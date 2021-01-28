@@ -11085,6 +11085,28 @@ table {
   border-spacing: 0;
 }
 
+.container a:first-child {
+  display: flex;
+  flex-direction: row;
+}
+
+.container a:first-child .brand {
+  margin: 15px;
+}
+
+.container .nav-item .nav-link {
+  display: flex;
+  flex-direction: row;
+}
+
+.container .nav-item .nav-link #fav {
+  margin: 10px;
+}
+
+.container .nav-item .nav-link #user {
+  margin: 10px;
+}
+
 h1 {
   color: red;
 }

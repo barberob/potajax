@@ -1,0 +1,26 @@
+.container a:first-child{
+	display: flex; 
+	flex-direction: row;
+
+	.brand{
+		margin: 15px;
+	}
+}
+
+.container{
+
+	.nav-item{
+		.nav-link{
+			display: flex; 
+			flex-direction: row;
+
+			#fav{
+				margin:10px;
+			}
+			
+			#user{
+				margin:10px;
+			}
+		}
+	}
+}
