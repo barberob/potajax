@@ -10,27 +10,33 @@
                 <h2 class="h2">Découvrez les commerces en click & drive près de chez vous</h2>
             </div>
         </div>
+
+        <div class="filters w-100 d-flex justify-content-around pt-5">
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+            <div class="d-flex align-items-center flex-column">
+                <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                <h3 class="text-dark">Catégorie</h3>
+            </div>
+        </div>
     </div>
 
-    <div class="filters w-100 d-flex align-content-around">
-        <div>
-            <div class="rounded-circle bg-light category_image"></div>
-            <h3 class="text-dark">Catégorie</h3>
-        </div>
-
-        <div>
-            <div class="rounded-circle bg-light category_image"></div>
-            <h3 class="text-dark">Catégorie</h3>
-        </div>
-
-        <div>
-            <div class="rounded-circle bg-light category_image"></div>
-            <h3 class="text-dark">Catégorie</h3>
-        </div>
-
-        <div>
-            <div class="rounded-circle bg-light category_image"></div>
-            <h3 class="text-dark">Catégorie</h3>
-        </div>
-    </div>
 @endsection
