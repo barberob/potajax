@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserShopTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'User_Shop';
+    public $tableName = 'products';
 
     /**
      * Run the migrations.
-     * @table User_Shop
+     * @table products
      *
      * @return void
      */
@@ -22,21 +22,26 @@ class CreateUserShopTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('User_id');
+            $table->increments('id');
+            $table->string('libProd');
+            $table->text('descProd');
+            $table->string('refProd', 100);
+            $table->float('prixProd');
             $table->integer('Shop_id');
+            $table->integer('Unit_id');
 
-            $table->index(["User_id"], 'fk_Internaute_has_Commerce_Internaute1_idx');
+            $table->index(["Unit_id"], 'fk_Products_Units1_idx');
 
-            $table->index(["Shop_id"], 'fk_Internaute_has_Commerce_Commerce1_idx');
+            $table->index(["Shop_id"], 'fk_Products_Shops1_idx');
 
 
-            $table->foreign('User_id', 'fk_Internaute_has_Commerce_Internaute1_idx')
-                ->references('id')->on('Users')
+            $table->foreign('Shop_id', 'fk_Products_Shops1_idx')
+                ->references('id')->on('shops')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('Shop_id', 'fk_Internaute_has_Commerce_Commerce1_idx')
-                ->references('id')->on('Shops')
+            $table->foreign('Unit_id', 'fk_Products_Units1_idx')
+                ->references('id')->on('units')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

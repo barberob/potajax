@@ -10,11 +10,11 @@ class CreateShopsTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Shops';
+    public $tableName = 'shops';
 
     /**
      * Run the migrations.
-     * @table Shops
+     * @table shops
      *
      * @return void
      */
@@ -50,22 +50,22 @@ class CreateShopsTable extends Migration
 
 
             $table->foreign('City_insee', 'fk_Commerce_Ville_idx')
-                ->references('id')->on('Cities')
+                ->references('id')->on('cities')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('SubCategory_id', 'fk_Commerce_Type1_idx')
-                ->references('id')->on('SubCategories')
+                ->references('id')->on('subcategories')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Category_id', 'fk_Commerce_Categorie1_idx')
-                ->references('id')->on('Categories')
+                ->references('id')->on('categories')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Manager_id', 'fk_Commerce_Responsable1_idx')
-                ->references('id')->on('Managers')
+                ->references('id')->on('managers')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

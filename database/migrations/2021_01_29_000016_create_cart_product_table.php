@@ -10,11 +10,11 @@ class CreateCartProductTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Cart_Product';
+    public $tableName = 'cart_product';
 
     /**
      * Run the migrations.
-     * @table Cart_Product
+     * @table cart_product
      *
      * @return void
      */
@@ -32,12 +32,12 @@ class CreateCartProductTable extends Migration
 
 
             $table->foreign('Cart_id', 'fk_Carts_has_Products_Carts1_idx')
-                ->references('id')->on('Carts')
+                ->references('id')->on('carts')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Product_id', 'fk_Carts_has_Products_Products1_idx')
-                ->references('id')->on('Products')
+                ->references('id')->on('products')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

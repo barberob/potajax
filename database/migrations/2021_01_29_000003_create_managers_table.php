@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVisitsTable extends Migration
+class CreateManagersTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Visits';
+    public $tableName = 'managers';
 
     /**
      * Run the migrations.
-     * @table Visits
+     * @table managers
      *
      * @return void
      */
@@ -22,16 +22,13 @@ class CreateVisitsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('dateHeure');
-            $table->integer('Shop_idCom');
-
-            $table->index(["Shop_idCom"], 'fk_Date_Commerce1_idx');
-
-
-            $table->foreign('Shop_idCom', 'fk_Date_Commerce1_idx')
-                ->references('id')->on('Shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->increments('id');
+            $table->string('nomMan', 45);
+            $table->string('prenomMan', 45);
+            $table->string('mailMan');
+            $table->string('mdpMan', 32);
+            $table->string('telMan', 10);
+            $table->string('prefixeTelMan', 6);
         });
     }
 

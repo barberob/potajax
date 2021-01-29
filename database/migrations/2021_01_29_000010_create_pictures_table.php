@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModeratorsTable extends Migration
+class CreatePicturesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Moderators';
+    public $tableName = 'pictures';
 
     /**
      * Run the migrations.
-     * @table Moderators
+     * @table pictures
      *
      * @return void
      */
@@ -23,11 +23,16 @@ class CreateModeratorsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nomMod', 45);
-            $table->string('prenomMod', 45);
-            $table->string('mailMod');
-            $table->char('mdpMod', 65);
-            $table->char('etatMod', 1);
+            $table->string('urlPic');
+            $table->integer('Shop_id');
+
+            $table->index(["Shop_id"], 'fk_Photo_Commerce1_idx');
+
+
+            $table->foreign('Shop_id', 'fk_Photo_Commerce1_idx')
+                ->references('id')->on('shops')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 

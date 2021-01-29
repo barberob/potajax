@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Payments';
+    public $tableName = 'users';
 
     /**
      * Run the migrations.
-     * @table Payments
+     * @table users
      *
      * @return void
      */
@@ -23,16 +23,18 @@ class CreatePaymentsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('moyenPay', 45);
-            $table->dateTime('datePay');
-            $table->float('montantPay');
-            $table->integer('Cart_id');
+            $table->string('nomUser', 45);
+            $table->string('prenomUser', 45);
+            $table->string('mailUser');
+            $table->char('mdpUser', 65);
+            $table->text('adresseUser')->nullable();
+            $table->integer('City_insee');
 
-            $table->index(["Cart_id"], 'fk_Payments_Carts1_idx');
+            $table->index(["City_insee"], 'fk_Internaute_Ville1_idx');
 
 
-            $table->foreign('Cart_id', 'fk_Payments_Carts1_idx')
-                ->references('id')->on('Carts')
+            $table->foreign('City_insee', 'fk_Internaute_Ville1_idx')
+                ->references('id')->on('cities')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });
