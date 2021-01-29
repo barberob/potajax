@@ -1,4 +1,3 @@
-<<<<<<< HEAD:database/migrations/2021_01_29_000007_create_Shops_table.php
 <?php
 
 use Illuminate\Support\Facades\Schema;
