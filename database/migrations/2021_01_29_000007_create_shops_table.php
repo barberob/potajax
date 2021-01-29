@@ -1,3 +1,4 @@
+<<<<<<< HEAD:database/migrations/2021_01_29_000007_create_Shops_table.php
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -10,11 +11,11 @@ class CreateShopsTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'shops';
+    public $tableName = 'Shops';
 
     /**
      * Run the migrations.
-     * @table shops
+     * @table Shops
      *
      * @return void
      */
@@ -48,24 +49,23 @@ class CreateShopsTable extends Migration
 
             $table->index(["Manager_id"], 'fk_Commerce_Responsable1_idx');
 
-
             $table->foreign('City_insee', 'fk_Commerce_Ville_idx')
-                ->references('id')->on('cities')
+                ->references('id')->on('Cities')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('SubCategory_id', 'fk_Commerce_Type1_idx')
-                ->references('id')->on('subcategories')
+                ->references('id')->on('SubCategories')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Category_id', 'fk_Commerce_Categorie1_idx')
-                ->references('id')->on('categories')
+                ->references('id')->on('Categories')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Manager_id', 'fk_Commerce_Responsable1_idx')
-                ->references('id')->on('managers')
+                ->references('id')->on('Managers')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });
