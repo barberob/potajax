@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubcategoriesTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'SubCategories';
+    public $tableName = 'payments';
 
     /**
      * Run the migrations.
-     * @table SubCategories
+     * @table payments
      *
      * @return void
      */
@@ -23,7 +23,18 @@ class CreateSubcategoriesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('libSubCategorie', 30);
+            $table->string('moyenPay', 45);
+            $table->dateTime('datePay');
+            $table->float('montantPay');
+            $table->integer('Cart_id');
+
+            $table->index(["Cart_id"], 'fk_Payments_Carts1_idx');
+
+
+            $table->foreign('Cart_id', 'fk_Payments_Carts1_idx')
+                ->references('id')->on('carts')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 

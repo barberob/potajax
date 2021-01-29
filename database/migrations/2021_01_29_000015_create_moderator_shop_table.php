@@ -10,11 +10,11 @@ class CreateModeratorShopTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Moderator_Shop';
+    public $tableName = 'moderator_shop';
 
     /**
      * Run the migrations.
-     * @table Moderator_Shop
+     * @table moderator_shop
      *
      * @return void
      */
@@ -34,12 +34,12 @@ class CreateModeratorShopTable extends Migration
 
 
             $table->foreign('Moderators_id', 'fk_Moderators_has_Shops_Moderators1_idx')
-                ->references('id')->on('Moderators')
+                ->references('id')->on('moderators')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
             $table->foreign('Shops_id', 'fk_Moderators_has_Shops_Shops1_idx')
-                ->references('id')->on('Shops')
+                ->references('id')->on('shops')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

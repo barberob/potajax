@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartsTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Carts';
+    public $tableName = 'subcategories';
 
     /**
      * Run the migrations.
-     * @table Carts
+     * @table subcategories
      *
      * @return void
      */
@@ -23,16 +23,7 @@ class CreateCartsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->dateTime('dateCart')->nullable();
-            $table->integer('User_id');
-
-            $table->index(["User_id"], 'fk_Carts_Users1_idx');
-
-
-            $table->foreign('User_id', 'fk_Carts_Users1_idx')
-                ->references('id')->on('Users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->string('libSubCategorie', 30);
         });
     }
 
