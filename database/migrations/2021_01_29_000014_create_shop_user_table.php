@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserShopTable extends Migration
+class CreateShopUserTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'user_shop';
+    public $tableName = 'shop_user';
 
     /**
      * Run the migrations.
-     * @table user_shop
+     * @table shop_user
      *
      * @return void
      */
