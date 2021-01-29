@@ -10,7 +10,7 @@ class CreateCategoriesTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'subcategories';
+    public $tableName = 'categories';
 
     /**
      * Run the migrations.
