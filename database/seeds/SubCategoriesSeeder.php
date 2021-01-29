@@ -12,19 +12,29 @@ class SubCategoriesSeeder extends Seeder
     public function run()
     {
        $asiatique_id = DB::table('subcategories')->insertGetId([
-            'libSubCategorie'=> 'Asiatique'
+            'libSubCat'=> 'Asiatique',
+            'Categorie_id'=> '1'
         ]);
         $fastFood_id =DB::table('subcategories')->insertGetId([
-            'libSubCategorie'=> 'Fast Food'
+            'libSubCat'=> 'Fast Food',
+            'Categorie_id'=> '1'
         ]);
         $hallal_id =DB::table('subcategories')->insertGetId([
-            'libSubCategorie'=> 'Hallal'
+            'libSubCat'=> 'Hallal',
+            'Categorie_id'=> '3'
         ]);
         $francais_id =DB::table('subcategories')->insertGetId([
-            'libSubCategorie'=> 'Français'
+            'libSubCat'=> 'Français',
+            'Categorie_id'=> '1'
         ]);
         $italien_id =DB::table('subcategories')->insertGetId([
-            'libSubCategorie'=> 'Italien'
+            'libSubCat'=> 'Italien',
+            'Categorie_id'=> '1'
+        ]);
+
+        $orientale_id =DB::table('subcategories')->insertGetId([
+        	'libSubCat' => 'Orientale',
+        	'Categorie_id' => '2'
         ]);
         
     }

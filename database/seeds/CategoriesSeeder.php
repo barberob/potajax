@@ -12,25 +12,25 @@ class CategoriesSeeder extends Seeder
     public function run()
     {
         $restaurant_id = DB::table('categories')->insertGetId([
-            'libCat'=> 'Restaurant'
+            'libCategorie'=> 'Restaurant'
         ]);
         $epicerie_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Epicerie'
+            'libCategorie'=> 'Epicerie'
         ]);
         $boucherie_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Boucherie'
+            'libCategorie'=> 'Boucherie'
         ]);
         $primeur_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Primeur'
+            'libCategorie'=> 'Primeur'
         ]);
         $bio_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Bio'
+            'libCategorie'=> 'Bio'
         ]);
         $animalerie_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Animalerie'
+            'libCategorie'=> 'Animalerie'
         ]);
         $sport_id =DB::table('categories')->insertGetId([
-            'libCat'=> 'Sport'
+            'libCategorie'=> 'Sport'
         ]);
     }
 }
