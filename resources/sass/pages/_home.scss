@@ -11,13 +11,29 @@ div.home {
         align-items: center;
         flex-direction: column;
         justify-content: space-evenly;
-
         color: white;
+        div {
+            margin-right: auto;
+            margin-left: 5%;
+        }
+        input {
+            border: 2px solid #bbb;
+            text-overflow: ellipsis;
+        }
+    }
+    .category_image {
+        width: 75px;
+        height: 75px;
     }
 
-    .category_image {
-        width: 50px;
-        height: 50px;
+    div.filters {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        div {
+            margin-bottom: 30px;
+        }
     }
+
 }
 
