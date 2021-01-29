@@ -22,7 +22,7 @@ class CreateShopsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nomShop', 45);
             $table->text('adresseShop');
             $table->float('latShop');
@@ -35,39 +35,18 @@ class CreateShopsTable extends Migration
             $table->text('horairesShop');
             $table->char('etatShop', 1);
             $table->string('codeNoteShop', 10);
-            $table->integer('Manager_id');
-            $table->integer('City_insee');
-            $table->integer('SubCategory_id');
-            $table->integer('Category_id');
 
-            $table->index(["Category_id"], 'fk_Commerce_Categorie1_idx');
+            $table->integer('City_id')->unsigned();
 
-            $table->index(["City_insee"], 'fk_Commerce_Ville_idx');
+            $table->foreignId('SubCategory_id')->constrained();
 
-            $table->index(["SubCategory_id"], 'fk_Commerce_Type1_idx');
+            $table->foreignId('Category_id')->constrained();
 
-            $table->index(["Manager_id"], 'fk_Commerce_Responsable1_idx');
+            $table->foreignId('Manager_id')->constrained();
 
 
-            $table->foreign('City_insee', 'fk_Commerce_Ville_idx')
-                ->references('id')->on('cities')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('SubCategory_id', 'fk_Commerce_Type1_idx')
-                ->references('id')->on('subcategories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Category_id', 'fk_Commerce_Categorie1_idx')
-                ->references('id')->on('categories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Manager_id', 'fk_Commerce_Responsable1_idx')
-                ->references('id')->on('managers')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

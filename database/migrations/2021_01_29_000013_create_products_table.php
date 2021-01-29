@@ -22,28 +22,19 @@ class CreateProductsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('libProd');
             $table->text('descProd');
             $table->string('refProd', 100);
             $table->float('prixProd');
-            $table->integer('Shop_id');
-            $table->integer('Unit_id');
 
-            $table->index(["Unit_id"], 'fk_Products_Units1_idx');
+            $table->foreignId('Shops_id')->constrained();
 
-            $table->index(["Shop_id"], 'fk_Products_Shops1_idx');
+            $table->foreignId('Unit_id')->constrained();
 
 
-            $table->foreign('Shop_id', 'fk_Products_Shops1_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Unit_id', 'fk_Products_Units1_idx')
-                ->references('id')->on('units')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

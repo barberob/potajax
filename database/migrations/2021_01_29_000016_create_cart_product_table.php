@@ -22,24 +22,13 @@ class CreateCartProductTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('Cart_id');
-            $table->integer('Product_id');
+
             $table->unsignedTinyInteger('quantity');
 
-            $table->index(["Product_id"], 'fk_Carts_has_Products_Products1_idx');
+            $table->foreignId('Cart_id')->constrained();
 
-            $table->index(["Cart_id"], 'fk_Carts_has_Products_Carts1_idx');
+            $table->foreignId('Product_id')->constrained();
 
-
-            $table->foreign('Cart_id', 'fk_Carts_has_Products_Carts1_idx')
-                ->references('id')->on('carts')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Product_id', 'fk_Carts_has_Products_Products1_idx')
-                ->references('id')->on('products')
-                ->onDelete('no action')
-                ->onUpdate('no action');
         });
     }
 

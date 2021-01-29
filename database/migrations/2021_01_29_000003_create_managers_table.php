@@ -22,13 +22,16 @@ class CreateManagersTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nomMan', 45);
             $table->string('prenomMan', 45);
             $table->string('mailMan');
             $table->string('mdpMan', 32);
             $table->string('telMan', 10);
             $table->string('prefixeTelMan', 6);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

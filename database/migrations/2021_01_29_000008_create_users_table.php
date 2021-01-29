@@ -22,21 +22,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nomUser', 45);
             $table->string('prenomUser', 45);
             $table->string('mailUser');
             $table->char('mdpUser', 65);
             $table->text('adresseUser')->nullable();
-            $table->integer('City_insee');
 
-            $table->index(["City_insee"], 'fk_Internaute_Ville1_idx');
+            $table->integer('City_id')->unsigned();
 
-
-            $table->foreign('City_insee', 'fk_Internaute_Ville1_idx')
-                ->references('id')->on('cities')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

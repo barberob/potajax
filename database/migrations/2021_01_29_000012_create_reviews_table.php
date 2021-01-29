@@ -22,25 +22,16 @@ class CreateReviewsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('Shops_id');
-            $table->integer('Users_id');
             $table->text('messageReview');
             $table->float('noteReview');
 
-            $table->index(["Shops_id"], 'fk_Shops_has_Users_Shops1_idx');
+            $table->foreignId('Shops_id')->constrained();
 
-            $table->index(["Users_id"], 'fk_Shops_has_Users_Users1_idx');
+            $table->foreignId('Users_id')->constrained();
 
 
-            $table->foreign('Shops_id', 'fk_Shops_has_Users_Shops1_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Users_id', 'fk_Shops_has_Users_Users1_idx')
-                ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

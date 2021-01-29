@@ -22,26 +22,13 @@ class CreateModeratorShopTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('Moderators_id');
-            $table->integer('Shops_id');
             $table->char('etatModeration', 1);
             $table->text('motifRefus')->nullable();
             $table->dateTime('date')->nullable();
 
-            $table->index(["Moderators_id"], 'fk_Moderators_has_Shops_Moderators1_idx');
+            $table->foreignId('Moderators_id')->constrained();
 
-            $table->index(["Shops_id"], 'fk_Moderators_has_Shops_Shops1_idx');
-
-
-            $table->foreign('Moderators_id', 'fk_Moderators_has_Shops_Moderators1_idx')
-                ->references('id')->on('moderators')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('Shops_id', 'fk_Moderators_has_Shops_Shops1_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->foreignId('Shops_id')->constrained();
         });
     }
 

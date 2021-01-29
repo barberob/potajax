@@ -22,17 +22,14 @@ class CreatePicturesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('urlPic');
-            $table->integer('Shop_id');
 
-            $table->index(["Shop_id"], 'fk_Photo_Commerce1_idx');
+            $table->foreignId('Shop_id')->constrained();
 
+            $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('Shop_id', 'fk_Photo_Commerce1_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
         });
     }
 

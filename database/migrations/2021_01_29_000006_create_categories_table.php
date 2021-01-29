@@ -22,17 +22,14 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('libCat', 50);
-            $table->integer('SubCategorie_id');
 
-            $table->index(["SubCategorie_id"], 'fk_Categorie_Type1_idx');
+            $table->foreignId('SubCategorie_id')->constrained();
 
 
-            $table->foreign('SubCategorie_id', 'fk_Categorie_Type1_idx')
-                ->references('id')->on('subcategories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

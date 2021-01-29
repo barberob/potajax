@@ -22,17 +22,13 @@ class CreateCartsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->dateTime('dateCart')->nullable();
-            $table->integer('User_id');
 
-            $table->index(["User_id"], 'fk_Carts_Users1_idx');
+            $table->foreignId('User_id')->constrained();
 
-
-            $table->foreign('User_id', 'fk_Carts_Users1_idx')
-                ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

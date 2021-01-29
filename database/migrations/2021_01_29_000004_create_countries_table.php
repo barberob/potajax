@@ -22,7 +22,7 @@ class CreateCountriesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('libCountry', 50);
         });
     }

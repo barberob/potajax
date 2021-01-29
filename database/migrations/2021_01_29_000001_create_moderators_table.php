@@ -22,12 +22,15 @@ class CreateModeratorsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nomMod', 45);
             $table->string('prenomMod', 45);
             $table->string('mailMod');
             $table->char('mdpMod', 65);
             $table->char('etatMod', 1);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
