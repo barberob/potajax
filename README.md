@@ -38,7 +38,7 @@ Use the package manager [composer](https://getcomposer.org/) to install Potajax.
 
 - Retrieve the [Github](https://github.com/michelgege/potajax.git) deposit :
 ```bash
-git pull https://github.com/michelgege/potajax.git
+git clone https://github.com/michelgege/potajax.git
 ```
 
 - Installing the repository:
@@ -47,6 +47,7 @@ composer install
 ```
 - Copy the .env example into a .env at the root of the project.
 
+<hr>
 
 - Regenerate the key
 ```bash
