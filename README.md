@@ -40,8 +40,7 @@ Use the package manager [composer](https://getcomposer.org/) to install Potajax.
 ```bash
 git clone https://github.com/michelgege/potajax.git
 ```
-
-- Installing the repository:
+- Put yourself in the project directory and installing the repository:
 ```bash
 composer install
 ```
