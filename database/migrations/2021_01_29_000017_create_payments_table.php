@@ -27,7 +27,7 @@ class CreatePaymentsTable extends Migration
             $table->dateTime('datePay');
             $table->float('montantPay');
 
-            $table->foreignId('Cart_id')->constrained();
+            $table->foreignId('cart_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();

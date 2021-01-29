@@ -25,9 +25,9 @@ class CreateCartProductTable extends Migration
 
             $table->unsignedTinyInteger('quantity');
 
-            $table->foreignId('Cart_id')->constrained();
+            $table->foreignId('cart_id')->constrained();
 
-            $table->foreignId('Product_id')->constrained();
+            $table->foreignId('product_id')->constrained();
 
         });
     }

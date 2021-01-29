@@ -23,9 +23,9 @@ class CreateShopUserTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->foreignId('User_id')->constrained();
+            $table->foreignId('user_id')->constrained();
 
-            $table->foreignId('Shops_id')->constrained();
+            $table->foreignId('shops_id')->constrained();
 
         });
     }

@@ -25,7 +25,7 @@ class CreateCartsTable extends Migration
             $table->id()->unique();
             $table->dateTime('dateCart')->nullable();
 
-            $table->foreignId('User_id')->constrained();
+            $table->foreignId('user_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();

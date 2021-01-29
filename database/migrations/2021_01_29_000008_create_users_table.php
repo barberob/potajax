@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->char('mdpUser', 65);
             $table->text('adresseUser')->nullable();
 
-            $table->integer('City_id')->unsigned();
+            $table->integer('city_id')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();

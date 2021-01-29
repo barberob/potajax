@@ -24,7 +24,7 @@ class CreateVisitsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('dateHeure');
 
-            $table->foreignId('Shop_idCom')->constrained();
+            $table->foreignId('shop_idCom')->constrained();
         });
     }
 

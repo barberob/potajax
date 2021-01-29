@@ -22,8 +22,8 @@ class CreateCitiesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('City_id');
-            $table->primary(array('City_id', 'Countries_id'));
+            $table->integer('city_id');
+            $table->primary(array('city_id', 'countries_id'));
 
 
             $table->string('CP', 5);
@@ -31,7 +31,7 @@ class CreateCitiesTable extends Migration
             $table->float('latCity');
             $table->float('lonCity');
 
-            $table->foreignId('Countries_id')->constrained();
+            $table->foreignId('countries_id')->constrained();
 
         });
     }

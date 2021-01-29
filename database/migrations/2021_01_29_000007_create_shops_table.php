@@ -36,13 +36,13 @@ class CreateShopsTable extends Migration
             $table->char('etatShop', 1);
             $table->string('codeNoteShop', 10);
 
-            $table->integer('City_id')->unsigned();
+            $table->integer('city_id')->unsigned();
 
-            $table->foreignId('SubCategory_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained();
 
-            $table->foreignId('Category_id')->constrained();
+            $table->foreignId('category_id')->constrained();
 
-            $table->foreignId('Manager_id')->constrained();
+            $table->foreignId('manager_id')->constrained();
 
 
             $table->timestamps();

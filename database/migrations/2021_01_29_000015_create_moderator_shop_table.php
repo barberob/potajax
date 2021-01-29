@@ -26,9 +26,9 @@ class CreateModeratorShopTable extends Migration
             $table->text('motifRefus')->nullable();
             $table->dateTime('date')->nullable();
 
-            $table->foreignId('Moderators_id')->constrained();
+            $table->foreignId('moderators_id')->constrained();
 
-            $table->foreignId('Shops_id')->constrained();
+            $table->foreignId('shops_id')->constrained();
         });
     }
 

@@ -25,7 +25,7 @@ class CreateCategoriesTable extends Migration
             $table->id()->unique();
             $table->string('libCat', 50);
 
-            $table->foreignId('SubCategorie_id')->constrained();
+            $table->foreignId('subcategorie_id')->constrained();
 
 
             $table->timestamps();

@@ -25,7 +25,7 @@ class CreatePicturesTable extends Migration
             $table->id()->unique();
             $table->string('urlPic');
 
-            $table->foreignId('Shop_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();

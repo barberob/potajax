@@ -28,9 +28,9 @@ class CreateProductsTable extends Migration
             $table->string('refProd', 100);
             $table->float('prixProd');
 
-            $table->foreignId('Shops_id')->constrained();
+            $table->foreignId('shops_id')->constrained();
 
-            $table->foreignId('Unit_id')->constrained();
+            $table->foreignId('unit_id')->constrained();
 
 
             $table->timestamps();

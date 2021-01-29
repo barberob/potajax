@@ -25,9 +25,9 @@ class CreateReviewsTable extends Migration
             $table->text('messageReview');
             $table->float('noteReview');
 
-            $table->foreignId('Shops_id')->constrained();
+            $table->foreignId('shops_id')->constrained();
 
-            $table->foreignId('Users_id')->constrained();
+            $table->foreignId('users_id')->constrained();
 
 
             $table->timestamps();
