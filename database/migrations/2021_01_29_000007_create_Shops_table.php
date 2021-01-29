@@ -48,7 +48,6 @@ class CreateShopsTable extends Migration
 
             $table->index(["Manager_id"], 'fk_Commerce_Responsable1_idx');
 
-
             $table->foreign('City_insee', 'fk_Commerce_Ville_idx')
                 ->references('id')->on('Cities')
                 ->onDelete('no action')
