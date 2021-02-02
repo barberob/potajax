@@ -31,11 +31,10 @@ class SubCategoriesSeeder extends Seeder
             'libSubCat'=> 'Italien',
             'Categorie_id'=> '1'
         ]);
-
         $orientale_id =DB::table('subcategories')->insertGetId([
         	'libSubCat' => 'Orientale',
         	'Categorie_id' => '2'
         ]);
-        
+
     }
 }

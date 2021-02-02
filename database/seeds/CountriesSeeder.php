@@ -261,8 +261,5 @@ class CountriesSeeder extends Seeder
                 'libCountry' => $countri['libCountry']
             ));
         }
-
-
-
     }
 }
