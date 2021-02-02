@@ -25,7 +25,7 @@ class CreateSubcategoriesTable extends Migration
             $table->id()->unique();
             $table->string('libSubCat', 50);
 
-            $table->foreignId('Categorie_id')->constrained();
+            $table->foreignId('categorie_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();
