@@ -255,7 +255,6 @@ class CountriesSeeder extends Seeder
             ['id' => '241', 'libCountry' => '894;ZM;ZMB;Zambia;Zambie']
         ];
 
-        //dd($tab_Country);
         foreach ($tab_Country as $countri){
             DB::table('countries')->insert(array(
                 'id' => $countri['id'],
