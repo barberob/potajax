@@ -17,7 +17,8 @@
             @foreach($categories as $categorie)
 
                 <div class="d-flex align-items-center flex-column">
-                    <div class="rounded-circle bg-secondary category_image mb-3 mx-3"></div>
+                    <div class="rounded-circle bg-secondary category_image mb-3 mx-3"
+                     style="background-image:url('img/{{$categorie->libCategorie}}.jpg'); background-size: cover; background-position: bottom;"></div>
                     <h3 class="text-dark">{{ $categorie->libCategorie }}</h3>
                 </div>
 
