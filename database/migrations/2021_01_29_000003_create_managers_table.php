@@ -26,7 +26,7 @@ class CreateManagersTable extends Migration
             $table->string('nomMan', 45);
             $table->string('prenomMan', 45);
             $table->string('mailMan');
-            $table->string('mdpMan', 32);
+            $table->string('mdpMan', 65);
             $table->string('telMan', 10);
             $table->string('prefixeTelMan', 6);
 
