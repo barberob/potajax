@@ -31,4 +31,9 @@ class Shop extends Model
     {
         return $this->belongsTo(SubCategorie::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

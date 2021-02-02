@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Shop::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
