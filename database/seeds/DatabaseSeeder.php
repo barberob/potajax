@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SubCategoriesSeeder::class);
 
+        $this->call(UnitsSeeder::class);
+
         factory(App\Moderator::class, 10)->create();
 
         factory(App\Manager::class, 10)->create();
