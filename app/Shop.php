@@ -36,4 +36,14 @@ class Shop extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
+
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
+    }
 }
