@@ -11,8 +11,8 @@ $factory->define(Manager::class, function (Faker $faker) {
         'nomMan' => $faker->name,
         'prenomMan' => $faker->lastName,
         'mailMan' => $faker->unique()->safeEmail,
-        'mdpMan' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'telMan' => $faker->phoneNumber(),
+        'mdpMan' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        'telMan' => $faker->numerify('##########'),
         'prefixeTelMan' => '+33',
     ];
 });
