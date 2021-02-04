@@ -21,6 +21,7 @@ class CreateCountriesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
+            
             $table->engine = 'InnoDB';
             $table->id()->unique();
             $table->string('libelle', 150);
