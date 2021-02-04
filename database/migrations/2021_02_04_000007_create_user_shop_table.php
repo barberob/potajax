@@ -22,25 +22,17 @@ class CreateUserShopTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('shop_id');
-            $table->integer('user_id');
             $table->text('modifRefus')->nullable();
             $table->dateTime('date')->nullable();
 
-            $table->index(["user_id"], 'fk_Shops_has_Users_Users2_idx');
+            $table->primary(['shop_id','user_id']);
 
-            $table->index(["shop_id"], 'fk_Shops_has_Users_Shops2_idx');
+            $table->foreignId('shop_id')->constrained();
+            $table->foreignId('user_id')->constrained();
 
+            $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('shop_id', 'fk_Shops_has_Users_Shops2_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('user_id', 'fk_Shops_has_Users_Users2_idx')
-                ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
         });
     }
 

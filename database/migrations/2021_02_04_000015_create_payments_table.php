@@ -22,19 +22,15 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('moyen', 45);
             $table->dateTime('date');
             $table->float('montant');
-            $table->integer('cart_id');
 
-            $table->index(["cart_id"], 'fk_Payments_Carts1_idx');
+            $table->foreignId('cart_id')->constrained();
 
-
-            $table->foreign('cart_id', 'fk_Payments_Carts1_idx')
-                ->references('id')->on('carts')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

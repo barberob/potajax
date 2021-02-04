@@ -22,8 +22,11 @@ class CreateUnitsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('libelle', 10);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

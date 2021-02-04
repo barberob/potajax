@@ -22,7 +22,7 @@ class CreateShopsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nom', 45);
             $table->text('adresse');
             $table->float('lat');
@@ -35,31 +35,13 @@ class CreateShopsTable extends Migration
             $table->text('horaires');
             $table->tinyInteger('etat');
             $table->string('codeNote', 10);
-            $table->integer('city_id');
-            $table->integer('subcategory_id');
-            $table->integer('category_id');
 
-            $table->index(["category_id"], 'fk_Commerce_Categorie1_idx');
+            $table->foreignId('cities_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('category_id')->constrained();
 
-            $table->index(["city_id"], 'fk_Commerce_Ville_idx');
-
-            $table->index(["subcategory_id"], 'fk_Commerce_Type1_idx');
-
-
-            $table->foreign('city_id', 'fk_Commerce_Ville_idx')
-                ->references('id')->on('')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('subcategory_id', 'fk_Commerce_Type1_idx')
-                ->references('id')->on('sub_categories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('category_id', 'fk_Commerce_Categorie1_idx')
-                ->references('id')->on('categories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id()->unique();
             $table->string('nom', 45);
             $table->string('prenom', 45);
             $table->string('email');
@@ -31,15 +31,11 @@ class CreateUsersTable extends Migration
             $table->string('prefixtel', 10)->nullable();
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
-            $table->integer('city_Id');
 
-            $table->index(["city_Id"], 'fk_Internaute_Ville1_idx');
+            $table->foreignId('cities_id')->constrained();
 
-
-            $table->foreign('city_Id', 'fk_Internaute_Ville1_idx')
-                ->references('id')->on('')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

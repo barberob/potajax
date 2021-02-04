@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'countries';
+    public $tableName = 'subcategories';
 
     /**
      * Run the migrations.
-     * @table countries
+     * @table sub_categories
      *
      * @return void
      */
@@ -23,7 +23,9 @@ class CreateCountriesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id()->unique();
-            $table->string('libelle', 50);
+            $table->string('libelle', 30);
+
+            $table->foreignId('category_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();

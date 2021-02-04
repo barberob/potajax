@@ -22,23 +22,14 @@ class CreateFavoritesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('user_id');
-            $table->integer('shop_id');
 
-            $table->index(["user_id"], 'fk_Internaute_has_Commerce_Internaute1_idx');
+            $table->primary(['user_id','shop_id']);
 
-            $table->index(["shop_id"], 'fk_Internaute_has_Commerce_Commerce1_idx');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
 
-
-            $table->foreign('user_id', 'fk_Internaute_has_Commerce_Internaute1_idx')
-                ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('shop_id', 'fk_Internaute_has_Commerce_Commerce1_idx')
-                ->references('id')->on('shops')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
