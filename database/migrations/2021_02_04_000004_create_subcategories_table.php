@@ -14,7 +14,7 @@ class CreateSubcategoriesTable extends Migration
 
     /**
      * Run the migrations.
-     * @table sub_categories
+     * @table subcategories
      *
      * @return void
      */

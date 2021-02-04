@@ -36,7 +36,7 @@ class CreateShopsTable extends Migration
             $table->tinyInteger('etat');
             $table->string('codeNote', 10);
 
-            $table->foreignId('cities_id')->constrained();
+            $table->foreignId('city_id')->constrained();
             $table->foreignId('subcategory_id')->constrained();
             $table->foreignId('category_id')->constrained();
 

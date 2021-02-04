@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
 
-            $table->foreignId('cities_id')->constrained();
+            $table->foreignId('city_id')->constrained();
 
             $table->timestamps();
             $table->softDeletes();
