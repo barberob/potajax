@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         //factory( App\Users\Moderator::class, 10)->create();
         //factory(App\Users\Manager::class, 10)->create();
-        factory(App\Users\User::class, 10)->create();
+        factory(App\User::class, 10)->create();
 
         //factory(App\Product::class, 10)->create();
     }
