@@ -31,7 +31,6 @@ $factory->define(User::class, function (Faker $faker) {
 
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        'deleted_at' => '',
     ];
 });
 
