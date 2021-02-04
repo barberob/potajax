@@ -12,16 +12,16 @@ class UnitsSeeder extends Seeder
     public function run()
     {
         $lot_id = DB::table('units')->insertGetId([
-            'libUnit'=> 'Pièce'
+            'libelle'=> 'Pièce'
         ]);
         $kilo_id = DB::table('units')->insertGetId([
-            'libUnit'=> 'Kg'
+            'libelle'=> 'Kg'
         ]);
         $litre_id = DB::table('units')->insertGetId([
-            'libUnit'=> 'L'
+            'libelle'=> 'L'
         ]);
         $mili_litre_id = DB::table('units')->insertGetId([
-            'libUnit'=> 'mL'
+            'libelle'=> 'mL'
         ]);
     }
 }
