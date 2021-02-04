@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Moderator;
+use App\Users\Moderator;
 use Faker\Generator as Faker;
 
 $factory->define(Moderator::class, function (Faker $faker) {
