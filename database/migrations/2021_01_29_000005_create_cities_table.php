@@ -22,14 +22,14 @@ class CreateCitiesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('city_id');
+            $table->integer('city_id')->unsigned();
             $table->primary(array('city_id', 'countries_id'));
 
 
             $table->string('CP', 5);
             $table->string('nomCity', 50);
-            $table->float('latCity');
-            $table->float('lonCity');
+            $table->float('latCity')->nullable();
+            $table->float('lonCity')->nullable();
 
             $table->foreignId('countries_id')->constrained();
 
