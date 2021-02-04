@@ -23,7 +23,7 @@ class CreateCountriesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id()->unique();
-            $table->string('libelle', 50);
+            $table->string('libelle', 150);
 
             $table->timestamps();
             $table->softDeletes();
