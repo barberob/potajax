@@ -14,16 +14,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
 
         $this->call(CountriesSeeder::class);
-
+        $this->call(CitiesSeeder::class);
         $this->call(CategoriesSeeder::class);
-
         $this->call(SubCategoriesSeeder::class);
-
         $this->call(UnitsSeeder::class);
 
         factory(App\Moderator::class, 10)->create();
-
         factory(App\Manager::class, 10)->create();
+        factory(App\User::class, 10)->create();
 
         //factory(App\Product::class, 10)->create();
     }
