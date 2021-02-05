@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
+Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
