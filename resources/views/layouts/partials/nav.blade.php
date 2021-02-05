@@ -46,13 +46,13 @@
                     </li>
                 @endguest --->
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ route('favorites') }}">
                         <div id="fav">Favoris</div>
                         <div id="imfav"><img src="{{ asset('img/star.svg') }}" alt="" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ route('myaccount') }}">
                         <div id="user">Mon compte</div>
                         <div><img src="{{ asset('img/user.svg') }}" alt="" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
