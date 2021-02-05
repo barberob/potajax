@@ -11,14 +11,14 @@
             </div>
         </div>
 
-        <div class="filters d-flex justify-content-around mt-5 px-5">
+        <div class="filters d-flex justify-content-around mt-5 px-5" id="cat">
             
 
             @foreach($categories as $categorie)
                 <a href="{{ route('map', ['category_id' => $categorie->id]) }}">
                     <div class="d-flex align-items-center flex-column">
                         
-                            <div class="rounded-circle bg-secondary category_image mb-3 mx-3"
+                            <div id="zoom" class="rounded-circle bg-secondary category_image mb-3 mx-3"
                              style="background-image:url('img/{{$categorie->libelle}}.jpg'); background-size: cover; background-position: bottom;"></div>
                             <h3 class="text-dark">{{ $categorie->libelle }}</h3>
                         
