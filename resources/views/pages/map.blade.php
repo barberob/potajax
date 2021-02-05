@@ -4,17 +4,17 @@
 	<div class="page_map">
         <div class="filters d-flex justify-content mt-1 px-1">
         	<div class="dropdown mx-2 mt-2">
-			  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
+			  <button class="btn btn-light border-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
 			    Catégories
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <li><a class="dropdown-item" href="#">Action</a></li>
-			    <li><a class="dropdown-item" href="#">Another action</a></li>
-			    <li><a class="dropdown-item" href="#">Something else here</a></li>
+			  	@foreach($categories as $categorie)
+			    	<li><a class="dropdown-item" href="{{ route('map', ['category_id' => $categorie->id]) }}">{{$categorie->libelle}}</a></li>
+			    @endforeach
 			  </ul>
 			</div>
 			<div class="dropdown mx-2 mt-2">
-			  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
+			  <button class="btn btn-light border-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
 			    Sous catégories
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

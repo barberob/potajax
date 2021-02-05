@@ -20,7 +20,9 @@ Auth::routes();
 Route::get('/', 'CategoriesController@listCat')->name('index');
 
 Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
+Route::get('/map/{category_id}', 'SubcategoriesController@listSubcat')->name('map');
 
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');
+

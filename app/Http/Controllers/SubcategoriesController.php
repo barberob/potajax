@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class SubcategoriesController extends Controller
 {
-    public function listSubcat(){
-		$subcategories = DB::table('subcategories')->distinct()->get();
+    public function listSubcat($category_id){
+		$subcategories = DB::table('subcategories')
+		->distinct()
+		->where("category_id","=",$category_id)
+		->get();
 		
-
+		$categories = DB::table('categories')->distinct()->get();
 		return view('pages.map', [
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'categories' => $categories
         ]);
 	}
 }
