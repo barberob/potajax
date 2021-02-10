@@ -15,7 +15,7 @@
             
 
             @foreach($categories as $categorie)
-                <a href="{{ route('map', ['category_id' => $categorie->id]) }}">
+                <a href="{{ route('map', ['category_id' => $categorie->id]) }}" class="lien_cat">
                     <div class="d-flex align-items-center flex-column">
                         
                             <div id="zoom" class="rounded-circle bg-secondary category_image mb-3 mx-3"

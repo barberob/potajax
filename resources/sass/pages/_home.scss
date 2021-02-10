@@ -28,8 +28,8 @@ div.home {
         background-position: bottom;
     }
 
-    .category_image:hover{
-        transition-duration: 1s;
+    .lien_cat:hover .category_image{
+        transition-duration: 0.4s;
         border-radius: 20px!important;
     }
     
