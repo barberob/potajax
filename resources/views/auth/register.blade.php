@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if($errors)
+        @dump($errors)
+    @endif
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,12 +16,12 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="nom" class="col-md-4 col-form-label text-md-right">Nom</label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-right">Nom</label>
 
                             <div class="col-md-6">
-                                <input id="nom" type="text" class="form-control @error('Name') is-invalid @enderror" name="nom" value="{{ old('nom') }}" required autocomplete="nom" autofocus>
+                                <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
 
-                                @error('Name')
+                                @error('lastname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -25,12 +30,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="prenom" class="col-md-4 col-form-label text-md-right">Prénom</label>
+                            <label for="firstname" class="col-md-4 col-form-label text-md-right">Prénom</label>
 
                             <div class="col-md-6">
-                                <input id="prenom" type="text" class="form-control @error('Name') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus>
+                                <input id="firstname" type="text" class="form-control @error('Name') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="prenom" autofocus>
 
-                                @error('Name')
+                                @error('firstname')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -53,11 +58,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mdp" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mdp" type="password" class="form-control @error('password') is-invalid @enderror" name="mdp" required autocomplete="new-password">
-
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
