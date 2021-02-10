@@ -13,5 +13,8 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->price,
         'shops_id' => factory(App\Shop::class),
         'unit_id' => factory(App\Unit::class),
+
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime
     ];
 });
