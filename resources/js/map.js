@@ -4,11 +4,6 @@ const TILE_LAYER3 = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
 const TILE_LAYER4 = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
 const TILE_LAYER5 = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
 
-export function Gen_Json_Map(type,lat,lng,nom,){
-
-
-}
-
 class Map {
 
     constructor(Lat, Lng, Zoom, Tile) {
@@ -32,6 +27,10 @@ class Map {
             minZoom: 1,
             maxZoom: 20
         }).addTo(this.macarte);
+    }
+    Gen_Json_Map(type,lat,lng,nom,desc){
+
+
     }
     NewPoints(Obj){
         console.log('Nouveau Marker');
