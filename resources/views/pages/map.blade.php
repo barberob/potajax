@@ -29,16 +29,16 @@
               <button class="btn" type="submit"><i class="bi-search" style="font-size: 1.5rem; color: black;"></i></button>
             </form>
         </div>
-        <div class="container">
+        <div class="container" style="margin-top: 15px;">
 			 <div class="row">
-			    <div class="col-9 red" id="map" style="background-color: red;">
+			    <div class="col-9 red" id="map" style="background-color: silver;">
 			    	map
 			    </div>
-			    <div class="col" style="font-size: 25px; text-align: center;">
-					  <div class="card-header">
+			    <div class="col" >
+					  <div class="card-header" style="font-size: 25px; text-align: center; background-color: transparent;">
 					    {{ $current_category }}
 					  </div>
-					  <div class="card-body">
+					  <div class="card-body" style="font-size: 20px;">
 					    <p class="card-text">les shops</p>
 					  </div>
 			      
