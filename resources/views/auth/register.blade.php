@@ -78,23 +78,16 @@
                             </div>
                         </div>
 
-{{--                        <div class="col-md-12">--}}
-{{--                            <p>Je suis:</p>--}}
-{{--                            <div>--}}
-{{--                                <label for="user" class="col-md-6 col-form-label text-md-right">Consommateur:</label>--}}
-{{--                                <input id="user" type="radio" name="role" value="user" checked>--}}
-{{--                            </div>--}}
-{{--                            <div>--}}
-{{--                                <label for="manager" class="col-md-6 col-form-label text-md-right">Commerçant:</label>--}}
-{{--                                <input id="manager" type="radio" name="role" value="manager">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="js-manager-button btn btn-outline-primary mx-auto d-block my-5">Je suis commerçant</div>--}}
-                        <label for="manager-button">Je suis commerçant</label>
-                        <input type="checkbox" value="" id="manager-button" class="js-manager-button">
+                        <div class="form-group row d-inline">
+                            <div class="col-md-4 ">
+                                <label for="manager-button" class="col-form-label text-md-right mr-3">Je suis commerçant</label>
+                                <input type="checkbox" value="" id="manager-button" class="js-manager-button">
+                            </div>
+                        </div>
+
                         <div class="js-manager-inputs manager-inputs hidden">
-                            <div class="row">
-                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                            <div class="form-group row">
+                                <label for="tel" class="col-md-4 col-form-label text-md-right">Téléphone</label>
                                 <div class="col-md-6">
                                     <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel" disabled>
                                     @error('tel')
@@ -105,8 +98,8 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <label for="adress" class="col-md-4 col-form-label text-md-right">{{ __('Adress') }}</label>
+                            <div class="form-group row">
+                                <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse du commerce</label>
                                 <div class="col-md-6">
                                     <input id="adress" type="text" class="form-control @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
                                     @error('adress')
