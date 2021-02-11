@@ -4,7 +4,12 @@
 @section('content')
     <div class="home">
         <div class="intro px-3">
-            <input class="rounded-pill w-75 px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
+            <form class="d-flex">
+              <input class="rounded-pill px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
+              <button class="btn" type="submit"><i class="bi-search" style="font-size: 2rem; color: white;"></i></button>
+            </form>
+            
+
             <div>
                 <h1 class="h1">Consommez mieux, consommez local</h1>
                 <h2 class="h2">Découvrez les commerces en click & drive près de chez vous</h2>

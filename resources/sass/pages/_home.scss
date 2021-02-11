@@ -16,9 +16,13 @@ div.home {
             margin-right: auto;
             margin-left: 5%;
         }
+        form{
+            width: 75%;
+        }
         input {
             border: 2px solid #bbb;
             text-overflow: ellipsis;
+            flex-grow: 1!important;
         }
     }
     .category_image {
