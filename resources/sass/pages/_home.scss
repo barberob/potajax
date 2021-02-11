@@ -16,23 +16,28 @@ div.home {
             margin-right: auto;
             margin-left: 5%;
         }
-        input {
-            border: 2px solid #bbb;
-            text-overflow: ellipsis;
+        form{
+            width: 75%;
+            input {
+                border: 2px solid #bbb;
+                text-overflow: ellipsis;
+                flex-grow: 1!important;
+            }
         }
+        
     }
     .category_image {
         width: 75px;
         height: 75px;
         background-size: cover; 
         background-position: bottom;
+        transition-duration: 0.4s;
     }
 
-    .category_image:hover{
-        transition-duration: 1s;
+    .lien_cat:hover .category_image{
+        transition-duration: 0.4s;
         border-radius: 20px!important;
     }
-    
 
     div.filters {
         flex-wrap: wrap;
