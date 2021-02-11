@@ -34,7 +34,8 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
-import RegisterForm from './pages/RegisterForm'
+import Map from './map';
+import RegisterForm from './pages/RegisterForm';
 
 class App {
     constructor() {
@@ -43,6 +44,7 @@ class App {
 
     initApp() {
         new RegisterForm()
+        new Map();
     }
 }
 
