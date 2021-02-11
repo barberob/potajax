@@ -34,8 +34,14 @@
 			    <div class="col-9 red" id="map" style="background-color: red;">
 			    	map
 			    </div>
-			    <div class="col">
-			      {{ $current_category }}
+			    <div class="col" style="font-size: 25px; text-align: center;">
+					  <div class="card-header">
+					    {{ $current_category }}
+					  </div>
+					  <div class="card-body">
+					    <p class="card-text">les shops</p>
+					  </div>
+			      
 			    </div>
 			 </div>
 		</div>

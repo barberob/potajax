@@ -16,8 +16,6 @@ class SubcategoriesController extends Controller
 		$categories = DB::table('categories')->distinct()->get();
 
 		$current_category = Categorie::findOrFail($category_id)->libelle;
-		//DB::table('categories')->where("id","=",$category_id)->get();
-
 		
 
 		return view('pages.map', [
