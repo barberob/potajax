@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Shops\Categorie;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Config;
 
 class RegisterController extends Controller
 {
@@ -51,10 +53,11 @@ class RegisterController extends Controller
     {
 //        dd($data);
         return Validator::make($data, [
-            'nom' => ['required', 'string', 'max:255'],
-            'prenom' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'mdp' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'in:user,manager']
         ]);
     }
 
@@ -66,12 +69,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-//        dd($data);
+        $role = $data['role'] === 'user' ? User::USER : User::MANAGER;
         return User::create([
-            'nom' => $data['nom'],
-            'prenom' => $data['prenom'],
+            'nom' => $data['lastname'],
+            'prenom' => $data['firstname'],
             'email' => $data['email'],
-            'mdp' => Hash::make($data['mdp']),
+            'mdp' => Hash::make($data['password']),
+            'role' => $role
         ]);
     }
+
+
 }
