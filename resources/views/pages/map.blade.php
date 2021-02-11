@@ -24,7 +24,10 @@
 				    
 			  </ul>
 			</div>
-            <input class="rounded-pill w-50 px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
+            <form class="d-flex">
+              <input class="rounded-pill px-2 py-2" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
+              <button class="btn" type="submit"><i class="bi-search" style="font-size: 1.5rem; color: black;"></i></button>
+            </form>
         </div>
         <div id="map"></div>
 
