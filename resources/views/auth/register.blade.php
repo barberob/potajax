@@ -6,7 +6,7 @@
         @dump($errors)
     @endif
 
-<div class="container mt-5">
+<div class="container mt-5 register">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -75,6 +75,35 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+{{--                        <div class="col-md-12">--}}
+{{--                            <p>Je suis:</p>--}}
+{{--                            <div>--}}
+{{--                                <label for="user" class="col-md-6 col-form-label text-md-right">Consommateur:</label>--}}
+{{--                                <input id="user" type="radio" name="role" value="user" checked>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <label for="manager" class="col-md-6 col-form-label text-md-right">Commerçant:</label>--}}
+{{--                                <input id="manager" type="radio" name="role" value="manager">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="js-manager-button btn btn-outline-primary mx-auto d-block my-5">Je suis commerçant</div>--}}
+                        <label for="manager-button">Je suis commerçant</label>
+                        <input type="checkbox" value="" id="manager-button" class="js-manager-button">
+                        <div class="js-manager-inputs manager-inputs hidden">
+                            <div class="form-group row">
+                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel">
+                                    @error('tel')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 

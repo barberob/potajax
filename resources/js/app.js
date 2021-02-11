@@ -4,6 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
+
+
 require('./bootstrap');
 
 // window.Vue = require('vue');
@@ -30,3 +33,17 @@ require('./bootstrap');
 // const app = new Vue({
 //     el: '#app',
 // });
+
+import RegisterForm from './pages/RegisterForm'
+
+class App {
+    constructor() {
+        this.initApp()
+    }
+
+    initApp() {
+        new RegisterForm()
+    }
+}
+
+new App()
