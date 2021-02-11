@@ -1,11 +1,37 @@
 .page_map{
+
 	form{
-		 width: 40%;
-		 input {
+		width: 50%;
+		input {
             border: 2px solid #bbb;
             text-overflow: ellipsis;
             flex-grow: 1!important;
         }
+        .btn{
+        	font-size: 1.5rem; 
+        	color: black;
+        }
+	}
+
+	.container{
+		margin-top: 15px;
+		.row{
+			#map{
+				background-color: silver;
+			}
+
+			.col{
+				.card-header{
+					font-size: 25px; 
+					text-align: center; 
+					background-color: transparent;
+				}
+
+				.card-body{
+					font-size: 20px;
+				}
+			}
+		}
 	}
 
 

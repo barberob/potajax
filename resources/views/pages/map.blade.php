@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="page_map">
-        <div class="filters d-flex justify-content mt-1 px-1">
+        <div class="filters d-flex justify-content mt-4 px-4" id="navig">
         	<div class="dropdown mx-2 mt-2">
 			  <button class="btn btn-light border-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
 			    Catégories
@@ -26,19 +26,19 @@
 			</div>
             <form class="d-flex">
               <input class="rounded-pill px-2 py-2" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
-              <button class="btn" type="submit"><i class="bi-search" style="font-size: 1.5rem; color: black;"></i></button>
+              <button class="btn" type="submit"><i class="bi-search"></i></button>
             </form>
         </div>
-        <div class="container" style="margin-top: 15px;">
+        <div class="container">
 			 <div class="row">
-			    <div class="col-9 red" id="map" style="background-color: silver;">
+			    <div class="col-9" id="map">
 			    	map
 			    </div>
 			    <div class="col" >
-					  <div class="card-header" style="font-size: 25px; text-align: center; background-color: transparent;">
+					  <div class="card-header">
 					    {{ $current_category }}
 					  </div>
-					  <div class="card-body" style="font-size: 20px;">
+					  <div class="card-body">
 					    <p class="card-text">les shops</p>
 					  </div>
 			      
