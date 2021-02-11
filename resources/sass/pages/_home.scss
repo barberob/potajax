@@ -26,13 +26,13 @@ div.home {
         height: 75px;
         background-size: cover; 
         background-position: bottom;
+        transition-duration: 0.4s;
     }
 
     .lien_cat:hover .category_image{
         transition-duration: 0.4s;
         border-radius: 20px!important;
     }
-    
 
     div.filters {
         flex-wrap: wrap;

@@ -26,6 +26,7 @@
 			</div>
             <input class="rounded-pill w-50 px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
         </div>
+        <div id="map"></div>
 
        
     </div>
