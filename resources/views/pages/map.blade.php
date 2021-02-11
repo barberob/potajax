@@ -29,7 +29,16 @@
               <button class="btn" type="submit"><i class="bi-search" style="font-size: 1.5rem; color: black;"></i></button>
             </form>
         </div>
-        <div id="map"></div>
+        <div class="container">
+			 <div class="row">
+			    <div class="col-9 red" id="map" style="background-color: red;">
+			    	map
+			    </div>
+			    <div class="col">
+			      {{ $current_category }}
+			    </div>
+			 </div>
+		</div>
 
        
     </div>
