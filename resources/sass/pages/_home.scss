@@ -18,12 +18,13 @@ div.home {
         }
         form{
             width: 75%;
+            input {
+                border: 2px solid #bbb;
+                text-overflow: ellipsis;
+                flex-grow: 1!important;
+            }
         }
-        input {
-            border: 2px solid #bbb;
-            text-overflow: ellipsis;
-            flex-grow: 1!important;
-        }
+        
     }
     .category_image {
         width: 75px;
