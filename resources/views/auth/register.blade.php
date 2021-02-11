@@ -93,11 +93,11 @@
                         <label for="manager-button">Je suis commerçant</label>
                         <input type="checkbox" value="" id="manager-button" class="js-manager-button">
                         <div class="js-manager-inputs manager-inputs hidden">
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel">
+                                    <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel" disabled>
                                     @error('tel')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

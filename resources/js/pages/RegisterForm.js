@@ -10,13 +10,22 @@ export default class RegisterForm {
     initEls() {
         this.els = {
             managerButton : document.querySelector('.js-manager-button'),
-            managerInputs : document.querySelector('.js-manager-inputs')
+            managerInputsContainer : document.querySelector('.js-manager-inputs')
         }
     }
 
     initEvents() {
         this.els.managerButton.addEventListener('click', (event) => {
-            this.els.managerInputs.classList.toggle('hidden')
+            this.els.managerInputsContainer.classList.toggle('hidden')
+            if (this.els.managerButton.checked) {
+                [...this.els.managerInputsContainer.querySelector('input')].forEach(input => {
+                    input.removeAttribute('disabled')
+                })
+            } else {
+                [...this.els.managerInputsContainer.querySelector('input')].forEach(input => {
+                    input.setAttribute('disabled')
+                })
+            }
         })
     }
 }
