@@ -31,11 +31,11 @@ export default class Map{
 
 
         document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
-        //document.getElementById('map').style.height = document.querySelector('.container').scrollWidth+'px';
+        document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
 
         window.onresize = () => {
             document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
-            document.getElementById('map').style.height = document.querySelector('.container').scrollWidth+'px';
+            document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
         }
 
 

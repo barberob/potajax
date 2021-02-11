@@ -1,4 +1,6 @@
-
+body.map{
+	height: 100vh;
+}
 .page_map{
 
 	form{
@@ -16,7 +18,7 @@
 
 	.container{
 		margin-top: 15px;
-
+		height: 80vh;
 		.row{
 			#map{
 				background-color: silver;
