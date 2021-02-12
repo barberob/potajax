@@ -78,10 +78,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row d-inline">
-                            <div class="col-md-4 ">
+                        <div class="form-group row">
+                            <div class="col-md-6">
                                 <label for="manager-button" class="col-form-label text-md-right mr-3">Je suis commerçant</label>
-                                <input type="checkbox" value="" id="manager-button" class="js-manager-button">
+                                <input type="checkbox" value="false" id="manager-button" class="js-manager-button">
                             </div>
                         </div>
 
@@ -101,7 +101,8 @@
                             <div class="form-group row">
                                 <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse du commerce</label>
                                 <div class="col-md-6">
-                                    <input id="adress" type="text" class="form-control @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
+                                    <input id="adress" type="text" class="form-control js-adress @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
+                                    <div class="py-3 w-100">test</div>
                                     @error('adress')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
