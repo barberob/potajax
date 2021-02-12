@@ -13,17 +13,13 @@
 
     <!-- Styles -->
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"/>
+{{--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css">--}}
+{{--    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css"/>--}}
+{{--    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"/>--}}
     <!--
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-
-
 </head>
 <body class="{{ Route::currentRouteName() }}">
     <div id="app">
