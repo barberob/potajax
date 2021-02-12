@@ -38,3 +38,8 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 // Le callback du provider
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('socialite.callback');
+
+
+
+//Route::get('/API/get_marker', 'MapController@create')->name('create_Marker');
+Route::post('/API/get_marker', 'MapController@create')->name('create_Marker');

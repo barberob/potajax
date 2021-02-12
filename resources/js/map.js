@@ -29,7 +29,7 @@ export default class Map{
         console.log(document.querySelector('.container').scrollWidth);
         console.log(document.querySelector('.container').scrollWidth);
 
-
+/*
         document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
         document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
 
@@ -38,7 +38,7 @@ export default class Map{
             document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
         }
 
-
+*/
 
         this.macarte = L.map('map').setView([this.Lat, this.Lng], this.Zoom);
         L.tileLayer(this.Tile, {
@@ -46,16 +46,51 @@ export default class Map{
             minZoom: 1,
             maxZoom: 20
         }).addTo(this.macarte);
+
+        this.macarte.on('moveend', () => {
+            this.NewPoints(this.macarte.getBounds());
+        });
+
     }
-    NewPoints(Obj){
+    NewPoints(posMap){
         console.log('Nouveau Marker');
         this.marker_remove();
-        this.Object = Obj;
-        this.marker_add();
+
+        var url = 'http://potajax.prog/API/get_marker';
+        var params = ''
+        var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var data = "{lat: 565,lng: 6546848,categorie: [1,2,3], subcategorie: [2,1]}";
+
+        var test = {
+            northEast: posMap._northEast,
+            sudOuest: posMap._southWest,
+            categories: [1,2,3],
+            subcategories: [2,1]
+        };
+
+
+        let responce =
+            fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-Token": token
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify(test)
+        })
+        .then(response => response.json())
+        .catch(error => alert("Erreur : " + error));
+
+
+        console.log(responce);
+        //this.marker_add();
     }
     marker_remove(){
         console.log('Destruction Marker');
-        console.log(this.markers);
+        //console.log(this.markers);
         if(this.markers) this.markers.remove();
     }
     marker_add(){

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Shops\Categorie; 
+use App\Shops\Categorie;
 class SubcategoriesController extends Controller
 {
     public function listSubcat($category_id){
@@ -12,11 +12,11 @@ class SubcategoriesController extends Controller
 		->distinct()
 		->where("category_id","=",$category_id)
 		->get();
-		
+
 		$categories = DB::table('categories')->distinct()->get();
 
 		$current_category = Categorie::findOrFail($category_id)->libelle;
-		
+
 
 		return view('pages.map', [
             'subcategories' => $subcategories,

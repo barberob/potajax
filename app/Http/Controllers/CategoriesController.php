@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
-		public function listCat(){
-			$categories = DB::table('categories')->distinct()->get();
-			
+    public function listCat(){
+        $categories = DB::table('categories')->distinct()->get();
 
-			return view('pages.home', [
-	            'categories' => $categories
-	        ]);
-		}
+
+        return view('pages.home', [
+            'categories' => $categories
+        ]);
+    }
 }
