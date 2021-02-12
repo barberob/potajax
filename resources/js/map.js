@@ -30,13 +30,13 @@ export default class Map{
         console.log(document.querySelector('.container').scrollWidth);
 
 
-        document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
+        /*document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
         document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
 
         window.onresize = () => {
             document.getElementById('map').style.width = document.querySelector('.container').scrollWidth+'px';
             document.getElementById('map').style.height = document.querySelector('.container').scrollHeight+'px';
-        }
+        }*/
 
 
 
