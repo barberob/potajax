@@ -101,8 +101,11 @@
                             <div class="form-group row">
                                 <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse du commerce</label>
                                 <div class="col-md-6">
-                                    <input id="adress" type="text" class="form-control js-adress @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
-                                    <div class="py-3 w-100">test</div>
+                                    <div class="js-input_container">
+                                        <input id="adress" tabindex="1" type="text" class="form-control js-adress @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
+                                        <ul class="js-autocomplete js-hidden">
+                                        </ul>
+                                    </div>
                                     @error('adress')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

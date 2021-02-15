@@ -1,0 +1,42 @@
+.name{
+	background-color: black;
+	width: 100%;
+	height: 200px;
+	text-align: center;
+
+	.title{
+		font-size: 30px; 
+		color: tomato; 
+		padding-top: 5%;
+	}
+
+	.adresse{
+		margin-top: 5px;
+		color: #D3D0D0;
+	}
+
+	.tel{
+		margin-top: 5px;
+		color: #D3D0D0;
+	}
+	.mail{
+		margin-top: 5px;
+		color: #D3D0D0;
+	}
+}
+
+.horaires{
+	margin-top: 15px;
+	text-align: center;
+}
+
+.descriptif{
+	text-align: center;
+	font-style: italic;
+
+	p{
+		margin-top: 25px;
+		padding-left: 150px;
+		padding-right: 150px;
+	}
+}
