@@ -17,11 +17,17 @@ class SubcategoriesController extends Controller
 
 		$current_category = Categorie::findOrFail($category_id)->libelle;
 
+		$shops = DB::table('shops')
+		->distinct()
+		->where("category_id",'=',$category_id)
+		->get();
+
 
 		return view('pages.map', [
             'subcategories' => $subcategories,
             'categories' => $categories,
-            'current_category' => $current_category
+            'current_category' => $current_category,
+            'shops' => $shops
         ]);
 	}
 }

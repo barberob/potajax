@@ -26,23 +26,22 @@ body.map{
 	        }
 		}
 	}
-	.container{
+	
+		
+	.row{	
 		margin-top: 15px;
-		width: 100%;
-		.row{			
+		width: 100%;	
+		#map{
+			background-color: silver;
 			width: 100%;
-			margin: 0!important;
-			#map{
-				background-color: silver;
-				width: 100%;
-				height: 65vh;
-			}
+			height: 65vh;
+		}
 
-			#liste{
-				display: none;
-			}
+		#liste{
+			display: none;
 		}
 	}
+	
 
 
 }
@@ -59,28 +58,53 @@ body.map{
 	            flex-grow: 1!important;
 	        }
 		}
-		.container{
-			.row{			
-				#map{
-					height: 73vh;
+		
+		.row{			
+			#map{
+				height: 73vh;
+				margin-left: 2px;
+			}
+
+			#liste{
+				display: block;
+				width: 10%;
+				.card-header{
+					font-size: 25px; 
+					text-align: center; 
+					background-color: transparent;
 				}
 
-				#liste{
-					display: block;
-					width: 10%;
-					.card-header{
-						font-size: 25px; 
-						text-align: center; 
-						background-color: transparent;
-					}
+				.card-body{
+					font-size: 20px;
+					.list-group{
+					    max-height: 60vh;
+					    width:100%;
+					    overflow:scroll;
+					    -webkit-overflow-scrolling: touch;
 
-					.card-body{
-						font-size: 20px;
+					    .list-group-item{
+					    	strong a{
+					    		font-weight: bold;
+					    		color: black;
+					    		font-size: 20px;
+					    		transition-duration: 0.4s;
+					    	}
+					    	strong a:hover{
+					    		text-decoration: none;
+					    		color: tomato;
+					    		transition-duration: 0.4s;
+					    	}
+					    	p{
+					    		font-size: 15px;
+					    		color: grey;
+					    	}
+					    }
 					}
 				}
 			}
 		}
-
-
 	}
+
+
+	
 }

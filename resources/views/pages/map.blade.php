@@ -31,24 +31,34 @@
               <button class="btn" type="submit"><i class="bi-search"></i></button>
             </form>
         </div>
-        <div class="container">
-			 <div class="row">
-			    <div class="col-lg-9" id="map">
-			    	map
-			    </div>
-			    <div class="col" id="liste">
-					  <div class="card-header">
-					    {{ $current_category }}
-					  </div>
-					  <div class="card-body">
-					    <p class="card-text">les shops</p>
-					  </div>
-			      
-			    </div>
-			 </div>
-		</div>
-
-       
+        
+		 <div class="row">
+		    <div class="col-lg-9" id="map">
+		    	map
+		    </div>
+		    <div class="col" id="liste">
+				  <div class="card-header">
+				    {{ $current_category }}
+				  </div>
+				  <div class="card-body">
+				  	<div class="panel panel-primary" id="result_panel">
+					    <div class="panel-body">
+					        <ul class="list-group">
+					        	@foreach($shops as $shop)
+					            <li class="list-group-item">
+					            	<strong><a href="#">{{$shop->nom}}</a></strong>
+					            	
+					            	<p>{{$shop->adresse}}</p>
+					            </li>
+					            @endforeach
+					        </ul>
+					    </div>
+					</div>
+				  </div>
+		      
+		    </div>
+		 </div>
+		
     </div>
 
 
