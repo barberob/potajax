@@ -49,6 +49,7 @@
 					            	<strong><a href="#">{{$shop->nom}}</a></strong>
 					            	
 					            	<p>{{$shop->adresse}}</p>
+					            	<a class="btn btn-outline-danger btn-sm" href="{{ route('shop', ['id' => $shop->id]) }}" role="button">Voir la page</a>
 					            </li>
 					            @endforeach
 					        </ul>

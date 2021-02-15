@@ -22,6 +22,9 @@ Route::get('/', 'CategoriesController@listCat')->name('index');
 Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
 Route::get('/map/{category_id}', 'SubcategoriesController@listSubcat')->name('map');
 
+// Route vers la page d'un shop
+Route::get('/shop/{id}', 'ShopController@details')->name('shop');
+
 // Route vers la page Mes Favoris
 
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
