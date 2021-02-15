@@ -6,7 +6,6 @@ export default class RegisterForm {
             api_endpoint : 'https://api-adresse.data.gouv.fr/search/?q='
         }
         if(document.querySelector('body.register')) {
-            console.log('init')
             this.initEls()
             this.initEvents()
         }
@@ -55,7 +54,6 @@ export default class RegisterForm {
 
     async _autoComplete() {
         this.els.autoCompleteContainer.classList.remove('js-hidden')
-        console.log('called');
         const value = this.els.inputAutoComplete.value
         const query = value.split(' ').join('+')
 
@@ -84,11 +82,7 @@ export default class RegisterForm {
             this.els.autoCompleteContainer.classList.add('js-hidden')
             if(this.els.autoCompleteItems) {
                 this.els.inputAutoComplete.value = e.currentTarget.textContent
-                // this.els.autoCompleteItems.forEach(item => {
-                //     item.classList.remove('js-active')
-                // })
             }
-            // e.currentTarget.classList.add('js-active')
         })
         li.textContent = result
         this.els.autoCompleteContainer.appendChild(li)
