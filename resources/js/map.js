@@ -1,4 +1,5 @@
-import L from 'leaflet'
+import * as L from "leaflet";
+import * as L1 from "leaflet.markercluster";
 export default class Map{
 
     constructor() {
@@ -15,7 +16,7 @@ export default class Map{
             this.Zoom = '5';
             this.Tile = TILE_LAYER2;
 
-            this.Object = null;
+            this.Object = new Array();
 
             this.macarte = null;
             this.markers = null
@@ -42,50 +43,23 @@ export default class Map{
         });
 
     }
-    NewPoints(posMap){
+    NewPoints(posMap) {
         console.log('Nouveau Marker');
         this.marker_remove();
 
-        var url = 'http://potajax.prog/API/get_marker';
-        var params = ''
-        var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        var data = "{lat: 565,lng: 6546848,categorie: [1,2,3], subcategorie: [2,1]}";
-
-        var test = {
-            northEast: posMap._northEast,
-            sudOuest: posMap._southWest,
-            categories: [1,2,3],
-            subcategories: [2,1]
-        };
-
-
-        let responce =
-            fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-Token": token
-            },
-            method: "post",
-            credentials: "same-origin",
-            body: JSON.stringify(test)
-        })
-        .then(response => response.json())
-        .catch(error => alert("Erreur : " + error));
-
-
-        console.log(responce);
-        //this.marker_add();
+        this.Fetch(posMap);
     }
     marker_remove(){
         console.log('Destruction Marker');
         //console.log(this.markers);
-        if(this.markers) this.markers.remove();
+        if(this.markers){
+            this.Object = new Array();
+            this.markers.remove();
+        }
     }
     marker_add(){
         console.log('Creation Marker');
-        this.markers = new L.MarkerClusterGroup();
+        this.markers = new L1.MarkerClusterGroup();
 
         this.Object.map((Item) => {
             let marker;
@@ -112,7 +86,7 @@ export default class Map{
 
             marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
-            let type = Item.type;
+            /*let type = Item.type;
             if(type == '0') {
                 marker = L.marker([Item.coord.Lat, Item.coord.Lng], {icon: IconWhite}).bindPopup(data);
             }
@@ -124,10 +98,62 @@ export default class Map{
             }
             else{
 
-            }
+            }*/
             this.markers.addLayer(marker);
 
         });
         this.macarte.addLayer(this.markers);
+    }
+
+    Fetch(posMap){
+        console.log('Recherche Marker');
+        let url = 'http://potajax.prog/API/get_marker';
+        let params = ''
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
+
+        let test = {
+            northEast: posMap._northEast,
+            sudOuest: posMap._southWest,
+            categories: [1, 2, 3],
+            subcategories: [1, 2, 3]
+        };
+
+        let ResTo = fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-Token": token
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify(test)
+        }).then(response => {
+            return response.json();
+        }).then(objected => {
+            //console.log(Object.entries(objected));
+            for (const [key1, value1] of Object.entries(objected)) {
+                for (const [key2, value2] of Object.entries(value1)) {
+                    if (value2 != null) {
+                        //console.log(value2);
+                        this.Object.push({
+                            'detail': {
+                                'name': value2.nom,
+                                'desc': value2.descriptif,
+                            },
+                            'coord': {
+                                'Lat': value2.lat,
+                                'Lng': value2.lng,
+                            }
+                        });
+                        //console.log(this.Object);
+                    }
+                }
+            }
+            this.marker_add();
+            //console.log(this.Object);
+        }).catch(error => alert("Erreur : " + error));
+        //console.log(ResTo);
     }
 }

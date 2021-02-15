@@ -41,5 +41,5 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 
 
-//Route::get('/API/get_marker', 'MapController@create')->name('create_Marker');
-Route::post('/API/get_marker', 'MapController@create')->name('create_Marker');
+Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
+Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
