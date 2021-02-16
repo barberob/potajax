@@ -11,6 +11,8 @@ export default class Map{
             const TILE_LAYER4 = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
             const TILE_LAYER5 = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
 
+            this.domain_url = window.location.hostname;
+
             this.Lat = '44.55962000171788';
             this.Lng = '6.079823238576286';
             this.Zoom = '5';
@@ -30,7 +32,6 @@ export default class Map{
                     lat: 32.91648534731439,
                     lng: -14.106445312500002 }
             };
-
             this.init();
         }
     }
@@ -78,8 +79,8 @@ export default class Map{
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
 
-        let img = 'http://potajax.prog/img/icon_map/marker-icon-';
-        let shadow = 'http://potajax.prog/img/icon_map/marker-shadow.png';
+        let img = 'http://'+this.domain_url+'/img/icon_map/marker-icon-';
+        let shadow = 'http://'+this.domain_url+'/img/icon_map/marker-shadow.png';
 
         /*         Default           */
         let IconWhite = L.icon({
@@ -168,7 +169,7 @@ export default class Map{
     }
     Fetch(posMap){
         console.log('Recherche Marker');
-        let url = 'http://potajax.prog/API/get_marker';
+        let url = 'http://'+this.domain_url+'/API/get_marker';
         let params = ''
         let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
