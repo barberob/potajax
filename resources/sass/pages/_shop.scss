@@ -11,6 +11,13 @@
 		background: rgba(0,0,0,0.5);
 		text-align: center;
 
+		#back{
+			border-radius: 33px;
+			margin-top: 5px;
+			margin-left: 100px;
+			float: left;
+		}
+
 		.title{
 			font-size: 30px; 
 			color: tomato; 
@@ -21,7 +28,7 @@
 			margin-top: 5px;
 			color: #D3D0D0;
 		}
-		.btn{
+		a{
 			margin-top: 10px; 
 		}
 
