@@ -69,6 +69,7 @@ export default class RegisterForm {
                     this.els.inputAutoComplete.value = value
                     this._handleView(false)
                 } catch (e) {}
+                this.selectedItem = 0
                 return
             }
             try {
