@@ -21,6 +21,16 @@ export default class Map{
             this.macarte = null;
             this.markers = null
 
+            this.Def_pos = {
+                _northEast:{
+                    lat: 54.29088164657006,
+                    lng: 26.235351562500004
+                },
+                _southWest: {
+                    lat: 32.91648534731439,
+                    lng: -14.106445312500002 }
+            };
+
             this.init();
         }
     }
@@ -38,7 +48,10 @@ export default class Map{
             maxZoom: 20
         }).addTo(this.macarte);
 
+        this.NewPoints(this.Def_pos);
+
         this.macarte.on('moveend', () => {
+            //console.log(this.macarte.getBounds());
             this.NewPoints(this.macarte.getBounds());
         });
 
@@ -53,70 +66,118 @@ export default class Map{
         console.log('Destruction Marker');
         //console.log(this.markers);
         if(this.markers){
-            this.Object = new Array();
+
             this.markers.remove();
+            delete this.markers;
+
+            delete this.Object;
+            this.Object = new Array();
         }
     }
     marker_add(){
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
 
+        let img = 'http://potajax.prog/img/icon_map/marker-icon-';
+        let shadow = 'http://potajax.prog/img/icon_map/marker-shadow.png';
+
+        /*         Default           */
+        let IconWhite = L.icon({
+            iconUrl: img+'white.png',
+            shadowUrl: shadow
+        });
+        let IconGrey = L.icon({
+            iconUrl: img+'grey.png',
+            shadowUrl: shadow
+        });
+        let IconBlack = L.icon({
+            iconUrl: img+'black.png',
+            shadowUrl: shadow
+        });
+        let IconBlue = L.icon({
+            iconUrl: img+'blue.png',
+            shadowUrl: shadow
+        });
+        let IconRed = L.icon({
+            iconUrl: img+'red.png',
+            shadowUrl: shadow
+        });
+        let IconGreen = L.icon({
+            iconUrl: img+'green.png',
+            shadowUrl: shadow
+        });
+        let IconLightBlue = L.icon({
+            iconUrl: img+'light-blue.png',
+            shadowUrl: shadow
+        });
+        let IconOrange = L.icon({
+            iconUrl: img+'orange.png',
+            shadowUrl: shadow
+        });
+        let IconPink = L.icon({
+            iconUrl: img+'pink.png',
+            shadowUrl: shadow
+        });
+        let IconPurple = L.icon({
+            iconUrl: img+'purple.png',
+            shadowUrl: shadow
+        });
+        let IconYellow = L.icon({
+            iconUrl: img+'yellow.png',
+            shadowUrl: shadow
+        });
+        let IconNAN = L.icon({
+            iconUrl: img+'nan.png',
+            shadowUrl: shadow
+        });
+
         this.Object.map((Item) => {
-            let marker;
+            let type = Item.detail['subcategorie'];
             let data = '';
-
-            var IconBlue = L.icon({
-                iconUrl: 'icon/marker-icon-blue.png',
-                shadowUrl: 'icon/marker-shadow.png'
-            });
-
-            var IconWhite = L.icon({
-                /*iconUrl: 'icon/marker-icon-white.png',
-                shadowUrl: 'icon/marker-shadow.png'
-                 */
-            });
-
-            var IconRed = L.icon({
-                iconUrl: 'icon/marker-icon-red.png',
-                shadowUrl: 'icon/marker-shadow.png'
-            });
+            let marker;
+            let Loc = [Item.coord['Lat'], Item.coord['Lng']];
+            let icone = null;
 
             data += '<p>Nom: '+Item.detail['name']+'</p>';
             data += '<p>Desc: '+Item.detail['desc']+'</p>';
 
-            marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
+            //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
-            /*let type = Item.type;
-            if(type == '0') {
-                marker = L.marker([Item.coord.Lat, Item.coord.Lng], {icon: IconWhite}).bindPopup(data);
-            }
-            if(type > '0'){
-                marker = L.marker([Item.coord.Lat, Item.coord.Lng], {icon: IconRed}).bindPopup(data);
-            }
-            if(type < '0') {
-                marker = L.marker([Item.coord.Lat, Item.coord.Lng], {icon: IconBlue}).bindPopup(data);
-            }
-            else{
+            switch (type){
+                case 1: icone = {icon: IconBlue}; break;
+                case 2: icone = {icon: IconRed}; break;
+                case 3: icone = {icon: IconGreen}; break;
+                case 4: icone = {icon: IconOrange}; break;
+                case 5: icone = {icon: IconPurple}; break;
+                case 6: icone = {icon: IconYellow}; break;
+                case 7: icone = {icon: IconPink}; break;
+                case 8: icone = {icon: IconLightBlue}; break;
 
-            }*/
+                case 9: icone = {icon: IconWhite}; break;
+                case 10: icone = {icon: IconGrey}; break;
+                case 11: icone = {icon: IconBlack}; break;
+
+                default: icone = {icon: IconNAN}; break;
+            }
+
+            marker = L.marker(Loc,icone).bindPopup(data);
             this.markers.addLayer(marker);
 
         });
         this.macarte.addLayer(this.markers);
     }
-
     Fetch(posMap){
         console.log('Recherche Marker');
         let url = 'http://potajax.prog/API/get_marker';
         let params = ''
-        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         let test = {
             northEast: posMap._northEast,
             sudOuest: posMap._southWest,
-            categories: [1, 2, 3],
-            subcategories: [1, 2, 3]
+            categories: [1, 2, 3,],
+            subcategories: [1, 2, 3, 4, 5, 6]
         };
 
         let ResTo = fetch(url, {
@@ -141,6 +202,8 @@ export default class Map{
                             'detail': {
                                 'name': value2.nom,
                                 'desc': value2.descriptif,
+                                'categorie': value2.category_id,
+                                'subcategorie': value2.subcategory_id,
                             },
                             'coord': {
                                 'Lat': value2.lat,
