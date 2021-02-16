@@ -8,6 +8,8 @@
 		<p class="adresse">{{$infos->adresse}}</p>
 		<p class="tel">Téléphone: {{$infos->tel}}</p>
 		<p class="mail">@: {{$infos->email}}</p>
+
+		<a class="btn btn-outline-warning btn-sm" href="#" role="button">Ajouter aux favoris</a>
 	</div>
 </div>
 <div class="horaires">
@@ -16,11 +18,5 @@
 <div class="descriptif">
 	<p>{{$infos->descriptif}}</p>
 </div>
-
-
-
-
-
-
 
 @endsection

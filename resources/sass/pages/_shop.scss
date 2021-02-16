@@ -10,25 +10,21 @@
 		height: 250px;
 		background: rgba(0,0,0,0.5);
 		text-align: center;
+
 		.title{
 			font-size: 30px; 
 			color: tomato; 
 			padding-top: 5%;
 		}
 
-		.adresse{
+		.adresse, .tel, .mail{
 			margin-top: 5px;
 			color: #D3D0D0;
+		}
+		.btn{
+			margin-top: 10px; 
 		}
 
-		.tel{
-			margin-top: 5px;
-			color: #D3D0D0;
-		}
-		.mail{
-			margin-top: 5px;
-			color: #D3D0D0;
-		}
 
 	}
 
