@@ -15,6 +15,7 @@ class MapController extends Controller
 
         $categories = MapController::FindCat($cat,$norEst,$sudOue);
         dd($categories);*/
+        dd('Bah nan !!!');
     }
 
     public function FindCat($tab_cat_id,$tab_subcat_id,$norEst,$sudOue){
@@ -22,6 +23,7 @@ class MapController extends Controller
         if($tab_subcat_id == null || sizeof($tab_subcat_id) == 0){
             foreach ($tab_cat_id as $cat_id){
                 $categories[] = DB::table('shops')->
+                join('categories', 'categories.id', '=', 'shops.category_id')->
                 where('category_id', $cat_id)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
@@ -31,6 +33,7 @@ class MapController extends Controller
             foreach ($tab_cat_id as $cat_id){
                 foreach ($tab_subcat_id as $subcat_id) {
                     $categories[] = DB::table('shops')->
+                    join('categories', 'categories.id', '=', 'shops.category_id')->
                     where('category_id', $cat_id)->
                     where('subcategory_id', $subcat_id)->
                     whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
@@ -52,18 +55,6 @@ class MapController extends Controller
         }
         //dd($lesCategorie);
         return $lesCategorie;
-    }
-
-    public function FindSubCat($tab_subcat_id,$norEst,$sudOue){
-        $subcategories = null;
-        foreach ($tab_subcat_id as $subcat_id){
-            $subcategories[] = DB::table('shops')->
-            where('shops.subcategory_id',$subcat_id)->
-            whereBetween('lat', [$sudOue['lat'],$norEst['lat']])->
-            whereBetween('lng', [$sudOue['lng'],$norEst['lng']])->
-            first();
-        }
-        return $subcategories;
     }
 
     public function post(Request $request)
