@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Shops\Categorie;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
@@ -32,8 +33,13 @@ class RegisterController extends Controller
      * @var string
      */
 //    protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected function redirectTo(): string
+    {
+        return Auth::user()->role === User::MANAGER
+            ? RouteServiceProvider::MANAGER_BACK_OFFICE
+            : RouteServiceProvider::HOME;
+    }
 
     /**
      * Create a new controller instance.
@@ -70,7 +76,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = isset($data['role']) ? User::USER : User::MANAGER;
+        $role = isset($data['role']) ? User::MANAGER : User::USER;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
