@@ -80,8 +80,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="manager-button" class="col-form-label text-md-right mr-3">Je suis commerçant</label>
-                                <input type="checkbox" value="false" id="manager-button" class="js-manager-button">
+                                <label for="role" class="col-form-label text-md-right mr-3">Je suis commerçant</label>
+                                <input type="checkbox" name="role" value="manager" id="role" class="js-manager-button">
                             </div>
                         </div>
 
@@ -101,6 +101,43 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="street_number" class="col-md-4 col-form-label text-md-right">Numéro de rue</label>
+                                <div class="col-md-6">
+                                    <input id="street_number" tabindex="1" type="text" class="form-control js-street_number @error('street_number') is-invalid @enderror" name="street_number" required autocomplete="new-street_number" disabled>
+                                    @error('street_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="city" class="col-md-4 col-form-label text-md-right">Ville</label>
+                                <div class="col-md-6">
+                                    <input id="city" tabindex="1" type="text" class="form-control js-city @error('city') is-invalid @enderror" name="city" required autocomplete="new-city" disabled>
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="cp" class="col-md-4 col-form-label text-md-right">Code postal</label>
+                                <div class="col-md-6">
+                                    <input id="cp" tabindex="1" type="text" class="form-control js-cp @error('cp') is-invalid @enderror" name="cp" required autocomplete="new-cp" disabled>
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="tel" class="col-md-4 col-form-label text-md-right">Téléphone</label>
                                 <div class="col-md-6">

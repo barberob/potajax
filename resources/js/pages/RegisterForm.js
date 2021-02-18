@@ -10,6 +10,8 @@ export default class RegisterForm {
             api_endpoint : 'https://api-adresse.data.gouv.fr/search/?q='
         }
         this.selectedItem = 0
+        this.adresses = []
+        console.log(window.location)
     }
 
     initEls() {
@@ -18,6 +20,9 @@ export default class RegisterForm {
             managerInputsContainer : document.querySelector('.js-manager-inputs'),
             inputAutoComplete : document.querySelector('.js-adress'),
             autoCompleteContainer : document.querySelector('.js-autocomplete'),
+            inputCity : document.querySelector('.js-city'),
+            inputCp : document.querySelector('.js-cp'),
+            inputStreetNumber : document.querySelector('.js-street_number'),
             autoCompleteItems : 0
         }
     }
@@ -28,6 +33,12 @@ export default class RegisterForm {
     }
 
     initManagerForm() {
+        if (this.els.managerButton.checked) {
+            this.els.managerInputsContainer.querySelectorAll('input').forEach(input => {
+                input.removeAttribute('disabled')
+            })
+        }
+
         this.els.managerButton.addEventListener('click', () => {
             if (this.els.managerButton.checked) {
                 this.els.managerInputsContainer.classList.remove('hidden')
@@ -54,32 +65,35 @@ export default class RegisterForm {
             this.els.autoCompleteContainer.classList.add('js-hidden')
         })
         this.els.inputAutoComplete.addEventListener('keydown', event => {
-            console.log(event.key);
-            if (this.els.autoCompleteItems.length === 0) return
-            if(event.key === 'ArrowDown' && this.selectedItem < this.els.autoCompleteItems.length) {
-                this.selectedItem++
-            }
-            else if (event.key === 'ArrowUp' && this.selectedItem > 0) {
-                this.selectedItem--
-            }
-            if (event.key === 'Enter') {
-                event.preventDefault()
-                try {
-                    this.els.inputAutoComplete.value = document.querySelector(
-                        `ul.js-autocomplete li:nth-of-type(${this.selectedItem})`)
-                        .textContent
-                    this._handleView(false)
-                } catch (e) {}
-                this.selectedItem = 0
-                return
-            }
-            try {
-                document.querySelectorAll(`ul.js-autocomplete li`).forEach((item, i) => {
-                    if (i === this.selectedItem - 1) item.classList.add('js-active')
-                    else item.classList.remove('js-active')
-                })
-            } catch (e) {}
+            this._keyboardNavigation(event)
         })
+    }
+
+    _keyboardNavigation(event) {
+        if (this.els.autoCompleteItems.length === 0) return
+        if(event.key === 'ArrowDown' && this.selectedItem < this.els.autoCompleteItems.length) {
+            this.selectedItem++
+        }
+        else if (event.key === 'ArrowUp' && this.selectedItem > 0) {
+            this.selectedItem--
+        }
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            try {
+                this.els.inputAutoComplete.value = document.querySelector(
+                    `ul.js-autocomplete li:nth-of-type(${this.selectedItem})`)
+                    .textContent
+                this._handleView(false)
+            } catch (e) {}
+            this.selectedItem = 0
+            return
+        }
+        try {
+            document.querySelectorAll(`ul.js-autocomplete li`).forEach((item, i) => {
+                if (i === this.selectedItem - 1) item.classList.add('js-active')
+                else item.classList.remove('js-active')
+            })
+        } catch (e) {}
     }
 
     _listenKeyEvents(event) {
@@ -105,6 +119,7 @@ export default class RegisterForm {
 
         const source = await fetch(this.config.api_endpoint + query)
         const res = await source.json()
+        this.adresses = res
 
         if (res.features.length === 0) this._handleView('false')
         const formatted_res = res.features.map(adress => adress.properties.label)
@@ -115,23 +130,43 @@ export default class RegisterForm {
     _createList(data) {
         if(data.length === 0) this._handleView()
         this.els.autoCompleteContainer.innerHTML = ''
-        data.forEach(result => {
-            this._createListItem(result)
+        data.forEach((result, count) => {
+            this._createListItem(result, count)
         })
         this.els.autoCompleteItems = this.els.autoCompleteContainer.querySelectorAll('li')
         this._handleView(true)
     }
 
-    _createListItem(result) {
+    _createListItem(result, count) {
         const li = document.createElement('li')
         li.addEventListener('mousedown', e => {
             this.els.autoCompleteContainer.classList.add('js-hidden')
             if(this.els.autoCompleteItems) {
-                this.els.inputAutoComplete.value = e.currentTarget.textContent
+                this._fillForm(count)
             }
         })
         li.textContent = result
         this.els.autoCompleteContainer.appendChild(li)
+    }
+
+    _fillForm(count) {
+        const properties = this.adresses.features[count].properties
+        console.log(properties)
+
+        if (properties.type !== "municipality") {
+            this.els.inputAutoComplete.value = properties.street || properties.name
+            if(properties.type === 'housenumber') {
+                this.els.inputStreetNumber.value = properties.housenumber
+            } else {
+                this.els.inputStreetNumber.value = ''
+            }
+            this.els.inputCp.value = properties.postcode
+            this.els.inputCity.value = properties.city
+        } else {
+            this.els.inputCity.value         = ''
+            this.els.inputCp.value           = ''
+            this.els.inputStreetNumber.value = ''
+        }
     }
 
     _handleView(haveResult = false) {

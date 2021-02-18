@@ -25,6 +25,8 @@ class CreateShopsTable extends Migration
             $table->id()->unique();
             $table->string('nom', 45);
             $table->text('adresse');
+            $table->string('cp');
+            $table->string('numRue');
             $table->float('lat');
             $table->float('lng');
             $table->text('descriptif');
@@ -34,7 +36,7 @@ class CreateShopsTable extends Migration
             $table->string('siret', 14);
             $table->text('horaires');
             $table->tinyInteger('etat');
-            $table->string('codeNote', 10);
+            $table->string('codeNote', 10)->nullable();
 
             $table->foreignId('city_id')->constrained();
             $table->foreignId('subcategory_id')->constrained();
