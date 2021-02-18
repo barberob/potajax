@@ -25,6 +25,8 @@ Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
 Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
 Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
 
+
+
 // Route vers la page d'un shop
 Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 
