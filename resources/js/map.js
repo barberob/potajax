@@ -31,7 +31,7 @@ export default class Map{
                     lat: 32.91648534731439,
                     lng: -14.106445312500002 }
             };
-            this.changeSelect();
+            //this.changeSelect();
             this.init();
 
 
@@ -45,8 +45,8 @@ export default class Map{
     init() {
         console.log('Creation Map');
 
-        console.log(document.querySelector('.container').scrollWidth);
-        console.log(document.querySelector('.container').scrollWidth);
+        //console.log(document.querySelector('.container').scrollWidth);
+        //console.log(document.querySelector('.container').scrollWidth);
 
 
         this.macarte = L.map('map').setView([this.Lat, this.Lng], this.Zoom);
@@ -183,12 +183,8 @@ export default class Map{
         let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        let test = {
-            northEast: posMap._northEast,
-            sudOuest: posMap._southWest,
-            categories: [1, 2, 3,],
-            subcategories: [1, 2, 3, 4, 5, 6]
-        };
+        let test = this.get_data(this.Def_pos);
+        //console.log(test);
 
         let ResTo = fetch(url, {
             headers: {
@@ -229,7 +225,26 @@ export default class Map{
         }).catch(error => alert("Erreur : " + error));
         //console.log(ResTo);
     }
-    click(lat,lng,zoom){
+    get_data(posMap){
+        console.log('Récupération Data Map');
+        let red = window.location.href.split('/');
+
+        red[4] = parseInt(red[4]);
+        red[5] = parseInt(red[5]);
+
+        if(isNaN(red[4])) red[4] = "All";
+        if(isNaN(red[5])) red[5] = "All";
+
+        let test = {
+            northEast: posMap._northEast,
+            sudOuest: posMap._southWest,
+            categories: [red[4]],
+            subcategories: [red[5]]
+        };
+
+        return test;
+    }
+    /*click(lat,lng,zoom){
         //document
         this.macarte.setView([lat, lng], zoom);
     }
@@ -288,5 +303,5 @@ export default class Map{
 
                 alert('yolo2');
             });
-    }
+    }*/
 }

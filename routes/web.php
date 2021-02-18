@@ -15,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', 'IndexController@index')->name('index');
 
+Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
 
-Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
-Route::get('/map/{category_id}', 'SubcategoriesController@listSubcat')->name('map');
+Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
+//Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
+Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
+Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
 
 // Route vers la page d'un shop
 Route::get('/shop/{id}', 'ShopController@details')->name('shop');

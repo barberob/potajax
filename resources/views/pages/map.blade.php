@@ -10,19 +10,19 @@
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				  	@foreach($categories as $categorie)
-				    	<li><a class="dropdown-item" href="{{ route('map', ['category_id' => $categorie->id]) }}">{{$categorie->libelle}}</a></li>
+				    	<li><a class="dropdown-item" href="{{ route('Catmap', ['category_id' => $categorie->id]) }}">{{$categorie->libelle}}</a></li>
 				    @endforeach
 				  </ul>
 				</div>
+
 				<div class="dropdown mx-2 mt-2">
 				  <button class="btn btn-light border-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
 				    Sous catégories
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				  	@foreach($subcategories as $subcategorie)
-				    	<li><a class="dropdown-item" href="#">{{$subcategorie->libelle}}</a></li>
+				    	<li><a class="dropdown-item" href="{{ route('Subcatmap', ['category_id' => $current_category_id,'subcategory_id' => $subcategorie->id]) }}">{{$subcategorie->libelle}}</a></li>
 				   	@endforeach
-					    
 				  </ul>
 				</div>
 			</div>
@@ -31,14 +31,15 @@
               <button class="btn" type="submit"><i class="bi-search"></i></button>
             </form>
         </div>
-        
+
 		 <div class="row">
 		    <div class="col-lg-9" id="map">
 		    	map
 		    </div>
 		    <div class="col" id="liste">
 				  <div class="card-header">
-				    {{ $current_category }}
+                      {{ $current_category_lib }}<br>
+                      {{ $current_subcategory_lib }}
 				  </div>
 				  <div class="card-body">
 				  	<div class="panel panel-primary" id="result_panel">
@@ -47,7 +48,7 @@
 					        	@foreach($shops as $shop)
 					            <li class="list-group-item">
 					            	<strong><a href="#">{{$shop->nom}}</a></strong>
-					            	
+
 					            	<p>{{$shop->adresse}}</p>
 					            	<a class="btn btn-outline-danger btn-sm" href="{{ route('shop', ['id' => $shop->id]) }}" role="button">Voir la page</a>
 					            </li>
@@ -56,10 +57,10 @@
 					    </div>
 					</div>
 				  </div>
-		      
+
 		    </div>
 		 </div>
-		
+
     </div>
 
 
