@@ -31,11 +31,11 @@ Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listS
 Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 
 // Route vers la page Mes Favoris
-
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
-// Route vers la page Mon Compte
+Route::get('/add/favorites', 'FavoritesController@add')->name('add-favorites');
 
+// Route vers la page Mon Compte
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');
 
 // La page où on présente les liens de redirection vers les providers
@@ -46,6 +46,8 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 // Le callback du provider
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('socialite.callback');
+
+Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
 
 
