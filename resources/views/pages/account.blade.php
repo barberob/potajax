@@ -7,7 +7,7 @@
         <div class="home text-center">
             <h1 class="py-3">Votre compte</h1>
         </div>
-        
+
         @manager
         {{--        @forelse($shops ?? '' as $shop)--}}
         {{--        <div class="card">--}}
