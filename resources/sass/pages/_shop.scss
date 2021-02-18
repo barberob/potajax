@@ -14,7 +14,6 @@
 		#back{
 			border-radius: 33px;
 			margin-top: 5px;
-			margin-left: 100px;
 			float: left;
 		}
 
@@ -30,6 +29,7 @@
 		}
 		a{
 			margin-top: 10px; 
+			font-size: 15px;
 		}
 
 
@@ -48,8 +48,25 @@
 	font-style: italic;
 
 	p{
-		margin-top: 25px;
-		padding-left: 150px;
-		padding-right: 150px;
+		margin: 25px;
+
 	}
+}
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+		.name{
+			div{
+				#back{
+					margin-left: 100px;
+				}
+			}
+		}
+		.descriptif{
+			p{
+				margin-top: 25px;
+				margin-left: 300px;
+				margin-right: 300px;
+
+			}
+		}
 }
