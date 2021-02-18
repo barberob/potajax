@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('prefixtel', 10)->nullable();
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Shops\Categorie;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
@@ -31,7 +32,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function redirectTo(): string
+    {
+        return Auth::user()->role === User::MANAGER
+            ? RouteServiceProvider::MANAGER_BACK_OFFICE
+            : RouteServiceProvider::HOME;
+    }
 
     /**
      * Create a new controller instance.
@@ -51,12 +59,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-//        dd($data);
         return Validator::make($data, [
             'lastname' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tel' => ['required_with:role,manager']
         ]);
     }
 
@@ -68,10 +76,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = $data['role'] === null ? User::USER : User::MANAGER;
-        if ($role === User::MANAGER) {
-            $coordinates = self::getShopCoordinates($data);
-        }
+        $role = isset($data['role']) ? User::MANAGER : User::USER;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],

@@ -21,7 +21,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
+
+    /**
+     * The path to the "back-office" route for managers.
+     *
+     * @var string
+     */
+    public const MANAGER_BACK_OFFICE = '/manager/my-shops';
 
     /**
      * Define your route model bindings, pattern filters, etc.

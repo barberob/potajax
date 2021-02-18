@@ -51,7 +51,7 @@ class MapController extends Controller
                 get();
             }
         }
-        
+
         if($tab_subcat_id[0] == null){
             $categories[] = DB::table('shops')->
             join('categories', 'categories.id', '=', 'shops.category_id')->

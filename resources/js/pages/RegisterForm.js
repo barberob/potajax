@@ -18,18 +18,18 @@ export default class RegisterForm {
         this.els = {
             managerButton : document.querySelector('.js-manager-button'),
             managerInputsContainer : document.querySelector('.js-manager-inputs'),
-            inputAutoComplete : document.querySelector('.js-adress'),
-            autoCompleteContainer : document.querySelector('.js-autocomplete'),
-            inputCity : document.querySelector('.js-city'),
-            inputCp : document.querySelector('.js-cp'),
-            inputStreetNumber : document.querySelector('.js-street_number'),
-            autoCompleteItems : 0
+            // inputAutoComplete : document.querySelector('.js-adress'),
+            // autoCompleteContainer : document.querySelector('.js-autocomplete'),
+            // inputCity : document.querySelector('.js-city'),
+            // inputCp : document.querySelector('.js-cp'),
+            // inputStreetNumber : document.querySelector('.js-street_number'),
+            // autoCompleteItems : 0
         }
     }
 
     initEvents() {
         this.initManagerForm()
-        this.initAutoComplete()
+        // this.initAutoComplete()
     }
 
     initManagerForm() {
@@ -174,4 +174,3 @@ export default class RegisterForm {
         else this.els.autoCompleteContainer.classList.remove('js-hidden')
     }
 }
-
