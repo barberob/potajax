@@ -21,6 +21,7 @@ $factory->define(Shop::class, function (Faker $faker) {
         'horaires' => '[lundi][mardi][mercredi][jeudi][vendredi][samedi][dimanche][ferié]',
         'etat' => random_int(1, 2),
         'codeNote' => $faker->numerify('##########'),
+        'user_id' => factory(App\User::class),
         'city_id' => random_int(1,4),
         'subcategory_id' => random_int(1,6),
         'category_id' => random_int(1,7),

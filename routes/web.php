@@ -35,8 +35,8 @@ Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
 Route::get('/add/favorites', 'FavoritesController@add')->name('add-favorites');
 
-// Route vers la page Mon Compte
-Route::get('/myaccount', 'UsersController@index')->name('myaccount');
+
+Route::get('/account', 'UsersController@index')->name('account');
 
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");

@@ -16,7 +16,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links 
+                <!-- Authentication Links
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('myaccount') }}">
+                    <a class="nav-link" href="{{ route('account') }}">
                         <div id="user">Mon compte</div>
                         <div><img src="{{ asset('img/user.svg') }}" alt="" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
