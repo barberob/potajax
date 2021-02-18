@@ -86,57 +86,57 @@
                         </div>
 
                         <div class="js-manager-inputs manager-inputs hidden">
-                            <div class="form-group row">
-                                <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse du commerce</label>
-                                <div class="col-md-6">
-                                    <div class="js-input_container">
-                                        <input id="adress" tabindex="1" type="text" class="form-control js-adress @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>
-                                        <ul class="js-autocomplete js-hidden">
-                                        </ul>
-                                    </div>
-                                    @error('adress')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse du commerce</label>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="js-input_container">--}}
+{{--                                        <input id="adress" tabindex="1" type="text" class="form-control js-adress @error('adress') is-invalid @enderror" name="adress" required autocomplete="new-adress" disabled>--}}
+{{--                                        <ul class="js-autocomplete js-hidden">--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
+{{--                                    @error('adress')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="form-group row">
-                                <label for="street_number" class="col-md-4 col-form-label text-md-right">Numéro de rue</label>
-                                <div class="col-md-6">
-                                    <input id="street_number" tabindex="1" type="text" class="form-control js-street_number @error('street_number') is-invalid @enderror" name="street_number" required autocomplete="new-street_number" disabled>
-                                    @error('street_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="street_number" class="col-md-4 col-form-label text-md-right">Numéro de rue</label>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="street_number" tabindex="1" type="text" class="form-control js-street_number @error('street_number') is-invalid @enderror" name="street_number" required autocomplete="new-street_number" disabled>--}}
+{{--                                    @error('street_number')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="form-group row">
-                                <label for="city" class="col-md-4 col-form-label text-md-right">Ville</label>
-                                <div class="col-md-6">
-                                    <input id="city" tabindex="1" type="text" class="form-control js-city @error('city') is-invalid @enderror" name="city" required autocomplete="new-city" disabled>
-                                    @error('city')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="city" class="col-md-4 col-form-label text-md-right">Ville</label>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="city" tabindex="1" type="text" class="form-control js-city @error('city') is-invalid @enderror" name="city" required autocomplete="new-city" disabled>--}}
+{{--                                    @error('city')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="form-group row">
-                                <label for="cp" class="col-md-4 col-form-label text-md-right">Code postal</label>
-                                <div class="col-md-6">
-                                    <input id="cp" tabindex="1" type="text" class="form-control js-cp @error('cp') is-invalid @enderror" name="cp" required autocomplete="new-cp" disabled>
-                                    @error('city')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="cp" class="col-md-4 col-form-label text-md-right">Code postal</label>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="cp" tabindex="1" type="text" class="form-control js-cp @error('cp') is-invalid @enderror" name="cp" required autocomplete="new-cp" disabled>--}}
+{{--                                    @error('city')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
                             <div class="form-group row">
                                 <label for="tel" class="col-md-4 col-form-label text-md-right">Téléphone</label>

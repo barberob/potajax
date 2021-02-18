@@ -68,10 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = $data['role'] === null ? User::USER : User::MANAGER;
-        if ($role === User::MANAGER) {
-            $coordinates = self::getShopCoordinates($data);
-        }
+        $role = isset($data['role']) ? User::USER : User::MANAGER;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
