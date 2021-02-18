@@ -11,8 +11,7 @@ export default class Map{
             const TILE_LAYER4 = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
             const TILE_LAYER5 = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
 
-            this.domain_url = window.location.hostname;
-
+            this.domain_url = window.location.origin;
             this.Lat = '44.55962000171788';
             this.Lng = '6.079823238576286';
             this.Zoom = '5';
@@ -32,7 +31,15 @@ export default class Map{
                     lat: 32.91648534731439,
                     lng: -14.106445312500002 }
             };
+            this.changeSelect();
             this.init();
+
+
+            /*alert('zerzre');
+            window.addEventListener("beforeunload", function (event) {
+                //your code goes here on location change
+                alert('yolo');
+            });*/
         }
     }
     init() {
@@ -79,8 +86,8 @@ export default class Map{
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
 
-        let img = 'http://'+this.domain_url+'/img/icon_map/marker-icon-';
-        let shadow = 'http://'+this.domain_url+'/img/icon_map/marker-shadow.png';
+        let img = this.domain_url+'/img/icon_map/marker-icon-';
+        let shadow = this.domain_url+'/img/icon_map/marker-shadow.png';
 
         /*         Default           */
         let IconWhite = L.icon({
@@ -161,6 +168,8 @@ export default class Map{
                 default: icone = {icon: IconNAN}; break;
             }
 
+
+
             marker = L.marker(Loc,icone).bindPopup(data);
             this.markers.addLayer(marker);
 
@@ -169,7 +178,7 @@ export default class Map{
     }
     Fetch(posMap){
         console.log('Recherche Marker');
-        let url = 'http://'+this.domain_url+'/API/get_marker';
+        let url = this.domain_url+'/API/get_marker';
         let params = ''
         let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -219,5 +228,65 @@ export default class Map{
             //console.log(this.Object);
         }).catch(error => alert("Erreur : " + error));
         //console.log(ResTo);
+    }
+    click(lat,lng,zoom){
+        //document
+        this.macarte.setView([lat, lng], zoom);
+    }
+    changeSelect(){
+        document.getElementById('categorie_id')
+            .addEventListener("change", function (event) {
+
+                let url = this.domain_url+'/API/get_sub_category';
+                let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                //console.log(this.value)
+                let test = {
+                    category_id: this.value
+                };
+
+                let ResTo = fetch(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": token
+                    },
+                    method: "post",
+                    credentials: "same-origin",
+                    body: JSON.stringify(test)
+                }).then(response => {
+                    return response.json();
+                }).then(objected => {
+                    //console.log(Object.entries(objected));
+                    for (const [key1, value1] of Object.entries(objected)) {
+                        for (const [key2, value2] of Object.entries(value1)) {
+                            if (value2 != null) {
+                                //console.log(value2);
+                                this.Object.push({
+                                    'detail': {
+                                        'name': value2.nom,
+                                        'desc': value2.descriptif,
+                                        'categorie': value2.category_id,
+                                        'subcategorie': value2.subcategory_id,
+                                    },
+                                    'coord': {
+                                        'Lat': value2.lat,
+                                        'Lng': value2.lng,
+                                    }
+                                });
+                                //console.log(this.Object);
+                            }
+                        }
+                    }
+                    this.marker_add();
+                    //console.log(this.Object);
+                }).catch(error => alert("Erreur : " + error));
+                //console.log(ResTo);
+            });
+        document.getElementById('subcategorie_id')
+            .addEventListener("change", function (event) {
+
+                alert('yolo2');
+            });
     }
 }

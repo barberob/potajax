@@ -27,13 +27,10 @@ class CreateUsersTable extends Migration
             $table->string('prenom', 45);
             $table->string('email');
             $table->char('mdp', 65);
-            $table->text('adresse')->nullable();
             $table->string('prefixtel', 10)->nullable();
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
-
-            $table->foreignId('city_id')->constrained();
-
+            
             $table->timestamps();
             $table->softDeletes();
         });

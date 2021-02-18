@@ -57,7 +57,6 @@ class RegisterController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:user,manager']
         ]);
     }
 
@@ -69,7 +68,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = $data['role'] === 'user' ? User::USER : User::MANAGER;
+        $role = $data['role'] === null ? User::USER : User::MANAGER;
+        if ($role === User::MANAGER) {
+            $coordinates = self::getShopCoordinates($data);
+        }
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
@@ -77,6 +79,35 @@ class RegisterController extends Controller
             'mdp' => Hash::make($data['password']),
             'role' => $role
         ]);
+    }
+
+    private function getShopCoordinates(array $data) {
+
+        $query = $data['street_number']. '+' .$data['adress']. '+' .$data['city']. '+' . $data['cp'];
+        $curl = curl_init();
+        curl_setopt_array(
+            $curl,
+            [
+                CURLOPT_URL => "https://api-adresse.data.gouv.fr/search/?q=". urlencode($query),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "",
+            ]
+        );
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            abort(403);
+        } else {
+//            dd(json_decode($response)->features[0]->geometry->coordinates);
+            return json_decode($response)->features[0]->geometry->coordinates;
+        }
     }
 
 
