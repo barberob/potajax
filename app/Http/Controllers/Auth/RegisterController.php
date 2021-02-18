@@ -110,7 +110,6 @@ class RegisterController extends Controller
         if ($err) {
             abort(403);
         } else {
-//            dd(json_decode($response)->features[0]->geometry->coordinates);
             return json_decode($response)->features[0]->geometry->coordinates;
         }
     }

@@ -36,6 +36,7 @@ require('./bootstrap');
 
 import Map from './map';
 import RegisterForm from './pages/RegisterForm';
+import AddShopForm from './pages/AddShopForm';
 import locStorage from './locStorage';
 
 class App {
@@ -45,6 +46,7 @@ class App {
 
     initApp() {
         new RegisterForm();
+        new AddShopForm();
         new Map();
         new locStorage();
     }

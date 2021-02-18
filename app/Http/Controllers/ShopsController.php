@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ShopsController extends Controller
 {
+    public function addShop()
+    {
+        return view('pages.add-shop');
+    }
+
     public function listShop()
     {
     	$shops = DB::table('shops')->get();
