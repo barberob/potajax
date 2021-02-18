@@ -65,8 +65,9 @@ export default class RegisterForm {
             if (event.key === 'Enter') {
                 event.preventDefault()
                 try {
-                    const value = document.querySelector(`ul.js-autocomplete li:nth-of-type(${this.selectedItem})`).textContent
-                    this.els.inputAutoComplete.value = value
+                    this.els.inputAutoComplete.value = document.querySelector(
+                        `ul.js-autocomplete li:nth-of-type(${this.selectedItem})`)
+                        .textContent
                     this._handleView(false)
                 } catch (e) {}
                 this.selectedItem = 0
