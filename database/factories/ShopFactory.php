@@ -8,7 +8,9 @@ use Faker\Generator as Faker;
 $factory->define(Shop::class, function (Faker $faker) {
     return [
         'nom' => $faker->name,
-        'adresse' => $faker->address,
+        'adresse' => $faker->streetName,
+        'numRue' => random_int(1, 99),
+        'cp' => $faker->postcode,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,
         'descriptif' => $faker->text,

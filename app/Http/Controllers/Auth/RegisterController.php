@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Shops\Categorie;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
@@ -31,7 +32,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function redirectTo(): string
+    {
+        return Auth::user()->role === User::MANAGER
+            ? RouteServiceProvider::MANAGER_BACK_OFFICE
+            : RouteServiceProvider::HOME;
+    }
 
     /**
      * Create a new controller instance.
@@ -51,13 +59,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-//        dd($data);
         return Validator::make($data, [
             'lastname' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:user,manager']
+            'tel' => ['required_with:role,manager']
         ]);
     }
 
@@ -69,7 +76,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = $data['role'] === 'user' ? User::USER : User::MANAGER;
+        $role = isset($data['role']) ? User::MANAGER : User::USER;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
@@ -77,6 +84,35 @@ class RegisterController extends Controller
             'mdp' => Hash::make($data['password']),
             'role' => $role
         ]);
+    }
+
+    private function getShopCoordinates(array $data) {
+
+        $query = $data['street_number']. '+' .$data['adress']. '+' .$data['city']. '+' . $data['cp'];
+        $curl = curl_init();
+        curl_setopt_array(
+            $curl,
+            [
+                CURLOPT_URL => "https://api-adresse.data.gouv.fr/search/?q=". urlencode($query),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "",
+            ]
+        );
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            abort(403);
+        } else {
+//            dd(json_decode($response)->features[0]->geometry->coordinates);
+            return json_decode($response)->features[0]->geometry->coordinates;
+        }
     }
 
 

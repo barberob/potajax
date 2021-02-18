@@ -1,6 +1,39 @@
-.container.register {
+body.register {
     .hidden {
         display: none;
     }
+    .js-hidden {
+        display: none;
+    }
+    .js-input_container {
+        position: relative;
+        .js-autocomplete {
+            max-height: 200px;
+            overflow-y: scroll;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            background-color: #fff;
+            transform: translateY(100%);
+            z-index: 2;
+            border-radius: 3px;
+            border: 2px solid lightgrey;
+            li {
+                padding: 10px 20px;
+                width: 100%;
+                display: block;
+                cursor: pointer;
+                &.js-active {
+                    background-color: var(--primary);
+                    color: white;
+                }
+                &:hover {
+                    background-color: var(--info);
+                    color: white;
+                }
+            }
+        }
+    }
+
 }
 

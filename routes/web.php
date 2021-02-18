@@ -15,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', 'IndexController@index')->name('index');
 
+Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
 
-Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
-Route::get('/map/{category_id}', 'SubcategoriesController@listSubcat')->name('map');
+Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
+//Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
+Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
+Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
+
+// Route vers la page d'un shop
+Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 
 // Route vers la page Mes Favoris
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
@@ -43,5 +49,5 @@ Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
 
 
-//Route::get('/API/get_marker', 'MapController@create')->name('create_Marker');
-Route::post('/API/get_marker', 'MapController@create')->name('create_Marker');
+Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
+Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
