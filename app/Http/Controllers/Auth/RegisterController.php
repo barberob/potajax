@@ -37,7 +37,7 @@ class RegisterController extends Controller
     protected function redirectTo(): string
     {
         return Auth::user()->role === User::MANAGER
-            ? RouteServiceProvider::MANAGER_BACK_OFFICE
+            ? RouteServiceProvider::ACCOUNT
             : RouteServiceProvider::HOME;
     }
 
