@@ -113,6 +113,4 @@ class RegisterController extends Controller
             return json_decode($response)->features[0]->geometry->coordinates;
         }
     }
-
-
 }
