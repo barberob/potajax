@@ -25,6 +25,8 @@ Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
 Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
 Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
 
+
+
 // Route vers la page d'un shop
 Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 
@@ -33,8 +35,9 @@ Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
 Route::get('/add/favorites', 'FavoritesController@add')->name('add-favorites');
 
-// Route vers la page Mon Compte
-Route::get('/myaccount', 'UsersController@index')->name('myaccount');
+
+Route::get('/account', 'UsersController@index')->name('account');
+Route::get('/account/add-shop', 'ShopsController@addShop')->name('add_shop');
 
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");

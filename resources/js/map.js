@@ -242,13 +242,15 @@ export default class Map{
             subcategories: [red[5]]
         };
 
+
+
+
         return test;
     }
-    /*click(lat,lng,zoom){
-        //document
+    ZoomShop(lat,lng,zoom){
         this.macarte.setView([lat, lng], zoom);
     }
-    changeSelect(){
+    /*changeSelect(){
         document.getElementById('categorie_id')
             .addEventListener("change", function (event) {
 
