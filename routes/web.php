@@ -56,3 +56,5 @@ Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')-
 
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
+
+Route::get('/search', 'SearchController@get')->name('Recherche');
