@@ -10,7 +10,7 @@
 		<p class="tel">Téléphone: {{$infos->tel}}</p>
 		<p class="mail">@: {{$infos->email}}</p>
 
-		<a class="btn btn-outline-warning btn-sm" href="#" role="button">Ajouter aux favoris</a>
+		<a class="btn btn-outline-warning btn-sm fav" href="#" role="button">Ajouter aux favoris</a>
 	</div>
 </div>
 <div class="horaires">

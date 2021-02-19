@@ -3,7 +3,7 @@ export default class locStorage
 
     constructor()
     {
-        if(document.querySelector('body.shops'))
+        if(document.querySelector('body.shop'))
         {
             this.init();
         }
@@ -15,7 +15,7 @@ export default class locStorage
             button.addEventListener("click", function(){
                 localStorage.setItem("id"+i, i);
                 document.cookie = "id"+i+"="+i;
-                /*alert(document.cookie);*/
+                console.log(document.cookie);
             }, false);
         });
     }
