@@ -24,7 +24,7 @@
                     <div class="d-flex align-items-center flex-column">
 
                             <div id="zoom" class="rounded-circle bg-secondary category_image mb-3 mx-3"
-                             style="background-image:url('img/{{$categorie->libelle}}.jpg');"></div>
+                             style="background-image:url('img/Size_Small/{{$categorie->libelle}}.jpg');"></div>
                             <h3 class="text-dark">{{ $categorie->libelle }}</h3>
 
                     </div>
