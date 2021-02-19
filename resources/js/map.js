@@ -11,16 +11,31 @@ export default class Map{
             const TILE_LAYER4 = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
             const TILE_LAYER5 = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
 
+            this.TILE_LAYER1_layers = L.tileLayer(TILE_LAYER1, {id: '1',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER2_layers = L.tileLayer(TILE_LAYER2, {id: '2',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER3_layers = L.tileLayer(TILE_LAYER3, {id: '3',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER4_layers = L.tileLayer(TILE_LAYER4, {id: '4',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER5_layers = L.tileLayer(TILE_LAYER5, {id: '5',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+
+            this.baseMaps = {
+                "<span style='color: gray'>Dark Edition</span>": this.TILE_LAYER1_layers,
+                "<span style='color: gray'>Negative Edition</span>": this.TILE_LAYER5_layers,
+                "<span style='color: gray'>Light Smooth 1</span>": this.TILE_LAYER3_layers,
+                "<span style='color: gray'>Light Smooth 2</span>": this.TILE_LAYER4_layers,
+                "<span style='color: gray'>Light Smooth 3</span>": this.TILE_LAYER2_layers,
+            };
+
             this.domain_url = window.location.origin;
             this.Lat = '44.55962000171788';
             this.Lng = '6.079823238576286';
             this.Zoom = '5';
-            this.Tile = TILE_LAYER2;
-
+            //this.Tile = TILE_LAYER2;
             this.Object = new Array();
 
             this.macarte = null;
             this.markers = null
+
+            this.makerUse = [];
 
             this.Def_pos = {
                 _northEast:{
@@ -48,13 +63,17 @@ export default class Map{
         //console.log(document.querySelector('.container').scrollWidth);
         //console.log(document.querySelector('.container').scrollWidth);
 
-
-        this.macarte = L.map('map').setView([this.Lat, this.Lng], this.Zoom);
+        this.macarte = L.map('map', {center: [this.Lat, this.Lng], zoom: this.Zoom, layers: [this.TILE_LAYER2_layers]});
+        this.macarte.setMaxBounds([[-90,-180],[90,180]])
+        // vielle carte sans le layers des tuilles
+        /*this.macarte = L.map('map').setView([this.Lat, this.Lng], this.Zoom);
         L.tileLayer(this.Tile, {
             attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
             minZoom: 1,
             maxZoom: 20
-        }).addTo(this.macarte);
+        }).addTo(this.macarte);*/
+
+        L.control.layers(this.baseMaps).addTo(this.macarte);
 
         this.NewPoints(this.Def_pos);
 
@@ -140,11 +159,14 @@ export default class Map{
         });
 
         this.Object.map((Item) => {
-            let type = Item.detail['subcategorie'];
+            //console.log(Item.detail);
+            let type = Item.detail['subcategorie_id'];
+            let libelle = Item.detail['subcategorie_lib'];
             let data = '';
             let marker;
             let Loc = [Item.coord['Lat'], Item.coord['Lng']];
             let icone = null;
+            let color = null;
 
             data += '<p>Nom: '+Item.detail['name']+'</p>';
             data += '<p>Desc: '+Item.detail['desc']+'</p>';
@@ -152,28 +174,33 @@ export default class Map{
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
             switch (type){
-                case 1: icone = {icon: IconBlue}; break;
-                case 2: icone = {icon: IconRed}; break;
-                case 3: icone = {icon: IconGreen}; break;
-                case 4: icone = {icon: IconOrange}; break;
-                case 5: icone = {icon: IconPurple}; break;
-                case 6: icone = {icon: IconYellow}; break;
-                case 7: icone = {icon: IconPink}; break;
-                case 8: icone = {icon: IconLightBlue}; break;
+                case 1: icone = {icon: IconBlue};color = '#2B82CB' ; break;
+                case 2: icone = {icon: IconRed};color = '#F80B17' ; break;
+                case 3: icone = {icon: IconGreen};color = '#0AF92A' ; break;
+                case 4: icone = {icon: IconOrange};color = '#F87D10' ; break;
+                case 5: icone = {icon: IconPurple};color = '#9E0DF7' ; break;
+                case 6: icone = {icon: IconYellow};color = '#F8F008' ; break;
+                case 7: icone = {icon: IconPink};color = '#F810B3' ; break;
+                case 8: icone = {icon: IconLightBlue};color = '#0DF7EC' ; break;
 
-                case 9: icone = {icon: IconWhite}; break;
-                case 10: icone = {icon: IconGrey}; break;
-                case 11: icone = {icon: IconBlack}; break;
+                case 9: icone = {icon: IconWhite};color = '#E2E2E2' ; break;
+                case 10: icone = {icon: IconGrey};color = '#888888' ; break;
+                case 11: icone = {icon: IconBlack};color = '#2B2B2B' ; break;
 
-                default: icone = {icon: IconNAN}; break;
+                default: icone = {icon: IconNAN};color = 'NaN' ; break;
             }
 
 
+            if(!(this.VerificationDejaDansTableau(libelle,this.makerUse))){
+                //console.log('add '+ libelle);
+                this.makerUse.push({type: libelle, color: color});
+            }
 
             marker = L.marker(Loc,icone).bindPopup(data);
             this.markers.addLayer(marker);
 
         });
+        //console.log(this.makerUse);
         this.macarte.addLayer(this.markers);
     }
     Fetch(posMap){
@@ -202,14 +229,15 @@ export default class Map{
             //console.log(Object.entries(objected));
             for (const [key1, value1] of Object.entries(objected)) {
                 for (const [key2, value2] of Object.entries(value1)) {
+                    //console.log(value2);
                     if (value2 != null) {
-                        //console.log(value2);
                         this.Object.push({
                             'detail': {
                                 'name': value2.nom,
                                 'desc': value2.descriptif,
-                                'categorie': value2.category_id,
-                                'subcategorie': value2.subcategory_id,
+                                'categorie_id': value2.category_id,
+                                'subcategorie_id': value2.subcategory_id,
+                                'subcategorie_lib': value2.libelle,
                             },
                             'coord': {
                                 'Lat': value2.lat,
@@ -306,4 +334,15 @@ export default class Map{
                 alert('yolo2');
             });
     }*/
+    VerificationDejaDansTableau(val,tab){
+        let res = false;
+        //console.log(tab.length);
+        for(let i = 0; i < tab.length; i++){
+            //console.log(val+' '+tab[i]['type']);
+            if(val === tab[i]['type']){
+                res = true;
+            }
+        }
+        return res;
+    }
 }

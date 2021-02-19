@@ -36,7 +36,8 @@ class MapController extends Controller
             else if($tab_subcat_id[0] == "All"){
                 $categories[] = DB::table('shops')->
                 join('categories', 'categories.id', '=', 'shops.category_id')->
-                where('category_id', $tab_cat_id[0])->
+                join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                where('shops.category_id', $tab_cat_id[0])->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 get();
@@ -44,8 +45,9 @@ class MapController extends Controller
             else{
                 $categories[] = DB::table('shops')->
                 join('categories', 'categories.id', '=', 'shops.category_id')->
-                where('category_id', $tab_cat_id[0])->
-                where('subcategory_id', $tab_subcat_id[0])->
+                join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                where('shops.category_id', $tab_cat_id[0])->
+                where('shops.subcategory_id', $tab_subcat_id[0])->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 get();
@@ -55,7 +57,8 @@ class MapController extends Controller
         if($tab_subcat_id[0] == null){
             $categories[] = DB::table('shops')->
             join('categories', 'categories.id', '=', 'shops.category_id')->
-            where('category_id', $tab_cat_id[0])->
+            join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+            where('shops.category_id', $tab_cat_id[0])->
             whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
             whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
             get();
