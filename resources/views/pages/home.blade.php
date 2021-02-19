@@ -4,7 +4,7 @@
 @section('content')
     <div class="home">
         <div class="intro px-3">
-            <form class="d-flex">
+            <form class="d-flex" action="{{ route('Recherche') }}">
               <input class="rounded-pill px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
               <button class="btn" type="submit"><i class="bi-search" style="font-size: 2rem; color: white;"></i></button>
             </form>
@@ -32,7 +32,7 @@
 
             @endforeach
 
-            
+
 
         </div>
     </div>
