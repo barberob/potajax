@@ -53,13 +53,6 @@ export default class RegisterForm {
         }
         if (event.key === 'Enter' && this.selectedItem > 0) {
             event.preventDefault()
-            // try {
-            //     this.els.inputAutoComplete.value = document.querySelector(
-            //         `ul.js-autocomplete li:nth-of-type(${this.selectedItem})`)
-            // } catch (e) {}
-            // this.selectedItem = 0
-            //         .textContent
-            // return
             this._handleView(false)
             this._fillForm(this.selectedItem - 1)
             this.selectedItem = 0

@@ -12,6 +12,22 @@
                     <div class="card-body">
                         <form method="POST" action="">
                             @csrf
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" tabindex="1" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="new-name">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
+
                             <div class="form-group row">
                                 <label for="adress" class="col-md-4 col-form-label text-md-right">Adresse</label>
                                 <div class="col-md-6">
