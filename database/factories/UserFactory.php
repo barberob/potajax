@@ -21,7 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
         'nom' => $faker->firstName,
         'prenom' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'mdp' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         'prefixtel' => '+33',
         'tel' => $faker->numerify('##########'),
         'role' => random_int(1,3),
