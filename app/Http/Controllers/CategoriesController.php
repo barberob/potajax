@@ -10,9 +10,14 @@ class CategoriesController extends Controller
     public function listCat(){
         $categories = Categorie::all();
 
-
         return view('pages.home', [
             'categories' => $categories
         ]);
+    }
+
+    public function apiGetCategories()
+    {
+        $categories = Categorie::with('subcategories')->get();
+        return $categories->toJson();
     }
 }

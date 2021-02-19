@@ -51,5 +51,11 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
+<<<<<<< HEAD
+=======
+
+Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
+
+>>>>>>> b629a54... 2 selects categories addshop
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');

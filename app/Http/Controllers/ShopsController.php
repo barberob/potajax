@@ -12,11 +12,7 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        $categories = Categorie::all();
-
-        return view('pages.add-shop', [
-            'categories' => $categories,
-        ]);
+        return view('pages.add-shop');
     }
 
     public function postAddShop(Request $request)
