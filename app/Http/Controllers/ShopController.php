@@ -9,7 +9,7 @@ use App\Shops\Categorie;
 class ShopController extends Controller
 {
     public function details($id){
-    	$infos = Shop::findOrFail($id); 
+    	$infos = Shop::findOrFail($id);
     	$id_cat = Shop::findOrFail($id)->category_id;
     	$img_cat = Categorie::findOrFail($id_cat)->libelle;
 
@@ -18,4 +18,6 @@ class ShopController extends Controller
             'img'=> $img_cat
         ]);
     }
+
+
 }
