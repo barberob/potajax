@@ -13,9 +13,10 @@ export default class locStorage
     {
         document.querySelectorAll('.fav').forEach((button, i) => {
             button.addEventListener("click", function(){
-                localStorage.setItem("id"+i, i);
+                /*localStorage.setItem("id"+i, i);
                 document.cookie = "id"+i+"="+i;
-                console.log(document.cookie);
+                console.log(document.cookie);*/
+                console.log("favoris");
             }, false);
         });
     }
