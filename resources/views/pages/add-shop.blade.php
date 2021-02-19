@@ -19,7 +19,7 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="new-name">
                                     @error('name')
@@ -27,6 +27,17 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
+                                <div class="col-md-6">
+                                    <select name="category" id="category" class="js-category"></select>
+                                </div>
+                                <label for="subcategory" class="col-md-4 col-form-label text-md-right">{{ __('Sous-Catégorie') }}</label>
+                                <div class="col-md-6">
+                                    <select name="subcategory" id="subcategory" class="js-subcategory"></select>
                                 </div>
                             </div>
 
@@ -43,7 +54,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Téléphone') }}</label>
                                 <div class="col-md-6">
                                     <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel">
                                     @error('tel')
@@ -115,7 +126,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="adress2" class="col-md-4 col-form-label text-md-right">Adresse ligne 2</label>
+                                <label for="adress2" class="col-md-4 col-form-label text-md-right">Adresse ligne 2*</label>
                                 <div class="col-md-6">
                                     <input id="adress2" tabindex="1" type="text" class="form-control @error('adress2') is-invalid @enderror" name="adress2" autocomplete="new-adress2">
                                     @error('adress2')

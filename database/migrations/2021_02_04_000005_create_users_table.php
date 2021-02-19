@@ -22,11 +22,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id()->unique();
+            $table->id();
             $table->string('nom', 45);
             $table->string('prenom', 45);
-            $table->string('email');
-            $table->char('mdp', 65);
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('prefixtel', 10)->nullable();
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
