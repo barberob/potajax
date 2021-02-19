@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="name" style="background-image:url('../img/{{$img}}.jpg');">
+<div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">
 	<div>
 		<a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
 		<h2 class="title">{{ $infos->nom }}</h2>

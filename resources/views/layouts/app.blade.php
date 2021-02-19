@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="Le site Ramène Ta Fraise 🍓 propose un service de “Click & Drive” qui vous permet de visionner les produits que vous souhaitez acheter dans les commerces qui vous entourent pour ensuite venir les collecter en magasin.">
+
     <link rel="apple-touch-icon" sizes="57x57" HREF="/img/icon_favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" HREF="/img/icon_favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" HREF="/img/icon_favicon/apple-icon-72x72.png">
