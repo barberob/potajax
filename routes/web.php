@@ -38,6 +38,7 @@ Route::get('/add/favorites', 'FavoritesController@add')->name('add-favorites');
 
 Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->name('add_shop');
+Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->name('post_add_shop');
 
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");

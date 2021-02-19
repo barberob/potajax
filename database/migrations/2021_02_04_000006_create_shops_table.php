@@ -25,13 +25,14 @@ class CreateShopsTable extends Migration
             $table->id()->unique();
             $table->string('nom', 45);
             $table->text('adresse');
+            $table->text('adresse2')->nullable();
             $table->string('cp');
             $table->string('numRue');
             $table->float('lat');
             $table->float('lng');
             $table->text('descriptif');
             $table->string('tel', 10);
-            $table->string('prefixeTel', 6);
+            $table->string('prefixeTel', 6)->nullable();
             $table->string('email');
             $table->string('siret', 14);
             $table->text('horaires');

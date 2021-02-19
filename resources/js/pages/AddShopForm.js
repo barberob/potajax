@@ -14,12 +14,16 @@ export default class RegisterForm {
     }
 
     initEls() {
+        const __ = selector => document.querySelector(selector)
+
         this.els = {
-            inputAutoComplete : document.querySelector('.js-adress'),
-            autoCompleteContainer : document.querySelector('.js-autocomplete'),
-            inputCity : document.querySelector('.js-city'),
-            inputCp : document.querySelector('.js-cp'),
-            inputStreetNumber : document.querySelector('.js-street_number'),
+            inputAutoComplete : __('.js-adress'),
+            autoCompleteContainer : __('.js-autocomplete'),
+            inputCity : __('.js-city'),
+            inputCp : __('.js-cp'),
+            inputStreetNumber : __('.js-street_number'),
+            inputLat : __('.js-lat'),
+            inputLng : __('.js-lng'),
             autoCompleteItems : 0
         }
     }
@@ -119,7 +123,9 @@ export default class RegisterForm {
 
     _fillForm(count) {
         const properties = this.adresses.features[count].properties
-        console.log(properties)
+        console.log(this.adresses.features[count])
+        const [lat, lng] = this.adresses.features[count].geometry.coordinates
+        console.log({lat, lng});
 
         if (properties.type !== "municipality") {
             this.els.inputAutoComplete.value = properties.street || properties.name
@@ -128,12 +134,16 @@ export default class RegisterForm {
             } else {
                 this.els.inputStreetNumber.value = ''
             }
-            this.els.inputCp.value = properties.postcode
+            this.els.inputCp.value   = properties.postcode
             this.els.inputCity.value = properties.city
+            this.els.inputLat.value  = lat
+            this.els.inputLng.value  = lng
         } else {
             this.els.inputCity.value         = ''
             this.els.inputCp.value           = ''
             this.els.inputStreetNumber.value = ''
+            this.els.inputLat.value          = ''
+            this.els.inputLng.value          = ''
         }
     }
 

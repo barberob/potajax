@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('admin_scripts')
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+@endsection
+
 @section('content')
 
 <div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">

@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
+
+    protected $hidden = [
+        'id',
+        'etat',
+        'codeNote'
+    ];
+
     //
     public function manager()
     {
