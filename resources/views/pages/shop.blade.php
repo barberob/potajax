@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('admin_scripts')
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+@endsection
+
 @section('content')
 
 <div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">
@@ -10,7 +14,9 @@
 		<p class="tel">Téléphone: {{$infos->tel}}</p>
 		<p class="mail">@: {{$infos->email}}</p>
 
-		<a class="btn btn-outline-warning btn-sm fav" href="#" role="button">Ajouter aux favoris</a>
+		<a class="btn btn-outline-warning btn-sm fav" href="{{ route('add-favorites') }}" role="button">
+			Ajouter aux favoris
+		</a>
 	</div>
 </div>
 <div class="horaires">

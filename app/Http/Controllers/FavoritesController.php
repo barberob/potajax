@@ -36,9 +36,13 @@ class FavoritesController extends Controller
     {
     	// Si l'utilisateur est connecté
 
+        dump(auth()->check());
+
     	if(auth()->check())
     	{
     		// On enregistre ses favoris dans la BDD
+
+            
     	}
 
     	// Si l'utilisateur n'est pas connecté
@@ -50,6 +54,8 @@ class FavoritesController extends Controller
 
     	/*return view('pages.add-fav');*/
         
-        return view('pages.fav');
+        /*return view('pages.fav', [
+            'shops' => $shops
+        ]);*/
     }
 }
