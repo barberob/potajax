@@ -17,9 +17,13 @@ class ShopsController extends Controller
 
     public function postAddShop(Request $request)
     {
+        if (!$request->hasFile('images')) return false;
+
+
         Validator::make($request, [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
+            'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
             'hours' => ['required'],
