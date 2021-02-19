@@ -1,0 +1,57 @@
+body.login{
+	background: url('./img/come.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.opacite{
+	height: 90vh;
+	background-color: rgba(255,255,255,0.5);
+	padding-top: 100px;
+
+	.card-group{
+		width: 55%;
+		margin: auto;
+
+		#image{
+			display: none;
+		}
+
+		.card-title{
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			color: tomato;
+		}
+		form{
+
+			label{
+				font-size: 15px;
+			}
+			.form-group{
+				margin-top: 25px!important;
+			}
+
+		} 
+	}
+}
+
+@media (min-width: 992px) { 
+	body.login{
+		height: 100vh;
+		background-position: center;
+	}
+	.opacite{
+
+		.card-group{
+
+			#image{
+				display: block;
+				background : url('./img/come.jpg');
+				background-size: cover;
+				height: 400px;
+			}
+
+		}
+	}
+}
