@@ -18,6 +18,12 @@
 </div>
 <div class="descriptif">
 	<p>{{$infos->descriptif}}</p>
+	<textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
 </div>
+
+
+<script>
+        CKEDITOR.replace( 'summary-ckeditor' );
+    </script>
 
 @endsection
