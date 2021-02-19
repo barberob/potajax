@@ -42,6 +42,24 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                                <div class="col-md-6">
+                                    <input id="images"
+                                           type="file" 
+                                           multiple="multiple"
+                                           accept="image/*"
+                                           class="form-control @error('images') is-invalid @enderror"
+                                           name="images"
+                                    >
+                                    @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-10">
                                     <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
@@ -126,7 +144,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="adress2" class="col-md-4 col-form-label text-md-right">Adresse ligne 2*</label>
+                                <label for="adress2" class="col-md-4 col-form-label text-md-right">Adresse ligne 2</label>
                                 <div class="col-md-6">
                                     <input id="adress2" tabindex="1" type="text" class="form-control @error('adress2') is-invalid @enderror" name="adress2" autocomplete="new-adress2">
                                     @error('adress2')
