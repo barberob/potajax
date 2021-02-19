@@ -15,11 +15,12 @@ class SearchController extends Controller
         if (isset($search) && !empty($search)) {
             $resultat = SearchController::Find($search, 0);
         }
-        dd($resultat);
-
+        return view('pages.search', [
+            'resultat' => $resultat
+        ]);
     }
 
-    public function Find($laRecherche, $etat)
+    public function Find($laRecherche)
     {
         $res = null;
         //$laRecherche = "Royce Smith DDS";
@@ -29,21 +30,25 @@ class SearchController extends Controller
         where('shops.nom', 'Like', $laRecherche)->
         get();
         if (empty($resultat[0])) {
+            // nom categorie
             $resultat = DB::table('categories')->
             where('categories.libelle', 'Like', $laRecherche)->
             get();
             if (empty($resultat[0])) {
+                // nom subcategorie
                 $resultat = DB::table('subcategories')->
                 where('subcategories.libelle', 'Like', $laRecherche)->
                 get();
                 if (empty($resultat[0])) {
+                    // recherche adresse
                     $resultat = SearchController::API($laRecherche);
+                    return $resultat;
                 }
+                return $resultat[0]->libelle;
             }
+            return $resultat[0]->libelle;
         }
-
-
-        return $resultat;
+        return $resultat[0]->nom;
     }
     public function API($laRecherche){
         $query = $laRecherche;
