@@ -11,11 +11,17 @@ class FavoritesController extends Controller
 {
     public function index()
     {
+        // On récupère l'id de l'utilisateur connecté
+
         $user_id = Auth::id();
+
+        // On va chercher en BDD les magasins mis en favoris par l'utilisateur connecté
 
         $shops = DB::table('shops')->join('favorites', 'id', '=', 'favorites.shop_id')
                                    ->where('favorites.user_id', '=', $user_id)
                                    ->get();
+
+        // On envoie les magasins récupérés en BDD à la vue fav
 
         return view('pages.fav', [
             'shops' => $shops

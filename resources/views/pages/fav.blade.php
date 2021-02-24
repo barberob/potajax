@@ -3,9 +3,9 @@
 
 @section('content')
 
-    <div class="home text-center">
+    <!-- <div class="home text-center">
         Coucou je suis un favoris
-    </div>
+    </div> -->
 
     @foreach($shops as $shop)
 
