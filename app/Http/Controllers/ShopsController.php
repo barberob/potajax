@@ -12,18 +12,18 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        $categories = Categorie::all();
-
-        return view('pages.add-shop', [
-            'categories' => $categories,
-        ]);
+        return view('pages.add-shop');
     }
 
     public function postAddShop(Request $request)
     {
+        if (!$request->hasFile('images')) return false;
+
+
         Validator::make($request, [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
+            'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
             'hours' => ['required'],

@@ -19,10 +19,39 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="new-name">
                                     @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
+                                <div class="col-md-6">
+                                    <select name="category" id="category" class="js-category"></select>
+                                </div>
+                                <label for="subcategory" class="col-md-4 col-form-label text-md-right">{{ __('Sous-Catégorie') }}</label>
+                                <div class="col-md-6">
+                                    <select name="subcategory" id="subcategory" class="js-subcategory"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                                <div class="col-md-6">
+                                    <input id="images"
+                                           type="file" 
+                                           multiple="multiple"
+                                           accept="image/*"
+                                           class="form-control @error('images') is-invalid @enderror"
+                                           name="images"
+                                    >
+                                    @error('images')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,7 +72,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Téléphone') }}</label>
                                 <div class="col-md-6">
                                     <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="new-tel">
                                     @error('tel')

@@ -9,6 +9,7 @@
 				    Catégories
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Toute</a></li>
 				  	@foreach($categories as $categorie)
 				    	<li><a class="dropdown-item" href="{{ route('Catmap', ['category_id' => $categorie->id]) }}">{{$categorie->libelle}}</a></li>
 				    @endforeach
@@ -20,6 +21,7 @@
 				    Sous catégories
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Toute</a></li>
 				  	@foreach($subcategories as $subcategorie)
 				    	<li><a class="dropdown-item" href="{{ route('Subcatmap', ['category_id' => $current_category_id,'subcategory_id' => $subcategorie->id]) }}">{{$subcategorie->libelle}}</a></li>
 				   	@endforeach

@@ -11,12 +11,14 @@ export default class RegisterForm {
         }
         this.selectedItem = 0
         this.adresses = []
+        this.categories = {}
     }
 
     initEls() {
         const __ = selector => document.querySelector(selector)
 
         this.els = {
+            //autocomplete
             inputAutoComplete : __('.js-adress'),
             autoCompleteContainer : __('.js-autocomplete'),
             inputCity : __('.js-city'),
@@ -24,12 +26,16 @@ export default class RegisterForm {
             inputStreetNumber : __('.js-street_number'),
             inputLat : __('.js-lat'),
             inputLng : __('.js-lng'),
-            autoCompleteItems : 0
+            autoCompleteItems : 0,
+            //selects category
+            selectCategory : __('.js-category'),
+            selectSubCategory : __('.js-subcategory'),
         }
     }
 
     initEvents() {
         this.initAutoComplete()
+        this.initSelects()
     }
 
     initAutoComplete() {
@@ -150,5 +156,42 @@ export default class RegisterForm {
     _handleView(haveResult = false) {
         if (!haveResult) this.els.autoCompleteContainer.classList.add('js-hidden')
         else this.els.autoCompleteContainer.classList.remove('js-hidden')
+    }
+
+    async initSelects() {
+        this._listenSelects()
+        const url = `${window.location.origin}/API/get-categories-list`
+        const request = await fetch(url)
+        this.categories = await request.json()
+
+        this.categories.forEach((category, i) => {
+            const option = document.createElement('option')
+            option.setAttribute('data-id', i)
+            option.value = category.libelle
+            option.textContent = category.libelle
+            this.els.selectCategory.appendChild(option)
+            if(i === 0) this._fillSubCategory(category.subcategories)
+        })
+    }
+
+    _fillSubCategory(list) {
+        this.els.selectSubCategory.innerHTML = ''
+        const option = document.createElement('option')
+        option.textContent = '--Optionel--'
+        option.value = -1
+        this.els.selectSubCategory.appendChild(option)
+        list.forEach((el) => {
+            const option = document.createElement('option')
+            option.value = el.libelle
+            option.textContent = el.libelle
+            this.els.selectSubCategory.appendChild(option)
+        })
+    }
+
+    _listenSelects() {
+        this.els.selectCategory.addEventListener('change', (e) => {
+            const index = this.els.selectCategory.selectedIndex
+            this._fillSubCategory(this.categories[index].subcategories)
+        })
     }
 }
