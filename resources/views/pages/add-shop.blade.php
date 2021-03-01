@@ -5,17 +5,21 @@
 @endsection
 
 @section('content')
-
-{{--    @if($errors)--}}
-{{--        @dump($errors)--}}
-{{--    @endif--}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            Création réussie
+        </div>
+    @endif
+    @if($errors)
+        @dump($errors)
+    @endif
     <div class="container mt-5 register">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Ajouter un commerce</div>
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('post_add_shop') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -45,11 +49,11 @@
                                 <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
                                 <div class="col-md-6">
                                     <input id="images"
-                                           type="file" 
+                                           type="file"
                                            multiple="multiple"
                                            accept="image/*"
                                            class="form-control @error('images') is-invalid @enderror"
-                                           name="images"
+                                           name="images[]"
                                     >
                                     @error('images')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +90,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="mail" required autocomplete="new-email">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="new-email">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

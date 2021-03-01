@@ -8,6 +8,9 @@ class Picture extends Model
 {
     //
     protected $fillable = ['url'];
+    /**
+     * @var mixed|string
+     */
 
     public function shop()
     {

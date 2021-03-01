@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Shops\Categorie;
+use App\Shops\Picture;
 use App\Shops\SubCategorie;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -17,12 +18,9 @@ class ShopsController extends Controller
 
     public function postAddShop(Request $request)
     {
-        if (!$request->hasFile('images')) return false;
-
-
-        Validator::make($request, [
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['string'],
             'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
@@ -31,9 +29,25 @@ class ShopsController extends Controller
             'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required'],
-            'lat' => ['required', 'number'],
-            'lng' => ['required', 'number'],
+//            'lat' => ['required', 'numeric'],
+//            'lng' => ['required', 'numeric'],
+            'images' => 'required',
+            'images.*' => 'mimes:jpeg,jpg,png|max:2048'
         ]);
+
+        if ($request->hasFile('images')) {
+            foreach($request->file('images') as $file)
+            {
+                $name = $file->getClientOriginalName();
+                $file->move(public_path().'/uploads/', $name);
+                Picture::create([
+                    'url' => '/uploads/'.$name
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'File has successfully uploaded!');
+
     }
 
     public function listShop()
