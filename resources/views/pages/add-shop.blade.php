@@ -102,7 +102,7 @@
                             <div class="form-group row">
                                 <label for="siret" class="col-md-4 col-form-label text-md-right">{{ __('Siret') }}</label>
                                 <div class="col-md-6">
-                                    <input id="siret" type="text" class="form-control @error('siret') is-invalid @enderror" name="siret" required autocomplete="new-siret">
+                                    <input id="siret" type="text" maxlength="10" class="form-control @error('siret') is-invalid @enderror" name="siret" required autocomplete="new-siret">
                                     @error('siret')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

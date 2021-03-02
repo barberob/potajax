@@ -167,7 +167,7 @@ export default class RegisterForm {
         this.categories.forEach((category, i) => {
             const option = document.createElement('option')
             option.setAttribute('data-id', i)
-            option.value = category.libelle
+            option.value = category.id
             option.textContent = category.libelle
             this.els.selectCategory.appendChild(option)
             if(i === 0) this._fillSubCategory(category.subcategories)
@@ -182,7 +182,7 @@ export default class RegisterForm {
         this.els.selectSubCategory.appendChild(option)
         list.forEach((el) => {
             const option = document.createElement('option')
-            option.value = el.libelle
+            option.value = el.id
             option.textContent = el.libelle
             this.els.selectSubCategory.appendChild(option)
         })
