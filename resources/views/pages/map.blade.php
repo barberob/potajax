@@ -28,7 +28,7 @@
 				  </ul>
 				</div>
 			</div>
-            <form class="d-flex">
+            <form class="d-flex" action="{{ route('Recherche') }}">
               <input class="rounded-pill px-2 py-2" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
               <button class="btn" type="submit"><i class="bi-search"></i></button>
             </form>
