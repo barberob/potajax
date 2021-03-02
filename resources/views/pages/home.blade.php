@@ -31,10 +31,8 @@
                 </a>
 
             @endforeach
-
-
-
         </div>
+
     </div>
 
 @endsection
