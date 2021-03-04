@@ -79,7 +79,6 @@ class ShopsController extends Controller
                 $file->move(public_path().$url, $name . '.' . $file->extension());
             }
         }
-
         return redirect()->route('account');
     }
 

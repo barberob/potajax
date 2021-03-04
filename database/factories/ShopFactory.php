@@ -22,7 +22,7 @@ $factory->define(Shop::class, function (Faker $faker) {
         'etat' => random_int(1, 2),
         'codeNote' => $faker->numerify('##########'),
         'user_id' => factory(App\User::class),
-        'city_id' => random_int(1,4),
+        'city_id' => strval($faker->numerify('#####')),
         'subcategory_id' => random_int(1,6),
         'category_id' => random_int(1,7),
 

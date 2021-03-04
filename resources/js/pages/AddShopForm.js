@@ -26,7 +26,9 @@ export default class RegisterForm {
             inputStreetNumber : __('.js-street_number'),
             inputLat : __('.js-lat'),
             inputLng : __('.js-lng'),
+            inputInsee : __('.js-citycode'),
             autoCompleteItems : 0,
+
             //selects category
             selectCategory : __('.js-category'),
             selectSubCategory : __('.js-subcategory'),
@@ -140,16 +142,19 @@ export default class RegisterForm {
             } else {
                 this.els.inputStreetNumber.value = ''
             }
-            this.els.inputCp.value   = properties.postcode
-            this.els.inputCity.value = properties.city
-            this.els.inputLat.value  = lat
-            this.els.inputLng.value  = lng
+            this.els.inputCp.value     = properties.postcode
+            this.els.inputCity.value   = properties.city
+            this.els.inputLat.value    = lat
+            this.els.inputLng.value    = lng
+            this.els.inputInsee.value  = properties.citycode
         } else {
             this.els.inputCity.value         = ''
             this.els.inputCp.value           = ''
             this.els.inputStreetNumber.value = ''
             this.els.inputLat.value          = ''
             this.els.inputLng.value          = ''
+            this.els.inputLng.value          = ''
+            this.els.inputInsee.value        = ''
         }
     }
 
