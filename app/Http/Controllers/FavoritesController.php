@@ -22,7 +22,7 @@ class FavoritesController extends Controller
                                    ->get();
 
         // On envoie les magasins récupérés en BDD à la vue fav
-
+        //$s = ['bla','bla'];
         return view('pages.fav', [
             'shops' => $shops
         ]);
