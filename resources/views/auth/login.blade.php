@@ -42,26 +42,19 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-8 offset-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-0">
-                    <div class="col-md-8 offset-md-4">
+                    <div class="log">
                         <button type="submit" class="btn btn-primary">
                             {{ __('Login') }}
                         </button>
                     </div>
-                   
-                    
                 </div>
+                <div class="form-group row register">
+                    <div class="register">
+                        Vous n'avez pas de compte ? 
+                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Créer un compte</a>
+                    </div>
+                </div>
+
                 <div class="form-group row mb-0">
                      <div class="col-md-8 offset-md-2">
 

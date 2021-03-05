@@ -3,6 +3,11 @@
 
 @section('content')
     <div class="home">
+        @if($auth != null)
+            <div class="auth text-center">
+                Bonjour {{ $auth->prenom }} ! 
+            </div>
+        @endif
         <div class="intro px-3">
             <form class="d-flex" action="{{ route('Recherche') }}">
               <input class="rounded-pill px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
