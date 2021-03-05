@@ -26,7 +26,9 @@ export default class RegisterForm {
             inputStreetNumber : __('.js-street_number'),
             inputLat : __('.js-lat'),
             inputLng : __('.js-lng'),
+            inputInsee : __('.js-citycode'),
             autoCompleteItems : 0,
+
             //selects category
             selectCategory : __('.js-category'),
             selectSubCategory : __('.js-subcategory'),
@@ -140,16 +142,19 @@ export default class RegisterForm {
             } else {
                 this.els.inputStreetNumber.value = ''
             }
-            this.els.inputCp.value   = properties.postcode
-            this.els.inputCity.value = properties.city
-            this.els.inputLat.value  = lat
-            this.els.inputLng.value  = lng
+            this.els.inputCp.value     = properties.postcode
+            this.els.inputCity.value   = properties.city
+            this.els.inputLat.value    = lat
+            this.els.inputLng.value    = lng
+            this.els.inputInsee.value  = properties.citycode
         } else {
             this.els.inputCity.value         = ''
             this.els.inputCp.value           = ''
             this.els.inputStreetNumber.value = ''
             this.els.inputLat.value          = ''
             this.els.inputLng.value          = ''
+            this.els.inputLng.value          = ''
+            this.els.inputInsee.value        = ''
         }
     }
 
@@ -161,13 +166,19 @@ export default class RegisterForm {
     async initSelects() {
         this._listenSelects()
         const url = `${window.location.origin}/API/get-categories-list`
-        const request = await fetch(url)
-        this.categories = await request.json()
+        try {
+            const request = await fetch(url)
+            this.categories = await request.json()
+        } catch(e) {
+            console.log(e)
+        }
+
+
 
         this.categories.forEach((category, i) => {
             const option = document.createElement('option')
             option.setAttribute('data-id', i)
-            option.value = category.libelle
+            option.value = category.id
             option.textContent = category.libelle
             this.els.selectCategory.appendChild(option)
             if(i === 0) this._fillSubCategory(category.subcategories)
@@ -182,7 +193,7 @@ export default class RegisterForm {
         this.els.selectSubCategory.appendChild(option)
         list.forEach((el) => {
             const option = document.createElement('option')
-            option.value = el.libelle
+            option.value = el.id
             option.textContent = el.libelle
             this.els.selectSubCategory.appendChild(option)
         })

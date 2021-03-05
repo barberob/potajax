@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,18 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+//         $this->call(UserSeeder::class);
         $this->call(CountriesSeeder::class);
         $this->call(CitiesSeeder::class);
         $this->call(CategoriesSeeder::class);
         $this->call(SubCategoriesSeeder::class);
         $this->call(UnitsSeeder::class);
 
-        //factory( App\Users\Moderator::class, 10)->create();
-        //factory(App\Users\Manager::class, 10)->create();
+//        factory( App\Users\Moderator::class, 10)->create();
+//        factory(App\Users\Manager::class, 10)->create();
         factory(App\User::class, 10)->create();
-        factory(App\Shops\Shop::class, 200)->create();
-        factory(App\Products\Product::class, 100)->create();
+//        factory(App\Shops\Shop::class, 200)->create();
+//        factory(App\Products\Product::class, 100)->create();
 
         //factory(App\Product::class, 10)->create();
     }

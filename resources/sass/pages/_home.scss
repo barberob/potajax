@@ -33,11 +33,26 @@ div.home {
         background-position: bottom;
         transition-duration: 0.4s;
     }
+    h3{
+        color: black; 
+        font-weight: normal;
+    }
 
     .lien_cat:hover .category_image{
         transition-duration: 0.4s;
         border-radius: 20px!important;
     }
+    .lien_cat:hover{
+        text-decoration: none;
+        .flex-column{
+            h3{ 
+                color: tomato!important;
+                font-weight: bold;
+            }
+        }
+    }
+
+
 
     div.filters {
         flex-wrap: wrap;
@@ -46,9 +61,6 @@ div.home {
         div {
             margin-bottom: 30px;
         }
-
-       
-
     }
 
 }
