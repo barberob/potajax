@@ -166,8 +166,14 @@ export default class RegisterForm {
     async initSelects() {
         this._listenSelects()
         const url = `${window.location.origin}/API/get-categories-list`
-        const request = await fetch(url)
-        this.categories = await request.json()
+        try {
+            const request = await fetch(url)
+            this.categories = await request.json()
+        } catch(e) {
+            console.log(e)
+        }
+
+
 
         this.categories.forEach((category, i) => {
             const option = document.createElement('option')
