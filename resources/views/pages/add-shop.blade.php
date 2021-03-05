@@ -66,7 +66,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-10">
-                                    <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                                    <textarea class="form-control" id="summary-ckeditor" name="description"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

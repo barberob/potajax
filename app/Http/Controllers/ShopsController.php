@@ -11,6 +11,8 @@ use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Image;
+use Storage;
 
 class ShopsController extends Controller
 {
@@ -23,7 +25,7 @@ class ShopsController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
+            'description' => ['string', 'required'],
             'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
@@ -36,7 +38,7 @@ class ShopsController extends Controller
 //            'lat' => ['required', 'numeric'],
 //            'lng' => ['required', 'numeric'],
 //            'images' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,png|max:2048'
+            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048'
         ]);
 
 
@@ -44,7 +46,7 @@ class ShopsController extends Controller
 
         $shop = Shop::create([
             'nom' => $request->name,
-            'descriptif' => 'test',
+            'descriptif' => $request->description,
             'adresse' => $request->adress,
             'adresse2' => $request->adress2,
             'cp' => $request->cp,
@@ -77,9 +79,25 @@ class ShopsController extends Controller
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
                 $file->move(public_path().$url, $name . '.' . $file->extension());
+//
+
+//                $file = Image::make($file)->resize(600, null, function ($constraint) {
+//                    $constraint->aspectRatio();
+//                })->encode('jpg');
+//
+////                Storage::put(public_path().$url, $name . '.' . $file->extension());
+//
+//
+//                $file->move(public_path().$url, $name . '.' . $file->extension());
+//                $image_name = time() . '.' . $file->getClientOriginalExtension();
+
+//                $destinationPath = public_path('/images/uploads');
+
             }
         }
-        return redirect()->route('account');
+        return redirect()
+            ->route('account')
+            ->with('success','Création réussie');
     }
 
     public function listShop()

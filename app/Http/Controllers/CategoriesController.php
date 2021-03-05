@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
 {
-    public function listCat(){
+    public function listCat()
+    {
         $categories = Categorie::all();
         $auth = Auth::user();
         return view('pages.home', [

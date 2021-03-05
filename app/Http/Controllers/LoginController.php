@@ -38,7 +38,6 @@ class LoginController extends Controller
         }
 
         // Sinon, 404
-
         else abort(404);
     }
 
