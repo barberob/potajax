@@ -66,7 +66,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-10">
-                                    <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                                    <textarea class="form-control" id="summary-ckeditor" name="description"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
                             <div class="form-group row">
                                 <label for="siret" class="col-md-4 col-form-label text-md-right">{{ __('Siret') }}</label>
                                 <div class="col-md-6">
-                                    <input id="siret" type="text" class="form-control @error('siret') is-invalid @enderror" name="siret" required autocomplete="new-siret">
+                                    <input id="siret" type="text" maxlength="10" class="form-control @error('siret') is-invalid @enderror" name="siret" required autocomplete="new-siret">
                                     @error('siret')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -197,6 +197,7 @@
 
                             <input type="hidden" class="js-lat" name="lat">
                             <input type="hidden" class="js-lng" name="lng">
+                            <input type="hidden" class="js-citycode" name="citycode">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

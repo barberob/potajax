@@ -1,12 +1,9 @@
-body.login{
-	background: url('./img/come.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center left;
-}
+
 .opacite{
-	height: 90vh;
-	background-color: rgba(255,255,255,0.5);
+	height: 92.5vh;
+	background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+	            linear-gradient(127deg, rgba(255,255,255,.8), rgba(0,0,0,0) 70.71%),
+	            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
 	padding-top: 100px;
 
 	.card-group{
@@ -30,6 +27,12 @@ body.login{
 			}
 			.form-group{
 				margin-top: 25px!important;
+				.log{
+					margin: auto;
+				}
+				.register{
+					margin: auto;
+				}
 			}
 
 		} 

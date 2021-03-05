@@ -7,13 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
 
-    protected $hidden = [
-        'id',
-        'etat',
-        'codeNote'
+    protected $fillable = [
+        'codeNote',
+        'nom',
+        'descriptif',
+        'adresse',
+        'adresse2',
+        'cp',
+        'numRue',
+        'tel',
+        'email',
+        'siret',
+        'horaires',
+        'siret',
+        'user_id',
+        'city_id',
+        'category_id',
+        'subcategory_id',
+        'lat',
+        'lng',
+        'etat'
     ];
 
-    //
     public function manager()
     {
         return $this->belongsTo(Manager::class);

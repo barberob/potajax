@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
@@ -38,8 +38,8 @@ Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorite
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');
 
 Route::get('/account', 'UsersController@index')->name('account');
-Route::get('/account/add-shop', 'ShopsController@addShop')->name('add_shop');
-Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->name('post_add_shop');
+Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
+Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->middleware('manager')->name('post_add_shop');
 
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");

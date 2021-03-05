@@ -11,13 +11,33 @@ export default class locStorage
 
     init()
     {
-        document.querySelectorAll('.fav').forEach((button, i) => {
-            button.addEventListener("click", function(){
-                /*localStorage.setItem("id"+i, i);
-                document.cookie = "id"+i+"="+i;
-                console.log(document.cookie);*/
-                console.log("favoris");
-            }, false);
-        });
+        let button = document.querySelector('.fav');
+        let id = button.getAttribute("data-id");
+
+        /*console.log(id);*/
+
+        let data = JSON.parse(localStorage.getItem("id")) || [];
+
+        /*console.log(data);*/
+
+        button.addEventListener("click", function(){
+
+            data.push(id);
+
+            localStorage.setItem("id", JSON.stringify(data));
+
+            /*jQuery.post("FavoritesController.php", {id: localStorage.getItem("id")}, function(data)
+            {
+                alert(localStorage.getItem("id"));
+            }).fail(function()
+            {
+                alert("not working");
+            });*/
+
+            /*document.cookie = "id="+localStorage.getItem("id");
+
+            alert(document.cookie);*/
+
+        }, false);
     }
 }

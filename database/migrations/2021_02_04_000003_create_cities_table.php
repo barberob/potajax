@@ -22,15 +22,15 @@ class CreateCitiesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id()->unique();
+            $table->string('id', 5)->unique();
             $table->string('cp', 5);
-            $table->string('nom', 50);
-            $table->float('lat')->nullable();
-            $table->float('lng')->nullable();
+            $table->string('lat', 18)->nullable();
+            $table->string('lng', 18)->nullable();
+            $table->string('nom', 45);
 
-            $table->foreignId('country_id')->constrained();
+            $table->primary('id');
 
-            $table->timestamps();
+//            $table->foreignId('country_id')->constrained();
             $table->softDeletes();
         });
     }

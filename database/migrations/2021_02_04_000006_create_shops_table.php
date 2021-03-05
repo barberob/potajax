@@ -28,10 +28,10 @@ class CreateShopsTable extends Migration
             $table->text('adresse2')->nullable();
             $table->string('cp');
             $table->string('numRue');
-            $table->float('lat');
-            $table->float('lng');
+            $table->float('lat')->nullable();
+            $table->float('lng')->nullable();
             $table->text('descriptif');
-            $table->string('tel', 10);
+            $table->string('tel', 20);
             $table->string('prefixeTel', 6)->nullable();
             $table->string('email');
             $table->string('siret', 14);
@@ -39,9 +39,11 @@ class CreateShopsTable extends Migration
             $table->tinyInteger('etat');
             $table->string('codeNote', 10)->nullable();
 
+            $table->string('city_id', 5)->nullable();
+
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('city_id')->constrained();
-            $table->foreignId('subcategory_id')->constrained();
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreignId('subcategory_id')->nullable();
             $table->foreignId('category_id')->constrained();
 
             $table->timestamps();

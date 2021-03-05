@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Picture extends Model
 {
     //
-    protected $fillable = ['url'];
+    protected $fillable = ['url', 'shop_id'];
     /**
      * @var mixed|string
      */
