@@ -46,14 +46,14 @@
 				  <div class="card-body">
 				  	<div class="panel panel-primary" id="result_panel">
 					    <div class="panel-body">
-					        <ul class="list-group">
+					        <ul class="list-group" id="listRightShop">
 					        	@foreach($shops as $shop)
-					            <li class="list-group-item">
+					            <!--<li class="list-group-item">
 					            	<strong><a href="#">{{$shop->nom}}</a></strong>
 
 					            	<p>{{$shop->adresse}}</p>
 					            	<a class="btn btn-outline-danger btn-sm" href="{{ route('shop', ['id' => $shop->id]) }}" role="button">Voir la page</a>
-					            </li>
+					            </li>-->
 					            @endforeach
 					        </ul>
 					    </div>

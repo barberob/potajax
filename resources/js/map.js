@@ -26,6 +26,61 @@ export default class Map{
             };
 
             this.domain_url = window.location.origin;
+
+            let img = this.domain_url+'/img/icon_map/marker-icon-';
+            let shadow = this.domain_url+'/img/icon_map/marker-shadow.png';
+
+            /*         Default           */
+            this.IconWhite = L.icon({
+                iconUrl: img+'white.png',
+                shadowUrl: shadow
+            });
+            this.IconGrey = L.icon({
+                iconUrl: img+'grey.png',
+                shadowUrl: shadow
+            });
+            this.IconBlack = L.icon({
+                iconUrl: img+'black.png',
+                shadowUrl: shadow
+            });
+            this.IconBlue = L.icon({
+                iconUrl: img+'blue.png',
+                shadowUrl: shadow
+            });
+            this.IconRed = L.icon({
+                iconUrl: img+'red.png',
+                shadowUrl: shadow
+            });
+            this.IconGreen = L.icon({
+                iconUrl: img+'green.png',
+                shadowUrl: shadow
+            });
+            this.IconLightBlue = L.icon({
+                iconUrl: img+'light-blue.png',
+                shadowUrl: shadow
+            });
+            this.IconOrange = L.icon({
+                iconUrl: img+'orange.png',
+                shadowUrl: shadow
+            });
+            this.IconPink = L.icon({
+                iconUrl: img+'pink.png',
+                shadowUrl: shadow
+            });
+            this.IconPurple = L.icon({
+                iconUrl: img+'purple.png',
+                shadowUrl: shadow
+            });
+            this.IconYellow = L.icon({
+                iconUrl: img+'yellow.png',
+                shadowUrl: shadow
+            });
+            this.IconNAN = L.icon({
+                iconUrl: img+'nan.png',
+                shadowUrl: shadow
+            });
+
+
             this.Lat = '44.55962000171788';
             this.Lng = '6.079823238576286';
             this.Zoom = '5';
@@ -34,6 +89,8 @@ export default class Map{
 
             this.macarte = null;
             this.markers = null
+
+            this.NewList = [];
 
             this.makerUse = [];
 
@@ -48,8 +105,6 @@ export default class Map{
             };
             //this.changeSelect();
             this.init();
-
-
             /*alert('zerzre');
             window.addEventListener("beforeunload", function (event) {
                 //your code goes here on location change
@@ -88,6 +143,7 @@ export default class Map{
         this.marker_remove();
 
         this.Fetch(posMap);
+
     }
     marker_remove(){
         console.log('Destruction Marker');
@@ -97,6 +153,8 @@ export default class Map{
             this.markers.remove();
             delete this.markers;
 
+            this.NewList = '';
+
             delete this.Object;
             this.Object = new Array();
         }
@@ -105,103 +163,65 @@ export default class Map{
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
 
-        let img = this.domain_url+'/img/icon_map/marker-icon-';
-        let shadow = this.domain_url+'/img/icon_map/marker-shadow.png';
-
-        /*         Default           */
-        let IconWhite = L.icon({
-            iconUrl: img+'white.png',
-            shadowUrl: shadow
-        });
-        let IconGrey = L.icon({
-            iconUrl: img+'grey.png',
-            shadowUrl: shadow
-        });
-        let IconBlack = L.icon({
-            iconUrl: img+'black.png',
-            shadowUrl: shadow
-        });
-        let IconBlue = L.icon({
-            iconUrl: img+'blue.png',
-            shadowUrl: shadow
-        });
-        let IconRed = L.icon({
-            iconUrl: img+'red.png',
-            shadowUrl: shadow
-        });
-        let IconGreen = L.icon({
-            iconUrl: img+'green.png',
-            shadowUrl: shadow
-        });
-        let IconLightBlue = L.icon({
-            iconUrl: img+'light-blue.png',
-            shadowUrl: shadow
-        });
-        let IconOrange = L.icon({
-            iconUrl: img+'orange.png',
-            shadowUrl: shadow
-        });
-        let IconPink = L.icon({
-            iconUrl: img+'pink.png',
-            shadowUrl: shadow
-        });
-        let IconPurple = L.icon({
-            iconUrl: img+'purple.png',
-            shadowUrl: shadow
-        });
-        let IconYellow = L.icon({
-            iconUrl: img+'yellow.png',
-            shadowUrl: shadow
-        });
-        let IconNAN = L.icon({
-            iconUrl: img+'nan.png',
-            shadowUrl: shadow
-        });
-
         this.Object.map((Item) => {
             //console.log(Item.detail);
             let type = Item.detail['subcategorie_id'];
             let libelle = Item.detail['subcategorie_lib'];
+            let adresse = Item.detail['adresse'];
+            let id = Item.detail['id'];
+            let nom = Item.detail['nom'];
+
             let data = '';
             let marker;
             let Loc = [Item.coord['Lat'], Item.coord['Lng']];
             let icone = null;
             let color = null;
 
-            data += '<p>Nom: '+Item.detail['name']+'</p>';
+            data += '<p>Nom: '+Item.detail['nom']+'</p>';
             data += '<p>Desc: '+Item.detail['desc']+'</p>';
 
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
             switch (type){
-                case 1: icone = {icon: IconBlue};color = '#2B82CB' ; break;
-                case 2: icone = {icon: IconRed};color = '#F80B17' ; break;
-                case 3: icone = {icon: IconGreen};color = '#0AF92A' ; break;
-                case 4: icone = {icon: IconOrange};color = '#F87D10' ; break;
-                case 5: icone = {icon: IconPurple};color = '#9E0DF7' ; break;
-                case 6: icone = {icon: IconYellow};color = '#F8F008' ; break;
-                case 7: icone = {icon: IconPink};color = '#F810B3' ; break;
-                case 8: icone = {icon: IconLightBlue};color = '#0DF7EC' ; break;
+                case 1: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
+                case 2: icone = {icon: this.IconRed};color = '#F80B17' ; break;
+                case 3: icone = {icon: this.IconGreen};color = '#0AF92A' ; break;
+                case 4: icone = {icon: this.IconOrange};color = '#F87D10' ; break;
+                case 5: icone = {icon: this.IconPurple};color = '#9E0DF7' ; break;
+                case 6: icone = {icon: this.IconYellow};color = '#F8F008' ; break;
+                case 7: icone = {icon: this.IconPink};color = '#F810B3' ; break;
+                case 8: icone = {icon: this.IconLightBlue};color = '#0DF7EC' ; break;
 
-                case 9: icone = {icon: IconWhite};color = '#E2E2E2' ; break;
-                case 10: icone = {icon: IconGrey};color = '#888888' ; break;
-                case 11: icone = {icon: IconBlack};color = '#2B2B2B' ; break;
+                case 9: icone = {icon: this.IconWhite};color = '#E2E2E2' ; break;
+                case 10: icone = {icon: this.IconGrey};color = '#888888' ; break;
+                case 11: icone = {icon: this.IconBlack};color = '#2B2B2B' ; break;
 
-                default: icone = {icon: IconNAN};color = 'NaN' ; break;
+                default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
             }
-
 
             if(!(this.VerificationDejaDansTableau(libelle,this.makerUse))){
                 //console.log('add '+ libelle);
                 this.makerUse.push({type: libelle, color: color});
             }
 
+
             marker = L.marker(Loc,icone).bindPopup(data);
             this.markers.addLayer(marker);
 
+            this.NewList += '<li class="list-group-item">';
+            this.NewList += '<strong><a id="shop_'+id+'">'+nom+'</a></strong>';
+            this.NewList += '<p>'+adresse+'</p>';
+            this.NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
+            this.NewList += '</li>';
+
         });
+        document.getElementById('listRightShop').innerHTML = '';
+        document.getElementById('listRightShop').innerHTML = this.NewList;
+
+
         //console.log(this.makerUse);
         this.macarte.addLayer(this.markers);
+
     }
     Fetch(posMap){
         console.log('Recherche Marker');
@@ -226,53 +246,80 @@ export default class Map{
         }).then(response => {
             return response.json();
         }).then(objected => {
-            //console.log(Object.entries(objected));
+            //console.log(objected);
             for (const [key1, value1] of Object.entries(objected)) {
-                for (const [key2, value2] of Object.entries(value1)) {
-                    //console.log(value2);
-                    if (value2 != null) {
-                        this.Object.push({
-                            'detail': {
-                                'name': value2.nom,
-                                'desc': value2.descriptif,
-                                'categorie_id': value2.category_id,
-                                'subcategorie_id': value2.subcategory_id,
-                                'subcategorie_lib': value2.libelle,
-                            },
-                            'coord': {
-                                'Lat': value2.lat,
-                                'Lng': value2.lng,
-                            }
-                        });
-                        //console.log(this.Object);
-                    }
+                //console.log(value1);
+                if (value1 != null) {
+                    this.Object.push({
+                        'detail': {
+                            'id': value1.id,
+                            'nom': value1.nom,
+                            'desc': value1.descriptif,
+                            'adresse': value1.adresse,
+                            'categorie_id': value1.category_id,
+                            'subcategorie_id': value1.subcategory_id,
+                            'subcategorie_lib': value1.libelle,
+                        },
+                        'coord': {
+                            'Lat': value1.lat,
+                            'Lng': value1.lng,
+                        }
+                    });
                 }
             }
-            this.marker_add();
             //console.log(this.Object);
+            this.marker_add();
         }).catch(error => alert("Erreur : " + error));
         //console.log(ResTo);
     }
     get_data(posMap){
         console.log('Récupération Data Map');
-        let red = window.location.href.split('/');
+        let Url = window.location.href.split('/');
+        let VariableGet = Url[3].indexOf('?search=');
+        let search = 'default';
+        let test;
 
-        red[4] = parseInt(red[4]);
-        red[5] = parseInt(red[5]);
+        //categorie
+        Url[4] = parseInt(Url[4]);
+        //subcategorie
+        Url[5] = parseInt(Url[5]);
 
-        if(isNaN(red[4])) red[4] = "All";
-        if(isNaN(red[5])) red[5] = "All";
+        //console.log(Url[4]+' '+Url[5]);
 
-        let test = {
-            northEast: posMap._northEast,
-            sudOuest: posMap._southWest,
-            categories: [red[4]],
-            subcategories: [red[5]]
-        };
+        //si il y a pas de categorie
+        if(isNaN(Url[4])){
+            Url[4] = "All";
+            //console.log('----// '+VariableGet);
 
+            // si il y a ?q=
+            if (VariableGet != -1){
+                //alert('--- Dans le ?');
+                search = Url[3].split('?search=');
+            }
+        }
 
+        //si il y a pas de subcategorie
+        if(isNaN(Url[5])){
+            Url[5] = "All";
+        }
 
-
+        //si il y a un search
+        if(search !== 'default'){
+            //alert('--- Dans le search');
+            test = {
+                northEast: posMap._northEast,
+                sudOuest: posMap._southWest,
+                search: search[1]
+            };
+        }
+        else{
+            test = {
+                northEast: posMap._northEast,
+                sudOuest: posMap._southWest,
+                categories: [Url[4]],
+                subcategories: [Url[5]]
+            };
+        }
         return test;
     }
     ZoomShop(lat,lng,zoom){
@@ -344,5 +391,8 @@ export default class Map{
             }
         }
         return res;
+    }
+    static openPopUp(id){
+        console.log(id);
     }
 }

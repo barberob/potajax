@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/', 'CategoriesController@listCat')->name('index');
 
 Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
+Route::post('/map?search=', 'MapController@post')->name('Recherche');
 //Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
 Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
 Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
@@ -56,5 +57,3 @@ Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')-
 
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
-
-Route::get('/search', 'SearchController@get')->name('Recherche');
