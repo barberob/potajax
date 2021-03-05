@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
