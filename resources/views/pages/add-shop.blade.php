@@ -197,7 +197,7 @@
 
                             <input type="hidden" class="js-lat" name="lat">
                             <input type="hidden" class="js-lng" name="lng">
-                            <input type="hidden" class="js-citycode" name="insee">
+                            <input type="hidden" class="js-citycode" name="citycode">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

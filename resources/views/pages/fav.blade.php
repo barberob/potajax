@@ -3,9 +3,6 @@
 
 @section('content')
 
-    <!-- <div class="home text-center">
-        Coucou je suis un favoris
-    </div> -->
     @if(count($shops) == 0)
     	<h1 class="text-center"> Vous n'avez aucun commerce en favoris, ajoutez-en ! </h1>
     @else
@@ -15,7 +12,6 @@
 	    	
 			  <li class="list-group-item">{{ $shop->name }}</li>
 			
-
 	    @endforeach
 	    </ul>
 	@endif

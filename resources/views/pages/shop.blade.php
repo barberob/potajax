@@ -14,7 +14,7 @@
 		<p class="tel">Téléphone: {{$infos->tel}}</p>
 		<p class="mail">@: {{$infos->email}}</p>
 
-		<a class="btn btn-outline-warning btn-sm fav" href="{{ route('add-favorites', $infos->id) }}" role="button">
+		<a class="btn btn-outline-warning btn-sm fav" href="{{ route('add-favorites', $infos->id) }}" role="button" data-id="{{ $infos->id }}" id="favorite">
 			Ajouter aux favoris
 		</a>
 	</div>
