@@ -22,12 +22,9 @@ class DatabaseSeeder extends Seeder
 //        factory( App\Users\Moderator::class, 10)->create();
 //        factory(App\Users\Manager::class, 10)->create();
         factory(App\User::class, 10)->create();
-        factory(App\Shops\Shop::class, 200)->create();
-        factory(App\Products\Product::class, 100)->create();
+//        factory(App\Shops\Shop::class, 200)->create();
+//        factory(App\Products\Product::class, 100)->create();
 
         //factory(App\Product::class, 10)->create();
-
-        $cities = file_get_contents(__DIR__.'/cities.sql');
-        DB::unprepared($cities);
     }
 }

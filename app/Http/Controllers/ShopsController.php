@@ -55,7 +55,7 @@ class ShopsController extends Controller
             'horaires' => $request->hours,
             'etat' => 0,
             'user_id' => Auth::id(),
-            'city_id' => 1, //zeubi
+            'city_id' => $request->citycode,
             'category_id' => $request->category,
             'subcategory_id' => $subcat,
             'lat' => $request->lat,
