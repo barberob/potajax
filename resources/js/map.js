@@ -1,7 +1,6 @@
 import * as L from "leaflet";
 import * as L1 from "leaflet.markercluster";
 export default class Map{
-
     constructor() {
         if(document.getElementById('map')){
 
@@ -90,8 +89,6 @@ export default class Map{
             this.macarte = null;
             this.markers = null
 
-            this.NewList = [];
-
             this.makerUse = [];
 
             this.Def_pos = {
@@ -153,7 +150,7 @@ export default class Map{
             this.markers.remove();
             delete this.markers;
 
-            this.NewList = '';
+            document.getElementById('listRightShop').innerHTML = '';
 
             delete this.Object;
             this.Object = new Array();
@@ -206,18 +203,29 @@ export default class Map{
 
 
             marker = L.marker(Loc,icone).bindPopup(data);
+            console.log(marker);
+
+            let NewList = '';
+            NewList += '<li class="list-group-item">';
+            NewList += '<strong><a id="shop_'+id+'">'+nom+'</a></strong>';
+            NewList += '<p>'+adresse+'</p>';
+            NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
+            NewList += '</li>';
+
+            document.getElementById('listRightShop').innerHTML += NewList;
+
+            console.log('shop_'+id);
+
+            document.getElementById('shop_'+id).addEventListener('click',function(ev){
+                console.log(ev.target.attributes.id);
+                console.log(marker);
+                marker.openPopup();
+            })
+
             this.markers.addLayer(marker);
-
-            this.NewList += '<li class="list-group-item">';
-            this.NewList += '<strong><a id="shop_'+id+'">'+nom+'</a></strong>';
-            this.NewList += '<p>'+adresse+'</p>';
-            this.NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
-            this.NewList += '</li>';
-
         });
-        document.getElementById('listRightShop').innerHTML = '';
-        document.getElementById('listRightShop').innerHTML = this.NewList;
-
+        /*document.getElementById('listRightShop').innerHTML = '';
+        document.getElementById('listRightShop').innerHTML = this.NewList;*/
 
         //console.log(this.makerUse);
         this.macarte.addLayer(this.markers);
@@ -391,8 +399,5 @@ export default class Map{
             }
         }
         return res;
-    }
-    static openPopUp(id){
-        console.log(id);
     }
 }
