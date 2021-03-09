@@ -77,7 +77,6 @@ class ShopsController extends Controller
                 $url = '/uploads/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
-//                $file->move(public_path().$url, $name . '.' . $file->extension());
 
                 $input['imagename'] = $name.'.'.$file->extension();
 
