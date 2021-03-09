@@ -75,24 +75,25 @@ class ShopsController extends Controller
 
                 $name = $shop->id . '_' . $picture->id;
                 $url = '/uploads/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
-
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
-                $file->move(public_path().$url, $name . '.' . $file->extension());
-//
-
-//                $file = Image::make($file)->resize(600, null, function ($constraint) {
-//                    $constraint->aspectRatio();
-//                })->encode('jpg');
-//
-////                Storage::put(public_path().$url, $name . '.' . $file->extension());
-//
-//
 //                $file->move(public_path().$url, $name . '.' . $file->extension());
-//                $image_name = time() . '.' . $file->getClientOriginalExtension();
 
-//                $destinationPath = public_path('/images/uploads');
+                $input['imagename'] = $name.'.'.$file->extension();
 
+                if (!file_exists($url)) {
+                    mkdir($url, 0775, true);
+                }
+
+                $filePath = public_path($url);
+
+                $img = Image::make($file->path());
+                $img->resize(400, 300, function ($const) {
+                    $const->aspectRatio();
+                })->save($filePath.'/'.$input['imagename']);
+
+                $filePath = public_path('/uploads/shops/original');
+                $file->move($filePath, $input['imagename']);
             }
         }
         return redirect()
