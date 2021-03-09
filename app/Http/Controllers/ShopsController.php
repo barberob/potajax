@@ -81,8 +81,8 @@ class ShopsController extends Controller
 
                 $input['imagename'] = $name.'.'.$file->extension();
 
-                if (!file_exists($url)) {
-                    mkdir($url, 0775, true);
+                if (!is_dir($url)) {
+                    mkdir($url, 775, true);
                 }
 
                 $filePath = public_path($url);
