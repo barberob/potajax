@@ -74,14 +74,15 @@ class ShopsController extends Controller
                 ]);
 
                 $name = $shop->id . '_' . $picture->id;
-                $url = '/uploads/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
+                $url = '/storage/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
 
                 $input['imagename'] = $name.'.'.$file->extension();
 
-                if (!is_dir($url)) {
-                    mkdir($url, 775, true);
+//                dd(public_path($url));
+                if (!is_dir(public_path($url))) {
+                    mkdir(public_path($url), 0775, true);
                 }
 
                 $filePath = public_path($url);
@@ -91,7 +92,7 @@ class ShopsController extends Controller
                     $const->aspectRatio();
                 })->save($filePath.'/'.$input['imagename']);
 
-                $filePath = public_path('/uploads/shops/original');
+                $filePath = public_path('/storage/shops/original');
                 $file->move($filePath, $input['imagename']);
             }
         }
