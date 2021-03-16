@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('admin_scripts')
-    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js" defer></script>
 @endsection
 
 @section('content')
@@ -15,6 +15,11 @@
     @endif
     @if(isset($shop))
         @dump($shop->pictures)
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div>{{$error}}</div>
+        @endforeach
     @endif
     <div class="container mt-5 register">
         <div class="row justify-content-center">
@@ -37,7 +42,7 @@
                                            name="name"
                                            required
                                            autocomplete="new-name"
-                                           value="{{ $shop->nom ?? ''}}"
+                                           value="{{ old('name') ?? $shop->nom ?? '' }}"
                                     >
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -52,9 +57,10 @@
                                 <div class="col-md-6">
                                     <select name="category" id="category" class="js-category">
                                         @foreach($categories as $category)
-                                            <option
-                                                value="{{ $category->id }}"
-                                                {{ $shop->category->id === $category->id ? 'selected' : '' }}
+                                            <option value="{{ $category->id }}"
+                                                @if(isset($shop))
+                                                    {{ $shop->category->id === $category->id ? 'selected' : '' }}
+                                                @endif
                                             >
                                                 {{ $category->libelle }}
                                             </option>
@@ -65,16 +71,24 @@
                                 <div class="col-md-6">
                                     <select name="subcategory" id="subcategory" class="js-subcategory">
                                         <option value="-1">--Optionel--</option>
-                                        @foreach($shop->category->subCategories as $subCategory)
-                                            <option
-                                                value="{{ $subCategory->id }}"
-                                                @if($shop->subCategory)
-                                                {{$shop->subCategory->id === $subCategory->id ? 'selected' : ''}}
-                                                @endif
-                                            >
-                                                {{ $subCategory->libelle }}
-                                            </option>
-                                        @endforeach
+                                        @if(isset($shop))
+                                            @foreach($shop->category->subCategories as $subCategory)
+                                                <option
+                                                    value="{{ $subCategory->id }}"
+                                                    @if($shop->subCategory)
+                                                        {{$shop->subCategory->id === $subCategory->id ? 'selected' : ''}}
+                                                    @endif
+                                                >
+                                                    {{ $subCategory->libelle }}
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            @foreach($categories[0]->subCategories as $subCategory)
+                                                <option value="{{ $subCategory->id }}">
+                                                    {{ $subCategory->libelle }}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -94,7 +108,7 @@
                                     </tbody>
                                 </table>
                                 @endif
-                                <div class="col-12 my-4 alert alert-danger js-max-pictures" style="display: none">
+                                <div class="col-6 my-4 alert alert-danger js-max-pictures" style="display: none">
                                     <strong>Le nombre maximum d'images par magasin est de 4</strong>
                                 </div>
                                 <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
@@ -106,18 +120,23 @@
                                            class="form-control js-input-picture @error('images') is-invalid @enderror"
                                            name="images[]"
                                     >
-                                    @error('images')
+{{--                                    @error('images')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+                                @if(Session::has('too_much_files'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>$message</strong>
                                     </span>
-                                    @enderror
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-10">
-                                    <textarea class="form-control" id="summary-ckeditor" name="description" data-content="{{ $shop->descriptif ?? '' }}"></textarea>
+                                    <textarea class="form-control" id="summary-ckeditor" name="description" data-content="{{ old('description') ?? $shop->descriptif ?? '' }}"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -135,7 +154,7 @@
                                            name="tel"
                                            required
                                            autocomplete="new-tel"
-                                           value="{{ $shop->tel ?? '' }}"
+                                           value="{{ old('tel') ?? $shop->tel ?? '' }}"
                                     >
                                     @error('tel')
                                     <span class="invalid-feedback" role="alert">
@@ -154,7 +173,7 @@
                                            name="email"
                                            required
                                            autocomplete="new-email"
-                                           value="{{ $shop->email ?? ''}}"
+                                           value="{{ old('email') ?? $shop->email ?? '' }}"
                                     >
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -174,7 +193,7 @@
                                            name="siret"
                                            required
                                            autocomplete="new-siret"
-                                           value="{{ $shop->siret ?? '' }}"
+                                           value="{{ old('siret') ?? $shop->siret ?? '' }}"
                                     >
                                     @error('siret')
                                     <span class="invalid-feedback" role="alert">
@@ -187,7 +206,7 @@
                             <div class="form-group row">
                                 <label for="hours" class="col-md-4 col-form-label text-md-right">{{ __('Horaires') }}</label>
                                 <div class="col-md-6">
-                                    <textarea name="hours" id="" rows="8" class="form-control">{{ $shop->horaires ?? '
+                                    <textarea name="hours" id="" rows="8" class="form-control">{{ old('hours') ?? $shop->horaires ?? '
 - Lundi:
 - Mardi:
 - Mercredi:
@@ -216,7 +235,7 @@
                                                name="adress"
                                                required
                                                autocomplete="off"
-                                               value="{{ $shop->adresse ?? ''}}"
+                                               value="{{ old('adress') ?? $shop->adresse ?? '' }}"
                                         >
                                         <ul class="js-autocomplete js-hidden">
                                         </ul>
@@ -238,7 +257,7 @@
                                            class="form-control @error('adress2') is-invalid @enderror"
                                            name="adress2"
                                            autocomplete="new-adress2"
-                                           value="{{ $shop->adress2 ?? '' }}"
+                                           value="{{ old('adress2') ?? $shop->adress2 ?? '' }}"
                                     >
                                     @error('adress2')
                                     <span class="invalid-feedback" role="alert">
@@ -257,7 +276,7 @@
                                            name="street_number"
                                            required
                                            autocomplete="new-street_number"
-                                           value="{{  $shop->numRue ?? '' }}"
+                                           value="{{ old('street_number') ?? $shop->numRue ?? '' }}"
                                     >
                                     @error('street_number')
                                     <span class="invalid-feedback" role="alert">
@@ -276,7 +295,7 @@
                                            name="city"
                                            required
                                            autocomplete="new-city"
-                                           value="{{ $shop->city->nom ?? ''}}"
+                                           value="{{ old('city') ?? $shop->city->nom ?? '' }}"
                                     >
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -295,7 +314,7 @@
                                            name="cp"
                                            required
                                            autocomplete="new-cp"
-                                           value="{{ $shop->cp ?? '' }}"
+                                           value="{{ old('cp') ?? $shop->cp ?? '' }}"
                                     >
                                     @error('cp')
                                     <span class="invalid-feedback" role="alert">
@@ -305,9 +324,9 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" class="js-lat" name="lat" value="{{ $shop->city->lat ?? '' }}">
-                            <input type="hidden" class="js-lng" name="lng" value="{{ $shop->city->lng  ?? '' }}">
-                            <input type="hidden" class="js-citycode" name="citycode" value="{{ $shop->city->id ?? '' }}">
+                            <input type="hidden" class="js-lat" name="lat" value="{{ $shop->city->lat ?? old('lat') }}">
+                            <input type="hidden" class="js-lng" name="lng" value="{{ $shop->city->lng  ?? old('lng') }}">
+                            <input type="hidden" class="js-citycode" name="citycode" value="{{ $shop->city->id ?? old('citycode') }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -320,11 +339,9 @@
             </div>
         </div>
     </div>
-
-<script>
-    CKEDITOR.replace( 'summary-ckeditor' );
-    const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
-    CKEDITOR.instances['summary-ckeditor'].setData(editor)
-</script>
-
+    <script defer>
+        CKEDITOR.replace( 'summary-ckeditor' );
+        const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
+        editor && CKEDITOR.instances['summary-ckeditor'].setData(editor)
+    </script>
 @endsection

@@ -11,6 +11,7 @@ use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Image;
 use Storage;
 
@@ -18,7 +19,8 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        return view('pages.add-update-shop');
+        $categories = Categorie::all();
+        return view('pages.add-update-shop', ['categories' => $categories]);
     }
 
     public function updateShop($id)
@@ -33,6 +35,8 @@ class ShopsController extends Controller
 
     public function postAddUpdateShop(Request $request, $id = null)
     {
+        $request->session()->put('requestReferrer', URL::previous());
+//        Session::put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['string', 'required'],
@@ -77,6 +81,13 @@ class ShopsController extends Controller
         ]);
 
         if ($request->hasFile('images')) {
+            $db_pictures_count = Picture::where('shop_id', $id)->count();
+            $max_files = Picture::MAX_FILES - $db_pictures_count;
+            if(count($request->file('images')) > $max_files) {
+                return redirect($request->session()->get('requestReferrer'))
+                    ->withInput()
+                    ->with('too_much_files');
+            }
             foreach($request->file('images') as $file)
             {
                 $date = Carbon::now();
