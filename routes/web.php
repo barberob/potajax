@@ -39,6 +39,7 @@ Route::get('/myaccount', 'UsersController@index')->name('myaccount');
 
 Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
+Route::get('/account/update-shop/{id}', 'ShopsController@updateShop')->middleware('manager')->name('update_shop');
 Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->middleware('manager')->name('post_add_shop');
 
 // La page où on présente les liens de redirection vers les providers
@@ -54,6 +55,7 @@ Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
 
 Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
+Route::get('/API/delete-picture/{id}', 'PictureController@ajaxDelete')->name('delete_picture');
 
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');

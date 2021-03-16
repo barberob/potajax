@@ -13,6 +13,9 @@
     @if($errors)
         @dump($errors)
     @endif
+    @if(isset($shop))
+        @dump($shop->pictures)
+    @endif
     <div class="container mt-5 register">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -45,7 +48,21 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
+
+                                @if(isset($shop->pictures))
+                                <table class="table">
+                                    <tbody>
+                                        @foreach($shop->pictures as $picture)
+                                        <tr data-picture="{{ $picture->id }}">
+                                            <td><img src="{{$picture->url}}" alt="" width="100" ></td>
+                                            <td><button class="btn btn-primary" data-picture="{{ $picture->id }}">Supprimer</button></td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @endif
                                 <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
                                 <div class="col-md-6">
                                     <input id="images"

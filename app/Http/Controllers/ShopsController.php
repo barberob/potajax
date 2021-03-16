@@ -18,13 +18,15 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        return view('pages.add-shop');
+        return view('pages.add-update-shop');
     }
 
-    public function updateShop()
+    public function updateShop($id)
     {
-
-        return view('pages.add-shop');
+        $shop = Shop::findOrFail($id);
+        return view('pages.add-update-shop', [
+            'shop' => $shop
+        ]);
     }
 
     public function postAddShop(Request $request)
