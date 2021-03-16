@@ -1,7 +1,7 @@
 export default class RegisterForm {
 
     constructor() {
-        if(document.querySelector('body.add_shop')) {
+        if(document.querySelector('body.add_shop, body.update_shop')) {
             this.initEls()
             this.initEvents()
         } else return
@@ -28,7 +28,7 @@ export default class RegisterForm {
             inputLng : __('.js-lng'),
             inputInsee : __('.js-citycode'),
             autoCompleteItems : 0,
-
+            pictureRows : document.querySelectorAll('tr[data-picture]'),
             //selects category
             selectCategory : __('.js-category'),
             selectSubCategory : __('.js-subcategory'),
@@ -38,6 +38,8 @@ export default class RegisterForm {
     initEvents() {
         this.initAutoComplete()
         this.initSelects()
+        this.initDeletePictures()
+        console.log(this.els.pictureRows)
     }
 
     initAutoComplete() {
@@ -203,6 +205,21 @@ export default class RegisterForm {
         this.els.selectCategory.addEventListener('change', (e) => {
             const index = this.els.selectCategory.selectedIndex
             this._fillSubCategory(this.categories[index].subcategories)
+        })
+    }
+
+    initDeletePictures() {
+        this.els.pictureRows.forEach((el) => {
+            const button = el.querySelector('button')
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-picture')
+                const url = `${window.location.origin}/API/delete-picture/${id}`
+                const request = await fetch(url)
+                const response = await request.json()
+                if (response.status === 200) {
+                    document.querySelector(`tr[data-picture="${id}"]`).remove()
+                }
+            })
         })
     }
 }

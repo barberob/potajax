@@ -1,15 +1,15 @@
 div.home {
     .auth{
-        padding-top:1%; 
+        padding-top:1%;
         padding-bottom:1%;
-        background:linear-gradient(0.25turn, #FF9051, #A051FF); 
+        background:linear-gradient(0.25turn, #FF9051, #A051FF);
         color: white;
         font-size: 20px;
     }
     div.intro {
         height : 80vh;
         width : 100%;
-        background-image : url("img/index-background.jpeg");
+        background-image : url("../img/index-background.jpeg");
         background-position: center center;
         background-size: cover;
 
@@ -37,17 +37,17 @@ div.home {
         h2{
             font-size: 23px;
         }
-        
+
     }
     .category_image {
         width: 90px;
         height: 90px;
-        background-size: cover; 
+        background-size: cover;
         background-position: bottom;
         transition-duration: 0.4s;
     }
     h3{
-        color: black; 
+        color: black;
         font-weight: normal;
     }
 
@@ -58,7 +58,7 @@ div.home {
     .lien_cat:hover{
         text-decoration: none;
         .flex-column{
-            h3{ 
+            h3{
                 color: tomato!important;
                 font-weight: bold;
             }

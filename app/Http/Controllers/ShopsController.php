@@ -18,7 +18,15 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        return view('pages.add-shop');
+        return view('pages.add-update-shop');
+    }
+
+    public function updateShop($id)
+    {
+        $shop = Shop::findOrFail($id);
+        return view('pages.add-update-shop', [
+            'shop' => $shop
+        ]);
     }
 
     public function postAddShop(Request $request)
@@ -74,15 +82,14 @@ class ShopsController extends Controller
                 ]);
 
                 $name = $shop->id . '_' . $picture->id;
-                $url = '/uploads/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
+                $url = '/storage/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
-//                $file->move(public_path().$url, $name . '.' . $file->extension());
 
                 $input['imagename'] = $name.'.'.$file->extension();
 
-                if (!file_exists($url)) {
-                    mkdir($url, 0775, true);
+                if (!is_dir(public_path($url))) {
+                    mkdir(public_path($url), 0775, true);
                 }
 
                 $filePath = public_path($url);
@@ -92,7 +99,7 @@ class ShopsController extends Controller
                     $const->aspectRatio();
                 })->save($filePath.'/'.$input['imagename']);
 
-                $filePath = public_path('/uploads/shops/original');
+                $filePath = public_path('/storage/shops/original');
                 $file->move($filePath, $input['imagename']);
             }
         }

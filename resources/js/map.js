@@ -184,8 +184,9 @@ export default class Map{
             let icone = null;
             let color = null;
 
-            data += '<p>Nom: '+Item.detail['nom']+'</p>';
-            data += '<p>Desc: '+Item.detail['desc']+'</p>';
+            data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
+            data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+'</p>';
+            data += '<p style="font-size:12px;">'+Item.detail['desc']+'</p>';
 
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
