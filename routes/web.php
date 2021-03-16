@@ -25,13 +25,18 @@ Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
 Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
 Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
 
+
 // Route vers la page d'un shop
 Route::get('/shop/{id}', 'ShopController@details')->name('shop');
+
 
 // Route vers la page Mes Favoris
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
+Route::post('/favorites', 'FavoritesController@post')->name('favorites-post');
+
 Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
+
 
 // Route vers la page Mon Compte
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');
@@ -40,14 +45,21 @@ Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->name('add_shop');
 Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->name('post_add_shop');
 
+
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");
+Route::get("social-login-manager", "SocialiteManagerController@socialManagerLogin");
 
 // La redirection vers le provider
-Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('socialite.redirect');
+Route::get('login/{provider}', 'SocialiteController@redirectToProvider')->name('socialite.redirect');
+//Route::get('login/{provider}/{manager?}', 'SocialiteController@redirectToProvider')->name('socialite.redirect');
+Route::get('login/manager/{provider}', 'SocialiteManagerController@redirectToProviderManager')->name('socialite.manager');
 
 // Le callback du provider
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('socialite.callback');
+Route::get('login/callback/{provider}', 'SocialiteController@handleProviderCallback')->name('socialite.callback');
+//Route::get('login/callback/{provider}/{manager?}', 'SocialiteController@handleProviderCallback')->name('socialite.callback');
+Route::get('login/manager/callback/{provider}', 'SocialiteManagerController@handleProviderCallbackManager')->name('socialite.callback-manager');
+
 
 Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
