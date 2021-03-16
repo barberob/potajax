@@ -2,6 +2,7 @@
 
 namespace App\Shops;
 
+use App\City;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
@@ -67,5 +68,10 @@ class Shop extends Model
     public function visits()
     {
         return $this->hasMany(Visit::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

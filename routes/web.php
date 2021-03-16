@@ -40,7 +40,10 @@ Route::get('/myaccount', 'UsersController@index')->name('myaccount');
 Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
 Route::get('/account/update-shop/{id}', 'ShopsController@updateShop')->middleware('manager')->name('update_shop');
-Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->middleware('manager')->name('post_add_shop');
+
+Route::post('/account/post-add-update-shop/{id?}', 'ShopsController@postAddUpdateShop')
+    ->middleware('manager')
+    ->name('post_add_update_shop');
 
 // La page où on présente les liens de redirection vers les providers
 Route::get("social-login", "SocialiteController@socialLogin");

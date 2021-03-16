@@ -12,7 +12,10 @@ export default class RegisterForm {
         this.selectedItem = 0
         this.adresses = []
         this.categories = {}
+        this.maxPictures = 4
+        this.totalPictures = 0
     }
+
 
     initEls() {
         const __ = selector => document.querySelector(selector)
@@ -28,7 +31,8 @@ export default class RegisterForm {
             inputLng : __('.js-lng'),
             inputInsee : __('.js-citycode'),
             autoCompleteItems : 0,
-            pictureRows : document.querySelectorAll('tr[data-picture]'),
+            inputPicture: __('.js-input-picture'),
+            pictureRows : document.querySelectorAll('tr[data-picture], .js-picture-row'),
             //selects category
             selectCategory : __('.js-category'),
             selectSubCategory : __('.js-subcategory'),
@@ -39,7 +43,9 @@ export default class RegisterForm {
         this.initAutoComplete()
         this.initSelects()
         this.initDeletePictures()
-        console.log(this.els.pictureRows)
+        this.initPictureChange()
+        this.countPictures()
+        console.log(this.totalPictures)
     }
 
     initAutoComplete() {
@@ -208,10 +214,31 @@ export default class RegisterForm {
         })
     }
 
+    initPictureChange() {
+        this.els.inputPicture.addEventListener('change', (e) => {
+            let display
+            if(this.countPictures() > this.maxPictures) {
+                display = 'block'
+            } else {
+                display = 'none'
+            }
+            document.querySelector('.js-max-pictures').style.display = display
+        })
+    }
+
+    countPictures() {
+        this.totalPictures =
+            document.querySelectorAll('tr[data-picture]').length
+            +
+            this.els.inputPicture.files.length
+        return this.totalPictures
+    }
+
     initDeletePictures() {
         this.els.pictureRows.forEach((el) => {
             const button = el.querySelector('button')
-            button.addEventListener('click', async () => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault()
                 const id = button.getAttribute('data-picture')
                 const url = `${window.location.origin}/API/delete-picture/${id}`
                 const request = await fetch(url)

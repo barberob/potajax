@@ -29,7 +29,7 @@ class ShopsController extends Controller
         ]);
     }
 
-    public function postAddShop(Request $request)
+    public function postAddUpdateShop(Request $request, $id = null)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -52,7 +52,9 @@ class ShopsController extends Controller
 
         $subcat = $request->subcategory === '-1' ? null : $request->subcategory;
 
-        $shop = Shop::create([
+        $shop = Shop::updateOrCreate(
+            ['id' => $id],
+            [
             'nom' => $request->name,
             'descriptif' => $request->description,
             'adresse' => $request->adress,
