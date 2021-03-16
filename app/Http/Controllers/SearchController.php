@@ -7,50 +7,74 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
-    public function get(Request $request)
-    {
+    public function get(Request $request){
 
         $search = $request->input('search');
         //dd($search);
         if (isset($search) && !empty($search)) {
-            $resultat = SearchController::Find($search, 0);
-        }
-        return view('pages.search', [
-            'resultat' => $resultat
-        ]);
-    }
+            $resultat = SearchController::Find($search);
 
-    public function Find($laRecherche)
-    {
+            switch ($resultat['type']) {
+                case 'shops':
+                    SearchController::Centroide($resultat['resultat'], $resultat['type']);
+                    break;
+                case 'categories.id':
+                    return redirect()->route('Catmap', ['category_id' => $resultat['resultat']]);
+                case 'subcategories.id':
+                    return redirect()->route('Subcatmap', ['category_id' => $resultat['resultat'][0],'subcategory_id' => $resultat['resultat'][1]]);
+                case 'adress':
+                    SearchController::Centroide($resultat['resultat'], $resultat['type']);
+                    break;
+            }
+        }
+
+        /*return view('pages.search', [
+            'resultat' => $resultat
+        ]);*/
+    }
+    public function Find($laRecherche){
         $res = null;
         //$laRecherche = "Royce Smith DDS";
 
         //nom shop
         $resultat = DB::table('shops')->
-        where('shops.nom', 'Like', $laRecherche)->
-        get();
+        where('shops.nom', 'Like', $laRecherche.'%')->get();
+
         if (empty($resultat[0])) {
             // nom categorie
             $resultat = DB::table('categories')->
-            where('categories.libelle', 'Like', $laRecherche)->
-            get();
+            where('categories.libelle', 'Like', $laRecherche.'%')->get();
+
             if (empty($resultat[0])) {
                 // nom subcategorie
                 $resultat = DB::table('subcategories')->
-                where('subcategories.libelle', 'Like', $laRecherche)->
-                get();
+                where('subcategories.libelle', 'Like', $laRecherche.'%')->get();
+
                 if (empty($resultat[0])) {
                     // recherche adresse
                     $resultat = SearchController::API($laRecherche);
-                    return $resultat;
+                    return [
+                        'resultat' => $resultat,
+                        'type' => 'adress'
+                    ];
                 }
-                return $resultat[0]->libelle;
+                return [
+                    'resultat' => [$resultat[0]->id,$resultat[0]->category_id],
+                    'type' => 'subcategories.id'
+                ];
             }
-            return $resultat[0]->libelle;
+            return [
+                'resultat' => $resultat[0]->id,
+                'type' => 'categories.id'
+            ];
         }
-        return $resultat[0]->nom;
+        return [
+            'resultat' => $resultat,
+            'type' => 'shops'
+        ];
     }
     public function API($laRecherche){
+
         $query = $laRecherche;
         $curl = curl_init();
         curl_setopt_array(
@@ -76,4 +100,39 @@ class SearchController extends Controller
             return json_decode($response)->features[0];
         }
     }
+    static function Centroide($tab, $type){
+        $lat = 0.0;
+        $lon = 0.0;
+        $centerlat = 0;
+        $centerlng = 0;
+
+        $shop = MapController::deuxFetch($tab);
+
+        dd($shop);
+        //return redirect()->route('Findmap', ['shop' => $shop]);
+
+
+        /*
+        switch ($type) {
+            case 'shops':
+                foreach ($tab as $value){
+                    $lat += $value->lat;
+                    $lon += $value->lng;
+                }
+                $centerlat = $lat / count($tab);
+                $centerlng = $lon / count($tab);
+                //dd($tab[0]->lat.' '.$tab[0]->lng.' // '.$tab[1]->lat.' '.$tab[1]->lng.' // '.$centerlat.' '.$centerlng);
+                break;
+            case 'adress':
+                foreach ($tab as $value){
+                    $lat += $value->lat;
+                    $lon += $value->lng;
+                }
+                $centerlat = $lat / count($tab);
+                $centerlng = $lon / count($tab);
+                break;
+        }
+*/
+    }
+
 }

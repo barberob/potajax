@@ -15,7 +15,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $shops = Auth::user()->shops;
-        return view('pages.account', ['shops', $shops]);
+    	$auth = Auth::user();
+        return view('pages.account', ['auth'=> $auth]);
     }
 }

@@ -9,7 +9,7 @@
 				    Catégories
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Toute</a></li>
+                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Tout</a></li>
 				  	@foreach($categories as $categorie)
 				    	<li><a class="dropdown-item" href="{{ route('Catmap', ['category_id' => $categorie->id]) }}">{{$categorie->libelle}}</a></li>
 				    @endforeach
@@ -21,7 +21,7 @@
 				    Sous catégories
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Toute</a></li>
+                      <li><a class="dropdown-item" href="{{ route('Allmap') }}">Tout</a></li>
 				  	@foreach($subcategories as $subcategorie)
 				    	<li><a class="dropdown-item" href="{{ route('Subcatmap', ['category_id' => $current_category_id,'subcategory_id' => $subcategorie->id]) }}">{{$subcategorie->libelle}}</a></li>
 				   	@endforeach
@@ -46,16 +46,17 @@
 				  <div class="card-body">
 				  	<div class="panel panel-primary" id="result_panel">
 					    <div class="panel-body">
-					        <ul class="list-group">
-					        	@foreach($shops as $shop)
-					            <li class="list-group-item">
+					        <ul class="list-group" id="listRightShop">
+
+					        </ul>
+                        @foreach($shops as $shop)
+                            <!--<li class="list-group-item">
 					            	<strong><a href="#">{{$shop->nom}}</a></strong>
 
 					            	<p>{{$shop->adresse}}</p>
 					            	<a class="btn btn-outline-danger btn-sm" href="{{ route('shop', ['id' => $shop->id]) }}" role="button">Voir la page</a>
-					            </li>
-					            @endforeach
-					        </ul>
+					            </li>-->
+                            @endforeach
 					    </div>
 					</div>
 				  </div>

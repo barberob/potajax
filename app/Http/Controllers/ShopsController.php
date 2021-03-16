@@ -11,19 +11,29 @@ use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Image;
+use Storage;
 
 class ShopsController extends Controller
 {
     public function addShop()
     {
-        return view('pages.add-shop');
+        return view('pages.add-update-shop');
     }
 
-    public function postAddShop(Request $request)
+    public function updateShop($id)
+    {
+        $shop = Shop::findOrFail($id);
+        return view('pages.add-update-shop', [
+            'shop' => $shop
+        ]);
+    }
+
+    public function postAddUpdateShop(Request $request, $id = null)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string'],
+            'description' => ['string', 'required'],
             'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
@@ -36,15 +46,17 @@ class ShopsController extends Controller
 //            'lat' => ['required', 'numeric'],
 //            'lng' => ['required', 'numeric'],
 //            'images' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,png|max:2048'
+            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048'
         ]);
 
 
         $subcat = $request->subcategory === '-1' ? null : $request->subcategory;
 
-        $shop = Shop::create([
+        $shop = Shop::updateOrCreate(
+            ['id' => $id],
+            [
             'nom' => $request->name,
-            'descriptif' => 'test',
+            'descriptif' => $request->description,
             'adresse' => $request->adress,
             'adresse2' => $request->adress2,
             'cp' => $request->cp,
@@ -72,14 +84,30 @@ class ShopsController extends Controller
                 ]);
 
                 $name = $shop->id . '_' . $picture->id;
-                $url = '/uploads/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
-
+                $url = '/storage/shops/'.$date->year.'/'.$date->month.'/'.$date->day;
                 $picture->url = $url . '/' .$name. '.' . $file->extension();
                 $picture->save();
-                $file->move(public_path().$url, $name . '.' . $file->extension());
+
+                $input['imagename'] = $name.'.'.$file->extension();
+
+                if (!is_dir(public_path($url))) {
+                    mkdir(public_path($url), 0775, true);
+                }
+
+                $filePath = public_path($url);
+
+                $img = Image::make($file->path());
+                $img->resize(400, 300, function ($const) {
+                    $const->aspectRatio();
+                })->save($filePath.'/'.$input['imagename']);
+
+                $filePath = public_path('/storage/shops/original');
+                $file->move($filePath, $input['imagename']);
             }
         }
-        return redirect()->route('account');
+        return redirect()
+            ->route('account')
+            ->with('success','Création réussie');
     }
 
     public function listShop()

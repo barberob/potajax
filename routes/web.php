@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 Route::get('/', 'CategoriesController@listCat')->name('index');
 
 Route::get('/map', 'SubcategoriesController@listAll')->name('Allmap');
+Route::post('/map?search=', 'MapController@post')->name('Recherche');
 //Route::get('/map', 'SubcategoriesController@listSubcat')->name('map');
 Route::get('/map/{category_id}', 'SubcategoriesController@listCat')->name('Catmap');
 Route::get('/map/{category_id}/{subcategory_id}', 'SubcategoriesController@listSubcat')->name('Subcatmap');
@@ -42,8 +43,12 @@ Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorite
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');
 
 Route::get('/account', 'UsersController@index')->name('account');
-Route::get('/account/add-shop', 'ShopsController@addShop')->name('add_shop');
-Route::post('/account/post-add-shop', 'ShopsController@postAddShop')->name('post_add_shop');
+Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
+Route::get('/account/update-shop/{id}', 'ShopsController@updateShop')->middleware('manager')->name('update_shop');
+
+Route::post('/account/post-add-update-shop/{id?}', 'ShopsController@postAddUpdateShop')
+    ->middleware('manager')
+    ->name('post_add_update_shop');
 
 
 // La page où on présente les liens de redirection vers les providers
@@ -65,8 +70,7 @@ Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
 
 Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
+Route::get('/API/delete-picture/{id}', 'PictureController@ajaxDelete')->name('delete_picture');
 
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
-
-Route::get('/search', 'SearchController@get')->name('Recherche');

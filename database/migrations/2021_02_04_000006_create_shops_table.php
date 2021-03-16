@@ -39,7 +39,7 @@ class CreateShopsTable extends Migration
             $table->tinyInteger('etat');
             $table->string('codeNote', 10)->nullable();
 
-            $table->string('city_id', 5);
+            $table->string('city_id', 5)->nullable();
 
             $table->foreignId('user_id')->constrained();
             $table->foreign('city_id')->references('id')->on('cities');

@@ -1,7 +1,6 @@
 import * as L from "leaflet";
 import * as L1 from "leaflet.markercluster";
 export default class Map{
-
     constructor() {
         if(document.getElementById('map')){
 
@@ -10,12 +9,18 @@ export default class Map{
             const TILE_LAYER3 = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
             const TILE_LAYER4 = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
             const TILE_LAYER5 = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
+            const TILE_LAYER6 = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+            const TILE_LAYER7 = 'https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}';
+            const TILE_LAYER8 = 'https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}';
 
-            this.TILE_LAYER1_layers = L.tileLayer(TILE_LAYER1, {id: '1',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
-            this.TILE_LAYER2_layers = L.tileLayer(TILE_LAYER2, {id: '2',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
-            this.TILE_LAYER3_layers = L.tileLayer(TILE_LAYER3, {id: '3',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
-            this.TILE_LAYER4_layers = L.tileLayer(TILE_LAYER4, {id: '4',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER1_layers = L.tileLayer(TILE_LAYER1, {id: '1',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'});
+            this.TILE_LAYER2_layers = L.tileLayer(TILE_LAYER2, {id: '2',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+            this.TILE_LAYER3_layers = L.tileLayer(TILE_LAYER3, {id: '3',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'});
+            this.TILE_LAYER4_layers = L.tileLayer(TILE_LAYER4, {id: '4',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
             this.TILE_LAYER5_layers = L.tileLayer(TILE_LAYER5, {id: '5',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
+            this.TILE_LAYER6_layers = L.tileLayer(TILE_LAYER6, {id: '6',noWrap: true, minZoom: 2, maxZoom: 19, attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+            this.TILE_LAYER7_layers = L.tileLayer(TILE_LAYER7, {id: '7',noWrap: true, minZoom: 1, maxZoom: 8, attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.', format: 'jpg', time: '', tilematrixset: 'GoogleMapsCompatible_Level'});
+            this.TILE_LAYER8_layers = L.tileLayer(TILE_LAYER8, {id: '8',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',apikey: 'choisirgeoportail', format: 'image/jpeg', style: 'normal'});
 
             this.baseMaps = {
                 "<span style='color: gray'>Dark Edition</span>": this.TILE_LAYER1_layers,
@@ -23,9 +28,66 @@ export default class Map{
                 "<span style='color: gray'>Light Smooth 1</span>": this.TILE_LAYER3_layers,
                 "<span style='color: gray'>Light Smooth 2</span>": this.TILE_LAYER4_layers,
                 "<span style='color: gray'>Light Smooth 3</span>": this.TILE_LAYER2_layers,
+                "<span style='color: gray'>Night</span>": this.TILE_LAYER7_layers,
+                "<span style='color: gray'>Geographic flat</span>": this.TILE_LAYER6_layers,
+                "<span style='color: gray'>Geographic</span>": this.TILE_LAYER8_layers,
             };
 
             this.domain_url = window.location.origin;
+
+            let img = this.domain_url+'/img/icon_map/marker-icon-';
+            let shadow = this.domain_url+'/img/icon_map/marker-shadow.png';
+
+            /*         Default           */
+            this.IconWhite = L.icon({
+                iconUrl: img+'white.png',
+                shadowUrl: shadow
+            });
+            this.IconGrey = L.icon({
+                iconUrl: img+'grey.png',
+                shadowUrl: shadow
+            });
+            this.IconBlack = L.icon({
+                iconUrl: img+'black.png',
+                shadowUrl: shadow
+            });
+            this.IconBlue = L.icon({
+                iconUrl: img+'blue.png',
+                shadowUrl: shadow
+            });
+            this.IconRed = L.icon({
+                iconUrl: img+'red.png',
+                shadowUrl: shadow
+            });
+            this.IconGreen = L.icon({
+                iconUrl: img+'green.png',
+                shadowUrl: shadow
+            });
+            this.IconLightBlue = L.icon({
+                iconUrl: img+'light-blue.png',
+                shadowUrl: shadow
+            });
+            this.IconOrange = L.icon({
+                iconUrl: img+'orange.png',
+                shadowUrl: shadow
+            });
+            this.IconPink = L.icon({
+                iconUrl: img+'pink.png',
+                shadowUrl: shadow
+            });
+            this.IconPurple = L.icon({
+                iconUrl: img+'purple.png',
+                shadowUrl: shadow
+            });
+            this.IconYellow = L.icon({
+                iconUrl: img+'yellow.png',
+                shadowUrl: shadow
+            });
+            this.IconNAN = L.icon({
+                iconUrl: img+'nan.png',
+                shadowUrl: shadow
+            });
+
             this.Lat = '44.55962000171788';
             this.Lng = '6.079823238576286';
             this.Zoom = '5';
@@ -49,13 +111,13 @@ export default class Map{
             //this.changeSelect();
             this.init();
 
-
             /*alert('zerzre');
             window.addEventListener("beforeunload", function (event) {
                 //your code goes here on location change
                 alert('yolo');
             });*/
         }
+
     }
     init() {
         console.log('Creation Map');
@@ -65,6 +127,7 @@ export default class Map{
 
         this.macarte = L.map('map', {center: [this.Lat, this.Lng], zoom: this.Zoom, layers: [this.TILE_LAYER2_layers]});
         this.macarte.setMaxBounds([[-90,-180],[90,180]])
+
         // vielle carte sans le layers des tuilles
         /*this.macarte = L.map('map').setView([this.Lat, this.Lng], this.Zoom);
         L.tileLayer(this.Tile, {
@@ -88,6 +151,7 @@ export default class Map{
         this.marker_remove();
 
         this.Fetch(posMap);
+
     }
     marker_remove(){
         console.log('Destruction Marker');
@@ -97,6 +161,8 @@ export default class Map{
             this.markers.remove();
             delete this.markers;
 
+            document.getElementById('listRightShop').innerHTML = '';
+
             delete this.Object;
             this.Object = new Array();
         }
@@ -104,104 +170,95 @@ export default class Map{
     marker_add(){
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
-
-        let img = this.domain_url+'/img/icon_map/marker-icon-';
-        let shadow = this.domain_url+'/img/icon_map/marker-shadow.png';
-
-        /*         Default           */
-        let IconWhite = L.icon({
-            iconUrl: img+'white.png',
-            shadowUrl: shadow
-        });
-        let IconGrey = L.icon({
-            iconUrl: img+'grey.png',
-            shadowUrl: shadow
-        });
-        let IconBlack = L.icon({
-            iconUrl: img+'black.png',
-            shadowUrl: shadow
-        });
-        let IconBlue = L.icon({
-            iconUrl: img+'blue.png',
-            shadowUrl: shadow
-        });
-        let IconRed = L.icon({
-            iconUrl: img+'red.png',
-            shadowUrl: shadow
-        });
-        let IconGreen = L.icon({
-            iconUrl: img+'green.png',
-            shadowUrl: shadow
-        });
-        let IconLightBlue = L.icon({
-            iconUrl: img+'light-blue.png',
-            shadowUrl: shadow
-        });
-        let IconOrange = L.icon({
-            iconUrl: img+'orange.png',
-            shadowUrl: shadow
-        });
-        let IconPink = L.icon({
-            iconUrl: img+'pink.png',
-            shadowUrl: shadow
-        });
-        let IconPurple = L.icon({
-            iconUrl: img+'purple.png',
-            shadowUrl: shadow
-        });
-        let IconYellow = L.icon({
-            iconUrl: img+'yellow.png',
-            shadowUrl: shadow
-        });
-        let IconNAN = L.icon({
-            iconUrl: img+'nan.png',
-            shadowUrl: shadow
-        });
-
         this.Object.map((Item) => {
             //console.log(Item.detail);
             let type = Item.detail['subcategorie_id'];
             let libelle = Item.detail['subcategorie_lib'];
+            let adresse = Item.detail['adresse'];
+            let id = Item.detail['id'];
+            let nom = Item.detail['nom'];
+
             let data = '';
             let marker;
             let Loc = [Item.coord['Lat'], Item.coord['Lng']];
             let icone = null;
             let color = null;
 
-            data += '<p>Nom: '+Item.detail['name']+'</p>';
-            data += '<p>Desc: '+Item.detail['desc']+'</p>';
+            data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
+            data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+'</p>';
+            data += '<p style="font-size:12px;">'+Item.detail['desc']+'</p>';
 
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
             switch (type){
-                case 1: icone = {icon: IconBlue};color = '#2B82CB' ; break;
-                case 2: icone = {icon: IconRed};color = '#F80B17' ; break;
-                case 3: icone = {icon: IconGreen};color = '#0AF92A' ; break;
-                case 4: icone = {icon: IconOrange};color = '#F87D10' ; break;
-                case 5: icone = {icon: IconPurple};color = '#9E0DF7' ; break;
-                case 6: icone = {icon: IconYellow};color = '#F8F008' ; break;
-                case 7: icone = {icon: IconPink};color = '#F810B3' ; break;
-                case 8: icone = {icon: IconLightBlue};color = '#0DF7EC' ; break;
+                case 1: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
+                case 2: icone = {icon: this.IconRed};color = '#F80B17' ; break;
+                case 3: icone = {icon: this.IconGreen};color = '#0AF92A' ; break;
+                case 4: icone = {icon: this.IconOrange};color = '#F87D10' ; break;
+                case 5: icone = {icon: this.IconPurple};color = '#9E0DF7' ; break;
+                case 6: icone = {icon: this.IconYellow};color = '#F8F008' ; break;
+                case 7: icone = {icon: this.IconPink};color = '#F810B3' ; break;
+                case 8: icone = {icon: this.IconLightBlue};color = '#0DF7EC' ; break;
 
-                case 9: icone = {icon: IconWhite};color = '#E2E2E2' ; break;
-                case 10: icone = {icon: IconGrey};color = '#888888' ; break;
-                case 11: icone = {icon: IconBlack};color = '#2B2B2B' ; break;
+                case 9: icone = {icon: this.IconWhite};color = '#E2E2E2' ; break;
+                case 10: icone = {icon: this.IconGrey};color = '#888888' ; break;
+                case 11: icone = {icon: this.IconBlack};color = '#2B2B2B' ; break;
 
-                default: icone = {icon: IconNAN};color = 'NaN' ; break;
+                default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
             }
 
+            //if(typeof libelle === 'undefined') libelle = 'tout';
+            //console.log(libelle)
+            //this.VerificationDejaDansTableau(libelle,this.makerUse,color);
+            /*if(!()){
 
-            if(!(this.VerificationDejaDansTableau(libelle,this.makerUse))){
-                //console.log('add '+ libelle);
                 this.makerUse.push({type: libelle, color: color});
-            }
+            }*/
+
+            //Map.flyTTo(Loc, 15);
 
             marker = L.marker(Loc,icone).bindPopup(data);
-            this.markers.addLayer(marker);
 
+            let NewList = '';
+            NewList += '<li class="list-group-item">';
+            NewList += '<strong><a class="MonFlyTo" data-loc="'+Loc+'">'+nom+'</a></strong>';
+            NewList += '<p>'+adresse+'</p>';
+            NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
+            NewList += '</li>';
+
+            document.getElementById('listRightShop').innerHTML += NewList;
+
+            /*console.log('shop_'+id);
+
+            document.getElementById('shop_'+id).addEventListener('click',function(ev){
+                console.log(ev.target.attributes.id);
+                console.log(marker);
+                marker.openPopup();
+            })*/
+
+            this.markers.addLayer(marker);
         });
+
+        //console.log(this.makerUse);
+        //this.legende(labels, grades);
+
+        document.querySelectorAll('.MonFlyTo').forEach((a) => {
+            a.addEventListener('click', (ev) =>{
+                let loc = ev.currentTarget.getAttribute('data-loc');
+                loc = loc.split(',');
+                this.macarte.flyTo(loc,14, {
+                    animate: false,
+                    duration: 2
+                });
+            })
+        });
+
+        /*document.getElementById('listRightShop').innerHTML = '';
+        document.getElementById('listRightShop').innerHTML = this.NewList;*/
+
         //console.log(this.makerUse);
         this.macarte.addLayer(this.markers);
+
     }
     Fetch(posMap){
         console.log('Recherche Marker');
@@ -226,57 +283,81 @@ export default class Map{
         }).then(response => {
             return response.json();
         }).then(objected => {
-            //console.log(Object.entries(objected));
+            //console.log(objected);
             for (const [key1, value1] of Object.entries(objected)) {
-                for (const [key2, value2] of Object.entries(value1)) {
-                    //console.log(value2);
-                    if (value2 != null) {
-                        this.Object.push({
-                            'detail': {
-                                'name': value2.nom,
-                                'desc': value2.descriptif,
-                                'categorie_id': value2.category_id,
-                                'subcategorie_id': value2.subcategory_id,
-                                'subcategorie_lib': value2.libelle,
-                            },
-                            'coord': {
-                                'Lat': value2.lat,
-                                'Lng': value2.lng,
-                            }
-                        });
-                        //console.log(this.Object);
-                    }
+                //console.log(value1);
+                if (value1 != null) {
+                    this.Object.push({
+                        'detail': {
+                            'id': value1.id,
+                            'nom': value1.nom,
+                            'desc': value1.descriptif,
+                            'adresse': value1.adresse,
+                            'categorie_id': value1.category_id,
+                            'subcategorie_id': value1.subcategory_id,
+                            'subcategorie_lib': value1.libelle,
+                        },
+                        'coord': {
+                            'Lat': value1.lat,
+                            'Lng': value1.lng,
+                        }
+                    });
                 }
             }
-            this.marker_add();
             //console.log(this.Object);
+            this.marker_add();
         }).catch(error => alert("Erreur : " + error));
         //console.log(ResTo);
     }
     get_data(posMap){
         console.log('Récupération Data Map');
-        let red = window.location.href.split('/');
+        let Url = window.location.href.split('/');
+        let VariableGet = Url[3].indexOf('?search=');
+        let search = 'default';
+        let test;
 
-        red[4] = parseInt(red[4]);
-        red[5] = parseInt(red[5]);
+        //categorie
+        Url[4] = parseInt(Url[4]);
+        //subcategorie
+        Url[5] = parseInt(Url[5]);
 
-        if(isNaN(red[4])) red[4] = "All";
-        if(isNaN(red[5])) red[5] = "All";
+        //console.log(Url[4]+' '+Url[5]);
 
-        let test = {
-            northEast: posMap._northEast,
-            sudOuest: posMap._southWest,
-            categories: [red[4]],
-            subcategories: [red[5]]
-        };
+        //si il y a pas de categorie
+        if(isNaN(Url[4])){
+            Url[4] = "All";
+            //console.log('----// '+VariableGet);
 
+            // si il y a ?q=
+            if (VariableGet != -1){
+                //alert('--- Dans le ?');
+                search = Url[3].split('?search=');
+            }
+        }
 
+        //si il y a pas de subcategorie
+        if(isNaN(Url[5])){
+            Url[5] = "All";
+        }
 
-
+        //si il y a un search
+        if(search !== 'default'){
+            //alert('--- Dans le search');
+            test = {
+                northEast: posMap._northEast,
+                sudOuest: posMap._southWest,
+                search: search[1]
+            };
+        }
+        else{
+            test = {
+                northEast: posMap._northEast,
+                sudOuest: posMap._southWest,
+                categories: [Url[4]],
+                subcategories: [Url[5]]
+            };
+        }
         return test;
-    }
-    ZoomShop(lat,lng,zoom){
-        this.macarte.setView([lat, lng], zoom);
     }
     /*changeSelect(){
         document.getElementById('categorie_id')
@@ -334,15 +415,53 @@ export default class Map{
                 alert('yolo2');
             });
     }*/
-    VerificationDejaDansTableau(val,tab){
-        let res = false;
-        //console.log(tab.length);
-        for(let i = 0; i < tab.length; i++){
-            //console.log(val+' '+tab[i]['type']);
-            if(val === tab[i]['type']){
-                res = true;
+    /*VerificationDejaDansTableau(val,tab,col){
+        //console.log('add '+ val);
+        let data = {type: val, color: col}
+        if(tab.length === 0){
+            this.makerUse.push(data);
+        } else {
+            for(let i = 0; i < tab.length; i++){
+                //console.log(val+' '+tab[i]['type']);
+                if(val !== tab[i]['type']){
+                    this.makerUse.push(data);
+                }
             }
         }
-        return res;
-    }
+    }*/
+    /*getMaCarte(){
+        console.log('getMaCarte')
+        return this.macarte;
+    }*/
+    /*flyTTo(Loc,zoom){
+        console.log('function flyTo');
+        this.macarte.flyTo(Loc,zoom);
+    }*/
+    /*legende(labels, grades){
+        var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function(map){
+            var div = L.DomUtil.create('div','legend');
+            div.style.border = '2px solid rgba(0,0,0,0.2)';
+            div.style.backgroundClip = 'padding-box';
+            div.style.background = '#fff';
+            div.style.borderRadius = '5px';
+            div.style.minWidth = '44px';
+            div.style.minHeight = '44px';
+
+            div.style.padding = '10px';
+
+
+            div.style.width = '200px';
+
+            var labels=["restaurant","kebbab"];
+            var grades = [450023,215478];
+
+            div.innerHTML = '<div><b style="text-align: right">Legende</b></div>';
+            for(var i = 0; i < grades.length; i++){
+                div.innerHTML += '<i style="background: #'+grades[i]+';">&nbsp;&nbsp;</i>&nbsp;&nbsp;'+labels[i]+'<br/>';
+            }
+            return div;
+        }
+        legend.addTo(this.macarte);
+    }*/
 }

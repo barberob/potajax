@@ -1,38 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.9.7deb1
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost:3306
--- Généré le : ven. 05 mars 2021 à 10:11
--- Version du serveur :  10.3.25-MariaDB-0ubuntu1
--- Version de PHP : 7.4.9
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `tests`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `cities`
---
-
-
---
--- Déchargement des données de la table `cities`
---
-
 INSERT INTO `cities` (`id`, `cp`, `lat`, `lng`, `nom`) VALUES
 ('1001', 1400, '46.1534255214', '4.92611354223', 'L\'Abergement-Clémenciat'),
 ('1002', 1640, '46.0091878776', '5.42801696363', 'L\'Abergement-de-Varey'),
@@ -36094,8 +36059,4 @@ INSERT INTO `cities` (`id`, `cp`, `lat`, `lng`, `nom`) VALUES
 ('98833', 98818, '', '', 'Kouaoua'),
 ('98901', 98799, '', '', 'Ile de clipperton'),
 ('99138', 98000, '', '', 'Monaco');
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
