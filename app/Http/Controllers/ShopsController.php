@@ -24,8 +24,10 @@ class ShopsController extends Controller
     public function updateShop($id)
     {
         $shop = Shop::findOrFail($id);
+        $categories = Categorie::all();
         return view('pages.add-update-shop', [
-            'shop' => $shop
+            'shop' => $shop,
+            'categories' => $categories
         ]);
     }
 

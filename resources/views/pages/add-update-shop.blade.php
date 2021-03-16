@@ -50,11 +50,32 @@
                             <div class="form-group row">
                                 <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
                                 <div class="col-md-6">
-                                    <select name="category" id="category" class="js-category"></select>
+                                    <select name="category" id="category" class="js-category">
+                                        @foreach($categories as $category)
+                                            <option
+                                                value="{{ $category->id }}"
+                                                {{ $shop->category->id === $category->id ? 'selected' : '' }}
+                                            >
+                                                {{ $category->libelle }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <label for="subcategory" class="col-md-4 col-form-label text-md-right">{{ __('Sous-Catégorie') }}</label>
                                 <div class="col-md-6">
-                                    <select name="subcategory" id="subcategory" class="js-subcategory"></select>
+                                    <select name="subcategory" id="subcategory" class="js-subcategory">
+                                        <option value="-1">--Optionel--</option>
+                                        @foreach($shop->category->subCategories as $subCategory)
+                                            <option
+                                                value="{{ $subCategory->id }}"
+                                                @if($shop->subCategory)
+                                                {{$shop->subCategory->id === $subCategory->id ? 'selected' : ''}}
+                                                @endif
+                                            >
+                                                {{ $subCategory->libelle }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

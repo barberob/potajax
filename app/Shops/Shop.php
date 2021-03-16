@@ -45,14 +45,14 @@ class Shop extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function categorie()
+    public function category()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class, 'category_id');
     }
 
-    public function subCategorie()
+    public function subCategory()
     {
-        return $this->belongsTo(SubCategorie::class);
+        return $this->belongsTo(SubCategorie::class, 'subcategory_id');
     }
 
     public function comments()

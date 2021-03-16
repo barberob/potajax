@@ -180,17 +180,9 @@ export default class RegisterForm {
         } catch(e) {
             console.log(e)
         }
-
-
-
-        this.categories.forEach((category, i) => {
-            const option = document.createElement('option')
-            option.setAttribute('data-id', i)
-            option.value = category.id
-            option.textContent = category.libelle
-            this.els.selectCategory.appendChild(option)
-            if(i === 0) this._fillSubCategory(category.subcategories)
-        })
+        // this.categories.forEach((category, i) => {
+        //     this._fillSubCategory(category.subcategories)
+        // })
     }
 
     _fillSubCategory(list) {
