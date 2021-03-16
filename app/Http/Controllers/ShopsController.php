@@ -21,6 +21,12 @@ class ShopsController extends Controller
         return view('pages.add-shop');
     }
 
+    public function updateShop()
+    {
+
+        return view('pages.add-shop');
+    }
+
     public function postAddShop(Request $request)
     {
         $request->validate([
@@ -80,7 +86,6 @@ class ShopsController extends Controller
 
                 $input['imagename'] = $name.'.'.$file->extension();
 
-//                dd(public_path($url));
                 if (!is_dir(public_path($url))) {
                     mkdir(public_path($url), 0775, true);
                 }
