@@ -47,7 +47,7 @@ class App {
     initApp() {
         new RegisterForm();
         new AddShopForm();
-        new Map();
+        let map = new Map();
         new locStorage();
     }
 }
