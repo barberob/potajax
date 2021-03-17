@@ -21,16 +21,16 @@ body.map{
 	            text-overflow: ellipsis;
 	        }
 	        .btn{
-	        	font-size: 1.5rem; 
+	        	font-size: 1.5rem;
 	        	color: black;
 	        }
 		}
 	}
-	
-		
-	.row{	
+
+
+	.row{
 		margin-top: 15px;
-		width: 100%;	
+		width: 100%;
 		#map{
 			background-color: silver;
 			width: 100%;
@@ -50,13 +50,13 @@ body.map{
 			display: none;
 		}
 	}
-	
+
 
 
 }
 
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
 	.page_map{
 		#navig{
 			flex-direction: row;
@@ -67,8 +67,8 @@ body.map{
 	            flex-grow: 1!important;
 	        }
 		}
-		
-		.row{			
+
+		.row{
 			#map{
 				height: 73vh;
 				margin-left: 30px;
@@ -78,8 +78,8 @@ body.map{
 				display: block;
 				width: 10%;
 				.card-header{
-					font-size: 25px; 
-					text-align: center; 
+					font-size: 25px;
+					text-align: center;
 					background-color: transparent;
 				}
 
@@ -119,14 +119,14 @@ body.map{
 		::-webkit-scrollbar {
 		    width: 12px;
 		}
-		 
+
 		::-webkit-scrollbar-thumb {
 		    border-radius: 10px;
-		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 		    background: linear-gradient(#f58f86, #d33821);
 		}
 	}
 
 
-	
+
 }

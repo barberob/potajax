@@ -26,6 +26,7 @@ class ShopsController extends Controller
     public function updateShop($id)
     {
         $shop = Shop::findOrFail($id);
+        if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
         return view('pages.add-update-shop', [
             'shop' => $shop,
