@@ -49,19 +49,31 @@
 		}
 	}	
 }
-.shop{
-	margin: auto;
-	border-radius: 120px 120px 0 0;
-	text-align: center;
-	.card-body{
-		.card-title{
-			font-weight: bold;
-			font-size: 20px;
-		}
-		a{
-			margin-top: 15px;
+.list{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	.shop{
+		margin: auto;
+		border-radius: 120px 120px 0 0;
+		text-align: center;
+		.card-body{
+			.card-title{
+				font-weight: bold;
+				font-size: 20px;
+			}
+			a{
+				margin-top: 15px;
+			}
 		}
 	}
+}
+	
+
+.col{
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 

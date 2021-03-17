@@ -33,8 +33,9 @@
                 </div>
             </div>
         @else
+        <div class="list">
             @foreach($myshops as $myshop)
-                <div class="card shop" style="width: 18rem;">
+                <div class="card shop" style="width: 15rem;">
                     <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
                     <div class="card-body">
                         <h5 class="card-title">{{$myshop->nom}}</h5>
@@ -43,6 +44,10 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+            <div class="col">
+                <a href="{{ route('add_shop') }}" class="btn btn-success">Ajouter un autre magasin</a>
+            </div>
         @endif
     @endmanager
 

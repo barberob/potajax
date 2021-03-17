@@ -67,7 +67,7 @@
                 </div>
 
                 <div>
-                    <h1> Se connecter avec Google </h1>
+                    <h3> Se connecter avec Google </h3>
                     <p>
                         <!-- Lien de redirection vers Google -->
                         <a href="{{ route('socialite.redirect', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer avec Google </a>
