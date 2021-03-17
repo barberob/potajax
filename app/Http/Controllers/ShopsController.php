@@ -39,7 +39,7 @@ class ShopsController extends Controller
 //        Session::put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string', 'required'],
+            'description' => ['required'],
             'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
@@ -48,7 +48,7 @@ class ShopsController extends Controller
             'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required'],
-            'tel' => ['required'],
+            'tel' => ['required', 'max:255'],
 //            'lat' => ['required', 'numeric'],
 //            'lng' => ['required', 'numeric'],
 //            'images' => 'required',

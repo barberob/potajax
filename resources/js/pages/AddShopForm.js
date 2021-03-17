@@ -1,3 +1,5 @@
+import 'ckeditor4'
+
 export default class RegisterForm {
 
     constructor() {
@@ -40,12 +42,14 @@ export default class RegisterForm {
     }
 
     initEvents() {
+        CKEDITOR.replace( 'summary-ckeditor' );
+        const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
+        editor && CKEDITOR.instances['summary-ckeditor'].setData(editor)
         this.initAutoComplete()
         this.initSelects()
         this.initDeletePictures()
         this.initPictureChange()
         this.countPictures()
-        console.log(this.totalPictures)
     }
 
     initAutoComplete() {
@@ -207,15 +211,19 @@ export default class RegisterForm {
     }
 
     initPictureChange() {
-        this.els.inputPicture.addEventListener('change', (e) => {
-            let display
-            if(this.countPictures() > this.maxPictures) {
-                display = 'block'
-            } else {
-                display = 'none'
-            }
-            document.querySelector('.js-max-pictures').style.display = display
+        this.els.inputPicture.addEventListener('change', () => {
+            this.handleMaxFiles()
         })
+    }
+
+    handleMaxFiles() {
+        let display
+        if(this.countPictures() > this.maxPictures) {
+            display = 'block'
+        } else {
+            display = 'none'
+        }
+        document.querySelector('.js-max-pictures').style.display = display
     }
 
     countPictures() {
@@ -238,6 +246,7 @@ export default class RegisterForm {
                 if (response.status === 200) {
                     document.querySelector(`tr[data-picture="${id}"]`).remove()
                 }
+                this.handleMaxFiles()
             })
         })
     }

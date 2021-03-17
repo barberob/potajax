@@ -5,11 +5,6 @@
 @endsection
 
 @section('content')
-    @if(session('success'))
-        <div class="alert alert-success">
-            Création réussie
-        </div>
-    @endif
     @if($errors)
         @dump($errors)
     @endif
@@ -108,7 +103,7 @@
                                     </tbody>
                                 </table>
                                 @endif
-                                <div class="col-6 my-4 alert alert-danger js-max-pictures" style="display: none">
+                                <div class="col-sm-12  my-4 alert alert-danger js-max-pictures" style="display: none">
                                     <strong>Le nombre maximum d'images par magasin est de 4</strong>
                                 </div>
                                 <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
@@ -129,17 +124,20 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>$message</strong>
                                     </span>
-                                    @endif
+                                @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-10">
-                                    <textarea class="form-control" id="summary-ckeditor" name="description" data-content="{{ old('description') ?? $shop->descriptif ?? '' }}"></textarea>
+                                    <textarea class="form-control @error('description') is-invalid @enderror"
+                                              id="summary-ckeditor"
+                                              name="description"
+                                              data-content="{{ old('description') ?? $shop->descriptif ?? '' }}"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Le champ description est requis</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -188,7 +186,7 @@
                                 <div class="col-md-6">
                                     <input id="siret"
                                            type="text"
-                                           maxlength="10"
+                                           maxlength="14"
                                            class="form-control @error('siret') is-invalid @enderror"
                                            name="siret"
                                            required
@@ -339,9 +337,4 @@
             </div>
         </div>
     </div>
-    <script defer>
-        CKEDITOR.replace( 'summary-ckeditor' );
-        const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
-        editor && CKEDITOR.instances['summary-ckeditor'].setData(editor)
-    </script>
 @endsection
