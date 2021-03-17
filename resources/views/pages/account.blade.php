@@ -28,7 +28,8 @@
                 </div>
             </div>
         @else
-        {{ $myshops }}
+            {{ $myshops }}
+        @endif
     @endmanager
 
 
