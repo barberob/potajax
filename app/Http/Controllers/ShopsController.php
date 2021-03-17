@@ -26,6 +26,7 @@ class ShopsController extends Controller
     public function updateShop($id)
     {
         $shop = Shop::findOrFail($id);
+        if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
         return view('pages.add-update-shop', [
             'shop' => $shop,
@@ -46,12 +47,14 @@ class ShopsController extends Controller
             'adress' => ['required'],
             'street_number' => ['required'],
             'city' => ['required'],
-            'cp' => ['required', 'numeric|size:5'],
-            'tel' => ['required', 'numeric'],
-//            'lat' => ['required', 'numeric'],
-//            'lng' => ['required', 'numeric'],
-//            'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048'
+            'cp' => ['required', 'digits:5'],
+            'tel' => ['required', 'regex:/^[0-9 ]+$/'],
+            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'images' => function($attribute, $value, $fail) {
+                if (count($value) > 4) {
+                    return $fail('le champ d\'' . $attribute . ' est limité à 4 fichiers maximum.');
+                }
+            }
         ]);
 
 
