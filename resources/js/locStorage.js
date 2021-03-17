@@ -1,30 +1,31 @@
-export default class locStorage
-{
+export default class locStorage {
 
-    constructor()
-    {
+    constructor() {
         if(document.querySelector('body.shop'))
         {
+            this.domain_url = window.location.origin;
+            this.button = document.querySelector('.fav');
+            this.id = this.button.getAttribute("data-id");
+            this.data = JSON.parse(localStorage.getItem("id")) || [];
+
             this.init();
+            this.DebugRS();
         }
     }
 
-    init()
-    {
-        let button = document.querySelector('.fav');
-        let id = button.getAttribute("data-id");
+    init() {
+        /*console.log(this.id);*/
+        /*console.log(this.data);*/
 
-        /*console.log(id);*/
+        this.button.addEventListener("click", () => {
 
-        let data = JSON.parse(localStorage.getItem("id")) || [];
+            this.data.push(this.id);
 
-        /*console.log(data);*/
+            localStorage.setItem("id", JSON.stringify(this.data));
 
-        button.addEventListener("click", function(){
+            this.DebugLS();
 
-            data.push(id);
-
-            localStorage.setItem("id", JSON.stringify(data));
+            this.Fetch(this.id);
 
             /*jQuery.post("FavoritesController.php", {id: localStorage.getItem("id")}, function(data)
             {
@@ -39,5 +40,49 @@ export default class locStorage
             alert(document.cookie);*/
 
         }, false);
+    }
+    LoadStorage() {
+        /*for (let i = 0; i < localStorage.length; i++) {
+            let content = document.createElement('p');
+            $_('Content').appendChild(content).innerText = localStorage.key(i) + "   " + localStorage.getItem(localStorage.key(i));
+        }*/
+    }
+    AddStorage() {
+        //localStorage.setItem($_('CP').value,$_('Ville').value);
+    }
+    RemoveStorage() {
+        //localStorage.clear();
+    }
+    DebugRS() {
+        localStorage.clear();
+    }
+    DebugLS(){
+        for (let i = 0; i < localStorage.length; i++) {
+            console.log(localStorage.getItem('id'));
+        }
+    }
+
+    Fetch(idShop){
+        console.log('Enregistement Fav');
+        let url = this.domain_url+'/API/get_favorite';
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        let test = {id: idShop};
+        //console.log(test);
+
+        let ResTo = fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-Token": token
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify(test)
+        }).then(response => {
+            return response.json();
+        }).then(objected => {
+            console.log(objected);
+        }).catch(error => alert("Erreur : " + error));
     }
 }

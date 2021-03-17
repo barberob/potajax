@@ -186,7 +186,17 @@ export default class Map{
 
             data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
             data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+'</p>';
-            data += '<p style="font-size:12px;">'+Item.detail['desc']+'</p>';
+
+            //console.log(typeof Item.detail['desc']);
+            if(typeof Item.detail['desc'] !== "object") {
+                Item.detail['desc'] = Item.detail['desc'].split('.');
+                for (let j = 0; j < Item.detail['desc'].length - 1; j++) {
+                    data += '<p style="font-size:12px;">' + Item.detail['desc'][j] + '.</p>';
+                }
+            } else {
+                data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
+            }
+            //console.log(data);
 
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
 
@@ -217,7 +227,8 @@ export default class Map{
 
             //Map.flyTTo(Loc, 15);
 
-            marker = L.marker(Loc,icone).bindPopup(data);
+
+            marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
 
             let NewList = '';
             NewList += '<li class="list-group-item">';

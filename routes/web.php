@@ -32,7 +32,9 @@ Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 // Route vers la page Mes Favoris
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
-Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
+Route::post('/API/get_favorite', 'FavoritesController@post')->name('create_Favorite');
+Route::get('/API/get_favorite', 'FavoritesController@get')->name('create_Favorite');
+//Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
 
 // Route vers la page Mon Compte
 Route::get('/myaccount', 'UsersController@index')->name('myaccount');

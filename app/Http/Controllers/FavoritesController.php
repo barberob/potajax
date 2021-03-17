@@ -9,6 +9,10 @@ use App\Favorite;
 
 class FavoritesController extends Controller
 {
+    public function get(Request $request){
+        FavoritesController::post($request);
+    }
+
     public function index()
     {
         if(auth()->check())
@@ -27,9 +31,9 @@ class FavoritesController extends Controller
 
             return view('pages.fav', [
                 'shops' => $shops
-            ]); 
+            ]);
         }
-        
+
         else
         {
             if(isset($_POST))
@@ -53,24 +57,35 @@ class FavoritesController extends Controller
         }
     }
 
-    public function add($id)
+    /*public function add(Request $request)
     {
-    	// Si l'utilisateur est connecté
-
-    	if(auth()->check())
-    	{
-    		// On enregistre ses favoris dans la BDD
-
-            Favorite::create(
-                ['user_id' => auth()->id(), 'shop_id' => $id]
+        //{{route('add-favorites', $infos->id)}}
+        if(auth()->check()){
+            $id = $request->input('search');
+            Favorite::create([
+                    'user_id' => auth()->id(),
+                    'shop_id' => $id
+                ]
             );
-    	}
+        }
+    }*/
 
-    	// Si l'utilisateur n'est pas connecté
+    public function post(Request $request){
 
-    	else
-    	{
-    		// On enregistre ses favoris en localStorage
-    	}
+        //{{route('add-favorites', $infos->id)}}
+        if(auth()->check()){
+            $id = $request->input('id');
+            $favorite = Favorite::firstOrCreate([
+                    'user_id' => auth()->id(),
+                    'shop_id' => $id
+                ]
+            );
+            return json_encode($favorite);
+        }
+        else{
+            return json_encode('pas Co');
+        }
     }
+
+
 }
