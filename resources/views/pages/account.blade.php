@@ -25,6 +25,9 @@
 
 
     @manager
+    <div class="col">
+        <a href="{{ route('add_shop') }}" class="btn btn-success">Ajouter un autre magasin</a>
+    </div>
         @if(count($myshops) == 0)
             <div class="row-shop">
                 <div class="col">
@@ -45,9 +48,7 @@
                 </div>
             @endforeach
         </div>
-            <div class="col">
-                <a href="{{ route('add_shop') }}" class="btn btn-success">Ajouter un autre magasin</a>
-            </div>
+            
         @endif
     @endmanager
 
