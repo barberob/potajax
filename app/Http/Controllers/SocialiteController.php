@@ -1,138 +1,138 @@
 <?php
 
-// namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
-// use App\Http\Controllers\Controller;
-// use Laravel\Socialite\Facades\Socialite;
-// use App\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Laravel\Socialite\Facades\Socialite;
+use App\User;
 
-// class SocialiteController extends Controller
-// {
-//     // Les tableaux des providers autorisés
+class SocialiteController extends Controller
+{
+    // Les tableaux des providers autorisés
 
-//     protected $providers = ["google"];
+    protected $providers = ["google"];
 
-//     public function socialLogin()
-//     {
-//         return view("socialite.social-login");
-//     }
+    public function socialLogin()
+    {
+        return view("socialite.social-login");
+    }
 
-//     // Redirige l'utilisateur sur la page de connexion du provider
+    // Redirige l'utilisateur sur la page de connexion du provider
 
-//     public function redirectToProvider(Request $request/*, $manager = false*/)
-//     {
-//         // On récupère le provider
+    public function redirectToProvider(Request $request)
+    {
+        // On récupère le provider
 
-//         $provider = $request->provider;
+        $provider = $request->provider;
 
-//         //dd($this->providers);
+        // Si le provider est autorisé
 
-//         // Si le provider est autorisé
+        if(in_array($provider, $this->providers))
+        {
+            // On redirige vers le provider
 
-//         if(in_array($provider, $this->providers))
-//         {
-//             // On redirige vers le provider
+            return Socialite::driver($provider)->redirect();
+        }
 
-//             return Socialite::driver($provider)->redirect();
-//         }
+        // Sinon, 404
 
-//         // Sinon, 404
+        else abort(404);
+    }
 
-//         else abort(404);
-//     }
+    // Obtention des informations de l'utilisateur via le provider
 
-//     // Obtention des informations de l'utilisateur via le provider
+    public function handleProviderCallback(Request $request)
+    {
+        // On récupère le provider
 
-//     public function handleProviderCallback(Request $request/*, $manager = false*/)
-//     {
-//         // On récupère le provider
+        $provider = $request->provider;
 
-//         $provider = $request->provider;
+        if(in_array($provider, $this->providers))
+        {
+        	// Les informations provenant du provider
 
-//         if(in_array($provider, $this->providers))
-//         {
-//         	// Les informations provenant du provider
+            $userData = Socialite::driver($request->provider)->user();
 
-//             $userData = Socialite::driver($request->provider)->user();
+            $userName = $userData->offsetGet('given_name');
+            $userLastName = $userData->offsetGet('family_name');
 
-//             $userName = $userData->offsetGet('given_name');
-//             $userLastName = $userData->offsetGet('family_name');
+            // Split du nom et prénom de l'utilisateur pour récupérer uniquement le prénom par la suite
 
-//             // Split du nom et prénom de l'utilisateur pour récupérer uniquement le prénom par la suite
+            $userExplode = explode(" ", $userName);
 
-//             $userExplode = explode(" ", $userName);
+            // Prénom de l'utilisateur
 
-//             // Prénom de l'utilisateur
+            $userFirstname = $userExplode[0];
 
-//             $userFirstname = $userExplode[0];
+            // Enregistrement Social Login
 
-//             // Enregistrement Social Login
+            $userEmail = $userData->getEmail(); // Récup de l'e-mail
+            $userName = $userData->getName(); // Récup du prénom
 
-//             $userEmail = $userData->getEmail(); // Récup de l'e-mail
-//             $userName = $userData->getName(); // Récup du prénom
+            // On récupère l'utilisateur en fonction de l'adresse mail
 
-//             // On récupère l'utilisateur en fonction de l'adresse mail
+            $user = User::where("email", $userEmail)->first();
 
-//             $user = User::where("email", $userEmail)->first();
+            // Si l'utilisateur existe
 
-//             // Si l'utilisateur existe
+            if(isset($user))
+            {
+                // On met ses informations à jour dans la BDD
 
-//             if(isset($user))
-//             {
-//                 // On met ses informations à jour dans la BDD
+                $user->nom = $userLastName;
+                $user->save();
+            }
 
-//                 $user->nom = $userLastName;
-//                 $user->save();
-//             }
+            // Si l'utilisateur n'existe pas, on enregistre ses infos en BDD
+                 
+            else
+            {
+                // On assigne à role la valeur de la variable de session nommée role, si elle est null on assigne false
 
-//             // Si l'utilisateur n'existe pas, on enregistre ses infos en BDD
-            
-            
-//             else
-//             {
-//                 // Condition ternaire
+                $role = session('role')??1;
 
-//                 // $role = $manager ? User::MANAGER : User::USER;
+                // Condition ternaire
 
-//                 // Enregistrement de l'utilisateur
+                $roleUser = $role == User::MANAGER ? User::MANAGER : User::USER;
 
-//                 $user = User::create([
-//                     'nom' => $userLastName,
-//                     'prenom' => $userFirstname,
-//                     'email' => $userEmail,
-//                     'password' => bcrypt("michelgegelesang"), // On attribue un mot de passe par défaut
-//                     'role' => 1,
-//                     // 'role' => $role,
-//                 ]);
-//             }
+                // Enregistrement de l'utilisateur
 
-//             // Ensuite, on connecte l'utilisateur
+                $user = User::create([
+                    'nom' => $userLastName,
+                    'prenom' => $userFirstname,
+                    'email' => $userEmail,
+                    'password' => bcrypt("michelgegelesang"), // On attribue un mot de passe par défaut
+                    'role' => $role,
+                ]);
+            }
 
-//             auth()->login($user);
+            // Ensuite, on connecte l'utilisateur
 
-//             // Redirection de l'utilisateur sur la page d'accueil après sa connexion
+            auth()->login($user);
 
-//             if(auth()->check())
-//             {
-//                 return redirect(route('index'));
-//             }
+            // Redirection de l'utilisateur sur la page d'accueil après sa connexion
 
-//             else abort(404);
+            if(auth()->check())
+            {
+                return redirect(route('index'));
+            }
 
-//             // On récupère les informations de l'utilisateur
+            else abort(404);
 
-//             /*$user = $userData->user;
-//             $userToken = $userData->token;
-//             $userId = $userData->getId();
-//             $userName = $userData->getName();
-//             $userNickname = $userData->getNickname();
-//             $userEmail = $userData->getEmail();
-//             $userAvatar = $userData->getAvatar();*/
+            // On récupère les informations de l'utilisateur
 
-//             dd($user);
-//         }
+            /*$user = $userData->user;
+            $userToken = $userData->token;
+            $userId = $userData->getId();
+            $userName = $userData->getName();
+            $userNickname = $userData->getNickname();
+            $userEmail = $userData->getEmail();
+            $userAvatar = $userData->getAvatar();*/
 
-//         else abort(403);
-//     }
-// }
+            dd($user);
+        }
+
+        else abort(403);
+    }
+}

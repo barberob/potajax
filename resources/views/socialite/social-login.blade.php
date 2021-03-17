@@ -9,7 +9,7 @@
 		<a href="{{ route('socialite.redirect', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer avec Google </a>
 
 		<!-- Lien de redirection vers Google -->
-		<a href="{{ route('socialite-manager.redirect', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer en tant que commerçant avec Google </a>
+		<a href="{{ route('socialite.manager', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer en tant que commerçant avec Google </a>
 	</p>
 </div>
 

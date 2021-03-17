@@ -55,22 +55,22 @@ Route::post('/account/post-add-update-shop/{id?}', 'ShopsController@postAddUpdat
 Route::get("social-login", "SocialiteController@socialLogin");
 Route::get("social-login-manager", "SocialiteManagerController@socialManagerLogin");
 
-// La redirection vers le provider
+// Route pour la redirection vers le provider
 Route::get('login/{provider}', 'SocialiteController@redirectToProvider')->name('socialite.redirect');
-//Route::get('login/{provider}/{manager?}', 'SocialiteController@redirectToProvider')->name('socialite.redirect');
 Route::get('login/manager/{provider}', 'SocialiteManagerController@redirectToProviderManager')->name('socialite.manager');
 
-// Le callback du provider
+// Route pour le callback du provider
 Route::get('login/callback/{provider}', 'SocialiteController@handleProviderCallback')->name('socialite.callback');
-//Route::get('login/callback/{provider}/{manager?}', 'SocialiteController@handleProviderCallback')->name('socialite.callback');
-Route::get('login/manager/callback/{provider}', 'SocialiteManagerController@handleProviderCallbackManager')->name('socialite.callback-manager');
 
-
+// Route du listage des shops
 Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
-
+// Route pour récupérer les catégories
 Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
+
+// Route pour supprimer des images
 Route::get('/API/delete-picture/{id}', 'PictureController@ajaxDelete')->name('delete_picture');
 
+// Routes pour créer les markers
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
