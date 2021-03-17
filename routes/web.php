@@ -69,6 +69,8 @@ Route::get('login/callback/{provider}', 'SocialiteController@handleProviderCallb
 // Route du listage des shops
 Route::get('/shops', 'ShopsController@listShop')->name('shops');
 
+Route::post('/review/add/{shop_id}', 'ReviewController@addReview')->name('add_review');
+
 // Route pour récupérer les catégories
 Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
 
