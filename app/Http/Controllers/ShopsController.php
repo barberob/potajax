@@ -36,7 +36,6 @@ class ShopsController extends Controller
     public function postAddUpdateShop(Request $request, $id = null)
     {
         $request->session()->put('requestReferrer', URL::previous());
-//        Session::put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required'],
@@ -120,7 +119,7 @@ class ShopsController extends Controller
         }
         return redirect()
             ->route('account')
-            ->with('success','Création réussie');
+            ->with('success','Enregistrement réussi');
     }
 
     public function listShop()

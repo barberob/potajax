@@ -5,17 +5,6 @@
 @endsection
 
 @section('content')
-    @if($errors)
-        @dump($errors)
-    @endif
-    @if(isset($shop))
-        @dump($shop->pictures)
-    @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div>{{$error}}</div>
-        @endforeach
-    @endif
     <div class="container mt-5 register">
         <div class="row justify-content-center">
             <div class="col-md-10">
