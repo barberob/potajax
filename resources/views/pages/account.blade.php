@@ -33,7 +33,16 @@
                 </div>
             </div>
         @else
-            {{ $myshops }}
+            @foreach($myshops as $myshop)
+                <div class="card shop" style="width: 18rem;">
+                    <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$myshop->nom}}</h5>
+                        <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}}</p>
+                        <a href="#" class="btn btn-danger">Modifier</a>
+                    </div>
+                </div>
+            @endforeach
         @endif
     @endmanager
 
