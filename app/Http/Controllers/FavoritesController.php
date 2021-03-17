@@ -30,17 +30,12 @@ class FavoritesController extends Controller
             ]); 
         }
         
-        else
-        {
-            if(isset($_POST))
-            {
-                dd($_POST);
-            }
+        //else
+        //{
+            /*dd($_POST);*/
+            /*dd("zebi");*/
 
-            else
-            {
-                dd("marche pas");
-            }
+
 
             /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
                                        ->get();
@@ -50,7 +45,7 @@ class FavoritesController extends Controller
             return view('pages.fav', [
                 'shops' => $shops
             ]);*/
-        }
+        //}
     }
 
     public function add($id)
@@ -68,9 +63,18 @@ class FavoritesController extends Controller
 
     	// Si l'utilisateur n'est pas connecté
 
-    	else
+    	/*else
     	{
     		// On enregistre ses favoris en localStorage
-    	}
+    	}*/
+    }
+
+    public function post(Request $request)
+    {
+        // Récupération des id du body du fetch
+
+        // Requête vers BDD whereIn tous les id sont dans cette collection d'id
+
+        // Retourne la vue shops.blade avec en paramètres les résultats de la requête ci-dessus
     }
 }

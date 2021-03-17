@@ -1,38 +1,15 @@
-export default class locStorage
+export default class fetchData
 {
 
     constructor()
     {
-        if(document.querySelector('body.shop'))
+        if(document.querySelector('body.fav'))
         {
             this.init();
         }
     }
 
     init()
-    {
-        let button = document.querySelector('.fav');
-        let id = button.getAttribute("data-id");
-
-        /*console.log(id);*/
-
-        let data = JSON.parse(localStorage.getItem("id")) || [];
-
-        /*console.log(data);*/
-
-        button.addEventListener("click", function(){
-            data.push(id);
-
-            localStorage.setItem("id", JSON.stringify(data));
-        }, false);
-
-        /*if(document.querySelector('body.fav'))
-        {
-            this.fetchData();
-        }*/
-    }
-
-    /*fetchData()
     {
         this.domain_url = window.location.origin;
 
@@ -46,9 +23,9 @@ export default class locStorage
 
         // doc.querySelector sur les li de la liste des fav
 
-        let li = document.querySelector('li');
+        let li = document.querySelector('.list-group-item');
 
-        console.log(li);
+        alert(li);
 
         // fetch(url, {
         //             headers: {
@@ -61,5 +38,5 @@ export default class locStorage
         //             credentials: "same-origin",
         //             body: stringId
         //         }).then(response => response.text()).catch(error => alert("Erreur : " + error)).then(response => console.log(response));
-    }*/
+    }
 }
