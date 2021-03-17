@@ -31,7 +31,7 @@ export default class locStorage {
             {
                 this.fetchData();
             }*/
-        }
+        }, false);
     }
 
     AddStorage() {
