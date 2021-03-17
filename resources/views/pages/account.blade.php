@@ -43,12 +43,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$myshop->nom}}</h5>
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}}</p>
-                        <a href="#" class="btn btn-danger">Modifier</a>
+                        <a href="{{ route('update_shop',['id' => $myshop->id]) }}" class="btn btn-danger">Modifier</a>
                     </div>
                 </div>
             @endforeach
         </div>
-            
+
         @endif
     @endmanager
 
