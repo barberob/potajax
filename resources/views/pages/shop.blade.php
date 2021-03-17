@@ -14,12 +14,10 @@
 		<p class="tel">Téléphone: {{$infos->tel}}</p>
 		<p class="mail">@: {{$infos->email}}</p>
 
-		<!-- <a class="btn btn-outline-warning btn-sm fav" href="{{ route('add-favorites', $infos->id) }}" role="button" data-id="{{ $infos->id }}" id="favorite">
-			Ajouter aux favoris
-		</a> -->
-		<a class="btn btn-outline-warning btn-sm fav" role="button" data-id="{{ $infos->id }}" id="favorite">
-			Ajouter aux favoris
-		</a>
+        <a class="btn btn-outline-warning btn-sm fav" href="#" role="button" data-id="{{ $infos->id }}" id="favorite">
+            Ajouter aux favoris
+        </a>
+
 	</div>
 </div>
 <div class="horaires">
