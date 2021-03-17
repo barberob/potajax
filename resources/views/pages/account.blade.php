@@ -25,7 +25,7 @@
 
 
     @manager
-    
+
         @if(count($myshops) == 0)
             <div class="row-shop">
                 <div class="col">

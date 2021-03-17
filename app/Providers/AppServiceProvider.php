@@ -30,6 +30,11 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         //ajout de directives blade
+
+        Blade::if('logged', function () {
+            return Auth::check();
+        });
+
         Blade::if('manager', function () {
             return Auth::check() && Auth::user()->role == User::MANAGER;
         });
