@@ -11,6 +11,7 @@ use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Image;
 use Storage;
 
@@ -18,22 +19,26 @@ class ShopsController extends Controller
 {
     public function addShop()
     {
-        return view('pages.add-update-shop');
+        $categories = Categorie::all();
+        return view('pages.add-update-shop', ['categories' => $categories]);
     }
 
     public function updateShop($id)
     {
         $shop = Shop::findOrFail($id);
+        $categories = Categorie::all();
         return view('pages.add-update-shop', [
-            'shop' => $shop
+            'shop' => $shop,
+            'categories' => $categories
         ]);
     }
 
-    public function postAddShop(Request $request)
+    public function postAddUpdateShop(Request $request, $id = null)
     {
+        $request->session()->put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['string', 'required'],
+            'description' => ['required'],
             'category' => ['required'],
             'email' => ['required'],
             'siret' => ['required'],
@@ -42,7 +47,7 @@ class ShopsController extends Controller
             'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required'],
-            'tel' => ['required'],
+            'tel' => ['required', 'max:255'],
 //            'lat' => ['required', 'numeric'],
 //            'lng' => ['required', 'numeric'],
 //            'images' => 'required',
@@ -52,7 +57,9 @@ class ShopsController extends Controller
 
         $subcat = $request->subcategory === '-1' ? null : $request->subcategory;
 
-        $shop = Shop::create([
+        $shop = Shop::updateOrCreate(
+            ['id' => $id],
+            [
             'nom' => $request->name,
             'descriptif' => $request->description,
             'adresse' => $request->adress,
@@ -73,6 +80,13 @@ class ShopsController extends Controller
         ]);
 
         if ($request->hasFile('images')) {
+            $db_pictures_count = Picture::where('shop_id', $id)->count();
+            $max_files = Picture::MAX_FILES - $db_pictures_count;
+            if(count($request->file('images')) > $max_files) {
+                return redirect($request->session()->get('requestReferrer'))
+                    ->withInput()
+                    ->with('too_much_files');
+            }
             foreach($request->file('images') as $file)
             {
                 $date = Carbon::now();
@@ -105,7 +119,7 @@ class ShopsController extends Controller
         }
         return redirect()
             ->route('account')
-            ->with('success','Création réussie');
+            ->with('success','Enregistrement réussi');
     }
 
     public function listShop()

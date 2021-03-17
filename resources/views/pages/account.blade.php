@@ -3,6 +3,11 @@
 
 @section('content')
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="home">
         <div class="account text-center">
             <div class="rounded-circle"></div>
@@ -15,17 +20,21 @@
             @endif
             <a class="btn btn-outline-warning" href="{{ route('favorites') }}" role="button">Voir mes favoris</a><br>
             <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
-        </div>s
-    </div>
-    
-
-    @manager
-    <div class="row py-5">
-        <div class="col-md-6">
-            <h2 class="py-3">Vous n'avez pas encore de magasins/restaurants</h2>
-            <a href="{{ route('add_shop') }}" class="btn btn-primary">Ajouter</a>
         </div>
     </div>
+
+
+    @manager
+        @if(count($myshops) == 0)
+            <div class="row-shop">
+                <div class="col">
+                    <h2>Vous n'avez pas encore de magasins/restaurants</h2>
+                    <a href="{{ route('add_shop') }}" class="btn btn-primary">Ajouter</a>
+                </div>
+            </div>
+        @else
+            {{ $myshops }}
+        @endif
     @endmanager
 
 

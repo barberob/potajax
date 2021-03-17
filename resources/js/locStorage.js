@@ -1,8 +1,7 @@
 export default class locStorage {
 
     constructor() {
-        if(document.querySelector('body.shop'))
-        {
+        if (document.querySelector('body.shop')) {
             this.domain_url = window.location.origin;
             this.button = document.querySelector('.fav');
             this.id = this.button.getAttribute("data-id");
@@ -27,44 +26,40 @@ export default class locStorage {
 
             this.Fetch(this.id);
 
-            /*jQuery.post("FavoritesController.php", {id: localStorage.getItem("id")}, function(data)
+
+            /*if(document.querySelector('body.fav'))
             {
-                alert(localStorage.getItem("id"));
-            }).fail(function()
-            {
-                alert("not working");
-            });*/
-
-            /*document.cookie = "id="+localStorage.getItem("id");
-
-            alert(document.cookie);*/
-
-        }, false);
+                this.fetchData();
+            }*/
+        }
     }
-    LoadStorage() {
-        /*for (let i = 0; i < localStorage.length; i++) {
-            let content = document.createElement('p');
-            $_('Content').appendChild(content).innerText = localStorage.key(i) + "   " + localStorage.getItem(localStorage.key(i));
-        }*/
-    }
+
     AddStorage() {
+
         //localStorage.setItem($_('CP').value,$_('Ville').value);
     }
+
     RemoveStorage() {
+
         //localStorage.clear();
     }
+
     DebugRS() {
+
         localStorage.clear();
     }
-    DebugLS(){
+
+    DebugLS() {
+
         for (let i = 0; i < localStorage.length; i++) {
             console.log(localStorage.getItem('id'));
         }
     }
 
-    Fetch(idShop){
+    Fetch(idShop) {
+
         console.log('Enregistement Fav');
-        let url = this.domain_url+'/API/get_favorite';
+        let url = this.domain_url + '/API/get_favorite';
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         let test = {id: idShop};
         //console.log(test);
@@ -85,4 +80,5 @@ export default class locStorage {
             console.log(objected);
         }).catch(error => alert("Erreur : " + error));
     }
+
 }

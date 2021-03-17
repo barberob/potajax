@@ -1,3 +1,5 @@
+import 'ckeditor4'
+
 export default class RegisterForm {
 
     constructor() {
@@ -12,7 +14,10 @@ export default class RegisterForm {
         this.selectedItem = 0
         this.adresses = []
         this.categories = {}
+        this.maxPictures = 4
+        this.totalPictures = 0
     }
+
 
     initEls() {
         const __ = selector => document.querySelector(selector)
@@ -28,7 +33,8 @@ export default class RegisterForm {
             inputLng : __('.js-lng'),
             inputInsee : __('.js-citycode'),
             autoCompleteItems : 0,
-            pictureRows : document.querySelectorAll('tr[data-picture]'),
+            inputPicture: __('.js-input-picture'),
+            pictureRows : document.querySelectorAll('tr[data-picture], .js-picture-row'),
             //selects category
             selectCategory : __('.js-category'),
             selectSubCategory : __('.js-subcategory'),
@@ -36,10 +42,14 @@ export default class RegisterForm {
     }
 
     initEvents() {
+        CKEDITOR.replace( 'summary-ckeditor' );
+        const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
+        editor && CKEDITOR.instances['summary-ckeditor'].setData(editor)
         this.initAutoComplete()
         this.initSelects()
         this.initDeletePictures()
-        console.log(this.els.pictureRows)
+        this.initPictureChange()
+        this.countPictures()
     }
 
     initAutoComplete() {
@@ -174,17 +184,9 @@ export default class RegisterForm {
         } catch(e) {
             console.log(e)
         }
-
-
-
-        this.categories.forEach((category, i) => {
-            const option = document.createElement('option')
-            option.setAttribute('data-id', i)
-            option.value = category.id
-            option.textContent = category.libelle
-            this.els.selectCategory.appendChild(option)
-            if(i === 0) this._fillSubCategory(category.subcategories)
-        })
+        // this.categories.forEach((category, i) => {
+        //     this._fillSubCategory(category.subcategories)
+        // })
     }
 
     _fillSubCategory(list) {
@@ -208,10 +210,35 @@ export default class RegisterForm {
         })
     }
 
+    initPictureChange() {
+        this.els.inputPicture.addEventListener('change', () => {
+            this.handleMaxFiles()
+        })
+    }
+
+    handleMaxFiles() {
+        let display
+        if(this.countPictures() > this.maxPictures) {
+            display = 'block'
+        } else {
+            display = 'none'
+        }
+        document.querySelector('.js-max-pictures').style.display = display
+    }
+
+    countPictures() {
+        this.totalPictures =
+            document.querySelectorAll('tr[data-picture]').length
+            +
+            this.els.inputPicture.files.length
+        return this.totalPictures
+    }
+
     initDeletePictures() {
         this.els.pictureRows.forEach((el) => {
             const button = el.querySelector('button')
-            button.addEventListener('click', async () => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault()
                 const id = button.getAttribute('data-picture')
                 const url = `${window.location.origin}/API/delete-picture/${id}`
                 const request = await fetch(url)
@@ -219,6 +246,7 @@ export default class RegisterForm {
                 if (response.status === 200) {
                     document.querySelector(`tr[data-picture="${id}"]`).remove()
                 }
+                this.handleMaxFiles()
             })
         })
     }

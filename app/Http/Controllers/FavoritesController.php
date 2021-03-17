@@ -9,23 +9,23 @@ use App\Favorite;
 
 class FavoritesController extends Controller
 {
-    public function get(Request $request){
+    public function get(Request $request)
+    {
         FavoritesController::post($request);
     }
 
     public function index()
     {
-        if(auth()->check())
-        {
-           // On récupère l'id de l'utilisateur connecté
+        if (auth()->check()) {
+            // On récupère l'id de l'utilisateur connecté
 
             $user_id = Auth::id();
 
             // On va chercher en BDD les magasins mis en favoris par l'utilisateur connecté
 
             $shops = DB::table('shops')->join('favorites', 'id', '=', 'favorites.shop_id')
-                                       ->where('favorites.user_id', '=', $user_id)
-                                       ->get();
+                ->where('favorites.user_id', '=', $user_id)
+                ->get();
 
             // On envoie les magasins récupérés en BDD à la vue fav
 
@@ -33,28 +33,15 @@ class FavoritesController extends Controller
                 'shops' => $shops
             ]);
         }
+        /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
+                                   ->get();
 
-        else
-        {
-            if(isset($_POST))
-            {
-                dd($_POST);
-            }
+        // On envoie les magasins récupérés en BDD à la vue fav grâce au localStorage
 
-            else
-            {
-                dd("marche pas");
-            }
-
-            /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
-                                       ->get();
-
-            // On envoie les magasins récupérés en BDD à la vue fav grâce au localStorage
-
-            return view('pages.fav', [
-                'shops' => $shops
-            ]);*/
-        }
+        return view('pages.fav', [
+            'shops' => $shops
+        ]);*/
+        //}
     }
 
     /*public function add(Request $request)
@@ -70,10 +57,11 @@ class FavoritesController extends Controller
         }
     }*/
 
-    public function post(Request $request){
+    public function post(Request $request)
+    {
 
         //{{route('add-favorites', $infos->id)}}
-        if(auth()->check()){
+        if (auth()->check()) {
             $id = $request->input('id');
             $favorite = Favorite::firstOrCreate([
                     'user_id' => auth()->id(),
@@ -81,8 +69,7 @@ class FavoritesController extends Controller
                 ]
             );
             return json_encode($favorite);
-        }
-        else{
+        } else {
             return json_encode('pas Co');
         }
     }
