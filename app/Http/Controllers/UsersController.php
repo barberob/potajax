@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Shops\Shop;
 
 class UsersController extends Controller
 {
@@ -16,6 +17,7 @@ class UsersController extends Controller
     public function index()
     {
     	$auth = Auth::user();
-        return view('pages.account', ['auth'=> $auth]);
+        $myshops = Shop::findOrFail($auth->id);
+        return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
 }

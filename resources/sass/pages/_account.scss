@@ -31,7 +31,6 @@
 			background-color: #EF9C0B;
 			color: white;
 		}
-
 		.btn-outline-primary{
 			font-size: 15px;
 			margin-top: 1%;
@@ -39,8 +38,18 @@
 		p{
 			font-size: 18px;
 		}
-	}
+	}	
 
+}
+.row-shop{
+	text-align: center;
+	.col{
+		.btn{
+			margin-top: 15px;
+		}
+	}
+		
+	
 }
 
 
