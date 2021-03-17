@@ -3,11 +3,6 @@
 
 @section('content')
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            Création réussie
-        </div>
-    @endif
     <div class="home">
         <div class="account text-center">
             <div class="rounded-circle"></div>
@@ -22,7 +17,7 @@
             <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
         </div>
     </div>
-
+    
 
     @manager
         @if(count($myshops) == 0)
