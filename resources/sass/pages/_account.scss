@@ -52,7 +52,8 @@
 .list{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: wrap; 
+	justify-content: space-around;
 	.shop{
 		margin: auto;
 		border-radius: 120px 120px 0 0;
