@@ -30,7 +30,7 @@
 
                             <div id="zoom" class="rounded-circle bg-secondary category_image mb-3 mx-3"
                              style="background-image:url('img/Size_Small/{{$categorie->libelle}}.jpg');"></div>
-                            <h3 class="text-dark">{{ $categorie->libelle }}</h3>
+                            <h3 class="text-dark" style="font-size:17px;">{{ $categorie->libelle }}</h3>
 
                     </div>
                 </a>
