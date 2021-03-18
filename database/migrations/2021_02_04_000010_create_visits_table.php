@@ -22,7 +22,6 @@ class CreateVisitsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('dateHeure');
 
             $table->foreignId('shop_id')->constrained();
 

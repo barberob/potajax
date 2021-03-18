@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
-    //
-    public function shop()
+	protected $fillable = [
+        'shop_id'
+    ];
+
+   	public function shop()
     {
         return $this->belongsTo(Shop::class);
     }

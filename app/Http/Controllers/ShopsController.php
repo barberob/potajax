@@ -133,4 +133,13 @@ class ShopsController extends Controller
             'shops' => $shops
         ]);
     }
+
+    public function stats($id)
+    {
+        $nbVisits = count(DB::table('visits')->where('shop_id', '=', $id)->get());
+
+        return view('pages.stats', [
+            'visits' => $nbVisits
+        ]);
+    }
 }
