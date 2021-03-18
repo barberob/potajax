@@ -27,7 +27,7 @@
         <p>{{$infos->descriptif}}</p>
     </div>
 
-    <div class="container col-6">
+    <div class="container col-md-6 col-sm-12">
         <h3>Avis</h3>
         @forelse($reviews as $review)
             <div class="card my-3">
@@ -39,9 +39,13 @@
                     <p class="font-weight-bold">Note: {{ $review->note }}/10</p>
                 </div>
             </div>
+
         @empty
             <p>Pas encore d'avis sur ce magasin</p>
         @endforelse
+        @if($reviews)
+            {{ $reviews->links() }}
+        @endif
 
         @logged
         @if($user_can_review))

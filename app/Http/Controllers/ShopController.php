@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function details($id){
-    	$infos = Shop::with('reviews')->findOrFail($id);
+    	$infos = Shop::findOrFail($id);
     	$id_cat = $infos->category_id;
     	$img_cat = Categorie::findOrFail($id_cat)->libelle;
-    	$reviews = Review::paginate(10);
+    	$reviews = Review::where('shop_id', $infos->id)->paginate(5);
     	$user_can_review = Review::where('user_id', Auth::id())->count() > 0 ? false : true;
     	return view('pages.shop', [
             'infos'=> $infos,
