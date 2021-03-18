@@ -1,5 +1,5 @@
 //trucs auto
-
+@import "config/reset";
 // Fonts
 //@import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -13,7 +13,7 @@
 @import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 // custom css
-@import "config/reset";
+
 @import "config/variables";
 @import "config/fonts";
 
@@ -28,5 +28,6 @@
 @import "pages/favorites";
 @import "pages/account";
 @import "pages/register";
+@import "pages/mentions";
 
 @import "components/autocomplete";

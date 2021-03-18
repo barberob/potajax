@@ -80,3 +80,7 @@ Route::get('/API/delete-picture/{id}', 'PictureController@ajaxDelete')->name('de
 // Routes pour créer les markers
 Route::get('/API/get_marker', 'MapController@get')->name('create_Marker');
 Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
+
+
+// Route mentions légales
+Route::get('/mentions','MentionsController@index')->name('mentions');

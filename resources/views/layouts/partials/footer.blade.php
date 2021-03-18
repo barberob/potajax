@@ -3,7 +3,7 @@
   
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     <div class="mentions">
-        <a href="#">Mentions légales</a>
+        <a href="{{ route('mentions') }}">Mentions légales</a>
     </div>
     © 2021 Copyright:
     Ramène Ta Fraise
