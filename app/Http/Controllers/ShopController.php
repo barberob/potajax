@@ -15,8 +15,13 @@ class ShopController extends Controller
     	$infos = Shop::findOrFail($id);
     	$id_cat = $infos->category_id;
     	$img_cat = Categorie::findOrFail($id_cat)->libelle;
-    	$average_note = Review::avg('note');
-    	$reviews = Review::where('shop_id', $infos->id)->whereNotIn('user_id', [$user_id])->paginate(5);
+    	$average_note = Review::where('shop_id', $id)->avg('note');
+    	$average_note = round($average_note, 2);
+    	if($user_id) {
+            $reviews = Review::where('shop_id', $infos->id)->whereNotIn('user_id', [$user_id])->paginate(5);
+        } else {
+            $reviews = Review::where('shop_id', $infos->id)->paginate(5);
+        }
     	$user_review = Review::where('user_id', $user_id)->get()->first();
     	$user_can_review =
             Review::where('user_id', $user_id)->count() > 0 || !Auth::check()

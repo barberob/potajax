@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @dump($infos->codeNote)
+{{--    @dump($infos->codeNote)--}}
     <div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">
         <div>
             <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
@@ -30,11 +30,23 @@
 
 
     <div class="container col-md-6 col-sm-12">
-        @if($reviews)
-            <h3>Moyenne: <strong>{{ $average_note }}</strong></h3>
+        @if($average_note)
+            <h3>Moyenne: <strong>{{ $average_note }}/10</strong></h3>
         @endif
+
+        @logged
+            @if($user_can_review)
+                <div class="card my-5">
+                    <button class="btn btn-primary py-3 d-block m-auto js-add-review-form">Ajouter un avis</button>
+                    <div class="card-body px-3 js-add-review-form">
+                        @include('layouts.partials.review_form', ['input_code' => true, 'update' => false])
+                    </div>
+                </div>
+            @endif
+        @endlogged
+
         @if($user_review)
-            <div class="card my-5 border-primary">
+            <div class="card my-5 border-primary pb-3">
                 <div class="card card-header flex-row justify-content-between">
                     <h4>Vous</h4>
                     <form method="POST" action="{{ route('delete_review', ['review_id' => $user_review->id]) }}">
@@ -48,8 +60,46 @@
                 </div>
                 @if(!$user_can_review)
                     <div class="col-md-10 d-block m-auto">
-                        <h3 class="d">Modifier</h3>
-                        @include('layouts.partials.review_form', ['input_code' => false, 'update' => true])
+                        <button class="btn btn-primary d-block m-auto my-3 js-update-review-button">Modifier</button>
+                        <form method="POST"
+                              action="{{ route('update_review', ['shop_id'=> $infos->id]) }}"
+                              class="js-update-review-form"
+                        >
+                            @csrf
+                            <div class="form-group">
+                                <label for="note" class="mb-2 form-label text-md-right">Note (sur 10)</label>
+                                <input type="number"
+                                       max="10"
+                                       min="0"
+                                       class="form-control w-100 @error('note') is-invalid @enderror"
+                                       name="note"
+                                       id="note"
+                                       value="{{ old('note') ?? $user_review->note  }}"
+                                >
+                                @error('note')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="mb-2 form-label text-md-right">Message</label>
+                                <textarea name="message"
+                                          class="w-100 d-block p-3 @error('message') is-invalid @enderror"
+                                          id="message"
+                                          cols="30"
+                                          rows="10"
+                                >{{ old('message') ?? $user_review->message}}</textarea>
+                                @error('message')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <button class="btn btn-primary d-block m-auto" type="submit">Valider</button>
+                        </form>
                     </div>
                 @endif
             </div>
@@ -66,23 +116,14 @@
                 </div>
             </div>
         @empty
-            <p>Pas encore d'avis sur ce magasin</p>
+            @if(!$user_review)
+                <p>Pas encore d'avis sur ce magasin</p>
+            @endif
         @endforelse
+
         @if($reviews)
             {{ $reviews->links() }}
         @endif
 
-        @logged
-            @if($user_can_review)
-                <div class="card my-5">
-                    <div class="card-header">
-                        <h3 class="font-weight-bold ">Ajouter un avis</h3>
-                    </div>
-                    <div class="card-body px-3">
-                        @include('layouts.partials.review_form', ['input_code' => true, 'update' => false])
-                    </div>
-                </div>
-            @endif
-        @endlogged
     </div>
 @endsection
