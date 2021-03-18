@@ -33,6 +33,9 @@ class FavoritesController extends Controller
                 'shops' => $shops
             ]);
         }
+        else{
+            return view('pages.fav');
+        }
         /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
                                    ->get();
 
@@ -73,6 +76,7 @@ class FavoritesController extends Controller
             return json_encode('pas Co');
         }
     }
+
 
 
 }

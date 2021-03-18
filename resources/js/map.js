@@ -230,6 +230,7 @@ export default class Map{
 
             marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
 
+
             let NewList = '';
             NewList += '<li class="list-group-item">';
             NewList += '<strong><a class="MonFlyTo" data-loc="'+Loc+'">'+nom+'</a></strong>';
