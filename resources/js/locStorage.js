@@ -8,7 +8,13 @@ export default class locStorage {
             this.data = JSON.parse(localStorage.getItem("id")) || [];
 
             this.init();
-            this.DebugRS();
+            //this.DebugRS();
+        }
+        if (document.querySelector('body.favorites')) {
+            document.getElementById('favorite_list').addEventListener("load", () => {
+                this.DebugLS();
+                this.ViewStorage();
+            })
         }
     }
 
@@ -18,9 +24,7 @@ export default class locStorage {
 
         this.button.addEventListener("click", () => {
 
-            this.data.push(this.id);
-
-            localStorage.setItem("id", JSON.stringify(this.data));
+            this.AddStorage()
 
             this.DebugLS();
 
@@ -36,24 +40,47 @@ export default class locStorage {
 
     AddStorage() {
 
-        //localStorage.setItem($_('CP').value,$_('Ville').value);
+        if (localStorage.getItem("id")) {
+            this.FindInStorage()
+        } else {
+            this.data.push(this.id);
+            localStorage.setItem("id", JSON.stringify(this.data));
+        }
     }
+
+    ViewStorage() {
+
+        if (localStorage.getItem("id")) {
+            let tempData = JSON.parse(localStorage.getItem('id'));
+            for (let i = 0; i < tempData.length; i++) {
+                console.log(tempData[i]);
+                let shop = document.createElement('p')
+                document.getElementById('favorite_list').appendChild(shop).innerText = tempData[i];
+            }
+        }
+    }
+
 
     RemoveStorage() {
-
-        //localStorage.clear();
-    }
-
-    DebugRS() {
-
+        localStorage.removeItem('id');
         localStorage.clear();
+        this.data = [];
     }
 
-    DebugLS() {
-
-        for (let i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.getItem('id'));
+    FindInStorage() {
+        let tempData = JSON.parse(localStorage.getItem('id'));
+        for (let i = 0; i < tempData.length; i++) {
+            /*console.log(this.id);
+            console.log(tempData[i]);*/
+            if (this.id === tempData[i]) {
+                //console.log(localStorage.getItem('id'));
+                console.log(this.id + ' ' + tempData[i]);
+                return true;
+            }
         }
+        this.data.push(this.id);
+        localStorage.setItem("id", JSON.stringify(this.data));
+        return false;
     }
 
     Fetch(idShop) {
@@ -61,7 +88,7 @@ export default class locStorage {
         console.log('Enregistement Fav');
         let url = this.domain_url + '/API/get_favorite';
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        let test = {id: idShop};
+        let test = [{id: idShop}];
         //console.log(test);
 
         let ResTo = fetch(url, {
@@ -81,4 +108,16 @@ export default class locStorage {
         }).catch(error => alert("Erreur : " + error));
     }
 
+    DebugRS() {
+        localStorage.removeItem('id');
+        localStorage.clear();
+        this.data = [];
+    }
+
+    DebugLS() {
+
+        for (let i = 0; i < localStorage.length; i++) {
+            console.log(localStorage.getItem('id'));
+        }
+    }
 }
