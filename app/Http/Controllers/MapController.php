@@ -11,7 +11,7 @@ class MapController extends Controller
     public function get(Request $request)
     {
         MapController::post($request);
-        dd('Bah nan dsl !!!');
+        //dd('Bah nan dsl !!!');
     }
 
     static function FindCat($tab_cat_id, $tab_subcat_id, $norEst, $sudOue)
@@ -22,11 +22,13 @@ class MapController extends Controller
 
             if ($tab_cat_id[0] == "All" && $tab_subcat_id[0] == "All") {
                 $categories[] = DB::table('shops')->
+                select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.subcategory_id','shops.category_id','subcategories.libelle','shops.created_at','shops.updated_at','shops.deleted_at')->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 get();
             } else if ($tab_subcat_id[0] == "All") {
                 $categories[] = DB::table('shops')->
+                select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.subcategory_id','shops.category_id','subcategories.libelle','shops.created_at','shops.updated_at','shops.deleted_at')->
                 join('categories', 'categories.id', '=', 'shops.category_id')->
                 join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
@@ -36,6 +38,7 @@ class MapController extends Controller
                 get();
             } else {
                 $categories[] = DB::table('shops')->
+                select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.subcategory_id','shops.category_id','subcategories.libelle','shops.created_at','shops.updated_at','shops.deleted_at')->
                 join('categories', 'categories.id', '=', 'shops.category_id')->
                 join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
@@ -49,6 +52,7 @@ class MapController extends Controller
 
         if ($tab_subcat_id[0] == null) {
             $categories[] = DB::table('shops')->
+            select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.subcategory_id','shops.category_id','subcategories.libelle','shops.created_at','shops.updated_at','shops.deleted_at')->
             join('categories', 'categories.id', '=', 'shops.category_id')->
             join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
             where('shops.category_id', $tab_cat_id[0])->
@@ -128,31 +132,29 @@ class MapController extends Controller
         return $lesCategorie;
     }
 
-    public function post(Request $request){
-        //dd($request->all());
+    static public function post(Request $request){
+        //dd($request->input('0'));
         //dd($request->input());
 
         //if(!$request->filled('message')) return redirect()->back()->with('error', 'You can\'t send an empty message');
-
-        if($request->input('search')){
-            $search = $request->input('search');
+        if(isset($request->input('0')['search'])){
+            $search = $request->input('0')['search'];
             $search = str_replace("+", " ", $search);
-
             $research = MapController::FindSearch($search);
 
             return json_encode($research);
         }
         else{
-            $norEst = $request->input('northEast');
-            $sudOue = $request->input('sudOuest');
-            $cat = $request->input('categories');
-            $subCat = $request->input('subcategories');
+            $norEst = $request->input('0')['northEast'];
+            $sudOue = $request->input('0')['sudOuest'];
+            $cat = $request->input('0')['categories'];
+            $subCat = $request->input('0')['subcategories'];
 
             $categories = MapController::FindCat($cat, $subCat, $norEst, $sudOue);
 
             //$subCategories = MapController::FindSubCat($subCat,$norEst,$sudOue);
             //dd($subCategories);
-
+            //dd(json_encode($categories));
             return json_encode($categories);
         }
 

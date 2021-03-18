@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use DB;
-use App\Favorite;
+use Illuminate\Support\Facades\DB;
 
 class FavoritesController extends Controller
 {
@@ -60,22 +58,108 @@ class FavoritesController extends Controller
         }
     }*/
 
-    public function post(Request $request)
+    static public function post(Request $request)
     {
+        //dd($request->input('0')['type']);
+        $type = $request->input('0')['type'];
 
-        //{{route('add-favorites', $infos->id)}}
-        if (auth()->check()) {
-            $id = $request->input('id');
-            $favorite = Favorite::firstOrCreate([
-                    'user_id' => auth()->id(),
-                    'shop_id' => $id
-                ]
-            );
-            return json_encode($favorite);
-        } else {
-            return json_encode('pas Co');
+        if ($type === 'create') {
+            if (auth()->check()) {
+                $id = $request->input('id');
+                $favorite = Favorite::firstOrCreate([
+                        'user_id' => auth()->id(),
+                        'shop_id' => $id
+                    ]
+                );
+                return json_encode($favorite);
+            }
+            /*else{
+                return json_encode('pas Co');
+            }*/
+        } else if ($type === 'read') {
+            /*if(auth()->check()){
+
+            }
+            else{*/
+            $shops = null;
+            //dd($request->all());
+            foreach ($request->input('1') as $idShop) {
+                $shops[] = DB::table('shops')->
+                select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
+                join('categories', 'categories.id', '=', 'shops.category_id')->
+                join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                join('cities', 'cities.id', '=', 'shops.city_id')->
+                where('shops.id', $idShop)->
+                orderBy('shops.id')->
+                get();
+            }
+            //dd(json_encode($shops));
+            return FavoritesController::Fetch($shops);
+            //}
         }
     }
+    static public function Fetch($cats)
+    {
+        $lesCategorie = [];
+        foreach ($cats as $cat) {
+            foreach ($cat as $ct) {
+                $lesCategorie[] = $ct;
+            }
+        }
+        return $lesCategorie;
+    }
+
+
+        /*if(count($request->all()) > 1){
+            //if (auth()->check()) {
+
+                /*$shops = null;
+                foreach ($request->all() as $idShop) {
+                    $shops[] = DB::table('shops')->
+                    select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as sub_libelle', 'categories.libelle as libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
+                    join('categories', 'categories.id', '=', 'shops.category_id')->
+                    join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                    join('cities', 'cities.id', '=', 'shops.city_id')->
+                    where('shops.id', $idShop)->
+                    orderBy('shops.id')->
+                    get();
+                }
+                dd(json_encode($shops));
+                return json_encode($shops);*/
+
+
+            //} else {
+            /*$shops = null;
+            foreach ($request->all() as $idShop){
+
+                $shops[] = DB::table('shops')->
+                select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.subcategory_id','shops.category_id','subcategories.libelle as sub_libelle','categories.libelle as libelle','shops.created_at','shops.updated_at','shops.deleted_at')->
+                join('categories', 'categories.id', '=', 'shops.category_id')->
+                join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                join('cities', 'cities.id', '=', 'shops.city_id')->
+                where('shops.id', $idShop)->
+                orderBy('shops.id')->
+                get();
+            }*/
+            //dd(json_encode($shops));
+            //return json_encode($shops);
+            //}
+
+        //} elseif (count($request->all()) === 1){
+            //{{route('add-favorites', $infos->id)}}
+            /*if (auth()->check()) {
+                $id = $request->input('id');
+                $favorite = Favorite::firstOrCreate([
+                        'user_id' => auth()->id(),
+                        'shop_id' => $id
+                    ]
+                );
+                return json_encode($favorite);
+            } else {
+                return json_encode('pas Co');
+            }
+        }
+    }*/
 
 
 

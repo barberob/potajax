@@ -1,5 +1,6 @@
 import * as L from "leaflet";
 import * as L1 from "leaflet.markercluster";
+
 export default class Map{
     constructor() {
         if(document.getElementById('map')){
@@ -109,6 +110,7 @@ export default class Map{
                     lng: -14.106445312500002 }
             };
             //this.changeSelect();
+
             this.init();
 
             /*alert('zerzre');
@@ -138,6 +140,7 @@ export default class Map{
 
         L.control.layers(this.baseMaps).addTo(this.macarte);
 
+        this.marker_remove();
         this.NewPoints(this.Def_pos);
 
         this.macarte.on('moveend', () => {
@@ -151,18 +154,25 @@ export default class Map{
         this.marker_remove();
 
         this.Fetch(posMap);
-
     }
     marker_remove(){
         console.log('Destruction Marker');
         //console.log(this.markers);
         if(this.markers){
 
-            this.markers.remove();
-            delete this.markers;
-
+            //this.markers.remove();
+            //delete this.markers;
+            this.markers.clearLayers();
+            this.macarte.removeLayer(this.markers);
+            if(document.querySelector('div.leaflet-pane.leaflet-shadow-pane')){
+                document.querySelector('div.leaflet-pane.leaflet-shadow-pane').innerHTML = '';
+            }
+            if(document.querySelector('div.leaflet-pane.leaflet-marker-pane')){
+                document.querySelector('div.leaflet-pane.leaflet-marker-pane').innerHTML = '';
+            }
             document.getElementById('listRightShop').innerHTML = '';
 
+            this.Object.remove;
             delete this.Object;
             this.Object = new Array();
         }
@@ -188,13 +198,13 @@ export default class Map{
             data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+'</p>';
 
             //console.log(typeof Item.detail['desc']);
-            if(typeof Item.detail['desc'] !== "object") {
+            if(typeof Item.detail['desc'] === "string") {
                 Item.detail['desc'] = Item.detail['desc'].split('.');
                 for (let j = 0; j < Item.detail['desc'].length - 1; j++) {
                     data += '<p style="font-size:12px;">' + Item.detail['desc'][j] + '.</p>';
                 }
             } else {
-                data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
+                //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
             }
             //console.log(data);
 
@@ -228,8 +238,13 @@ export default class Map{
             //Map.flyTTo(Loc, 15);
 
 
-            marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
+            //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
+            //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
 
+
+            let popup = L.popup().setLatLng(Loc).setContent(data);
+            marker = L.marker(Loc,icone);
+            marker.bindPopup(popup);
 
             let NewList = '';
             NewList += '<li class="list-group-item">';
@@ -275,11 +290,8 @@ export default class Map{
     Fetch(posMap){
         console.log('Recherche Marker');
         let url = this.domain_url+'/API/get_marker';
-        let params = ''
-        let data = "{lat: 565,lng: 6546848,categorie: [1], subcategorie: [1]}";
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        let test = this.get_data(this.Def_pos);
+        let dataPost = JSON.stringify(this.get_data(this.Def_pos))
         //console.log(test);
 
         let ResTo = fetch(url, {
@@ -291,7 +303,7 @@ export default class Map{
             },
             method: "post",
             credentials: "same-origin",
-            body: JSON.stringify(test)
+            body: dataPost
         }).then(response => {
             return response.json();
         }).then(objected => {
@@ -355,19 +367,19 @@ export default class Map{
         //si il y a un search
         if(search !== 'default'){
             //alert('--- Dans le search');
-            test = {
+            test = [{
                 northEast: posMap._northEast,
                 sudOuest: posMap._southWest,
                 search: search[1]
-            };
+            }];
         }
         else{
-            test = {
+            test = [{
                 northEast: posMap._northEast,
                 sudOuest: posMap._southWest,
                 categories: [Url[4]],
                 subcategories: [Url[5]]
-            };
+            }];
         }
         return test;
     }
@@ -476,4 +488,5 @@ export default class Map{
         }
         legend.addTo(this.macarte);
     }*/
+
 }
