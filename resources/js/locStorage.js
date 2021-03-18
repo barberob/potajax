@@ -14,7 +14,7 @@ export default class locStorage {
         if (document.querySelector('body.favorites')) {
             this.domain_url = window.location.origin;
             this.hookAffiche = document.getElementById('favorite_list');
-            this.ViewStorage();
+            //this.ViewStorage();
             this.Fetch('load');
         }
     }

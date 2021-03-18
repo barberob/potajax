@@ -45,6 +45,7 @@ class FavoritesController extends Controller
         //}
     }
 
+
     /*public function add(Request $request)
     {
         //{{route('add-favorites', $infos->id)}}
@@ -94,7 +95,10 @@ class FavoritesController extends Controller
                 get();
             }
             //dd(json_encode($shops));
-            return FavoritesController::Fetch($shops);
+            //return FavoritesController::Fetch($shops);
+            return view('pages.fav', [
+                'shops' => $shops
+            ]);
             //}
         }
     }
