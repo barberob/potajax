@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="min-height:100%;">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,13 +46,15 @@
     -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="{{ Route::currentRouteName() }}">
-    <div id="app">
+<body class="{{ Route::currentRouteName() }}" style="min-height:100%; display:flex; flex-direction:column">
+    <div id="app" >
         @include('layouts.partials.nav')
 
         <main>
             @yield('content')
         </main>
+        
     </div>
+    @include('layouts.partials.footer')
 </body>
 </html>

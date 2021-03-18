@@ -104,11 +104,11 @@
                                            class="form-control js-input-picture @error('images') is-invalid @enderror"
                                            name="images[]"
                                     >
-{{--                                    @error('images')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
+                                    @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 @if(Session::has('too_much_files'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>$message</strong>
