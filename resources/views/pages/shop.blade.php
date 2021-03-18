@@ -27,8 +27,34 @@
         <p>{{$infos->descriptif}}</p>
     </div>
 
+
+
     <div class="container col-md-6 col-sm-12">
-        <h3>Avis</h3>
+        @if($reviews)
+            <h3>Moyenne: <strong>{{ $average_note }}</strong></h3>
+        @endif
+        @if($user_review)
+            <div class="card my-5 border-primary">
+                <div class="card card-header flex-row justify-content-between">
+                    <h4>Vous</h4>
+                    <form method="POST" action="{{ route('delete_review', ['review_id' => $user_review->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <p class="pb-3">{{ $user_review->message }}</p>
+                    <p class="font-weight-bold">Note: {{ $user_review->note }}/10</p>
+                </div>
+                @if(!$user_can_review)
+                    <div class="col-md-10 d-block m-auto">
+                        <h3 class="d">Modifier</h3>
+                        @include('layouts.partials.review_form', ['input_code' => false, 'update' => true])
+                    </div>
+                @endif
+            </div>
+        @endif
+
         @forelse($reviews as $review)
             <div class="card my-3">
                 <div class="card card-header">
@@ -39,7 +65,6 @@
                     <p class="font-weight-bold">Note: {{ $review->note }}/10</p>
                 </div>
             </div>
-
         @empty
             <p>Pas encore d'avis sur ce magasin</p>
         @endforelse
@@ -48,67 +73,16 @@
         @endif
 
         @logged
-        @if($user_can_review))
-        <div class="card my-5">
-            <div class="card-header">
-                <h3 class="font-weight-bold ">Ajouter un avis</h3>
-            </div>
-            <div class="card-body px-3">
-                <form method="POST" action="{{ route('add_review', ['shop_id' => $infos->id]) }}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="code" class="mb-2 form-label text-md-right">Code d'ajout</label>
-                        <p class="py-2 font-weight-bold">Veuilez demander ce code au magasin</p>
-                        <input type="text"
-                               class="form-control w-100 @if(Session::has('wrong_code')) is-invalid @endif"
-                               name="code"
-                               id="code"
-                               value="{{ old('code') }}"
-                        >
-                        @if(Session::has('wrong_code'))
-                            <span class="invalid-feedback" role="alert">
-                            <strong>Le code n'est pas valide</strong>
-                        </span>
-                        @endif
+            @if($user_can_review)
+                <div class="card my-5">
+                    <div class="card-header">
+                        <h3 class="font-weight-bold ">Ajouter un avis</h3>
                     </div>
-
-                    <div class="form-group">
-                        <label for="note" class="mb-2 form-label text-md-right">Note (sur 10)</label>
-                        <input type="number"
-                               max="10"
-                               min="0"
-                               class="form-control w-100 @error('note') is-invalid @enderror"
-                               name="note"
-                               id="note"
-                               value="{{ old('note') }}"
-                        >
-                        @error('note')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                    <div class="card-body px-3">
+                        @include('layouts.partials.review_form', ['input_code' => true, 'update' => false])
                     </div>
-
-                    <div class="form-group">
-                        <label for="message" class="mb-2 form-label text-md-right">Message</label>
-                        <textarea name="message"
-                                  class="w-100 d-block p-3 @error('message') is-invalid @enderror"
-                                  id="message"
-                                  cols="30"
-                                  rows="10"
-                        >{{ old('message') }}</textarea>
-                        @error('message')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-primary m-auto d-block">Valider</button>
-                </form>
-            </div>
-        </div>
-        @endif
+                </div>
+            @endif
         @endlogged
     </div>
 @endsection

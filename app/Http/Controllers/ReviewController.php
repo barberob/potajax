@@ -29,4 +29,25 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', 'Ajout de commentaire réussi');
     }
+
+    public function deleteReview($review_id)
+    {
+        Review::find($review_id)->where('user_id', Auth::id())->delete();
+        return redirect()->back();
+    }
+
+    public function updateReview(Request $request, $shop_id)
+    {
+        $request->validate([
+           'note' => 'required|between:0,10',
+           'message' => 'required'
+        ]);
+
+        $review = Review::where('shop_id', $shop_id)->where('user_id', Auth::id())->get()->first();
+        $review->message = $request->message;
+        $review->note = $request->note;
+        $review->save();
+
+        return redirect()->back();
+    }
 }
