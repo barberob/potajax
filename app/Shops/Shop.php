@@ -3,6 +3,7 @@
 namespace App\Shops;
 
 use App\City;
+use App\Review;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
@@ -55,7 +56,7 @@ class Shop extends Model
         return $this->belongsTo(SubCategorie::class, 'subcategory_id');
     }
 
-    public function comments()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }

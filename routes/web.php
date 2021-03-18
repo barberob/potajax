@@ -34,9 +34,13 @@ Route::get('/shop/{id}', 'ShopController@details')->name('shop');
 // Route vers la page Mes Favoris
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
-Route::post('/favorites', 'FavoritesController@post')->name('favorites-post');
+
+Route::post('/API/get_favorite', 'FavoritesController@post')->name('create_Favorite');
+Route::get('/API/get_favorite', 'FavoritesController@get')->name('create_Favorite');
+//Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
 
 Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
+
 
 
 // Route vers la page Mon Compte
@@ -64,6 +68,8 @@ Route::get('login/callback/{provider}', 'SocialiteController@handleProviderCallb
 
 // Route du listage des shops
 Route::get('/shops', 'ShopsController@listShop')->name('shops');
+
+Route::post('/review/add/{shop_id}', 'ReviewController@addReview')->name('add_review');
 
 // Route pour récupérer les catégories
 Route::get('/API/get-categories-list', 'CategoriesController@apiGetCategories')->name('api_get_categories');
