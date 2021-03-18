@@ -56,7 +56,17 @@
 .js-update-review-form, .js-add-review-form {
     height: 0;
     overflow: hidden;
+    border: none;
+    &.active {
+        height: inherit;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
 }
+
+.js-add-review-button {
+    width: 175px;
+}
+
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
 		.name{

@@ -36,9 +36,9 @@
 
         @logged
             @if($user_can_review)
-                <div class="card my-5">
-                    <button class="btn btn-primary py-3 d-block m-auto js-add-review-form">Ajouter un avis</button>
-                    <div class="card-body px-3 js-add-review-form">
+                <button class="btn btn-primary py-3 my-4 d-block mx-auto js-add-review-button">Ajouter un avis</button>
+                <div class="card mb-5 mt-1 js-add-review-form">
+                    <div class="card-body px-4 py-0">
                         @include('layouts.partials.review_form', ['input_code' => true, 'update' => false])
                     </div>
                 </div>
