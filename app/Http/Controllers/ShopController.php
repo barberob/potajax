@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Review;
 use Illuminate\Http\Request;
 use App\Shops\Shop;
+use App\Shops\Visit;
 use App\Shops\Categorie;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,7 @@ class ShopController extends Controller
             Review::where('user_id', $user_id)->count() > 0 || !Auth::check()
             ? false
             : true;
+        $visit = Visit::create(['shop_id' => $id]);
     	return view('pages.shop', [
             'infos'=> $infos,
             'img'=> $img_cat,

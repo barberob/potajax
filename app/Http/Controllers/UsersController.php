@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 use App\Shops\Shop;
 
 class UsersController extends Controller
@@ -18,6 +19,7 @@ class UsersController extends Controller
     {
     	$auth = Auth::user();
         $myshops = Shop::all()->where('user_id', $auth->id);
+        // $visit = DB::table('visits')->
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
 }
