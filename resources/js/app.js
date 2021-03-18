@@ -38,6 +38,7 @@ import Map from './map';
 import RegisterForm from './pages/RegisterForm';
 import AddShopForm from './pages/AddShopForm';
 import locStorage from './locStorage';
+import ReviewForm from './pages/ReviewForm';
 
 class App {
     constructor() {
@@ -49,6 +50,7 @@ class App {
         new AddShopForm();
         let map = new Map();
         new locStorage();
+        new ReviewForm();
     }
 }
 

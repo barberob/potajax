@@ -1,9 +1,9 @@
 .name{
-	background-size: cover; 
+	background-size: cover;
     background-position: center;
 	width: 100%;
 	height: 250px;
-	
+
 
 	div{
 		width: 100%;
@@ -18,8 +18,8 @@
 		}
 
 		.title{
-			font-size: 30px; 
-			color: tomato; 
+			font-size: 30px;
+			color: tomato;
 			padding-top: 5%;
 		}
 
@@ -28,14 +28,14 @@
 			color: #D3D0D0;
 		}
 		a{
-			margin-top: 10px; 
+			margin-top: 10px;
 			font-size: 15px;
 		}
 
 
 	}
 
-	
+
 }
 
 .horaires{
@@ -52,8 +52,16 @@
 
 	}
 }
+
+.js-update-review-form {
+    height: 0;
+    overflow: hidden;
+    &.active {
+        transition: 0.3s ease-in-out;
+    }
+}
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
 		.name{
 			div{
 				#back{
