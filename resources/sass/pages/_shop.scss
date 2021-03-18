@@ -53,12 +53,9 @@
 	}
 }
 
-.js-update-review-form {
+.js-update-review-form, .js-add-review-form {
     height: 0;
     overflow: hidden;
-    &.active {
-        transition: 0.3s ease-in-out;
-    }
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {

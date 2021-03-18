@@ -3,7 +3,6 @@
         $update ? route('update_review', ['shop_id' => $infos->id])
             : route('add_review', ['shop_id' => $infos->id])
       }}"
-      class="js-add-review-form"
 >
     @csrf
     @if($input_code)

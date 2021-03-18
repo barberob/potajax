@@ -1,21 +1,37 @@
 export default class ReviewForm {
     constructor() {
-        this.initEls()
-        this.initEvents()
-        this.updateFormIsOpen = false
+        if(document.querySelector('body.shop')) {
+            this.initEls()
+            this.initEvents()
+            this.updateFormIsOpen = false
+            this.addFormIsOpen = false
+        } else return
     }
 
     initEls() {
-        const __ = document.querySelector
+        const __ = selector => document.querySelector(selector)
         this.els = {
             updateReviewForm : __('.js-update-review-form'),
             updateReviewButton : __('.js-update-review-button'),
             addReviewButton: __('.js-add-review-button'),
+            addReviewForm: __('.js-add-review-form')
         }
     }
 
     initEvents() {
         this.els.updateReviewButton.addEventListener('click', () => this.toggleUpdateForm())
+        this.els.addReviewButton.addEventListener('click', () => this.toggleAddForm())
+    }
+
+    toggleAddForm() {
+        if(this.addFormIsOpen) {
+            this.els.updateReviewForm.style.height = 0
+            this.addFormIsOpen = false
+        } else {
+            const targetHeight = this.els.addReviewForm.scrollHeight
+            this.els.addReviewForm.style.height = `${targetHeight}px`
+            this.addFormIsOpen = true
+        }
     }
 
     toggleUpdateForm() {
