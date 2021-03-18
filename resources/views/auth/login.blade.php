@@ -48,12 +48,6 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-group row register">
-                    <div class="register">
-                        Vous n'avez pas de compte ? 
-                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Créer un compte</a>
-                    </div>
-                </div>
 
                 <div class="form-group row mb-0">
                      <div class="col-md-8 offset-md-2">
@@ -66,16 +60,41 @@
                     </div>
                 </div>
 
-                <div>
-                    <h3> Se connecter avec Google </h3>
-                    <p>
-                        <!-- Lien de redirection vers Google -->
-                        <a href="{{ route('socialite.redirect', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer avec Google </a>
+                <div class="form-group row register">
+                    <div class="register">
+                        Vous n'avez pas de compte ? 
+                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Créer un compte</a>
+                    </div>
 
-                        <!-- Lien de redirection vers Google -->
-                        <!-- <a href="{{ route('socialite.redirect', ['provider' => 'google', 'manager' => true]) }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer en tant que commerçant avec Google </a> -->
-                        <a href="{{ route('socialite.manager', 'google') }}" title="Connexion/Inscription avec Google" class="btn btn-link"> Continuer en tant que commerçant avec Google </a>
-                    </p>
+                    <h2 class="col-md-12 text-center mt-4 mb-4"> ou </h2>
+
+                    <div class="google d-flex flex-row justify-content-center">
+                        <!-- <h1> Se connecter avec Google </h1> -->
+
+                        <!-- Liens de redirection vers Google -->
+
+                        <div class="d-flex flex-column">
+                            <label for="user" class="text-center mb-2"> Espace Utilisateur </label>
+                            <a href="{{ route('socialite.redirect', 'google') }}"
+                               title="Se connecter en tant qu'utilisateur avec Google"
+                               class="btn btn-light"
+                               name="user">
+                                <img src="img/search.png" /> Se connecter avec Google
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex flex-column ml-2">
+                            <label for="manager" class="text-center mb-2"> Espace Commerçant </label>
+                            <a href="{{ route('socialite.manager', 'google') }}"
+                               title="Se connecter en tant que commerçant avec Google"
+                               class="btn btn-light"
+                               name="manager">
+                                <img src="img/search.png" /> Se connecter avec Google
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
