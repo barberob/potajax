@@ -29,7 +29,7 @@
 
     <div class="container col-6">
         <h3>Avis</h3>
-        @forelse($infos->reviews as $review)
+        @forelse($reviews as $review)
             <div class="card my-3">
                 <div class="card card-header">
                     <h4>{{ $review->user->prenom }}</h4>

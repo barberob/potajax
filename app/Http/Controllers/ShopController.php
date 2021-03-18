@@ -14,11 +14,13 @@ class ShopController extends Controller
     	$infos = Shop::with('reviews')->findOrFail($id);
     	$id_cat = $infos->category_id;
     	$img_cat = Categorie::findOrFail($id_cat)->libelle;
+    	$reviews = Review::paginate(10);
     	$user_can_review = Review::where('user_id', Auth::id())->count() > 0 ? false : true;
     	return view('pages.shop', [
             'infos'=> $infos,
             'img'=> $img_cat,
-            'user_can_review' => $user_can_review
+            'user_can_review' => $user_can_review,
+            'reviews' => $reviews
         ]);
     }
 }
