@@ -47,6 +47,10 @@ class AppServiceProvider extends ServiceProvider
             return Auth::check() && Auth::user()->role == User::MODERATOR;
         });
 
+        Blade::if('admin', function () {
+            return Auth::check() && Auth::user()->role == User::ADMIN;
+        });
+
         // pour connecté / deconnecté
         //@auth
         //@guest

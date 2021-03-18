@@ -57,6 +57,13 @@
                         <div><img src="{{ asset('img/user.svg') }}" alt="" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
                 </li>
+                @admin
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('manage_site') }}">
+                            <div>Gérer les données</div>
+                        </a>
+                    </li>
+                @endadmin
             </ul>
         </div>
     </div>

@@ -87,3 +87,13 @@ Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
 
 // Route mentions légales
 Route::get('/mentions','MentionsController@index')->name('mentions');
+
+
+// ajouter middleware admin
+Route::get('/manage-site', 'ManageSiteController@index')->name('manage_site');
+Route::get('/manage-site/categories', 'ManageSiteController@categories')->name('manage_categories');
+Route::get('/manage-site/sub-categories/{category_id}', 'ManageSiteController@subcategories')
+    ->name('manage_subcategories');
+
+Route::post('manage-site/sub-categories/add/{category_id}', 'ManageSiteController@postAddSubcategories')
+    ->name('post_add_subcategories');
