@@ -22,12 +22,4 @@ class UsersController extends Controller
         // $visit = DB::table('visits')->
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
-
-    public function connect()
-    {
-        $auth = Auth::user();
-        return view('layouts.nav', [
-            'auth' => $auth
-        ]);
-    }
 }

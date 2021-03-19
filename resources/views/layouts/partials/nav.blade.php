@@ -51,7 +51,7 @@
                         <div id="imfav"><img src="{{ asset('img/star.svg') }}" alt="" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
                 </li>
-                @if($auth ?? '')
+                @if(Auth::check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('account') }}">
                             <div id="user">Mon compte</div>
