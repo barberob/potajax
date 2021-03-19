@@ -44,13 +44,19 @@
 }
 
 .descriptif{
-	text-align: center;
-	font-style: italic;
-
-	p{
-		margin: 25px;
-
+	width: 50%;
+	margin: auto;
+	font-size: 16px;
+	blockquote{
+		font-style: oblique;
+		text-align: justify;
+		padding-left: 15px;
+		border-left: 3px tomato solid;
 	}
+	li{
+		list-style-type:disc;
+	}
+	
 }
 
 .js-update-review-form, .js-add-review-form {
@@ -77,11 +83,9 @@
 			}
 		}
 		.descriptif{
-			p{
-				margin-top: 25px;
-				margin-left: 300px;
-				margin-right: 300px;
-
+			.contenu_desc{
+				width: 50%;
+				margin: auto;
 			}
 		}
 }

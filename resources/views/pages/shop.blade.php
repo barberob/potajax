@@ -24,7 +24,10 @@
         <p> Ouvert les : {{$infos->horaires}}</p>
     </div>
     <div class="descriptif">
-        <p>{{$infos->descriptif}}</p>
+        <div class="contenu_desc">
+            {!!$infos->descriptif!!}
+        </div>
+        
     </div>
 
 

@@ -41,7 +41,7 @@ class ShopsController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required'],
             'category' => ['required'],
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['required', 'email'],
             'siret' => ['required', 'max:14'],
             'hours' => ['required'],
             'adress' => ['required'],
