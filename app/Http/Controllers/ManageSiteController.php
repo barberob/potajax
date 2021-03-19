@@ -36,8 +36,74 @@ class ManageSiteController extends Controller
         ]);
     }
 
-    public function postAddSubcategories(Request $request, $category_id)
+    public function postAddSubcategory(Request $request, $category_id)
     {
-        dd($request);
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+        Categorie::findOrFail($category_id);
+        if(SubCategorie::where('libelle', $request->name)->where('category_id', $category_id)->count() > 0)
+            return redirect()->back();
+        SubCategorie::create([
+            'libelle' => $request->name,
+            'category_id'=> $category_id
+        ]);
+        return redirect()->back()->with('success', 'Création réussie');
     }
+
+    public function postAddCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+        if(Categorie::where('libelle', $request->name)->count() > 0) return redirect()->back();
+        Categorie::create([
+            'libelle' => $request->name,
+        ]);
+        return redirect()->back()->with('success', 'Création réussie');
+    }
+
+    public function getUpdateCategory($category_id)
+    {
+        $category = Categorie::findOrFail($category_id);
+        return view('pages.update-category', [
+            'category' => $category
+        ]);
+    }
+
+    public function postUpdateCategory(Request $request, $category_id)
+    {
+        $category = Categorie::findOrFail($category_id);
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+        $category->libelle = $request->name;
+        $category->save();
+        return redirect()->back()->with('success', 'Modification réussie');
+    }
+
+    public function postUpdateSubcategory(Request $request, $subcategory_id, $category_id)
+    {
+        $category = Categorie::findOrFail($category_id);
+        $subcategory = SubCategorie::findOrFail($subcategory_id);
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+        $subcategory->libelle = $request->name;
+        $subcategory->save();
+        return redirect()
+            ->route('manage_subcategories', ['category_id' => $category->id])
+            ->with('success', 'Modification réussie');
+    }
+
+    public function getUpdateSubcategory($subcategory_id, $category_id)
+    {
+        $subcategory = SubCategorie::findOrFail($subcategory_id);
+        $category = Categorie::findOrFail($subcategory_id);
+        return view('pages.update-subcategory', [
+            'category' => $category,
+            'subcategory' => $subcategory
+        ]);
+    }
+
 }

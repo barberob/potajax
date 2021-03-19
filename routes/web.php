@@ -95,5 +95,19 @@ Route::get('/manage-site/categories', 'ManageSiteController@categories')->name('
 Route::get('/manage-site/sub-categories/{category_id}', 'ManageSiteController@subcategories')
     ->name('manage_subcategories');
 
-Route::post('manage-site/sub-categories/add/{category_id}', 'ManageSiteController@postAddSubcategories')
-    ->name('post_add_subcategories');
+Route::get('/manage-site/categories/update/{category_id}', 'ManageSiteController@getUpdateCategory')
+    ->name('update_category');
+
+Route::post('/manage-site/categories/update/{category_id}', 'ManageSiteController@postUpdateCategory')
+    ->name('post_update_category');
+
+Route::post('/manage-site/categories/add', 'ManageSiteController@postAddCategory')->name('post_add_category');
+
+Route::post('manage-site/sub-categories/add/{category_id}', 'ManageSiteController@postAddSubcategory')
+    ->name('post_add_subcategory');
+
+Route::get('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 'ManageSiteController@getUpdateSubcategory')
+    ->name('get_update_subcategory');
+
+Route::post('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 'ManageSiteController@postUpdateSubcategory')
+    ->name('post_update_subcategory');

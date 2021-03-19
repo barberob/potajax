@@ -1,6 +1,7 @@
 export default class AdminManage {
 
     constructor() {
+        return
         if(!document.querySelector('body.manage_subcategories')) return
         this.initEls()
         this.initEvents()
@@ -33,7 +34,7 @@ export default class AdminManage {
         const input = this.createEl('input', {
             class: this.inputClasses,
             type: 'text',
-            name: id,
+            name: 'subcategories[]',
             id
         })
         container.appendChild(label)
