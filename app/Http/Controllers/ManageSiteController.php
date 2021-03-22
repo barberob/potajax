@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Shops\Categorie;
 use App\Shops\SubCategorie;
 use Illuminate\Http\Request;
+use Image;
 
 class ManageSiteController extends Controller
 {
@@ -54,12 +55,24 @@ class ManageSiteController extends Controller
     public function postAddCategory(Request $request)
     {
         $request->validate([
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'image.*' => 'mimes:jpeg,jpg,png|max:2048'
         ]);
+
         if(Categorie::where('libelle', $request->name)->count() > 0) return redirect()->back();
-        Categorie::create([
+        $category = Categorie::create([
             'libelle' => $request->name,
         ]);
+        $name = $category->libelle;
+        $url = '/img/Size_Small/';
+        $img_name = $name.'.jpg';
+        $filePath = public_path($url);
+        $img = Image::make($request->file('image')->path());
+        $img->resize(150, 150, function ($const) {
+            $const->aspectRatio();
+        })->save($filePath.'/'.$img_name, 90, 'jpg');
+
+//        dd($request->file('image')->move($filePath, $img_name));
         return redirect()->back()->with('success', 'Création réussie');
     }
 
@@ -75,10 +88,20 @@ class ManageSiteController extends Controller
     {
         $category = Categorie::findOrFail($category_id);
         $request->validate([
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'image.*' => 'mimes:jpeg,jpg,png|max:2048'
         ]);
         $category->libelle = $request->name;
         $category->save();
+
+        $name = $category->libelle;
+        $url = '/img/Size_Small/';
+        $img_name = $name.'.jpg';
+        $filePath = public_path($url);
+        $img = Image::make($request->file('image')->path());
+        $img->resize(150, 150, function ($const) {
+            $const->aspectRatio();
+        })->save($filePath.'/'.$img_name, 90, 'jpg');
         return redirect()->back()->with('success', 'Modification réussie');
     }
 
@@ -92,14 +115,14 @@ class ManageSiteController extends Controller
         $subcategory->libelle = $request->name;
         $subcategory->save();
         return redirect()
-            ->route('manage_subcategories', ['category_id' => $category->id])
+            ->back()
             ->with('success', 'Modification réussie');
     }
 
     public function getUpdateSubcategory($subcategory_id, $category_id)
     {
         $subcategory = SubCategorie::findOrFail($subcategory_id);
-        $category = Categorie::findOrFail($subcategory_id);
+        $category = Categorie::findOrFail($category_id);
         return view('pages.update-subcategory', [
             'category' => $category,
             'subcategory' => $subcategory
