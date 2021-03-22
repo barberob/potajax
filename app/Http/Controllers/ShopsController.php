@@ -49,7 +49,7 @@ class ShopsController extends Controller
             'city' => ['required'],
             'cp' => ['required', 'digits:5'],
             'tel' => ['required', 'regex:/^[0-9 ]+$/'],
-            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'images.*' => 'image|mimes:jpeg,jpg,png',
             'images' => function($attribute, $value, $fail) {
                 if (count($value) > 4) {
                     return $fail('le champ d\'' . $attribute . ' est limité à 4 fichiers maximum.');
