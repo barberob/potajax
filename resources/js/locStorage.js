@@ -17,7 +17,7 @@ export default class locStorage {
             this.domain_url = window.location.origin;
             this.hookAffiche = document.getElementById('favorite_list');
             //this.ViewStorage();
-            this.Fetch('load');
+            this.Fetch('load','');
         }
     }
 
@@ -31,8 +31,7 @@ export default class locStorage {
 
             this.DebugLS();
 
-            this.Fetch(this.id);
-
+            this.Fetch('create', this.id);
 
             /*if(document.querySelector('body.fav'))
             {
@@ -48,6 +47,7 @@ export default class locStorage {
         } else {
             this.data.push(this.id);
             localStorage.setItem("id", JSON.stringify(this.data));
+            this.data.length = 0;
         }
     }
 
@@ -55,7 +55,7 @@ export default class locStorage {
         if (localStorage.getItem("id")) {
             let tempData = JSON.parse(localStorage.getItem('id'));
             for (let i = 0; i < tempData.length; i++) {
-                console.log(tempData[i]);
+                //console.log(tempData[i]);
                 let shop = document.createElement('p')
                 this.hookAffiche.appendChild(shop).innerText = tempData[i];
             }
@@ -65,7 +65,8 @@ export default class locStorage {
     RemoveStorage() {
         localStorage.removeItem('id');
         localStorage.clear();
-        this.data = [];
+        this.data.length = 0;
+
     }
 
     FindInStorage() {
@@ -81,14 +82,15 @@ export default class locStorage {
         }
         this.data.push(this.id);
         localStorage.setItem("id", JSON.stringify(this.data));
+        this.data.length = 0;
         return false;
     }
 
-    Fetch(idShop) {
+    Fetch(type, idShop) {
         let url = this.domain_url + '/API/get_favorite';
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        if(idShop === 'load'){
+        if(type === 'load'){
             console.log('Loading Fav');
 
             let test = [{type: 'read'}];
@@ -115,44 +117,68 @@ export default class locStorage {
                 this.FormAffiche(objected);
             }).catch(error => alert("Erreur : " + error));
 
-        } else {
-        console.log('Enregistement Fav');
+        } else if(type === 'create') {
+            console.log('Enregistement Fav');
 
-        let test = [{type: 'create',id: idShop}];
-        console.log(test);
+            let test = [{type: 'create',id: idShop}];
+            console.log(test);
 
-        let ResTo = fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-Token": token
-            },
-            method: "post",
-            credentials: "same-origin",
-            body: JSON.stringify(test)
-        }).then(response => {
-            return response.json();
-        }).then(objected => {
-            console.log(objected);
-        }).catch(error => alert("Erreur : " + error));
+            let ResTo = fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": token
+                },
+                method: "post",
+                credentials: "same-origin",
+                body: JSON.stringify(test)
+            }).then(response => {
+                return response.json();
+            }).then(objected => {
+                console.log(objected);
+            }).catch(error => alert("Erreur : " + error));
+        } else if(type === 'remove') {
+            console.log('Remove Fav');
 
+            let test = [{type: 'remove',id: idShop}];
+            console.log(test);
+
+            let ResTo = fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": token
+                },
+                method: "post",
+                credentials: "same-origin",
+                body: JSON.stringify(test)
+            }).then(response => {
+                return response.json();
+            }).then(objected => {
+                console.log(objected);
+            }).catch(error => alert("Erreur : " + error));
         }
     }
 
     FormAffiche(objected){
-        if (objected !== null) {
+        //console.log(typeof objected);
+        if(typeof objected === 'string'){
+            let formTab = '<h1 class="text-center"> Vous n\'avez aucun commerce en favoris, ajoutez-en ! </h1>';
+            this.hookAffiche.innerHTML = formTab;
+        } else if (typeof objected === 'object') {
             let formTab = '<h1 class="text-center"> Vos commerces favoris : </h1>';
-                formTab += '<ul class="list-group list-group-flush">'
+            formTab += '<ul class="list-group list-group-flush">'
 
             for (let i = 0; i < objected.length; i++) {
-                        //console.log(objected[i]);
+                //console.log(objected[i]);
                 formTab += '<li class="list-group-item">';
 
-                    formTab += 'Nom = '+objected[i].nom+'<br/>';
-                    formTab += 'Adresse = '+objected[i].adresse+' à '+objected[i].Cit_nom+' ('+objected[i].Cit_cp+')<br/>';
-                    formTab += 'Type = '+objected[i].Cat_libelle+' / '+objected[i].SubCat_libelle+'<br/>';
-                    formTab += '<a class="btn btn-outline-danger btn-sm mr-3" href="'+this.domain_url+'/shop/'+objected[i].id+'" role="button">Voir la page</a>';
+                formTab += 'Nom = '+objected[i].nom+'<br/>';
+                formTab += 'Adresse = '+objected[i].adresse+' à '+objected[i].Cit_nom+' ('+objected[i].Cit_cp+')<br/>';
+                formTab += 'Type = '+objected[i].Cat_libelle+' / '+objected[i].SubCat_libelle+'<br/>';
+                formTab += '<a class="btn btn-outline-primary btn-sm mr-3" href="'+this.domain_url+'/shop/'+objected[i].id+'" role="button">Voir la page</a>';
 
                 /*if (navigator.geolocation) {
                     //console.log('connexion securisée');
@@ -164,13 +190,13 @@ export default class locStorage {
                     }, (position) => { console.log('connexion non securisée =>'+position.message);return 'yes'; });
                 }*/
 
-                    formTab += '<a class="btn btn-warning bg btn-sm ml-3" data-id="'+objected[i].id+'" role="button"> X </a>';
+                formTab += '<a class="btn btn-outline-danger btn-sm btn-circle ml-3" data-id="'+objected[i].id+'" role="button"> X </a>';
                 formTab += '</li>';
             }
 
             this.hookAffiche.innerHTML = formTab;
 
-            document.querySelectorAll('.btn.btn-warning.bg.btn-sm').forEach((a) => {
+            document.querySelectorAll('a.btn.btn-outline-danger.btn-sm.btn-circle.ml-3').forEach((a) => {
                 a.addEventListener('click', (ev) =>{
                     let id = ev.currentTarget.getAttribute('data-id');
                     console.log(id);
@@ -183,20 +209,27 @@ export default class locStorage {
 
     removeFav(id){
         //href="'+this.domain_url+'/API/remove_favorite/'+objected[i].id+'"
+        //console.log(this.data);
         let tempData = JSON.parse(localStorage.getItem('id'));
-        console.log(tempData);
+        //console.log(tempData);
         for (let i = 0; i < tempData.length; i++) {
             if (id === tempData[i]) {
                 console.log('dans le tableau');
-                //console.log(localStorage.getItem('id'));
+                //console.log(id);
                 const index = tempData.indexOf(tempData[i]);
                 if (index > -1) {
                     tempData.splice(index, 1);
                 }
+
                 //console.log(id + ' ' + tempData[i]);
-                console.log(JSON.stringify(tempData));
+                console.log(tempData);
+                this.data = [];
+                this.data = tempData;
+                localStorage.setItem("id", JSON.stringify(this.data));
+
                 //localStorage.setItem("id", JSON.stringify(tempData));
                 //return this.removeFav(id);
+                document.location.reload();
             }
         }
         return 'pas dans le tableau';
@@ -209,9 +242,6 @@ export default class locStorage {
     }
 
     DebugLS() {
-
-        for (let i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.getItem('id'));
-        }
+        console.log(localStorage.getItem('id'));
     }
 }

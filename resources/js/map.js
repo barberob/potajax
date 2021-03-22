@@ -206,6 +206,7 @@ export default class Map{
             } else {
                 //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
             }
+            data += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a>';
             //console.log(data);
 
             //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
