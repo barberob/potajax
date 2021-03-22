@@ -6,7 +6,12 @@
 
 @section('content')
 {{--    @dump($infos->codeNote)--}}
-    <div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">
+
+    @if(count($pic) == 0)
+        <div class="name" style="background: linear-gradient(to bottom right, #eb0000 20%, #ff9500 100%);">
+    @else
+        <div class="name" style="background-image:url('{{ $pic[0]->url }}');">
+    @endif
         <div>
             <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
             <h2 class="title">{{ $infos->nom }}</h2>
@@ -27,8 +32,16 @@
         <div class="contenu_desc">
             {!!$infos->descriptif!!}
         </div>
-        
     </div>
+    <div class="img">
+    @foreach($pic as $p)
+        <div class="card" style="width: 18rem;">
+            <img src="{{ $p->url }}" class="card-img-top" alt="mon shop">
+        </div>
+    @endforeach
+    </div>
+
+
 
 
 
