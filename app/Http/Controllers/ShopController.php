@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Shops\Shop;
 use App\Shops\Visit;
 use App\Shops\Categorie;
+use App\Shops\Picture;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -28,9 +29,12 @@ class ShopController extends Controller
             Review::where('user_id', $user_id)->count() > 0 || !Auth::check()
             ? false
             : true;
+        
+        $pic = Picture::where('shop_id', $id)->get();
         $visit = Visit::create(['shop_id' => $id]);
     	return view('pages.shop', [
             'infos'=> $infos,
+            'pic' => $pic,
             'img'=> $img_cat,
             'user_can_review' => $user_can_review,
             'reviews' => $reviews,

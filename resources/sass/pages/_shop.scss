@@ -58,6 +58,12 @@
 	}
 	
 }
+.img{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
 
 .js-update-review-form, .js-add-review-form {
     height: 0;
