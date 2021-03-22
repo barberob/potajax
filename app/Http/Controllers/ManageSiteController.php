@@ -56,7 +56,8 @@ class ManageSiteController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'image.*' => 'mimes:jpeg,jpg,png|max:2048'
+            'image.*' => 'mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required'
         ]);
 
         if(Categorie::where('libelle', $request->name)->count() > 0) return redirect()->back();
@@ -89,7 +90,8 @@ class ManageSiteController extends Controller
         $category = Categorie::findOrFail($category_id);
         $request->validate([
             'name' => 'required|string',
-            'image.*' => 'mimes:jpeg,jpg,png|max:2048'
+            'image.*' => 'mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required'
         ]);
         $category->libelle = $request->name;
         $category->save();
