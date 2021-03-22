@@ -19,6 +19,11 @@ export default class locStorage {
             //this.ViewStorage();
             this.Fetch('load','');
         }
+        /*if (document.querySelector('body.account')) {
+            this.domain_url = window.location.origin;
+            //this.ViewStorage();
+            this.Fetch('compare',localStorage.getItem('id'));
+        }*/
     }
 
     init() {
@@ -142,6 +147,27 @@ export default class locStorage {
             console.log('Remove Fav');
 
             let test = [{type: 'remove',id: idShop}];
+            console.log(test);
+
+            let ResTo = fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": token
+                },
+                method: "post",
+                credentials: "same-origin",
+                body: JSON.stringify(test)
+            }).then(response => {
+                return response.json();
+            }).then(objected => {
+                console.log(objected);
+            }).catch(error => alert("Erreur : " + error));
+        } if(type === 'compare') {
+            console.log('compare Fav');
+
+            let test = [{type: 'compare',shop: idShop}];
             console.log(test);
 
             let ResTo = fetch(url, {
