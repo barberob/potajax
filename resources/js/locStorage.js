@@ -12,6 +12,8 @@ export default class locStorage {
             //this.DebugRS();
         }
         if (document.querySelector('body.favorites')) {
+            this.curLat = '';
+            this.curLng = '';
             this.domain_url = window.location.origin;
             this.hookAffiche = document.getElementById('favorite_list');
             //this.ViewStorage();
@@ -114,11 +116,10 @@ export default class locStorage {
             }).catch(error => alert("Erreur : " + error));
 
         } else {
-
         console.log('Enregistement Fav');
 
         let test = [{type: 'create',id: idShop}];
-        //console.log(test);
+        console.log(test);
 
         let ResTo = fetch(url, {
             headers: {
@@ -141,33 +142,64 @@ export default class locStorage {
 
     FormAffiche(objected){
         if (objected !== null) {
-            let formTab = '<table class="table table-striped">';
-                    formTab += '<thead>';
-                        formTab += '<tr>';
-                            formTab += '<th scope="col">#</th>';
-                            formTab += '<th scope="col">Nom</th>';
-                            formTab += '<th scope="col">Adress</th>';
-                            formTab += '<th scope="col">Catégorie</th>';
-                            formTab += '<th scope="col">Sous Catégorie</th>';
-                            formTab += '<th scope="col">Go to</th>';
-                        formTab += '</tr>';
-                    formTab += '</thead>';
-                formTab += '<tbody>';
+            let formTab = '<h1 class="text-center"> Vos commerces favoris : </h1>';
+                formTab += '<ul class="list-group list-group-flush">'
+
             for (let i = 0; i < objected.length; i++) {
-                //console.log(objected[i]);
-                    formTab += '<tr>';
-                        formTab += '<td>';
-                            formTab += '<th scope="row">'+objected[i].id+'</th>';
-                            formTab += '<td>'+objected[i].nom+'</td>';
-                            formTab += '<td>'+objected[i].adresse+'</td>';
-                            formTab += '<td>'+objected[i].Cat_libelle+'</td>';
-                            formTab += '<td>'+objected[i].SubCat_libelle+'</td>';
-                            formTab += '<td>'+objected[i].id+'</td>';
-                        formTab += '</td>';
-                    formTab += '</tr>';
+                        //console.log(objected[i]);
+                formTab += '<li class="list-group-item">';
+
+                    formTab += 'Nom = '+objected[i].nom+'<br/>';
+                    formTab += 'Adresse = '+objected[i].adresse+' à '+objected[i].Cit_nom+' ('+objected[i].Cit_cp+')<br/>';
+                    formTab += 'Type = '+objected[i].Cat_libelle+' / '+objected[i].SubCat_libelle+'<br/>';
+                    formTab += '<a class="btn btn-outline-danger btn-sm mr-3" href="'+this.domain_url+'/shop/'+objected[i].id+'" role="button">Voir la page</a>';
+
+                /*if (navigator.geolocation) {
+                    //console.log('connexion securisée');
+                    formTab += navigator.geolocation.getCurrentPosition((position)=>{
+                        this.curLat = position.coords.latitude;
+                        this.curLng = position.coords.longitude;
+                        //formTab += '<a class="btn btn-outline-primary btn-sm mr-3" href="'+this.domain_url+'/shop/'+objected[i].id+'" role="button">Plans</a>';
+                        return '<a class="btn btn-outline-primary btn-sm ml-3" href="https://www.google.fr/maps/dir/'+this.curLat+','+this.curLng+'/44.5473755,6.0655453/@44.9119248,5.8415774,10.25z/" role="button">Google Maps</a>';
+                    }, (position) => { console.log('connexion non securisée =>'+position.message);return 'yes'; });
+                }*/
+
+                    formTab += '<a class="btn btn-warning bg btn-sm ml-3" data-id="'+objected[i].id+'" role="button"> X </a>';
+                formTab += '</li>';
             }
+
             this.hookAffiche.innerHTML = formTab;
+
+            document.querySelectorAll('.btn.btn-warning.bg.btn-sm').forEach((a) => {
+                a.addEventListener('click', (ev) =>{
+                    let id = ev.currentTarget.getAttribute('data-id');
+                    console.log(id);
+                    this.removeFav(id);
+                    //this.Fetch('load');
+                });
+            });
         }
+    }
+
+    removeFav(id){
+        //href="'+this.domain_url+'/API/remove_favorite/'+objected[i].id+'"
+        let tempData = JSON.parse(localStorage.getItem('id'));
+        console.log(tempData);
+        for (let i = 0; i < tempData.length; i++) {
+            if (id === tempData[i]) {
+                console.log('dans le tableau');
+                //console.log(localStorage.getItem('id'));
+                const index = tempData.indexOf(tempData[i]);
+                if (index > -1) {
+                    tempData.splice(index, 1);
+                }
+                //console.log(id + ' ' + tempData[i]);
+                console.log(JSON.stringify(tempData));
+                //localStorage.setItem("id", JSON.stringify(tempData));
+                //return this.removeFav(id);
+            }
+        }
+        return 'pas dans le tableau';
     }
 
     DebugRS() {

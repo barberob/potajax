@@ -37,6 +37,10 @@ Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
 Route::post('/API/get_favorite', 'FavoritesController@post')->name('create_Favorite');
 Route::get('/API/get_favorite', 'FavoritesController@get')->name('create_Favorite');
+
+Route::post('/API/remove_favorite', 'FavoritesController@post')->name('remove_Favorite');
+Route::get('/API/remove_favorite', 'FavoritesController@get')->name('remove_Favorite');
+
 //Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
 
 Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');

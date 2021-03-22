@@ -61,7 +61,8 @@ class FavoritesController extends Controller
 
     static public function post(Request $request)
     {
-        //dd($request->input('0')['type']);
+        //dd($request->input('0'));
+
         $type = $request->input('0')['type'];
 
         if ($type === 'create') {
@@ -74,9 +75,9 @@ class FavoritesController extends Controller
                 );
                 return json_encode($favorite);
             }
-            /*else{
+            else{
                 return json_encode('pas Co');
-            }*/
+            }
         } else if ($type === 'read') {
             /*if(auth()->check()){
 
@@ -86,7 +87,7 @@ class FavoritesController extends Controller
             //dd($request->all());
             foreach ($request->input('1') as $idShop) {
                 $shops[] = DB::table('shops')->
-                select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
+                select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'cities.nom as Cit_nom', 'cities.cp as Cit_cp', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
                 join('categories', 'categories.id', '=', 'shops.category_id')->
                 join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 join('cities', 'cities.id', '=', 'shops.city_id')->
@@ -96,9 +97,7 @@ class FavoritesController extends Controller
             }
             //dd(json_encode($shops));
             //return FavoritesController::Fetch($shops);
-            return view('pages.fav', [
-                'shops' => $shops
-            ]);
+            return json_encode(FavoritesController::Fetch($shops));
             //}
         }
     }
