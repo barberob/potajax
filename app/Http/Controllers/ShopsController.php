@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Shops\Categorie;
 use App\Shops\Picture;
 use App\Shops\Shop;
@@ -28,9 +29,11 @@ class ShopsController extends Controller
         $shop = Shop::findOrFail($id);
         if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
+        $city = City::find($shop->city_id);
         return view('pages.add-update-shop', [
             'shop' => $shop,
-            'categories' => $categories
+            'categories' => $categories,
+            'city' => $city
         ]);
     }
 
