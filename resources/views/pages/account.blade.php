@@ -40,7 +40,13 @@
         <div class="list">
             @foreach($myshops as $myshop)
                 <div class="card shop" style="width: 15rem;">
-                    <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
+
+                    @if(count($myshop->pictures) == 0)
+                        <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
+                    @else
+                        <img src="{{ $myshop->pictures[0]->url }}" class="card-img-top img_shop" style="height:auto; border-radius:33px;" alt="icone shop responsable">
+                    @endif
+
                     <div class="card-body">
                         <h5 class="card-title">{{$myshop->nom}}</h5>
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Shops\Shop;
+use App\Shops\Picture;
 
 class UsersController extends Controller
 {
@@ -18,7 +19,10 @@ class UsersController extends Controller
     public function index()
     {
     	$auth = Auth::user();
-        $myshops = Shop::all()->where('user_id', $auth->id);
+        $myshops = Shop::with('pictures')->where('user_id', $auth->id)->get();
+        
+        
+
         // $visit = DB::table('visits')->
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
