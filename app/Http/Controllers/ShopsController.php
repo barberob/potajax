@@ -51,7 +51,7 @@ class ShopsController extends Controller
             'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required', 'digits:5'],
-            'tel' => ['required', 'regex:/^[0-9 ]+$/'],
+            'tel' => ['required', 'regex:/^\+?[0-9 ]+$/', 'min:10', 'max:14'],
             'images.*' => 'image|mimes:jpeg,jpg,png',
             'images' => function($attribute, $value, $fail) {
                 if (count($value) > 4) {
@@ -76,7 +76,7 @@ class ShopsController extends Controller
             'email' => $request->email,
             'siret' => $request->siret,
             'horaires' => $request->hours,
-            'etat' => 0,
+            'etat' => 1,
             'user_id' => Auth::id(),
             'city_id' => $request->citycode,
             'category_id' => $request->category,

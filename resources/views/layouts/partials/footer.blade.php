@@ -5,7 +5,7 @@
     <div class="mentions">
         <a href="{{ route('mentions') }}">Mentions légales</a>
     </div>
-    © 2021 Copyright:
+    © 2021
     Ramène Ta Fraise
   </div>
   <!-- Copyright -->
