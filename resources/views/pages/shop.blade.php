@@ -133,7 +133,7 @@
             </div>
         @empty
             @if(!$user_review)
-                <p>Pas encore d'avis sur ce magasin</p>
+                <p class="text-center">Pas encore d'avis sur ce magasin</p>
             @endif
         @endforelse
 

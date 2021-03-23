@@ -164,8 +164,7 @@ export default class RegisterForm {
     _fillForm(count) {
         const properties = this.adresses.features[count].properties
         console.log(this.adresses.features[count])
-        const [lat, lng] = this.adresses.features[count].geometry.coordinates
-        console.log({lat, lng});
+        const [lng, lat] = this.adresses.features[count].geometry.coordinates
 
         if (properties.type !== "municipality") {
             this.els.inputAutoComplete.value = properties.street || properties.name

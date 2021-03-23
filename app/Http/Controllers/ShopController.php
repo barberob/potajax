@@ -26,10 +26,12 @@ class ShopController extends Controller
         }
     	$user_review = Review::where('user_id', $user_id)->get()->first();
     	$user_can_review =
-            Review::where('user_id', $user_id)->count() > 0 || !Auth::check()
-            ? false
-            : true;
-        
+            Review::where('user_id', $user_id)->count() > 0
+            || !Auth::check()
+            || $this->userHaveThisShop($infos->id)
+                ? false
+                : true;
+
         $pic = Picture::where('shop_id', $id)->get();
         $visit = Visit::create(['shop_id' => $id]);
     	return view('pages.shop', [
@@ -41,5 +43,14 @@ class ShopController extends Controller
             'average_note' => $average_note,
             'user_review' => $user_review
         ]);
+    }
+
+    private function userHaveThisShop($shop_id):bool
+    {
+        $user_shops = Shop::where('user_id', Auth::id());
+        foreach ($user_shops as $shop) {
+            if($shop_id == $shop->id) return true;
+        }
+        return false;
     }
 }
