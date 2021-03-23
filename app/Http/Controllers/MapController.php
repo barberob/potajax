@@ -138,13 +138,26 @@ class MapController extends Controller
 
         //if(!$request->filled('message')) return redirect()->back()->with('error', 'You can\'t send an empty message');
         if(isset($request->input('0')['search'])){
-            $search = $request->input('0')['search'];
-            $search = str_replace("+", " ", $search);
-            $research = MapController::FindSearch($search);
 
-            return json_encode($research);
+                $search = $request->input('0')['search'];
+                $search = str_replace("+", " ", $search);
+                $research = MapController::FindSearch($search);
+
+                return json_encode($research);
         }
         else{
+
+            if(empty($request->input('0')['search'])){
+                $norEst = ["lat" => 54.29088164657006, "lng" => 26.235351562500004];
+                $sudOue = ["lat" => 32.91648534731439, "lng" => -14.106445312500002];
+                $cat = ["All"];
+                $subCat = ["All"];
+
+                $categories = MapController::FindCat($cat, $subCat, $norEst, $sudOue);
+
+                return json_encode($categories);
+            }
+
             $norEst = $request->input('0')['northEast'];
             $sudOue = $request->input('0')['sudOuest'];
             $cat = $request->input('0')['categories'];

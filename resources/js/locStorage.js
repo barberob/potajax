@@ -192,6 +192,9 @@ export default class locStorage {
         //console.log(typeof objected);
         if(typeof objected === 'string'){
             let formTab = '<h1 class="text-center"> Vous n\'avez aucun commerce en favoris, ajoutez-en ! </h1>';
+            formTab += '<div class="d-flex justify-content-center">';
+            formTab += '<a class="btn btn-outline-primary" href="'+this.domain_url+'/map" role="button"> Cliquez ici pour voir les commerces ! </a>';
+            formTab += '</div>';
             this.hookAffiche.innerHTML = formTab;
         } else if (typeof objected === 'object') {
             let formTab = '<h1 class="text-center"> Vos commerces favoris : </h1>';
@@ -201,9 +204,9 @@ export default class locStorage {
                 //console.log(objected[i]);
                 formTab += '<li class="list-group-item">';
 
-                formTab += 'Nom = '+objected[i].nom+'<br/>';
-                formTab += 'Adresse = '+objected[i].adresse+' à '+objected[i].Cit_nom+' ('+objected[i].Cit_cp+')<br/>';
-                formTab += 'Type = '+objected[i].Cat_libelle+' / '+objected[i].SubCat_libelle+'<br/>';
+                formTab += 'Nom: '+objected[i].nom+'<br/>';
+                //formTab += 'Adresse: '+objected[i].adresse+' à '+objected[i].Cit_nom+' ('+objected[i].Cit_cp+')<br/>';
+                formTab += 'Type: '+objected[i].Cat_libelle+' / '+objected[i].SubCat_libelle+'<br/>';
                 formTab += '<a class="btn btn-outline-primary btn-sm mr-3" href="'+this.domain_url+'/shop/'+objected[i].id+'" role="button">Voir la page</a>';
 
                 /*if (navigator.geolocation) {
