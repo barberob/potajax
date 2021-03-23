@@ -29,7 +29,7 @@ class ShopController extends Controller
             Review::where('user_id', $user_id)->count() > 0 || !Auth::check()
             ? false
             : true;
-        
+
         $pic = Picture::where('shop_id', $id)->get();
         $visit = Visit::create(['shop_id' => $id]);
     	return view('pages.shop', [

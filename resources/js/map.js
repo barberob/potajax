@@ -42,51 +42,75 @@ export default class Map{
             /*         Default           */
             this.IconWhite = L.icon({
                 iconUrl: img+'white.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconGrey = L.icon({
                 iconUrl: img+'grey.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconBlack = L.icon({
                 iconUrl: img+'black.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconBlue = L.icon({
                 iconUrl: img+'blue.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconRed = L.icon({
                 iconUrl: img+'red.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconGreen = L.icon({
                 iconUrl: img+'green.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconLightBlue = L.icon({
                 iconUrl: img+'light-blue.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconOrange = L.icon({
                 iconUrl: img+'orange.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconPink = L.icon({
                 iconUrl: img+'pink.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconPurple = L.icon({
                 iconUrl: img+'purple.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconYellow = L.icon({
                 iconUrl: img+'yellow.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
             this.IconNAN = L.icon({
                 iconUrl: img+'nan.png',
-                shadowUrl: shadow
+                shadowUrl: shadow,
+                iconSize: [25, 41],
+                iconAnchor: [11.5, 41]
             });
 
             this.Lat = '44.55962000171788';
@@ -195,17 +219,22 @@ export default class Map{
             let color = null;
 
             data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
-            data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+'</p>';
+            if(Item.detail['nomVille']){
+                data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' - '+Item.detail['nomVille']+' ('+Item.detail['cp']+')</p>';
+            } else {
+                data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' ('+Item.detail['cp']+')</p>';
+            }
+
 
             //console.log(typeof Item.detail['desc']);
-            if(typeof Item.detail['desc'] === "string") {
+            /*if(typeof Item.detail['desc'] === "string") {
                 Item.detail['desc'] = Item.detail['desc'].split('.');
                 for (let j = 0; j < Item.detail['desc'].length - 1; j++) {
                     data += '<p style="font-size:12px;">' + Item.detail['desc'][j] + '.</p>';
                 }
             } else {
                 //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
-            }
+            }*/
             data += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a>';
             //console.log(data);
 
@@ -225,7 +254,8 @@ export default class Map{
                 case 10: icone = {icon: this.IconGrey};color = '#888888' ; break;
                 case 11: icone = {icon: this.IconBlack};color = '#2B2B2B' ; break;
 
-                default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
+                default: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
+                //default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
             }
 
             //if(typeof libelle === 'undefined') libelle = 'tout';
@@ -241,7 +271,6 @@ export default class Map{
 
             //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
             //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
-
 
             let popup = L.popup().setLatLng(Loc).setContent(data);
             marker = L.marker(Loc,icone);
@@ -312,21 +341,42 @@ export default class Map{
             for (const [key1, value1] of Object.entries(objected)) {
                 //console.log(value1);
                 if (value1 != null) {
-                    this.Object.push({
-                        'detail': {
-                            'id': value1.id,
-                            'nom': value1.nom,
-                            'desc': value1.descriptif,
-                            'adresse': value1.adresse,
-                            'categorie_id': value1.category_id,
-                            'subcategorie_id': value1.subcategory_id,
-                            'subcategorie_lib': value1.libelle,
-                        },
-                        'coord': {
-                            'Lat': value1.lat,
-                            'Lng': value1.lng,
-                        }
-                    });
+                    if(value1.cp){
+                        this.Object.push({
+                            'detail': {
+                                'id': value1.id,
+                                'nom': value1.nom,
+                                'desc': value1.descriptif,
+                                'adresse': value1.adresse,
+                                'cp': value1.cp,
+                                'nomVille': value1.nomVille,
+                                'categorie_id': value1.category_id,
+                                'subcategorie_id': value1.subcategory_id,
+                                'subcategorie_lib': value1.libelle,
+                            },
+                            'coord': {
+                                'Lat': value1.lat,
+                                'Lng': value1.lng,
+                            }
+                        });
+                    } else {
+                        this.Object.push({
+                            'detail': {
+                                'id': value1.id,
+                                'nom': value1.nom,
+                                'desc': value1.descriptif,
+                                'adresse': value1.adresse,
+                                'cp': value1.cp,
+                                'categorie_id': value1.category_id,
+                                'subcategorie_id': value1.subcategory_id,
+                                'subcategorie_lib': value1.libelle,
+                            },
+                            'coord': {
+                                'Lat': value1.lat,
+                                'Lng': value1.lng,
+                            }
+                        });
+                    }
                 }
             }
             //console.log(this.Object);
