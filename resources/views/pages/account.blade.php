@@ -46,6 +46,7 @@
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>
                         <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="btn btn-info">Voir les statistiques</a>
                         <a href="{{ route('update_shop',['id' => $myshop->id]) }}" class="btn btn-danger">Modifier</a>
+                        <a class="btn btn-success" href="{{ route('shop', ['id' => $myshop->id]) }}" role="button">Voir la page</a>
                     </div>
                 </div>
             @endforeach
