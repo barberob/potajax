@@ -14,7 +14,7 @@ class FavoritesController extends Controller
 
     public function index()
     {
-        if (auth()->check()) {
+        /*if (auth()->check()) {
             // On récupère l'id de l'utilisateur connecté
 
             $user_id = Auth::id();
@@ -31,9 +31,9 @@ class FavoritesController extends Controller
                 'shops' => $shops
             ]);
         }
-        else{
+        else{*/
             return view('pages.fav');
-        }
+        //}
         /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
                                    ->get();
 

@@ -47,13 +47,13 @@ export default class locStorage {
 
     AddStorage() {
 
-        if (localStorage.getItem("id")) {
+        //if (localStorage.getItem("id")) {
             this.FindInStorage()
-        } else {
+        /*} else {
             this.data.push(this.id);
             localStorage.setItem("id", JSON.stringify(this.data));
             this.data.length = 0;
-        }
+        }*/
     }
 
     ViewStorage() {
