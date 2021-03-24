@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Visit extends Model
 {
 	protected $fillable = [
-        'shop_id'
+        'shop_id', 'created_at'
     ];
 
    	public function shop()

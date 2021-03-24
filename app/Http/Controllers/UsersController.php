@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
     	$auth = Auth::user();
         $myshops = Shop::all()->where('user_id', $auth->id);
-        // $visit = DB::table('visits')->
+
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
 }

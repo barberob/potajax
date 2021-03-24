@@ -6,6 +6,7 @@ use App\Shops\Categorie;
 use App\Shops\Picture;
 use App\Shops\Shop;
 use App\Shops\SubCategorie;
+use App\Shops\Visit;
 use Carbon\Carbon;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -136,10 +137,27 @@ class ShopsController extends Controller
 
     public function stats($id)
     {
-        $nbVisits = count(DB::table('visits')->where('shop_id', '=', $id)->get());
+        $months = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
 
-        return view('pages.stats', [
-            'visits' => $nbVisits
-        ]);
+        $consultations = Visit::where("created_at", ">", Carbon::now()->subMonths(12))
+                                ->where('shop_id', $id)
+                                ->orderBy('created_at')
+                                ->get()
+                                ->groupBy(function ($date) {
+                                    return Carbon::parse($date->created_at)->format('F');
+                                })
+                                ->map
+                                ->count();
+
+        $consultationsResult = [];
+
+        foreach ($months as $month)
+        {
+            $consultationsResult[$month] = $consultations[$month] ?? 0;
+        }
+
+       /* $consultationsBycat = DB::select('select libelle, count(*) from categories inner join shops on shops.category_id = categories.id inner join visits on shops.id = visits.shop_id group by libelle');*/
+
+        return view('pages.stats', ['consultations' => $consultationsResult]);
     }
 }

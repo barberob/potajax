@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
         Schema::defaultStringLength(191);
 
@@ -46,6 +47,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('moderator', function () {
             return Auth::check() && Auth::user()->role == User::MODERATOR;
         });
+
+        $charts->register([\App\Charts\VisitChart::class]);
 
         // pour connecté / deconnecté
         //@auth
