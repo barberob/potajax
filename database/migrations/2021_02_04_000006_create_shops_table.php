@@ -27,7 +27,7 @@ class CreateShopsTable extends Migration
             $table->text('adresse');
             $table->text('adresse2')->nullable();
             $table->string('cp');
-            $table->string('numRue');
+            $table->string('numRue')->nullable();
             $table->float('lat', 9, 6)->nullable();
             $table->float('lng', 9, 6)->nullable();
             $table->text('descriptif');
