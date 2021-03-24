@@ -77,12 +77,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $role = isset($data['role']) ? User::MANAGER : User::USER;
+        $tel = $data['tel'] ?? null;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $role
+            'role' => $role,
+            'prefixtel' => '+33',
+            'tel' => $tel
         ]);
     }
 
