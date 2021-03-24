@@ -54,6 +54,8 @@ Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
 Route::get('/account/update-shop/{id}', 'ShopsController@updateShop')->middleware('manager')->name('update_shop');
 Route::get('/account/shop-stats/{id}', 'ShopsController@stats')->middleware('manager')->name('stats');
+Route::get('/account/update-informations', 'UsersController@updateUser')->name('update_user');
+Route::post('/account/update-informations', 'UsersController@postUpdateUser')->name('post_update_user');
 
 Route::post('/account/post-add-update-shop/{id?}', 'ShopsController@postAddUpdateShop')
     ->middleware('manager')
