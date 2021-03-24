@@ -77,7 +77,7 @@ class ShopsController extends Controller
             'email' => $request->email,
             'siret' => str_replace(' ', '', $request->siret),
             'horaires' => $request->hours,
-            'etat' => 1,
+            'etat' => Shop::PENDING,
             'user_id' => Auth::id(),
             'city_id' => $request->citycode,
             'category_id' => $request->category,

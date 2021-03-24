@@ -46,8 +46,9 @@
         </div>
         <div class="list">
             @foreach($myshops as $myshop)
-                <div class="card shop" style="width: 15rem;">
-
+                <div class="card shop"style="width: 15rem;">
+{{--                    pour vérification de l'état--}}
+{{--                    @if($myshop->etat == \App\Shops\Shop::PENDING) border-primary @endif--}}
                     @if(count($myshop->pictures) == 0)
                         <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
                     @else
@@ -55,6 +56,9 @@
                     @endif
 
                     <div class="card-body">
+                        @if($myshop->etat === \App\Shops\Shop::PENDING)
+                            <p>En attente de validation</p>
+                        @endif
                         <h5 class="card-title">{{$myshop->nom}}</h5>
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>
                         <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="stats btn btn-outline-primary text-primary">
@@ -73,11 +77,11 @@
 
         @endif
     @endmanager
-    @admin
-        <div class="btn_admin">
-            <a class="btn btn-primary" href="{{ route('manage_site') }}">Gérer les données du site</a>
-        </div>
-    @endadmin
+{{--    @admin--}}
+{{--        <div class="btn_admin">--}}
+{{--            <a class="btn btn-primary" href="{{ route('manage_site') }}">Gérer les données du site</a>--}}
+{{--        </div>--}}
+{{--    @endadmin--}}
 
 
 @endsection
