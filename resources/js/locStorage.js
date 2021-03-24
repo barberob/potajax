@@ -33,25 +33,30 @@ export default class locStorage {
 
         if(this.FindInStorage_v2()){
             document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText = 'Retirer des favoris';
+            document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').className = 'btn btn-outline-warning btn-sm fav'
         } else {
             document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText = 'Ajouter aux favoris';
+            document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').className = 'btn btn-warning btn-sm fav'
         }
 
-
+//btn btn-warning btn-sm fav
 
         this.button.addEventListener("click", () => {
             //console.log(document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText);
-            if(document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText === 'Ajouter aux favoris'){
+            if(document.querySelector('a.btn.btn-sm.fav').innerText === 'Ajouter aux favoris'){
                 this.AddStorage()
 
                 this.Fetch('create', this.id);
 
-                document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText = 'Retirer des favoris';
+                document.querySelector('a.btn.btn-sm.fav').className = 'btn btn-outline-warning btn-sm fav'
+                document.querySelector('a.btn.btn-sm.fav').innerText = 'Retirer des favoris';
 
-            } else if(document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText === 'Retirer des favoris'){
+            } else if(document.querySelector('a.btn.btn-sm.fav').innerText === 'Retirer des favoris'){
+
                 this.removeFav(this.id);
 
-                document.querySelector('a.btn.btn-outline-warning.btn-sm.fav').innerText = 'Ajouter aux favoris';
+                document.querySelector('a.btn.btn-sm.fav').className = 'btn btn-warning btn-sm fav'
+                document.querySelector('a.btn.btn-sm.fav').innerText = 'Ajouter aux favoris';
             }
 
             //
