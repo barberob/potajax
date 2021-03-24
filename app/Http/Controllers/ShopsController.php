@@ -48,7 +48,6 @@ class ShopsController extends Controller
             'siret' => ['required', 'max:16'],
             'hours' => ['required'],
             'adress' => ['required'],
-            'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required', 'digits:5'],
             'tel' => ['required', 'regex:/^\+?[0-9 ]+$/', 'min:10', 'max:14'],

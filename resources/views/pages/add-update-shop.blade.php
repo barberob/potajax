@@ -261,7 +261,6 @@
                                            type="text"
                                            class="form-control js-street_number @error('street_number') is-invalid @enderror"
                                            name="street_number"
-                                           required
                                            autocomplete="new-street_number"
                                            value="{{ old('street_number') ?? $shop->numRue ?? '' }}"
                                     >
