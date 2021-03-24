@@ -20,6 +20,7 @@
             @endif
             <a class="btn btn-outline-warning" href="{{ route('favorites') }}" role="button">Voir mes favoris</a><br>
             <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
+            <a class="btn btn-outline-primary" href="{{ route('update_user') }}" role="button">Changer mes informations</a>
         </div>
     </div>
 
@@ -50,8 +51,14 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$myshop->nom}}</h5>
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>
-                        <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="btn btn-info">Voir les statistiques</a>
-                        <a href="{{ route('update_shop',['id' => $myshop->id]) }}" class="btn btn-danger">Modifier</a>
+                        <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="stats btn btn-outline-primary text-primary">
+                            Voir les statistiques
+                        </a>
+                        <a href="{{ route('update_shop',['id' => $myshop->id]) }}"
+                           class="btn btn-primary"
+                        >
+                            Modifier
+                        </a>
                         <a class="btn btn-success" href="{{ route('shop', ['id' => $myshop->id]) }}" role="button">Voir la page</a>
                     </div>
                 </div>

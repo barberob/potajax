@@ -88,9 +88,9 @@ class FavoritesController extends Controller
                 foreach ($request->input('1') as $idShop) {
                     $shops[] = DB::table('shops')->
                     select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'cities.nom as Cit_nom', 'cities.cp as Cit_cp', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
-                    join('categories', 'categories.id', '=', 'shops.category_id')->
-                    join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
-                    join('cities', 'cities.id', '=', 'shops.city_id')->
+                    leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
+                    leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                    leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
                     where('shops.id', $idShop)->
                     orderBy('shops.id')->
                     get();
@@ -101,10 +101,10 @@ class FavoritesController extends Controller
             } else {
                 if(auth()->check()){
                     $shops_[] = select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'cities.nom as Cit_nom', 'cities.cp as Cit_cp', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
-                    join('categories', 'categories.id', '=', 'shops.category_id')->
-                    join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
-                    join('cities', 'cities.id', '=', 'shops.city_id')->
-                    join('favorites', 'favorites.shop_id', '=', 'shops.id')->
+                    leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
+                    leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                    leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
+                    leftJoin('favorites', 'favorites.shop_id', '=', 'shops.id')->
                     where('favorites.user_id', auth()->id)->
                     orderBy('shops.id')->
                     get();

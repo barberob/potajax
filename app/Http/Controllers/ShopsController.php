@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Image;
 use Storage;
+use Faker\Generator as Faker;
 
 class ShopsController extends Controller
 {
@@ -45,10 +46,9 @@ class ShopsController extends Controller
             'description' => ['required'],
             'category' => ['required'],
             'email' => ['required', 'email'],
-            'siret' => ['required', 'max:14'],
+            'siret' => ['required', 'max:16'],
             'hours' => ['required'],
             'adress' => ['required'],
-            'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required', 'digits:5'],
             'tel' => ['required', 'regex:/^\+?[0-9 ]+$/', 'min:10', 'max:14'],
@@ -62,7 +62,7 @@ class ShopsController extends Controller
 
 
         $subcat = $request->subcategory === '-1' ? null : $request->subcategory;
-
+        $faker = new Faker();
         $shop = Shop::updateOrCreate(
             ['id' => $id],
             [
@@ -74,7 +74,7 @@ class ShopsController extends Controller
             'numRue' => $request->street_number,
             'tel' => $request->tel,
             'email' => $request->email,
-            'siret' => $request->siret,
+            'siret' => str_replace(' ', '', $request->siret),
             'horaires' => $request->hours,
             'etat' => 1,
             'user_id' => Auth::id(),
@@ -84,6 +84,9 @@ class ShopsController extends Controller
             'lat' => $request->lat,
             'lng' => $request->lng
         ]);
+
+        $shop->codeNote = $this->generateReviewCode($shop->id);
+        $shop->save();
 
         if ($request->hasFile('images')) {
             $db_pictures_count = Picture::where('shop_id', $id)->count();
@@ -144,5 +147,14 @@ class ShopsController extends Controller
         return view('pages.stats', [
             'visits' => $nbVisits
         ]);
+    }
+
+    private function generateReviewCode($shop_id)
+    {
+        $returnString = $shop_id;
+        while (strlen($returnString) < 10) {
+            $returnString .= mt_rand(0, 9);
+        }
+        return $returnString;
     }
 }
