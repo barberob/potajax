@@ -19,7 +19,11 @@
             <p class="tel">Téléphone: {{$infos->tel}}</p>
             <p class="mail">@: {{$infos->email}}</p>
 
+            @if(isset($infos->subcategory->libelle))
             <p class="tel">catégorie / sous catégorie: {{$infos->category->libelle}} / {{$infos->subcategory->libelle}}</p>
+            @else
+            <p class="tel">catégorie: {{$infos->category->libelle}}</p>
+            @endif
 
             <a class="btn btn-outline-warning btn-sm fav" href="#" role="button" data-id="{{ $infos->id }}" id="favorite">
                 Ajouter aux favoris

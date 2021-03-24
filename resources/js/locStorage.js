@@ -9,6 +9,7 @@ export default class locStorage {
             this.data = JSON.parse(localStorage.getItem("id")) || [];
 
             this.init();
+            this.changeEtat();
             //this.DebugRS();
         }
         if (document.querySelector('body.favorites')) {
@@ -262,6 +263,10 @@ export default class locStorage {
             }
         }
         return 'pas dans le tableau';
+    }
+
+    changeEtat(){
+        //document.
     }
 
     DebugRS() {
