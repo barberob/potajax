@@ -175,7 +175,7 @@
                                 <div class="col-md-6">
                                     <input id="siret"
                                            type="text"
-                                           maxlength="14"
+                                           maxlength="16"
                                            class="form-control @error('siret') is-invalid @enderror"
                                            name="siret"
                                            required
