@@ -204,6 +204,8 @@ export default class Map{
     marker_add(){
         console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
+        this.markers.clearLayers();
+        this.macarte.removeLayer(this.markers);
         this.Object.map((Item) => {
             //console.log(Item.detail);
             let type = Item.detail['subcategorie_id'];
@@ -272,7 +274,7 @@ export default class Map{
             //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
             //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
 
-            let popup = L.popup().setLatLng(Loc).setContent(data);
+            let popup = L.popup({offset: [0, -32]}).setLatLng(Loc).setContent(data);
             marker = L.marker(Loc,icone);
             marker.bindPopup(popup);
 
@@ -337,6 +339,7 @@ export default class Map{
         }).then(response => {
             return response.json();
         }).then(objected => {
+            this.marker_remove();
             //console.log(objected);
             for (const [key1, value1] of Object.entries(objected)) {
                 //console.log(value1);
@@ -381,7 +384,7 @@ export default class Map{
             }
             //console.log(this.Object);
             this.marker_add();
-        }).catch(error => alert("Erreur : " + error));
+        }).catch(error => console.log("Erreur : " + error));
         //console.log(ResTo);
     }
     get_data(posMap){

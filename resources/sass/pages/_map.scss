@@ -41,6 +41,12 @@
 				.adresse{
 					color: #0BAB64;
 				}
+                a{
+                    color: #e3342f!important;
+                }
+                a:hover{
+                    color: #ffffff!important;
+                }
 			}
 		}
 
@@ -89,7 +95,7 @@
 					.list-group{
 					    max-height: 60vh;
 					    width:100%;
-					    overflow:scroll;
+					    overflow: auto;
 					    -webkit-overflow-scrolling: touch;
 
 					    .list-group-item{
