@@ -121,10 +121,12 @@ Route::post('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 
 
 //gestion shop
 Route::get('/manage-site/shops', 'ManageSiteController@shops')->name('manage_shops');
-Route::get('/manage-site/shops/update/{shop_id}', 'ManageSiteController@getUpdateShop')
+Route::get('/manage-site/shops/update/{shop_id}', 'ManageSiteController@getModerateShop')
     ->name('get_update_shop');
-Route::post('/manage-site/shops/update/{shop_id}', 'ManageSiteController@postUpdateShop')
-    ->name('post_update_shop');
 
+Route::post('manage-site/shops/validate-shop/{shop_id}', 'ManageSiteController@validateShop')
+    ->name('validate_shop');
 
+Route::post('manage-site/shops/reject-shop/{shop_id}', 'ManageSiteController@rejectShop')
+    ->name('reject_shop');
 

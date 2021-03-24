@@ -9,7 +9,7 @@
     <div class="container">
         <h1 class="mb-3">Liste des commerces en attente de validation</h1>
         <div class="row">
-            @foreach($shops as $shop)
+            @forelse($shops as $shop)
                 <div class="card col-md-4 px-0 mx-3 mb-4">
                     <div class="card-header">
                         <h2>{{ $shop->nom }}</h2>
@@ -22,7 +22,9 @@
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h3>Aucun</h3>
+            @endforelse
         </div>
     </div>
 @endsection

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Shops\Categorie;
 use App\Shops\Shop;
 use App\Shops\SubCategorie;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Image;
 
 class ManageSiteController extends Controller
@@ -20,6 +23,7 @@ class ManageSiteController extends Controller
         return view('pages.manage-site');
     }
 
+    // gestion des catégories / sous catégories
     public function categories()
     {
         $categories = Categorie::with('subcategories')->get();
@@ -36,34 +40,6 @@ class ManageSiteController extends Controller
             'category' => $category,
             'subcategories' => $subcategories
         ]);
-    }
-
-    public function shops()
-    {
-        $shops = Shop::where('etat','0')->get();
-        return view('pages.manage-shops', [
-            'shops' => $shops
-        ]);
-    }
-
-    public function getUpdateShop($shop_id)
-    {
-        $shop = Shop::findOrFail($shop_id);
-        return view('pages.update-shop', [
-            'shop' => $shop
-        ]);
-    }
-
-    public function postUpdateShop(Request $request, $shop_id)
-    {
-        $shop = Shop::findOrFail($shop_id);
-        $request->validate([
-            'etat' => 'required|string'
-        ]);
-        $shop->etat = $request->etat;
-        $shop->save();
-
-        return redirect()->back()->with('success', 'Modification réussie');
     }
 
     public function postAddSubcategory(Request $request, $category_id)
@@ -160,4 +136,49 @@ class ManageSiteController extends Controller
         ]);
     }
 
+    // Modération Shop
+    public function rejectShop(Request $request, $shop_id)
+    {
+        $request->validate(
+            [ 'motifRefus' => 'required' ]
+        );
+        $shop = Shop::findOrFail($shop_id);
+        $shop->etat = Shop::REJECTED;
+        $shop->save();
+
+        DB::table('user_shop')->updateOrInsert(
+            ['shop_id' => $shop->id, 'user_id' => Auth::id()],
+            [
+                'modifRefus' => $request->motifRefus,
+                'date' => Carbon::now(),
+                'user_id' => Auth::id(),
+                'shop_id' => $shop->id
+            ]
+        );
+        return redirect()->back()->with('success', 'la modération a bien été prise en compte');
+    }
+
+    public function validateShop($shop_id)
+    {
+        $shop = Shop::findOrFail($shop_id);
+        $shop->etat = Shop::VALID;
+        $shop->save();
+        return redirect()->back()->with('success', 'la modération a bien été prise en compte');
+    }
+
+    public function shops()
+    {
+        $shops = Shop::where('etat','0')->get();
+        return view('pages.manage-shops', [
+            'shops' => $shops
+        ]);
+    }
+
+    public function getModerateShop($shop_id)
+    {
+        $shop = Shop::findOrFail($shop_id);
+        return view('pages.moderate-shop', [
+            'shop' => $shop
+        ]);
+    }
 }

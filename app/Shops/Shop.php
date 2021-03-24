@@ -9,10 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-    public const USER = 1;
-    public const MANAGER = 2;
-    public const MODERATOR = 3;
-    public const ADMIN = 4;
+    public const PENDING = 0;
+    public const VALID = 1;
+    public const REJECTED = 2;
 
     protected $fillable = [
         'codeNote',
