@@ -39,7 +39,7 @@ import RegisterForm from './pages/RegisterForm';
 import AddShopForm from './pages/AddShopForm';
 import locStorage from './locStorage';
 import ReviewForm from './pages/ReviewForm';
-//import ChartLaravel from './chart';
+import AdminManage from './pages/AdminManage';
 
 class App {
     constructor() {
@@ -52,7 +52,7 @@ class App {
         let map = new Map();
         new locStorage();
         new ReviewForm();
-        //new ChartLaravel();
+        new AdminManage();
     }
 }
 

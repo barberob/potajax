@@ -175,7 +175,7 @@
                                 <div class="col-md-6">
                                     <input id="siret"
                                            type="text"
-                                           maxlength="14"
+                                           maxlength="16"
                                            class="form-control @error('siret') is-invalid @enderror"
                                            name="siret"
                                            required
@@ -261,7 +261,6 @@
                                            type="text"
                                            class="form-control js-street_number @error('street_number') is-invalid @enderror"
                                            name="street_number"
-                                           required
                                            autocomplete="new-street_number"
                                            value="{{ old('street_number') ?? $shop->numRue ?? '' }}"
                                     >

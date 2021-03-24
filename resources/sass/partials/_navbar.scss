@@ -1,5 +1,5 @@
 .container a:first-child{
-	display: flex; 
+	display: flex;
 	flex-direction: row;
 
 	.brand{
@@ -10,17 +10,15 @@
 .container{
 
 	.nav-item{
+        display: flex;
 		.nav-link{
-			display: flex; 
+			display: flex;
 			flex-direction: row;
-
-			#fav{
-				margin:10px;
-			}
-			
-			#user{
-				margin:10px;
-			}
+			font-size: 18px;
+            align-items: center;
+            div {
+                margin: 10px;
+            }
 		}
 	}
 }

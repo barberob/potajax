@@ -42,9 +42,29 @@ export default class RegisterForm {
     }
 
     initEvents() {
-        CKEDITOR.replace( 'summary-ckeditor' );
+        CKEDITOR.replace( 'summary-ckeditor', {
+            toolbarGroups : [
+                { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+                { name: 'forms', groups: [ 'forms' ] },
+                '/',
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                { name: 'links', groups: [ 'links' ] },
+                { name: 'insert', groups: [ 'insert' ] },
+                '/',
+                { name: 'styles', groups: [ 'styles' ] },
+                { name: 'colors', groups: [ 'colors' ] },
+                { name: 'tools', groups: [ 'tools' ] },
+                { name: 'others', groups: [ 'others' ] },
+                { name: 'about', groups: [ 'about' ] }
+            ],
+            removeButtons : 'Source,Save,Templates,NewPage,ExportPdf,Preview,Print,Cut,Copy,Paste,PasteText,PasteFromWord,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,CreateDiv,Anchor,Image,Flash,Smiley,PageBreak,Iframe,Styles,Font,Format,FontSize,BGColor,ShowBlocks,BidiLtr,BidiRtl,Language,Subscript,Superscript,TextColor,Replace,Find,Indent,Outdent'
+        });
         const editor = document.querySelector('#summary-ckeditor').getAttribute('data-content')
         editor && CKEDITOR.instances['summary-ckeditor'].setData(editor)
+
         this.initAutoComplete()
         this.initSelects()
         this.initDeletePictures()
@@ -144,8 +164,7 @@ export default class RegisterForm {
     _fillForm(count) {
         const properties = this.adresses.features[count].properties
         console.log(this.adresses.features[count])
-        const [lat, lng] = this.adresses.features[count].geometry.coordinates
-        console.log({lat, lng});
+        const [lng, lat] = this.adresses.features[count].geometry.coordinates
 
         if (properties.type !== "municipality") {
             this.els.inputAutoComplete.value = properties.street || properties.name

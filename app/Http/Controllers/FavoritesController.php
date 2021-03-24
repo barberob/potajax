@@ -14,7 +14,7 @@ class FavoritesController extends Controller
 
     public function index()
     {
-        if (auth()->check()) {
+        /*if (auth()->check()) {
             // On récupère l'id de l'utilisateur connecté
 
             $user_id = Auth::id();
@@ -31,9 +31,9 @@ class FavoritesController extends Controller
                 'shops' => $shops
             ]);
         }
-        else{
+        else{*/
             return view('pages.fav');
-        }
+        //}
         /*$shops = DB::table('shops')->where('shop_id', '=', $_COOKIE['id'])
                                    ->get();
 
@@ -44,6 +44,7 @@ class FavoritesController extends Controller
         ]);*/
         //}
     }
+
 
     /*public function add(Request $request)
     {
@@ -60,7 +61,8 @@ class FavoritesController extends Controller
 
     static public function post(Request $request)
     {
-        //dd($request->input('0')['type']);
+        //dd($request->input('0'));
+
         $type = $request->input('0')['type'];
 
         if ($type === 'create') {
@@ -73,29 +75,57 @@ class FavoritesController extends Controller
                 );
                 return json_encode($favorite);
             }
-            /*else{
+            else{
                 return json_encode('pas Co');
-            }*/
+            }
         } else if ($type === 'read') {
-            /*if(auth()->check()){
+            /**/
 
+            if($request->input('1') !== []){
+
+                $shops = null;
+                //dd($request->all());
+                foreach ($request->input('1') as $idShop) {
+                    $shops[] = DB::table('shops')->
+                    select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'cities.nom as Cit_nom', 'cities.cp as Cit_cp', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
+                    leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
+                    leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                    leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
+                    where('shops.id', $idShop)->
+                    orderBy('shops.id')->
+                    get();
+                }
+                //dd(json_encode($shops));
+                //return FavoritesController::Fetch($shops);
+                return json_encode(FavoritesController::Fetch($shops));
+            } else {
+                if(auth()->check()){
+                    $shops_[] = select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'cities.nom as Cit_nom', 'cities.cp as Cit_cp', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
+                    leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
+                    leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
+                    leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
+                    leftJoin('favorites', 'favorites.shop_id', '=', 'shops.id')->
+                    where('favorites.user_id', auth()->id)->
+                    orderBy('shops.id')->
+                    get();
+
+                    return json_encode(FavoritesController::Fetch($shops_));
+                }
+                else {
+                    return json_encode('pas Co');
+                }
             }
-            else{*/
-            $shops = null;
-            //dd($request->all());
-            foreach ($request->input('1') as $idShop) {
-                $shops[] = DB::table('shops')->
-                select('shops.id', 'shops.nom', 'shops.lat', 'shops.lng', 'shops.descriptif', 'shops.adresse', 'shops.subcategory_id', 'shops.category_id', 'subcategories.libelle as SubCat_libelle', 'categories.libelle as Cat_libelle', 'shops.created_at', 'shops.updated_at', 'shops.deleted_at')->
-                join('categories', 'categories.id', '=', 'shops.category_id')->
-                join('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
-                join('cities', 'cities.id', '=', 'shops.city_id')->
-                where('shops.id', $idShop)->
-                orderBy('shops.id')->
-                get();
-            }
-            //dd(json_encode($shops));
-            return FavoritesController::Fetch($shops);
             //}
+        } else if ($type === 'remove') {
+            if (auth()->check()) {
+                $favorite = DB::table('favorites')
+                    ->where('id', $request->input('1'))
+                    ->delete();
+                return json_encode($favorite);
+            }
+            else{
+                return json_encode('pas Co');
+            }
         }
     }
     static public function Fetch($cats)

@@ -6,7 +6,7 @@ use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsModerator
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class IsModerator
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::check() || Auth::user()->role !== User::MODERATOR) abort('403');
+        if(!Auth::check() || Auth::user()->role !== User::ADMIN) abort('403');
         return $next($request);
     }
 }

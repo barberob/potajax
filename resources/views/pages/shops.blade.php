@@ -1,5 +1,5 @@
 @foreach($shops as $shop)
-	
-	  <li class="list-group-item">{{ $shop->nom }}</li>
-	
+
+{{--	  <li class="list-group-item">{{ $shop->nom }}</li>--}}
+{{--	--}}
 @endforeach

@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'tel' => ['required_with:role,manager']
+            'tel' => ['required_with:role,manager', 'regex:/^\+?[0-9 ]+$/', 'min:10', 'max:14']
         ]);
     }
 
@@ -77,12 +77,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $role = isset($data['role']) ? User::MANAGER : User::USER;
+        $tel = $data['tel'] ?? null;
         return User::create([
             'nom' => $data['lastname'],
             'prenom' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $role
+            'role' => $role,
+            'prefixtel' => '+33',
+            'tel' => $tel
         ]);
     }
 

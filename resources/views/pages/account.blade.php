@@ -18,8 +18,15 @@
             @if ($auth->tel != null)
                 <p>Tel : {{ $auth->tel }}</p>
             @endif
-            <a class="btn btn-outline-warning" href="{{ route('favorites') }}" role="button">Voir mes favoris</a><br>
-            <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
+            @if ($auth->role == 4)
+                <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
+                <a class="btn btn-outline-primary" href="{{ route('update_user') }}" role="button">Changer mes informations</a>
+            @else
+
+                <a class="btn btn-outline-warning" href="{{ route('favorites') }}" role="button">Voir mes favoris</a><br>
+                <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
+                <a class="btn btn-outline-primary" href="{{ route('update_user') }}" role="button">Changer mes informations</a>
+            @endif
         </div>
     </div>
 
@@ -40,12 +47,25 @@
         <div class="list">
             @foreach($myshops as $myshop)
                 <div class="card shop" style="width: 15rem;">
-                    <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
+
+                    @if(count($myshop->pictures) == 0)
+                        <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
+                    @else
+                        <img src="{{ $myshop->pictures[0]->url }}" class="card-img-top img_shop" style="height:auto; border-radius:33px;" alt="icone shop responsable">
+                    @endif
+
                     <div class="card-body">
                         <h5 class="card-title">{{$myshop->nom}}</h5>
-                        <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}}</p>
-                        <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="btn btn-info">Voir les statistiques</a>
-                        <a href="{{ route('update_shop',['id' => $myshop->id]) }}" class="btn btn-danger">Modifier</a>
+                        <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>
+                        <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="stats btn btn-outline-primary text-primary">
+                            Voir les statistiques
+                        </a>
+                        <a href="{{ route('update_shop',['id' => $myshop->id]) }}"
+                           class="btn btn-primary"
+                        >
+                            Modifier
+                        </a>
+                        <a class="btn btn-success" href="{{ route('shop', ['id' => $myshop->id]) }}" role="button">Voir la page</a>
                     </div>
                 </div>
             @endforeach
@@ -53,6 +73,11 @@
 
         @endif
     @endmanager
+    @admin
+        <div class="btn_admin">
+            <a class="btn btn-primary" href="{{ route('manage_site') }}">Gérer les données du site</a>
+        </div>
+    @endadmin
 
 
 @endsection

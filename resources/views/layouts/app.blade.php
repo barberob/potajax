@@ -47,7 +47,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="{{ Route::currentRouteName() }}" style="min-height:100vh; display:flex; flex-direction:column">
-    <div id="app" >
+    <div id="app" class="pb-5">
         @include('layouts.partials.nav')
 
         <main>

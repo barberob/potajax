@@ -37,6 +37,10 @@ Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 
 Route::post('/API/get_favorite', 'FavoritesController@post')->name('create_Favorite');
 Route::get('/API/get_favorite', 'FavoritesController@get')->name('create_Favorite');
+
+Route::post('/API/remove_favorite', 'FavoritesController@post')->name('remove_Favorite');
+Route::get('/API/remove_favorite', 'FavoritesController@get')->name('remove_Favorite');
+
 //Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
 
 Route::get('/add/favorites/{id}', 'FavoritesController@add')->name('add-favorites');
@@ -50,6 +54,8 @@ Route::get('/account', 'UsersController@index')->name('account');
 Route::get('/account/add-shop', 'ShopsController@addShop')->middleware('manager')->name('add_shop');
 Route::get('/account/update-shop/{id}', 'ShopsController@updateShop')->middleware('manager')->name('update_shop');
 Route::get('/account/shop-stats/{id}', 'ShopsController@stats')->middleware('manager')->name('stats');
+Route::get('/account/update-informations', 'UsersController@updateUser')->name('update_user');
+Route::post('/account/update-informations', 'UsersController@postUpdateUser')->name('post_update_user');
 
 Route::post('/account/post-add-update-shop/{id?}', 'ShopsController@postAddUpdateShop')
     ->middleware('manager')
@@ -87,3 +93,27 @@ Route::post('/API/get_marker', 'MapController@post')->name('create_Marker');
 
 // Route mentions légales
 Route::get('/mentions','MentionsController@index')->name('mentions');
+
+
+// ajouter middleware admin
+Route::get('/manage-site', 'ManageSiteController@index')->name('manage_site');
+Route::get('/manage-site/categories', 'ManageSiteController@categories')->name('manage_categories');
+Route::get('/manage-site/sub-categories/{category_id}', 'ManageSiteController@subcategories')
+    ->name('manage_subcategories');
+
+Route::get('/manage-site/categories/update/{category_id}', 'ManageSiteController@getUpdateCategory')
+    ->name('update_category');
+
+Route::post('/manage-site/categories/update/{category_id}', 'ManageSiteController@postUpdateCategory')
+    ->name('post_update_category');
+
+Route::post('/manage-site/categories/add', 'ManageSiteController@postAddCategory')->name('post_add_category');
+
+Route::post('manage-site/sub-categories/add/{category_id}', 'ManageSiteController@postAddSubcategory')
+    ->name('post_add_subcategory');
+
+Route::get('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 'ManageSiteController@getUpdateSubcategory')
+    ->name('get_update_subcategory');
+
+Route::post('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 'ManageSiteController@postUpdateSubcategory')
+    ->name('post_update_subcategory');

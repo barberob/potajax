@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Shops\Categorie;
 use App\Shops\Picture;
 use App\Shops\Shop;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Image;
 use Storage;
+use Faker\Generator as Faker;
 
 class ShopsController extends Controller
 {
@@ -29,9 +31,11 @@ class ShopsController extends Controller
         $shop = Shop::findOrFail($id);
         if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
+        $city = City::find($shop->city_id);
         return view('pages.add-update-shop', [
             'shop' => $shop,
-            'categories' => $categories
+            'categories' => $categories,
+            'city' => $city
         ]);
     }
 
@@ -42,15 +46,14 @@ class ShopsController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required'],
             'category' => ['required'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'siret' => ['required', 'max:14'],
+            'email' => ['required', 'email'],
+            'siret' => ['required', 'max:16'],
             'hours' => ['required'],
             'adress' => ['required'],
-            'street_number' => ['required'],
             'city' => ['required'],
             'cp' => ['required', 'digits:5'],
-            'tel' => ['required', 'regex:/^[0-9 ]+$/'],
-            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'tel' => ['required', 'regex:/^\+?[0-9 ]+$/', 'min:10', 'max:14'],
+            'images.*' => 'image|mimes:jpeg,jpg,png',
             'images' => function($attribute, $value, $fail) {
                 if (count($value) > 4) {
                     return $fail('le champ d\'' . $attribute . ' est limité à 4 fichiers maximum.');
@@ -60,7 +63,7 @@ class ShopsController extends Controller
 
 
         $subcat = $request->subcategory === '-1' ? null : $request->subcategory;
-
+        $faker = new Faker();
         $shop = Shop::updateOrCreate(
             ['id' => $id],
             [
@@ -72,9 +75,9 @@ class ShopsController extends Controller
             'numRue' => $request->street_number,
             'tel' => $request->tel,
             'email' => $request->email,
-            'siret' => $request->siret,
+            'siret' => str_replace(' ', '', $request->siret),
             'horaires' => $request->hours,
-            'etat' => 0,
+            'etat' => 1,
             'user_id' => Auth::id(),
             'city_id' => $request->citycode,
             'category_id' => $request->category,
@@ -82,6 +85,9 @@ class ShopsController extends Controller
             'lat' => $request->lat,
             'lng' => $request->lng
         ]);
+
+        $shop->codeNote = $this->generateReviewCode($shop->id);
+        $shop->save();
 
         if ($request->hasFile('images')) {
             $db_pictures_count = Picture::where('shop_id', $id)->count();
@@ -159,5 +165,14 @@ class ShopsController extends Controller
        /* $consultationsBycat = DB::select('select libelle, count(*) from categories inner join shops on shops.category_id = categories.id inner join visits on shops.id = visits.shop_id group by libelle');*/
 
         return view('pages.stats', ['consultations' => $consultationsResult]);
+    }
+
+    private function generateReviewCode($shop_id)
+    {
+        $returnString = $shop_id;
+        while (strlen($returnString) < 10) {
+            $returnString .= mt_rand(0, 9);
+        }
+        return $returnString;
     }
 }

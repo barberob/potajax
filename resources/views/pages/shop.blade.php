@@ -6,13 +6,24 @@
 
 @section('content')
 {{--    @dump($infos->codeNote)--}}
-    <div class="name" style="background-image:url('../img/Size_Hight/{{$img}}.jpg');">
+
+    @if(count($pic) == 0)
+        <div class="name" style="background: linear-gradient(to bottom right, #eb0000 20%, #ff9500 100%);">
+    @else
+        <div class="name" style="background-image:url('{{ $pic[0]->url }}');">
+    @endif
         <div>
             <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
             <h2 class="title">{{ $infos->nom }}</h2>
-            <p class="adresse">{{$infos->adresse}}</p>
+            <p class="adresse">Adresse: {{$infos->adresse }} - {{$infos->city->nom}} ({{$infos->city->cp}})</p>
             <p class="tel">Téléphone: {{$infos->tel}}</p>
             <p class="mail">@: {{$infos->email}}</p>
+
+            @if(isset($infos->subcategory->libelle))
+            <p class="tel">catégorie / sous catégorie: {{$infos->category->libelle}} / {{$infos->subcategory->libelle}}</p>
+            @else
+            <p class="tel">catégorie: {{$infos->category->libelle}}</p>
+            @endif
 
             <a class="btn btn-outline-warning btn-sm fav" href="#" role="button" data-id="{{ $infos->id }}" id="favorite">
                 Ajouter aux favoris
@@ -24,8 +35,19 @@
         <p> Ouvert les : {{$infos->horaires}}</p>
     </div>
     <div class="descriptif">
-        <p>{{$infos->descriptif}}</p>
+        <div class="contenu_desc">
+            {!!$infos->descriptif!!}
+        </div>
     </div>
+    <div class="img">
+    @foreach($pic as $p)
+        <div class="card" style="width: 18rem;">
+            <img src="{{ $p->url }}" class="card-img-top" alt="mon shop">
+        </div>
+    @endforeach
+    </div>
+
+
 
 
 
@@ -117,7 +139,7 @@
             </div>
         @empty
             @if(!$user_review)
-                <p>Pas encore d'avis sur ce magasin</p>
+                <p class="text-center">Pas encore d'avis sur ce magasin</p>
             @endif
         @endforelse
 

@@ -38,8 +38,10 @@
 		p{
 			font-size: 18px;
 		}
-	}	
-
+	}
+}
+a.stats:hover {
+    color: white !important;
 }
 .row-shop{
 	text-align: center;
@@ -47,15 +49,16 @@
 		.btn{
 			margin-top: 15px;
 		}
-	}	
+	}
 }
 .list{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap; 
+	flex-wrap: wrap;
 	justify-content: space-around;
 	.shop{
 		margin: auto;
+		margin-bottom: 25px;
 		border-radius: 120px 120px 0 0;
 		text-align: center;
 		.card-body{
@@ -63,18 +66,29 @@
 				font-weight: bold;
 				font-size: 20px;
 			}
+
 			a{
+				color: white;
 				margin-top: 15px;
+			}
+			a:hover{
+				color: white;
 			}
 		}
 	}
 }
-	
+
 
 .col{
 	text-align: center;
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+
+.btn_admin{
+	width: 100%;
+	text-align: center;
+}
+
 
 

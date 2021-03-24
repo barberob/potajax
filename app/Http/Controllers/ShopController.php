@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Shops\Shop;
 use App\Shops\Visit;
 use App\Shops\Categorie;
+use App\Shops\Picture;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -25,17 +26,32 @@ class ShopController extends Controller
         }
     	$user_review = Review::where('user_id', $user_id)->get()->first();
     	$user_can_review =
-            Review::where('user_id', $user_id)->count() > 0 || !Auth::check()
-            ? false
-            : true;
+            Review::where('user_id', $user_id)->count() > 0
+            || !Auth::check()
+            || $this->userHaveThisShop($infos->id)
+                ? false
+                : true;
+
+
+        $pic = Picture::where('shop_id', $id)->get();
         $visit = Visit::create(['shop_id' => $id]);
     	return view('pages.shop', [
             'infos'=> $infos,
+            'pic' => $pic,
             'img'=> $img_cat,
             'user_can_review' => $user_can_review,
             'reviews' => $reviews,
             'average_note' => $average_note,
             'user_review' => $user_review
         ]);
+    }
+
+    private function userHaveThisShop($shop_id):bool
+    {
+        $user_shops = Shop::where('user_id', Auth::id());
+        foreach ($user_shops as $shop) {
+            if($shop_id == $shop->id) return true;
+        }
+        return false;
     }
 }
