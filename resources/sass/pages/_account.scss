@@ -71,6 +71,9 @@ a.stats:hover {
 				color: white;
 				margin-top: 15px;
 			}
+			a:hover{
+				color: white;
+			}
 		}
 	}
 }
@@ -80,6 +83,11 @@ a.stats:hover {
 	text-align: center;
 	margin-top: 15px;
 	margin-bottom: 15px;
+}
+
+.btn_admin{
+	width: 100%;
+	text-align: center;
 }
 
 

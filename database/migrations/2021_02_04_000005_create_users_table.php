@@ -31,6 +31,8 @@ class CreateUsersTable extends Migration
             $table->string('tel', 20)->nullable();
             $table->tinyInteger('role');
 
+            $table->rememberToken();
+
             $table->timestamps();
             $table->softDeletes();
         });
