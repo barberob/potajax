@@ -156,7 +156,7 @@ export default class locStorage {
             }).then(objected => {
                 console.log(objected);
                 this.FormAffiche(objected);
-            }).catch(error => alert("Erreur : " + error));
+            }).catch(error => console.log("Erreur : " + error));
 
         } else if(type === 'create') {
             console.log('Enregistement Fav');
@@ -178,7 +178,7 @@ export default class locStorage {
                 return response.json();
             }).then(objected => {
                 console.log(objected);
-            }).catch(error => alert("Erreur : " + error));
+            }).catch(error => console.log("Erreur : " + error));
         } else if(type === 'remove') {
             console.log('Remove Fav');
 
@@ -199,7 +199,7 @@ export default class locStorage {
                 return response.json();
             }).then(objected => {
                 console.log(objected);
-            }).catch(error => alert("Erreur : " + error));
+            }).catch(error => console.log("Erreur : " + error));
         } if(type === 'compare') {
             console.log('compare Fav');
 
@@ -220,12 +220,13 @@ export default class locStorage {
                 return response.json();
             }).then(objected => {
                 console.log(objected);
-            }).catch(error => alert("Erreur : " + error));
+            }).catch(error => console.log("Erreur : " + error));
         }
     }
 
     FormAffiche(objected){
-        //console.log(typeof objected);
+        console.log(typeof objected);
+        console.log(objected);
         if(typeof objected === 'string'){
             let formTab = '<h1 class="text-center"> Vous n\'avez aucun commerce en favoris, ajoutez-en ! </h1>';
             formTab += '<div class="d-flex justify-content-center">';
@@ -233,7 +234,7 @@ export default class locStorage {
             formTab += '</div>';
             this.hookAffiche.innerHTML = formTab;
         } else if (typeof objected === 'object') {
-            if(objected.length === 0){
+            if(objected.length === 0 || objected.exception === "Error"){
                 let formTab = '<h1 class="text-center"> Vous n\'avez aucun commerce en favoris, ajoutez-en ! </h1>';
                 formTab += '<div class="d-flex justify-content-center">';
                 formTab += '<a class="btn btn-outline-primary" href="'+this.domain_url+'/map" role="button"> Cliquez ici pour voir les commerces ! </a>';
