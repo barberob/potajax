@@ -57,10 +57,22 @@
 
                     <div class="card-body">
                         @if($myshop->etat === \App\Shops\Shop::PENDING)
-                            <p>En attente de validation</p>
+                            <div class="alert alert-secondary">
+                                <p class="mb-0">En attente de validation</p>
+                            </div>
+                            @elseif($myshop->etat === \App\Shops\Shop::VALID)
+                            <div class="alert alert-success">
+                                <p class="mb-0">Commerce valide</p>
+                            </div>
+                        @elseif($myshop->etat === \App\Shops\Shop::REJECTED)
+                            <div class="alert alert-danger">
+                                <p class="mb-0">Commerce refusé</p>
+{{--                                <a href="" class="btn">Voir les motifs du refus</a>--}}
+                            </div>
                         @endif
                         <h5 class="card-title">{{$myshop->nom}}</h5>
-                        <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}} {{ $myshop->codeNote }}</p>
+                        <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}}</p>
+                        <p class="card-text">Code de note: {{ $myshop->codeNote }}</p>
                         <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="stats btn btn-outline-primary text-primary">
                             Voir les statistiques
                         </a>
