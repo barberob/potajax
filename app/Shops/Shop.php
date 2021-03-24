@@ -4,10 +4,15 @@ namespace App\Shops;
 
 use App\City;
 use App\Review;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
+    public const USER = 1;
+    public const MANAGER = 2;
+    public const MODERATOR = 3;
+    public const ADMIN = 4;
 
     protected $fillable = [
         'codeNote',
@@ -41,9 +46,9 @@ class Shop extends Model
         return $this->belongsToMany(Moderator::class);
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function category()

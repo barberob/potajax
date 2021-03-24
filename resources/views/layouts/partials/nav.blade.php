@@ -76,6 +76,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('manage_site') }}" title="Vers la zone de gestion">
                             <div>Gérer les données</div>
+                            <div><img src="{{ asset('img/database.svg') }}" alt="Vers la zone de gestion" width="30" height="auto" class="d-inline-block align-top"></div>
                         </a>
                     </li>
                 @endadmin

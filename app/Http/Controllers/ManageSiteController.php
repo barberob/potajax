@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Shops\Categorie;
+use App\Shops\Shop;
 use App\Shops\SubCategorie;
 use Illuminate\Http\Request;
 use Image;
@@ -35,6 +36,34 @@ class ManageSiteController extends Controller
             'category' => $category,
             'subcategories' => $subcategories
         ]);
+    }
+
+    public function shops()
+    {
+        $shops = Shop::where('etat','0')->get();
+        return view('pages.manage-shops', [
+            'shops' => $shops
+        ]);
+    }
+
+    public function getUpdateShop($shop_id)
+    {
+        $shop = Shop::findOrFail($shop_id);
+        return view('pages.update-shop', [
+            'shop' => $shop
+        ]);
+    }
+
+    public function postUpdateShop(Request $request, $shop_id)
+    {
+        $shop = Shop::findOrFail($shop_id);
+        $request->validate([
+            'etat' => 'required|string'
+        ]);
+        $shop->etat = $request->etat;
+        $shop->save();
+
+        return redirect()->back()->with('success', 'Modification réussie');
     }
 
     public function postAddSubcategory(Request $request, $category_id)

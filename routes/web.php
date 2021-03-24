@@ -117,3 +117,14 @@ Route::get('manage-site/sub-categories/update/{subcategory_id}/{category_id}', '
 
 Route::post('manage-site/sub-categories/update/{subcategory_id}/{category_id}', 'ManageSiteController@postUpdateSubcategory')
     ->name('post_update_subcategory');
+
+
+//gestion shop
+Route::get('/manage-site/shops', 'ManageSiteController@shops')->name('manage_shops');
+Route::get('/manage-site/shops/update/{shop_id}', 'ManageSiteController@getUpdateShop')
+    ->name('get_update_shop');
+Route::post('/manage-site/shops/update/{shop_id}', 'ManageSiteController@postUpdateShop')
+    ->name('post_update_shop');
+
+
+
