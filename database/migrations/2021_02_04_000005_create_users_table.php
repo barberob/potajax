@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('prefixtel', 10)->nullable();
             $table->string('tel', 20)->nullable();
-            $table->tinyInteger('roleeee');
+            $table->tinyInteger('role');
 
             $table->rememberToken();
 
