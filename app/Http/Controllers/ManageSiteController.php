@@ -16,7 +16,7 @@ class ManageSiteController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('admin');
+       $this->middleware('moderatorOrAdmin');
     }
 
     public function index()

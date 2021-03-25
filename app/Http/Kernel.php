@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\IsManager;
+use App\Http\Middleware\IsModeratorOrAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -56,7 +57,8 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'moderator' => \Illuminate\Auth\Middleware\IsModerator::class,
+        'moderator' => \App\Http\Middleware\IsModerator::class,
+        'moderatorOrAdmin' => \App\Http\Middleware\IsModeratorOrAdmin::class,
         'manager' => \App\Http\Middleware\IsManager::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
