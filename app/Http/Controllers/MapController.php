@@ -23,6 +23,7 @@ class MapController extends Controller
             if ($tab_cat_id[0] == "All" && $tab_subcat_id[0] == "All") {
                 $categories[] = DB::table('shops')->
                 select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.cp','shops.subcategory_id','shops.category_id','shops.created_at','shops.updated_at','shops.deleted_at')->
+                where('shops.etat', 2)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 get();
@@ -32,6 +33,7 @@ class MapController extends Controller
                 leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
+                where('shops.etat', 2)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 orderBy('shops.nom')->
@@ -43,6 +45,7 @@ class MapController extends Controller
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
                 where('shops.subcategory_id', $tab_subcat_id[0])->
+                where('shops.etat', 2)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 orderBy('shops.nom')->
@@ -56,6 +59,7 @@ class MapController extends Controller
             leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
             leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
             where('shops.category_id', $tab_cat_id[0])->
+            where('shops.etat', 2)->
             whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
             whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
             orderBy('shops.nom')->
@@ -77,6 +81,7 @@ class MapController extends Controller
             leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
             leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
             where('shops.nom', 'Like','%' . $search . '%')->
+            where('shops.etat', 2)->
             orderBy('shops.nom')->
             get();
 
@@ -88,6 +93,7 @@ class MapController extends Controller
                 leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('subcategories.libelle', 'Like','%' . $search . '%')->
+                where('shops.etat', 2)->
                 orderBy('shops.nom')->
                 get();
 
@@ -99,6 +105,7 @@ class MapController extends Controller
                     leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                     leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                     where('categories.libelle', 'Like','%' . $search . '%')->
+                    where('shops.etat', 2)->
                     orderBy('shops.nom')->
                     get();
 
@@ -111,6 +118,7 @@ class MapController extends Controller
                         leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                         leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
                         where('cities.nom', 'Like','%' . $search . '%')->
+                        where('shops.etat', 2)->
                         orderBy('shops.nom')->
                         get();
 
@@ -139,15 +147,16 @@ class MapController extends Controller
         //if(!$request->filled('message')) return redirect()->back()->with('error', 'You can\'t send an empty message');
         if(isset($request->input('0')['search'])){
 
-                $search = $request->input('0')['search'];
-                $search = str_replace("+", " ", $search);
-                $research = MapController::FindSearch($search);
+            if(empty($request->input('0')['search']) || $request->input('0')['search'] == null) return redirect()->route('Allmap');
 
-                return json_encode($research);
+            $search = $request->input('0')['search'];
+            $search = str_replace("+", " ", $search);
+            $research = MapController::FindSearch($search);
 
-                /*
+            return json_encode($research);
 
-                if(empty($request->input('0')['search'])){
+            /*
+            if(empty($request->input('0')['search'])){
                 $norEst = ["lat" => 54.29088164657006, "lng" => 26.235351562500004];
                 $sudOue = ["lat" => 32.91648534731439, "lng" => -14.106445312500002];
                 $cat = ["All"];
@@ -157,14 +166,17 @@ class MapController extends Controller
 
                 return json_encode($categories);
             }
-                 */
+            */
+
         }
         else{
+
+            //dd($request->input('0'));
             $norEst = $request->input('0')['northEast'];
             $sudOue = $request->input('0')['sudOuest'];
-            $cat = $request->input('0')['categories'];
-            $subCat = $request->input('0')['subcategories'];
-
+            $cat = $request->input('0')['categories'] ?? ["All"];
+            $subCat = $request->input('0')['subcategories'] ?? ["All"];
+            
             $categories = MapController::FindCat($cat, $subCat, $norEst, $sudOue);
 
             //$subCategories = MapController::FindSubCat($subCat,$norEst,$sudOue);
