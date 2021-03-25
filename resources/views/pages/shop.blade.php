@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="horaires">
-        <p> Ouvert les : {{$infos->horaires}}</p>
+        <p> Horaires: {{$infos->horaires}}</p>
     </div>
     <div class="descriptif">
         <div class="contenu_desc">

@@ -71,7 +71,7 @@
                         @endif
                         <h5 class="card-title">{{$myshop->nom}}</h5>
                         <p class="card-text">{{$myshop->numRue}} {{$myshop->adresse}}</p>
-                        <p class="card-text">Code de note: {{ $myshop->codeNote }}</p>
+                        <p class="card-text">Code avis utilisateur: {{ $myshop->codeNote }}</p>
                         <a href="{{ route('stats', ['id' => $myshop->id]) }}" class="stats btn btn-outline-primary text-primary">
                             Voir les statistiques
                         </a>
