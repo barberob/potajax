@@ -79,4 +79,9 @@ class Shop extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function moderation()
+    {
+        return $this->hasMany(Moderation::class, 'shop_id');
+    }
 }

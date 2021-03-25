@@ -20,8 +20,10 @@ class UsersController extends Controller
     public function index()
     {
     	$auth = Auth::user();
-        
-        $myshops = Shop::with('pictures')->where('user_id', $auth->id)->get();
+        $myshops = Shop::with(['pictures', 'moderation'])->where('user_id', $auth->id)->get();
+        foreach ($myshops as $shop) {
+            dump($shop->moderation->last()->modifRefus);
+        }
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
 
