@@ -44,7 +44,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::if('moderator', function () {
-            return Auth::check() && Auth::user()->role == User::MODERATOR;
+            return (Auth::check() && Auth::user()->role == User::MODERATOR)
+                || (Auth::check() && Auth::user()->role == User::ADMIN);
         });
 
         Blade::if('admin', function () {
