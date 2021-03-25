@@ -207,98 +207,105 @@ export default class Map{
         this.markers = new L1.MarkerClusterGroup();
         this.markers.clearLayers();
         this.macarte.removeLayer(this.markers);
-        this.Object.map((Item) => {
-            //console.log(Item.detail);
-            let type = Item.detail['subcategorie_id'];
-            let libelle = Item.detail['subcategorie_lib'];
-            let adresse = Item.detail['adresse'];
-            let id = Item.detail['id'];
-            let nom = Item.detail['nom'];
-
-            let data = '';
-            let marker;
-            let Loc = [Item.coord['Lat'], Item.coord['Lng']];
-            let icone = null;
-            let color = null;
-
-            data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
-            if(Item.detail['nomVille']){
-                data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' - '+Item.detail['nomVille']+' ('+Item.detail['cp']+')</p>';
-            } else {
-                data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' ('+Item.detail['cp']+')</p>';
-            }
-
-
-            //console.log(typeof Item.detail['desc']);
-            /*if(typeof Item.detail['desc'] === "string") {
-                Item.detail['desc'] = Item.detail['desc'].split('.');
-                for (let j = 0; j < Item.detail['desc'].length - 1; j++) {
-                    data += '<p style="font-size:12px;">' + Item.detail['desc'][j] + '.</p>';
-                }
-            } else {
-                //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
-            }*/
-            data += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a>';
-            //console.log(data);
-
-            //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
-
-            switch (type){
-                case 1: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
-                case 2: icone = {icon: this.IconRed};color = '#F80B17' ; break;
-                case 3: icone = {icon: this.IconGreen};color = '#0AF92A' ; break;
-                case 4: icone = {icon: this.IconOrange};color = '#F87D10' ; break;
-                case 5: icone = {icon: this.IconPurple};color = '#9E0DF7' ; break;
-                case 6: icone = {icon: this.IconYellow};color = '#F8F008' ; break;
-                case 7: icone = {icon: this.IconPink};color = '#F810B3' ; break;
-                case 8: icone = {icon: this.IconLightBlue};color = '#0DF7EC' ; break;
-
-                case 9: icone = {icon: this.IconWhite};color = '#E2E2E2' ; break;
-                case 10: icone = {icon: this.IconGrey};color = '#888888' ; break;
-                case 11: icone = {icon: this.IconBlack};color = '#2B2B2B' ; break;
-
-                default: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
-                //default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
-            }
-
-            //if(typeof libelle === 'undefined') libelle = 'tout';
-            //console.log(libelle)
-            //this.VerificationDejaDansTableau(libelle,this.makerUse,color);
-            /*if(!()){
-
-                this.makerUse.push({type: libelle, color: color});
-            }*/
-
-            //Map.flyTTo(Loc, 15);
-
-
-            //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
-            //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
-
-            let popup = L.popup({offset: [0, -32]}).setLatLng(Loc).setContent(data);
-            marker = L.marker(Loc,icone);
-            marker.bindPopup(popup);
-
+        if(this.Object.length == 0){
             let NewList = '';
             NewList += '<li class="list-group-item">';
-            NewList += '<strong><a class="MonFlyTo" data-loc="'+Loc+'">'+nom+'</a></strong>';
-            NewList += '<p>'+adresse+'</p>';
-            NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
+            NewList += '<strong><a href="#">Aucun commerce</a></strong>';
             NewList += '</li>';
 
             document.getElementById('listRightShop').innerHTML += NewList;
+        } else {
+            this.Object.map((Item) => {
+                //console.log(Item.detail);
+                let type = Item.detail['subcategorie_id'];
+                let libelle = Item.detail['subcategorie_lib'];
+                let adresse = Item.detail['adresse'];
+                let id = Item.detail['id'];
+                let nom = Item.detail['nom'];
 
-            /*console.log('shop_'+id);
+                let data = '';
+                let marker;
+                let Loc = [Item.coord['Lat'], Item.coord['Lng']];
+                let icone = null;
+                let color = null;
 
-            document.getElementById('shop_'+id).addEventListener('click',function(ev){
-                console.log(ev.target.attributes.id);
-                console.log(marker);
-                marker.openPopup();
-            })*/
+                data += '<p style="font-weight:bold; font-size:18px;">'+Item.detail['nom']+'</p>';
+                if(Item.detail['nomVille']){
+                    data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' - '+Item.detail['nomVille']+' ('+Item.detail['cp']+')</p>';
+                } else {
+                    data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' ('+Item.detail['cp']+')</p>';
+                }
 
-            this.markers.addLayer(marker);
-        });
+                //console.log(typeof Item.detail['desc']);
+                /*if(typeof Item.detail['desc'] === "string") {
+                    Item.detail['desc'] = Item.detail['desc'].split('.');
+                    for (let j = 0; j < Item.detail['desc'].length - 1; j++) {
+                        data += '<p style="font-size:12px;">' + Item.detail['desc'][j] + '.</p>';
+                    }
+                } else {
+                    //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
+                }*/
+                data += '<div class="d-flex justify-content-center"><a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a></div>';
+                //console.log(data);
 
+                //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
+
+                switch (type){
+                    case 1: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
+                    case 2: icone = {icon: this.IconRed};color = '#F80B17' ; break;
+                    case 3: icone = {icon: this.IconGreen};color = '#0AF92A' ; break;
+                    case 4: icone = {icon: this.IconOrange};color = '#F87D10' ; break;
+                    case 5: icone = {icon: this.IconPurple};color = '#9E0DF7' ; break;
+                    case 6: icone = {icon: this.IconYellow};color = '#F8F008' ; break;
+                    case 7: icone = {icon: this.IconPink};color = '#F810B3' ; break;
+                    case 8: icone = {icon: this.IconLightBlue};color = '#0DF7EC' ; break;
+
+                    case 9: icone = {icon: this.IconWhite};color = '#E2E2E2' ; break;
+                    case 10: icone = {icon: this.IconGrey};color = '#888888' ; break;
+                    case 11: icone = {icon: this.IconBlack};color = '#2B2B2B' ; break;
+
+                    default: icone = {icon: this.IconBlue};color = '#2B82CB' ; break;
+                    //default: icone = {icon: this.IconNAN};color = 'NaN' ; break;
+                }
+
+                //if(typeof libelle === 'undefined') libelle = 'tout';
+                //console.log(libelle)
+                //this.VerificationDejaDansTableau(libelle,this.makerUse,color);
+                /*if(!()){
+
+                    this.makerUse.push({type: libelle, color: color});
+                }*/
+
+                //Map.flyTTo(Loc, 15);
+
+
+                //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
+                //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
+
+                let popup = L.popup({offset: [0, -32]}).setLatLng(Loc).setContent(data);
+                marker = L.marker(Loc,icone);
+                marker.bindPopup(popup);
+
+                let NewList = '';
+                NewList += '<li class="list-group-item">';
+                NewList += '<strong><a class="MonFlyTo" data-loc="'+Loc+'">'+nom+'</a></strong>';
+                NewList += '<p>'+adresse+'</p>';
+                NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
+                NewList += '</li>';
+
+                document.getElementById('listRightShop').innerHTML += NewList;
+
+                /*console.log('shop_'+id);
+
+                document.getElementById('shop_'+id).addEventListener('click',function(ev){
+                    console.log(ev.target.attributes.id);
+                    console.log(marker);
+                    marker.openPopup();
+                })*/
+
+                this.markers.addLayer(marker);
+            });
+        }
         //console.log(this.makerUse);
         //this.legende(labels, grades);
 

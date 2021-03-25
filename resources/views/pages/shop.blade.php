@@ -40,7 +40,7 @@
     <div class="img">
     @foreach($pic as $p)
         <div class="card" style="width: 18rem;">
-            <img src="{{ $p->url }}" class="card-img-top" alt="mon shop">
+            <img src="{{ $p->url }}" class="card-img-top my-auto" alt="mon shop">
         </div>
     @endforeach
     </div>
@@ -145,7 +145,7 @@
 
     @moderator
         <h3 class="text-center mt-5">Invalider le commerce</h3>
-        <div class="container row">
+        <div class="container">
             <form method="POST"
                   action="{{ route('reject_shop', ['shop_id' => $infos->id]) }}"
                   class="col-md-6 m-auto"

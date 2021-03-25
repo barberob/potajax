@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-xl navbar-light bg-white shadow-sm">
+{{--    <div class="container">--}}
         <a class="navbar-brand navbar-brand-logo" href="{{ url('/') }}" title="Vers la page d'accueil">
             <div class="logo"><img src="{{ asset('img/Fichier_8.svg') }}" alt="Vers la page d'accueil" width="30" height="auto" class="d-inline-block align-top"></div>
             <div class="brand">Ramène Ta Fraise</div>
@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse navbar-expand-lg" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
 
@@ -88,11 +88,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('manage_shops') }}" title="Vers la zone de gestion des commerces">
                             <div>Gérer les commerces</div>
-                            <div><img src="{{ asset('img/shop.svg') }}" alt="commerces" width="30" height="auto" class="d-inline-block align-top"></div>
+                            <div><img src="{{ asset('img/shops.svg') }}" alt="commerces" width="30" height="auto" class="d-inline-block align-top"></div>
                         </a>
                     </li>
                 @endmoderator
             </ul>
         </div>
-    </div>
+{{--    </div>--}}
 </nav>
