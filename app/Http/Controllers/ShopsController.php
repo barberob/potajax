@@ -31,7 +31,7 @@ class ShopsController extends Controller
         $shop = Shop::findOrFail($id);
         if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
-        $city = City::find($shop->city_id);
+        $city = City::where('id', $shop->city_id)->get();
         return view('pages.add-update-shop', [
             'shop' => $shop,
             'categories' => $categories,
