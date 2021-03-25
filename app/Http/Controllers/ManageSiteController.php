@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Shops\Categorie;
+use App\Shops\Moderation;
 use App\Shops\Shop;
 use App\Shops\SubCategorie;
 use Carbon\Carbon;
@@ -146,7 +147,7 @@ class ManageSiteController extends Controller
         $shop->etat = Shop::REJECTED;
         $shop->save();
 
-        DB::table('user_shop')->updateOrInsert(
+        Moderation::updateOrCreate(
             ['shop_id' => $shop->id, 'user_id' => Auth::id()],
             [
                 'modifRefus' => $request->motifRefus,
@@ -155,6 +156,16 @@ class ManageSiteController extends Controller
                 'shop_id' => $shop->id
             ]
         );
+
+//        DB::table('user_shop')->updateOrInsert(
+//            ['shop_id' => $shop->id, 'user_id' => Auth::id()],
+//            [
+//                'modifRefus' => $request->motifRefus,
+//                'date' => Carbon::now(),
+//                'user_id' => Auth::id(),
+//                'shop_id' => $shop->id
+//            ]
+//        );
         return redirect()->back()->with('success', 'la modération a bien été prise en compte');
     }
 

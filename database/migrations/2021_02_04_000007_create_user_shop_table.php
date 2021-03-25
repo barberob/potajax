@@ -22,10 +22,11 @@ class CreateUserShopTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->id();
             $table->text('modifRefus')->nullable();
             $table->dateTime('date')->nullable();
 
-            $table->primary(['shop_id','user_id']);
+//            $table->primary(['shop_id','user_id']);
 
             $table->foreignId('shop_id')->constrained();
             $table->foreignId('user_id')->constrained();

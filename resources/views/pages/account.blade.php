@@ -67,7 +67,7 @@
                         @elseif($myshop->etat === \App\Shops\Shop::REJECTED)
                             <div class="alert alert-danger">
                                 <p class="mb-0">Commerce refusé</p>
-{{--                                <a href="" class="btn">Voir les motifs du refus</a>--}}
+                                <div class="btn btn-danger">Voir la raison</div>
                             </div>
                         @endif
                         <h5 class="card-title">{{$myshop->nom}}</h5>

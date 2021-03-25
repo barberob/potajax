@@ -15,13 +15,13 @@ export default class Map{
             const TILE_LAYER8 = 'https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}';
 
             this.TILE_LAYER1_layers = L.tileLayer(TILE_LAYER1, {id: '1',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'});
-            this.TILE_LAYER2_layers = L.tileLayer(TILE_LAYER2, {id: '2',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+            this.TILE_LAYER2_layers = L.tileLayer(TILE_LAYER2, {id: '2',noWrap: true, minZoom: 2, maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
             this.TILE_LAYER3_layers = L.tileLayer(TILE_LAYER3, {id: '3',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'});
             this.TILE_LAYER4_layers = L.tileLayer(TILE_LAYER4, {id: '4',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
             this.TILE_LAYER5_layers = L.tileLayer(TILE_LAYER5, {id: '5',noWrap: true, minZoom: 2, maxZoom: 20, attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'});
-            this.TILE_LAYER6_layers = L.tileLayer(TILE_LAYER6, {id: '6',noWrap: true, minZoom: 2, maxZoom: 19, attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
-            this.TILE_LAYER7_layers = L.tileLayer(TILE_LAYER7, {id: '7',noWrap: true, minZoom: 1, maxZoom: 8, attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.', format: 'jpg', time: '', tilematrixset: 'GoogleMapsCompatible_Level'});
-            this.TILE_LAYER8_layers = L.tileLayer(TILE_LAYER8, {id: '8',noWrap: true, minZoom: 2, maxZoom: 20, attribution: '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',apikey: 'choisirgeoportail', format: 'image/jpeg', style: 'normal'});
+            this.TILE_LAYER6_layers = L.tileLayer(TILE_LAYER6, {id: '6',noWrap: true, minZoom: 2, maxZoom: 17, attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+            this.TILE_LAYER7_layers = L.tileLayer(TILE_LAYER7, {id: '7',noWrap: true, minZoom: 2, maxZoom: 8, attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.', format: 'jpg', time: '', tilematrixset: 'GoogleMapsCompatible_Level'});
+            this.TILE_LAYER8_layers = L.tileLayer(TILE_LAYER8, {id: '8',noWrap: true, minZoom: 2, maxZoom: 19, attribution: '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',apikey: 'choisirgeoportail', format: 'image/jpeg', style: 'normal'});
 
             this.baseMaps = {
                 "<span style='color: gray'>Dark Edition</span>": this.TILE_LAYER1_layers,
@@ -168,6 +168,7 @@ export default class Map{
         this.NewPoints(this.Def_pos);
 
         this.macarte.on('moveend', () => {
+            console.log(this.macarte.getZoom());
             //console.log(this.macarte.getBounds());
             this.NewPoints(this.macarte.getBounds());
         });
