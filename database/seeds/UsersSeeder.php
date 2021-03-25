@@ -24,7 +24,7 @@ class UsersSeeder extends Seeder
         $c1 = DB::table('users')->insert([
             'nom' => 'Monsieur',
             'prenom' => 'Commerçant',
-            'email' => 'commerçant@gmail.com',
+            'email' => 'commercant@gmail.com',
             'password' => 'commerçant123commerçant',
             'prefixtel' => '+33',
             'tel' => '0466853376',
@@ -34,7 +34,7 @@ class UsersSeeder extends Seeder
         $c2 = DB::table('users')->insert([
             'nom' => 'Madame',
             'prenom' => 'Commerçante',
-            'email' => 'commerçante@gmail.com',
+            'email' => 'commercante@gmail.com',
             'password' => 'commerçante123commerçante',
             'prefixtel' => '+33',
             'tel' => '0466853377',
