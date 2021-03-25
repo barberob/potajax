@@ -81,7 +81,7 @@ class FavoritesController extends Controller
         } else if ($type === 'read') {
             /**/
 
-            if($request->input('1') !== []){
+            if($request->input('1') !== [] && !empty($request->input('1'))){
 
                 $shops = null;
                 //dd($request->all());
