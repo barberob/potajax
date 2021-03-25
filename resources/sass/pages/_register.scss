@@ -1,5 +1,5 @@
 #register{
-	height: 110vh;
+	min-height: 110vh;
 	background-color: #ffe190;
 	background-image: linear-gradient(316deg, #ffe190 0%, #fa9e8c 74%);
 
@@ -32,9 +32,9 @@ body.register div#app.pb-5, body.login div#app.pb-5 {
 
 @media (min-width: 992px) {
 	#register{
-		height: 92.5vh;
+		min-height: 82.5vh;
 
-		padding-top: 100px;
+		padding-top: 50px;
 		.register{
 			margin-top: 20px!important;
 			.row{
@@ -46,10 +46,6 @@ body.register div#app.pb-5, body.login div#app.pb-5 {
 				}
 
 			}
-
-
-
 		}
-
 	}
 }

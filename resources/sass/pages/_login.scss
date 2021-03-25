@@ -46,11 +46,10 @@
 
 @media (min-width: 992px) {
 	body.login{
-		height: 100vh;
+		min-height: 100vh;
 	}
 	.opacite{
-		padding-top: 100px;
-
+		padding-top: 50px;
 	}
 	.card-group{
 		width: 40%!important;
