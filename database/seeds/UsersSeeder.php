@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class UsersSeeder extends Seeder
             'nom' => 'Monsieur',
             'prenom' => 'Michel',
             'email' => 'client@gmail.com',
-            'password' => 'client123client',
+            'password' => Hash::make('client123client'),
             'prefixtel' => '+33',
             'tel' => '0466853375',
             'role' => 1
@@ -24,8 +25,8 @@ class UsersSeeder extends Seeder
         $c1 = DB::table('users')->insert([
             'nom' => 'Monsieur',
             'prenom' => 'Commerçant',
-            'email' => 'commerçant@gmail.com',
-            'password' => 'commerçant123commerçant',
+            'email' => 'commercant@gmail.com',
+            'password' => Hash::make('commercant123commercant'),
             'prefixtel' => '+33',
             'tel' => '0466853376',
             'role' => 2
@@ -34,8 +35,8 @@ class UsersSeeder extends Seeder
         $c2 = DB::table('users')->insert([
             'nom' => 'Madame',
             'prenom' => 'Commerçante',
-            'email' => 'commerçante@gmail.com',
-            'password' => 'commerçante123commerçante',
+            'email' => 'commercante@gmail.com',
+            'password' => Hash::make('commercante123commercante'),
             'prefixtel' => '+33',
             'tel' => '0466853377',
             'role' => 2
@@ -44,7 +45,7 @@ class UsersSeeder extends Seeder
             'nom' => 'Monsieur',
             'prenom' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => 'admin123admin',
+            'password' => Hash::make('admin123admin'),
             'prefixtel' => '+33',
             'tel' => '0466853378',
             'role' => 4
@@ -53,7 +54,7 @@ class UsersSeeder extends Seeder
             'nom' => 'Monsieur',
             'prenom' => 'Moderateur',
             'email' => 'moderateur@gmail.com',
-            'password' => 'moderateur123moderateur',
+            'password' => Hash::make('moderateur123moderateur'),
             'prefixtel' => '+33',
             'tel' => '0466853379',
             'role' => 3
