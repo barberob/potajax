@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success m-0">
+            {{ session('success') }}
+        </div>
+    @endif
 	<div class="page_map">
         <div class="filters d-flex justify-content mt-4 px-4" id="navig">
         	<div id="btn">

@@ -5,8 +5,6 @@
 @endsection
 
 @section('content')
-{{--    @dump($infos->codeNote)--}}
-
     @if(count($pic) == 0)
         <div class="name" style="background: linear-gradient(to bottom right, #eb0000 20%, #ff9500 100%);">
     @else
@@ -47,13 +45,9 @@
     @endforeach
     </div>
 
-
-
-
-
     <div class="container col-md-6 col-sm-12">
         @if($average_note)
-            <h3>Moyenne: <strong>{{ $average_note }}/10</strong></h3>
+            <h3 class="my-5">Moyenne: <strong>{{ $average_note }}/10</strong></h3>
         @endif
 
         @logged
@@ -150,6 +144,29 @@
     </div>
 
     @moderator
-         
+        <h3 class="text-center mt-5">Invalider le commerce</h3>
+        <div class="container row">
+            <form method="POST"
+                  action="{{ route('reject_shop', ['shop_id' => $infos->id]) }}"
+                  class="col-md-6 m-auto"
+            >
+                @csrf
+
+                <label for="motifRefus">Message de refus: </label>
+                <textarea class="form-control @error('motifRefus') is-invalid @enderror"
+                          id="motifRefus"
+                          name="motifRefus"
+                ></textarea>
+                @error('motifRefus')
+                <span class="invalid-feedback" role="alert">
+                    <strong>Le champ d'explication du refus est requis</strong>
+                </span>
+                @enderror
+                <br/>
+                <button type="submit" class="btn btn-danger">
+                    Refuser
+                </button>
+            </form>
+        </div>
     @endmoderator
 @endsection

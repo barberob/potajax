@@ -37,7 +37,7 @@
 				height: 180px;
 				background-color: #f1dfd1;
 				background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%);
-				
+
 				.adresse{
 					color: #0BAB64;
 				}
@@ -84,6 +84,7 @@
 			#liste{
 				display: block;
 				width: 10%;
+                margin: 0px!important;
 				.card-header{
 					font-size: 25px;
 					text-align: center;
@@ -91,6 +92,7 @@
 				}
 
 				.card-body{
+                    padding: 0px!important;
 					font-size: 20px;
 					.list-group{
 					    max-height: 60vh;

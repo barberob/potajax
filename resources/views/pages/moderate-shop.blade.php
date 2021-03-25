@@ -81,8 +81,6 @@
                         Refuser
                     </button>
                 </form>
-
-
             </div>
         </div>
     </div>
