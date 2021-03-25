@@ -149,8 +149,13 @@ class MapController extends Controller
 
             if(empty($request->input('0')['search']) || $request->input('0')['search'] == null) return redirect()->route('Allmap');
 
-            $search = $request->input('0')['search'];
-            $search = str_replace("+", " ", $search);
+            $search = urldecode($request->input('0')['search']);
+            /*$search = str_replace("+", " ", $search);
+            $search = str_replace("%27", "'", $search);
+            $search = str_replace("%2F", "/", $search);
+            $search = str_replace("%3F", "?", $search);*/
+
+
             $research = MapController::FindSearch($search);
 
             return json_encode($research);

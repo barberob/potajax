@@ -5,12 +5,12 @@
     <div class="home">
         @if($auth != null)
             <div class="auth text-center">
-                Bonjour {{ $auth->prenom }} ! 
+                Bonjour {{ $auth->prenom }} !
             </div>
         @endif
         <div class="intro px-3">
             <form class="d-flex" action="{{ route('Recherche') }}">
-              <input class="rounded-pill px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une adresse...">
+              <input class="rounded-pill px-3 py-3" type="text" name="search" id="search" placeholder="Rechercher un commerce, une ville...">
               <button class="btn" type="submit"><i class="bi-search" style="font-size: 2rem; color: white;"></i></button>
             </form>
 
