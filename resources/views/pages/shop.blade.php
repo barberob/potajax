@@ -150,6 +150,32 @@
     </div>
 
     @moderator
-         
+        <h3 class="text-center mt-5">Invalider le commerce</h3>
+        <div class="container flex flex-center justify-content-center">
+            <form method="POST"
+                  action="{{ route('validate_shop', ['shop_id' => $infos->id]) }}"
+                  class="col-md-6"
+            >
+                @csrf
+
+                <label for="motifRefus">Message de refus: </label>
+                <textarea class="form-control @error('motifRefus') is-invalid @enderror"
+                          id="motifRefus"
+                          name="motifRefus"
+                ></textarea>
+                @error('motifRefus')
+                <span class="invalid-feedback" role="alert">
+                <strong>Le champ d'explication du refus est requis</strong>
+            </span>
+                @enderror
+                <br/>
+                <button type="submit"
+                        class="btn btn-danger"
+                        formaction="{{ route('reject_shop', ['shop_id' => $infos->id]) }}"
+                >
+                    Refuser
+                </button>
+            </form>
+        </div>
     @endmoderator
 @endsection
