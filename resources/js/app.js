@@ -42,6 +42,7 @@ import ReviewForm from './pages/ReviewForm';
 import AdminManage from './pages/AdminManage';
 
 class App {
+
     constructor() {
         this.initApp()
     }
