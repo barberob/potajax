@@ -143,9 +143,9 @@ class ShopsController extends Controller
 
     public function stats($id)
     {
-        $months = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"];
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        $consultations = Visit::where("created_at", ">", Carbon::now()->subMonths(12))
+        $visits = Visit::where("created_at", ">", Carbon::now()->subMonths(12))
                                 ->where('shop_id', $id)
                                 ->orderBy('created_at')
                                 ->get()
@@ -155,16 +155,18 @@ class ShopsController extends Controller
                                 ->map
                                 ->count();
 
-        $consultationsResult = [];
+        $allVisits = count(DB::table('visits')->where('shop_id', $id)->get());
+
+        $visitsResult = [];
 
         foreach ($months as $month)
         {
-            $consultationsResult[$month] = $consultations[$month] ?? 0;
+            $visitsResult[$month] = $visits[$month] ?? 0;
         }
 
        /* $consultationsBycat = DB::select('select libelle, count(*) from categories inner join shops on shops.category_id = categories.id inner join visits on shops.id = visits.shop_id group by libelle');*/
 
-        return view('pages.stats', ['consultations' => $consultationsResult]);
+        return view('pages.stats', ['visits' => $visitsResult, 'allVisits' => $allVisits]);
     }
 
     private function generateReviewCode($shop_id)
