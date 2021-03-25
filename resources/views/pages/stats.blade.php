@@ -21,17 +21,11 @@
 
 	    	var visits = @json($visits);
 
-	    	console.log(visits);
-
         	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         	var currentMonth = new Date().getMonth();
 
         	var orderedMonth = months.slice(currentMonth-6).concat(months.slice(0, currentMonth+1));
-
-        	console.log(orderedMonth);
-
-        	console.log(orderedMonth.map((month)=> {return visits?.[month]}));
 
 	    	let lineChart = new Chart(myChart, {
 	    		type: 'line',

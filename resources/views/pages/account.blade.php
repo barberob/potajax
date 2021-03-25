@@ -24,7 +24,7 @@
             @else
 
                 <a class="btn btn-outline-warning" href="{{ route('favorites') }}" role="button">Voir mes favoris</a><br>
-                <a class="btn btn-outline-primary" href="{{ route('logout') }}" role="button">Me deconnecter</a>
+                <a class="btn btn-outline-danger" href="{{ route('logout') }}" role="button">Me deconnecter</a>
                 <a class="btn btn-outline-primary" href="{{ route('update_user') }}" role="button">Changer mes informations</a>
             @endif
         </div>
