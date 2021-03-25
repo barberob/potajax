@@ -24,14 +24,14 @@
 			}
 
 		}
-		
-		
-
 	}
-	
 }
 
-@media (min-width: 992px) { 
+body.register div#app.pb-5, body.login div#app.pb-5 {
+    padding-bottom: 0 !important;
+}
+
+@media (min-width: 992px) {
 	#register{
 		height: 92.5vh;
 
@@ -47,10 +47,10 @@
 				}
 
 			}
-			
-			
+
+
 
 		}
-		
+
 	}
 }
