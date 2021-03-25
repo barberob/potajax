@@ -222,6 +222,7 @@ export default class Map{
                 let adresse = Item.detail['adresse'];
                 let id = Item.detail['id'];
                 let nom = Item.detail['nom'];
+                let nomVille = Item.detail['nomVille'];
 
                 let data = '';
                 let marker;
@@ -289,7 +290,7 @@ export default class Map{
                 let NewList = '';
                 NewList += '<li class="list-group-item">';
                 NewList += '<strong><a class="MonFlyTo" data-loc="'+Loc+'">'+nom+'</a></strong>';
-                NewList += '<p>'+adresse+'</p>';
+                NewList += '<p>'+Item.detail['adresse']+' - '+Item.detail['nomVille']+' ('+Item.detail['cp']+')</p>';
                 NewList += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+id+'" role="button">Voir la page</a>';
                 NewList += '</li>';
 
