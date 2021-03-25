@@ -28,7 +28,7 @@ class ShopController extends Controller
     	$user_can_review =
             Review::where('user_id', $user_id)->count() > 0
             || !Auth::check()
-            || $this->userHaveThisShop($infos->id)
+            || !$this->userDontHaveThisShop($infos->id)
                 ? false
                 : true;
 
@@ -46,7 +46,7 @@ class ShopController extends Controller
         ]);
     }
 
-    private function userHaveThisShop($shop_id):bool
+    private function userDontHaveThisShop($shop_id):bool
     {
         $user_shops = Shop::where('user_id', Auth::id());
         foreach ($user_shops as $shop) {
