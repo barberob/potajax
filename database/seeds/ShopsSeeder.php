@@ -11,7 +11,7 @@ class ShopsSeeder extends Seeder
      */
     public function run()
     {
-        DB:table('shops')->insert([
+        $s1 = DB::table('shops')->insert([
             'nom' => 'Le Resto',
             'adresse' => 'Rue Saint-Thomas',
             'numRue' => '6',
@@ -26,13 +26,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au vendredi : 12h00 - 14h00, Fermé les week-ends',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '30189',
             'subcategory_id' => 4,
             'category_id' => 1,
 
-        ])
-        ->insert([
+        ]);
+        $s2 = DB::table('shops')->insert([
             'nom' => 'A Funtana',
             'adresse' => 'Imm. Cyrnos Place Marcha',
             'numRue' => '1',
@@ -47,13 +47,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au dimanche : 12h00 - 14h30 / 19h15 - 23h00',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '2B050',
-            'subcategory_id' => '',
+            
             'category_id' => 1
 
-        ])
-        ->insert([
+        ]);
+        $s3 = DB::table('shops')->insert([
             'nom' => 'Day by day',
             'adresse' => 'Place Jean Marcellin',
             'numRue' => '9',
@@ -68,13 +68,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du mardi au samedi : 09h30 - 13h30 / 14h30 - 19h00.Fermé les dimanches et lundis.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '5061',
-            'subcategory_id' => '',
+           
             'category_id' => 2
 
-        ])
-        ->insert([
+        ]);
+        $s4 = DB::table('shops')->insert([
             'nom' => 'L\'Annexe',
             'adresse' => 'Avenue d\'Embrun',
             'numRue' => '89',
@@ -89,13 +89,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au jeudi : 11h45 - 14h00, du vendredi au samedi : 11h45 - 14h00 / 18h45 - 22h30. Fermé les dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '5061',
             'subcategory_id' => 4,
             'category_id' => 1
 
-        ])
-        ->insert([
+        ]);
+        $s5 = DB::table('shops')->insert([
             'nom' => 'L\'Epicerie de Nimes',
             'adresse' => 'Rue de l\'Agau',
             'numRue' => '14',
@@ -110,13 +110,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du mardi au samedi : 09h00 - 13h00 / 15h00 - 19h30. Fermé les dimanches et lundis.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '30189',
-            'subcategory_id' => '',
+            
             'category_id' => 2
 
-        ])
-        ->insert([
+        ]);
+        $s6 = DB::table('shops')->insert([
             'nom' => 'Thanh Binh',
             'adresse' => 'Rue Lagrange',
             'numRue' => '18',
@@ -131,13 +131,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au samedi : 9h30 - 20h00. Fermé les dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '75105',
             'subcategory_id' => 6,
             'category_id' => 2
 
-        ])
-        ->insert([
+        ]);
+        $s7 = DB::table('shops')->insert([
             'nom' => 'Boucherie du Lez',
             'adresse' => 'Avenue de la Pompignane',
             'numRue' => '1603',
@@ -152,13 +152,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du mardi au samedi : 07h00 - 18h00, le dimanche : 08h30 - 12h30. Fermé les lundis.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '34172',
-            'subcategory_id' => '',
+           
             'category_id' => 3
 
-        ])
-        ->insert([
+        ]);
+        $s8 = DB::table('shops')->insert([
             'nom' => 'Alpes Viandes 05',
             'adresse' => 'Rue Pasteur',
             'numRue' => '14',
@@ -173,13 +173,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du mardi au samedi : 08h30 - 13h00 / 15h00 - 19h30. Fermé les lundis et dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '5061',
             'subcategory_id' => 3,
             'category_id' => 3
 
-        ])
-        ->insert([
+        ]);
+        $s9 = DB::table('shops')->insert([
             'nom' => 'Le Primeur à domicile',
             'adresse' => 'Cour Astier',
             'numRue' => '1',
@@ -194,13 +194,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du mardi au dimanche : 09h30 - 18h00. Fermé les lundis.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '7319',
-            'subcategory_id' => '',
+            
             'category_id' => 4
 
-        ])
-        ->insert([
+        ]);
+        $s10 = DB::table('shops')->insert([
             'nom' => 'Mas Guérido primeur',
             'adresse' => 'Avenue André Ampère',
             'numRue' => '15',
@@ -215,13 +215,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au samedi : 09h00 - 17h30. Fermé les dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '66028',
-            'subcategory_id' => '',
+           
             'category_id' => 4
 
-        ])
-        ->insert([
+        ]);
+        $s11 = DB::table('shops')->insert([
             'nom' => 'Tiliem | Primeur Toulousain',
             'adresse' => 'Chemin de la Plaine des Lacs',
             'numRue' => '4',
@@ -238,13 +238,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Ouvert 24h/24, 7 jours sur 7.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '31458',
-            'subcategory_id' => '',
+           
             'category_id' => 4
 
-        ])
-        ->insert([
+        ]);
+        $s12 = DB::table('shops')->insert([
             'nom' => 'Magasin emile Noël | L\'Epicier Bio',
             'adresse' => 'Rue Dr Samuel Hahnemann',
             'numRue' => '',
@@ -264,13 +264,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au samedi : 09h00 - 12h00 / 14h30 - 18h30. Fermé les dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '30202',
-            'subcategory_id' => '',
+            
             'category_id' => 5
 
-        ])
-        ->insert([
+        ]);
+        $s13 = DB::table('shops')->insert([
             'nom' => 'Maxi Zoo Avignon - Mistral 7',
             'adresse' => 'Avenue Pierre Bérégovoy, Centre Commercial Mistral 7',
             'numRue' => '',
@@ -285,13 +285,13 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Du lundi au samedi : 09h30 - 12h30 / 14h00 - 19h00. Fermé les dimanches.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '2',
             'city_id' => '84007',
-            'subcategory_id' => '',
+            
             'category_id' => 6
 
-        ])
-        ->insert([
+        ]);
+        $s14 = DB::table('shops')->insert([
             'nom' => 'Centre Equestre Le Mazet',
             'adresse' => 'Mazet',
             'numRue' => '',
@@ -306,9 +306,9 @@ class ShopsSeeder extends Seeder
             'horaires' => 'Tous les jours, de 9h30 à 18h00.',
             'etat' => 1,
             'codeNote' => '',
-            'user_id' => '',
+            'user_id' => '3',
             'city_id' => '7034',
-            'subcategory_id' => '',
+            
             'category_id' => 7
 
         ])
