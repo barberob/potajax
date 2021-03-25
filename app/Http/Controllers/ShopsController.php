@@ -31,7 +31,8 @@ class ShopsController extends Controller
         $shop = Shop::findOrFail($id);
         if($shop->user_id !== Auth::id()) abort(403);
         $categories = Categorie::all();
-        $city = City::find($shop->city_id);
+        $city = City::where('id', $shop->city_id)->get()->first();
+
         return view('pages.add-update-shop', [
             'shop' => $shop,
             'categories' => $categories,
@@ -41,6 +42,7 @@ class ShopsController extends Controller
 
     public function postAddUpdateShop(Request $request, $id = null)
     {
+        $cityCode = strlen($request->citycode) > 5 ? null : $request->citycode;
         $request->session()->put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -79,7 +81,7 @@ class ShopsController extends Controller
             'horaires' => $request->hours,
             'etat' => Shop::PENDING,
             'user_id' => Auth::id(),
-            'city_id' => $request->citycode,
+            'city_id' => $cityCode,
             'category_id' => $request->category,
             'subcategory_id' => $subcat,
             'lat' => $request->lat,

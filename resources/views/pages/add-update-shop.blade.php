@@ -140,6 +140,7 @@
                                            class="form-control @error('tel') is-invalid @enderror"
                                            name="tel"
                                            required
+                                           max="14"
                                            autocomplete="new-tel"
                                            value="{{ old('tel') ?? $shop->tel ?? '' }}"
                                     >
@@ -310,9 +311,9 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" class="js-lat" name="lat" value="{{ $shop->city->lat ?? old('lat') }}">
-                            <input type="hidden" class="js-lng" name="lng" value="{{ $shop->city->lng  ?? old('lng') }}">
-                            <input type="hidden" class="js-citycode" name="citycode" value="{{ $shop->city->id ?? old('citycode') }}">
+                            <input type="hidden" class="js-lat" name="lat" value="{{ $city->lat ?? old('lat') ?? ''}}">
+                            <input type="hidden" class="js-lng" name="lng" value="{{ $city->lng  ?? old('lng') ?? ''}}">
+                            <input type="hidden" class="js-citycode" name="citycode" value="{{ $city->id ?? old('citycode') ?? ''}}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

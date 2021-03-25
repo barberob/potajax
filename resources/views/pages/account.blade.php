@@ -47,8 +47,6 @@
         <div class="list">
             @foreach($myshops as $myshop)
                 <div class="card shop"style="width: 15rem;">
-{{--                    pour vérification de l'état--}}
-{{--                    @if($myshop->etat == \App\Shops\Shop::PENDING) border-primary @endif--}}
                     @if(count($myshop->pictures) == 0)
                         <img src="./img/shopping-cart.svg" class="card-img-top" alt="icone shop responsable">
                     @else
@@ -67,7 +65,7 @@
                         @elseif($myshop->etat === \App\Shops\Shop::REJECTED)
                             <div class="alert alert-danger">
                                 <p class="mb-0">Commerce refusé</p>
-                                
+
                                 <button type="button" class="btn btn-danger" data-bs-toggle="popover" title="Raison du refus" data-bs-content="{{ $myshop->moderation->last()->modifRefus }}">Voir la raison</button>
                             </div>
                         @endif

@@ -13,7 +13,7 @@
         <div>
             <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
             <h2 class="title">{{ $infos->nom }}</h2>
-            <p class="adresse">Adresse: {{$infos->adresse }} - {{$infos->city->nom}} ({{$infos->city->cp}})</p>
+            <p class="adresse">Adresse: {{$infos->adresse }} - {{$infos->city->nom ?? ''}} ({{$infos->city->cp ?? ''}})</p>
             <p class="tel">Téléphone: {{$infos->tel}}</p>
             <p class="mail">@: {{$infos->email}}</p>
 
@@ -133,7 +133,7 @@
             </div>
         @empty
             @if(!$user_review)
-                <p class="text-center">Pas encore d'avis sur ce magasin</p>
+                <p class="text-center my-5">Pas encore d'avis sur ce magasin</p>
             @endif
         @endforelse
 
