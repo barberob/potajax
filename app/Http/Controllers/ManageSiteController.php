@@ -157,16 +157,10 @@ class ManageSiteController extends Controller
             ]
         );
 
-//        DB::table('user_shop')->updateOrInsert(
-//            ['shop_id' => $shop->id, 'user_id' => Auth::id()],
-//            [
-//                'modifRefus' => $request->motifRefus,
-//                'date' => Carbon::now(),
-//                'user_id' => Auth::id(),
-//                'shop_id' => $shop->id
-//            ]
-//        );
-        return redirect()->back()->with('success', 'la modération a bien été prise en compte');
+        if(preg_match('/(shop)/', request()->headers->get('referer'))) {
+            return redirect()->route('Allmap')->with('success', 'La modération a bien été prise en compte');
+        }
+        return redirect()->back()->with('success', 'La modération a bien été prise en compte');
     }
 
     public function validateShop($shop_id)

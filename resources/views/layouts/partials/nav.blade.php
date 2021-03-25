@@ -51,14 +51,14 @@
                         <div id="imfav"><img src="{{ asset('img/map.svg') }}" alt="Vers la map" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
                 </li>
-                
+
                 <li class="nav-item" >
                     <a class="nav-link" href="{{ route('favorites') }}" title="Vers les favoris">
                         <div id="fav">Favoris</div>
                         <div id="imfav"><img src="{{ asset('img/star.svg') }}" alt="Vers les favoris" width="30" height="auto" class="d-inline-block align-top"></div>
                     </a>
                 </li>
-            
+
                 @if(Auth::check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('account') }}" title="Vers le compte utilisateur">
@@ -74,6 +74,7 @@
                         </a>
                     </li>
                 @endif
+
                 @admin
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('manage_site') }}" title="Vers la zone de gestion">
@@ -82,6 +83,15 @@
                         </a>
                     </li>
                 @endadmin
+
+                @moderator
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('manage_shops') }}" title="Vers la zone de gestion des commerces">
+                            <div>Gérer les commerces</div>
+                            <div><img src="{{ asset('img/shop.svg') }}" alt="commerces" width="30" height="auto" class="d-inline-block align-top"></div>
+                        </a>
+                    </li>
+                @endmoderator
             </ul>
         </div>
     </div>
