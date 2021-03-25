@@ -68,6 +68,7 @@
                             <div class="alert alert-danger">
                                 <p class="mb-0">Commerce refusé</p>
                                 <div class="btn btn-danger">Voir la raison</div>
+                                <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
                             </div>
                         @endif
                         <h5 class="card-title">{{$myshop->nom}}</h5>
