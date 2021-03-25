@@ -163,7 +163,6 @@ export default class RegisterForm {
 
     _fillForm(count) {
         const properties = this.adresses.features[count].properties
-        console.log(this.adresses.features[count])
         const [lng, lat] = this.adresses.features[count].geometry.coordinates
 
         if (properties.type !== "municipality") {
