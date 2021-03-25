@@ -40,7 +40,7 @@
     <div class="img">
     @foreach($pic as $p)
         <div class="card" style="width: 18rem;">
-            <img src="{{ $p->url }}" class="card-img-top" alt="mon shop">
+            <img src="{{ $p->url }}" class="card-img-top my-auto" alt="mon shop">
         </div>
     @endforeach
     </div>
