@@ -23,7 +23,7 @@ class MapController extends Controller
             if ($tab_cat_id[0] == "All" && $tab_subcat_id[0] == "All") {
                 $categories[] = DB::table('shops')->
                 select('shops.id','shops.nom','shops.lat','shops.lng','shops.descriptif','shops.adresse','shops.cp','shops.subcategory_id','shops.category_id','shops.created_at','shops.updated_at','shops.deleted_at')->
-                where('shops.etat', 2)->
+                where('shops.etat', 1)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 get();
@@ -33,7 +33,7 @@ class MapController extends Controller
                 leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
-                where('shops.etat', 2)->
+                where('shops.etat', 1)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 orderBy('shops.nom')->
@@ -45,7 +45,7 @@ class MapController extends Controller
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('shops.category_id', $tab_cat_id[0])->
                 where('shops.subcategory_id', $tab_subcat_id[0])->
-                where('shops.etat', 2)->
+                where('shops.etat', 1)->
                 whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
                 whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
                 orderBy('shops.nom')->
@@ -59,7 +59,7 @@ class MapController extends Controller
             leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
             leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
             where('shops.category_id', $tab_cat_id[0])->
-            where('shops.etat', 2)->
+            where('shops.etat', 1)->
             whereBetween('lat', [$sudOue['lat'], $norEst['lat']])->
             whereBetween('lng', [$sudOue['lng'], $norEst['lng']])->
             orderBy('shops.nom')->
@@ -81,7 +81,7 @@ class MapController extends Controller
             leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
             leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
             where('shops.nom', 'Like','%' . $search . '%')->
-            where('shops.etat', 2)->
+            where('shops.etat', 1)->
             orderBy('shops.nom')->
             get();
 
@@ -93,7 +93,7 @@ class MapController extends Controller
                 leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                 leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                 where('subcategories.libelle', 'Like','%' . $search . '%')->
-                where('shops.etat', 2)->
+                where('shops.etat', 1)->
                 orderBy('shops.nom')->
                 get();
 
@@ -105,7 +105,7 @@ class MapController extends Controller
                     leftJoin('categories', 'categories.id', '=', 'shops.category_id')->
                     leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                     where('categories.libelle', 'Like','%' . $search . '%')->
-                    where('shops.etat', 2)->
+                    where('shops.etat', 1)->
                     orderBy('shops.nom')->
                     get();
 
@@ -118,7 +118,7 @@ class MapController extends Controller
                         leftJoin('subcategories', 'subcategories.id', '=', 'shops.subcategory_id')->
                         leftJoin('cities', 'cities.id', '=', 'shops.city_id')->
                         where('cities.nom', 'Like','%' . $search . '%')->
-                        where('shops.etat', 2)->
+                        where('shops.etat', 1)->
                         orderBy('shops.nom')->
                         get();
 
