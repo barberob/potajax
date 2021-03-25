@@ -49,7 +49,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '3',
             'city_id' => '2B050',
-            
+
             'category_id' => 1
 
         ]);
@@ -69,8 +69,8 @@ class ShopsSeeder extends Seeder
             'etat' => 1,
             'codeNote' => '',
             'user_id' => '2',
-            'city_id' => '5061',
-           
+            'city_id' => '05061',
+
             'category_id' => 2
 
         ]);
@@ -90,7 +90,7 @@ class ShopsSeeder extends Seeder
             'etat' => 1,
             'codeNote' => '',
             'user_id' => '3',
-            'city_id' => '5061',
+            'city_id' => '05061',
             'subcategory_id' => 4,
             'category_id' => 1
 
@@ -112,7 +112,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '2',
             'city_id' => '30189',
-            
+
             'category_id' => 2
 
         ]);
@@ -154,7 +154,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '2',
             'city_id' => '34172',
-           
+
             'category_id' => 3
 
         ]);
@@ -174,7 +174,7 @@ class ShopsSeeder extends Seeder
             'etat' => 1,
             'codeNote' => '',
             'user_id' => '3',
-            'city_id' => '5061',
+            'city_id' => '05061',
             'subcategory_id' => 3,
             'category_id' => 3
 
@@ -195,8 +195,8 @@ class ShopsSeeder extends Seeder
             'etat' => 1,
             'codeNote' => '',
             'user_id' => '2',
-            'city_id' => '7319',
-            
+            'city_id' => '07319',
+
             'category_id' => 4
 
         ]);
@@ -217,7 +217,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '3',
             'city_id' => '66028',
-           
+
             'category_id' => 4
 
         ]);
@@ -240,7 +240,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '2',
             'city_id' => '31458',
-           
+
             'category_id' => 4
 
         ]);
@@ -255,7 +255,7 @@ class ShopsSeeder extends Seeder
 
             Retrouvez tous nos produits Emile Noël, nos huiles vierges, nos spécialités méridionales, nos condiments, … et toute la gamme des produits d’hygiène Emma Noël.
             Vous y trouverez également les grandes marques du bio avec les compléments alimentaires et de nombreux produits d’épicerie bio.
-            
+
             Nous préparons également pour vous de merveilleux coffrets cadeaux.',
             'tel' => '0466907328',
             'prefixeTel' => '+33',
@@ -266,7 +266,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '3',
             'city_id' => '30202',
-            
+
             'category_id' => 5
 
         ]);
@@ -287,7 +287,7 @@ class ShopsSeeder extends Seeder
             'codeNote' => '',
             'user_id' => '2',
             'city_id' => '84007',
-            
+
             'category_id' => 6
 
         ]);
@@ -307,11 +307,11 @@ class ShopsSeeder extends Seeder
             'etat' => 1,
             'codeNote' => '',
             'user_id' => '3',
-            'city_id' => '7034',
-            
+            'city_id' => '07034',
+
             'category_id' => 7
 
         ])
-    ; 
+    ;
     }
 }

@@ -282,7 +282,7 @@ export default class Map{
                 //marker = L.marker(Loc,icone).bindTooltip(data, {sticky: true,elevation: 260.0});
                 //marker = L.marker(Loc,icone).bindTooltip(data, {elevation: 260.0,direction: 'top', permanent: false, offset: [10,0]});
 
-                let popup = L.popup({offset: [0, -32]}).setLatLng(Loc).setContent(data);
+                let popup = L.popup({offset: [0, -32],autoPan: false}).setLatLng(Loc).setContent(data);
                 marker = L.marker(Loc,icone);
                 marker.bindPopup(popup);
 
