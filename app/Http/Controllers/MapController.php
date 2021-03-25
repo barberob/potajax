@@ -176,7 +176,7 @@ class MapController extends Controller
             $sudOue = $request->input('0')['sudOuest'];
             $cat = $request->input('0')['categories'] ?? ["All"];
             $subCat = $request->input('0')['subcategories'] ?? ["All"];
-            
+
             $categories = MapController::FindCat($cat, $subCat, $norEst, $sudOue);
 
             //$subCategories = MapController::FindSubCat($subCat,$norEst,$sudOue);
