@@ -148,4 +148,8 @@
         @endif
 
     </div>
+
+    @moderator
+         
+    @endmoderator
 @endsection
