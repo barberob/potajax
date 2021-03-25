@@ -5,13 +5,6 @@ export default class RegisterForm {
             this.initEls()
             this.initEvents()
         } else return
-
-        this.config = {
-            api_endpoint : 'https://api-adresse.data.gouv.fr/search/?q='
-        }
-        this.selectedItem = 0
-        this.adresses = []
-        console.log(window.location)
     }
 
     initEls() {
