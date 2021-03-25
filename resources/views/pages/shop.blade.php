@@ -11,7 +11,7 @@
         <div class="name" style="background-image:url('{{ $pic[0]->url }}');">
     @endif
         <div>
-            <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Catmap', ['category_id' => $infos->category_id]) }}"><</a>
+            <a id="back" type="button" class="btn btn-outline-danger btn-circle" href="{{ route('Allmap') }}"><</a>
             <h2 class="title">{{ $infos->nom }}</h2>
             <p class="adresse">Adresse: {{$infos->adresse }} - {{$infos->city->nom ?? ''}} ({{$infos->cp ?? ''}})</p>
             <p class="tel">Téléphone: {{$infos->prefixeTel}} {{$infos->tel}}</p>
