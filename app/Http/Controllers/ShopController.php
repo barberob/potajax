@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use App\User;
 use Illuminate\Http\Request;
 use App\Shops\Shop;
 use App\Shops\Visit;
@@ -28,7 +29,7 @@ class ShopController extends Controller
     	$user_can_review =
             Review::where('user_id', $user_id)->count() > 0
             || !Auth::check()
-            || $this->userHaveThisShop($infos->id)
+            || Auth::user()->role == User::MANAGER
                 ? false
                 : true;
 
@@ -44,14 +45,5 @@ class ShopController extends Controller
             'average_note' => $average_note,
             'user_review' => $user_review
         ]);
-    }
-
-    private function userHaveThisShop($shop_id):bool
-    {
-        $user_shops = Shop::where('user_id', Auth::id());
-        foreach ($user_shops as $shop) {
-            if($shop_id == $shop->id) return true;
-        }
-        return false;
     }
 }
