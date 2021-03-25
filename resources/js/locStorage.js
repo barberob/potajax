@@ -107,7 +107,7 @@ export default class locStorage {
                     console.log(tempData[i]);*/
                     if (this.id === tempData[i]) {
                         //console.log(localStorage.getItem('id'));
-                        console.log(this.id + ' ' + tempData[i]);
+                        //console.log(this.id + ' ' + tempData[i]);
                         return true;
                     }
                 }
@@ -116,7 +116,7 @@ export default class locStorage {
                 this.data.length = 0;
                 return false;
             } else {
-                console.log('erreur le type de tempData n\'est pas un object');
+                //console.log('erreur le type de tempData n\'est pas un object');
                 return false;
             }
         } else {
@@ -132,7 +132,7 @@ export default class locStorage {
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         if(type === 'load'){
-            console.log('Loading Fav');
+            //console.log('Loading Fav');
 
             let test = [{type: 'read'}];
             let dat = JSON.parse(localStorage.getItem("id"))
@@ -154,15 +154,15 @@ export default class locStorage {
             }).then(response => {
                 return response.json();
             }).then(objected => {
-                console.log(objected);
+                //console.log(objected);
                 this.FormAffiche(objected);
             }).catch(error => console.log("Erreur : " + error));
 
         } else if(type === 'create') {
-            console.log('Enregistement Fav');
+            //console.log('Enregistement Fav');
 
             let test = [{type: 'create',id: idShop}];
-            console.log(test);
+            //console.log(test);
 
             let ResTo = fetch(url, {
                 headers: {
@@ -177,13 +177,13 @@ export default class locStorage {
             }).then(response => {
                 return response.json();
             }).then(objected => {
-                console.log(objected);
+                //console.log(objected);
             }).catch(error => console.log("Erreur : " + error));
         } else if(type === 'remove') {
-            console.log('Remove Fav');
+            //console.log('Remove Fav');
 
             let test = [{type: 'remove',id: idShop}];
-            console.log(test);
+            //console.log(test);
 
             let ResTo = fetch(url, {
                 headers: {
@@ -198,13 +198,13 @@ export default class locStorage {
             }).then(response => {
                 return response.json();
             }).then(objected => {
-                console.log(objected);
+                //console.log(objected);
             }).catch(error => console.log("Erreur : " + error));
         } if(type === 'compare') {
-            console.log('compare Fav');
+            //console.log('compare Fav');
 
             let test = [{type: 'compare',shop: idShop}];
-            console.log(test);
+            //console.log(test);
 
             let ResTo = fetch(url, {
                 headers: {
@@ -219,14 +219,14 @@ export default class locStorage {
             }).then(response => {
                 return response.json();
             }).then(objected => {
-                console.log(objected);
+                //console.log(objected);
             }).catch(error => console.log("Erreur : " + error));
         }
     }
 
     FormAffiche(objected){
-        console.log(typeof objected);
-        console.log(objected);
+        //console.log(typeof objected);
+        //console.log(objected);
         if(typeof objected === 'string'){
             let formTab = '<h1 class="text-center"> Vous n\'avez aucun commerce en favoris, ajoutez-en ! </h1>';
             formTab += '<div class="d-flex justify-content-center">';
@@ -276,7 +276,7 @@ export default class locStorage {
                 document.querySelectorAll('a.btn.btn-outline-danger.btn-sm.btn-circle.ml-3').forEach((a) => {
                     a.addEventListener('click', (ev) =>{
                         let id = ev.currentTarget.getAttribute('data-id');
-                        console.log(id);
+                        //console.log(id);
                         this.removeFav(id);
                         //this.Fetch('load');
                     });
@@ -294,7 +294,7 @@ export default class locStorage {
                 //console.log(tempData);
                 for (let i = 0; i < tempData.length; i++) {
                     if (id === tempData[i]) {
-                        console.log('dans le tableau');
+                        //console.log('dans le tableau');
                         //console.log(id);
                         const index = tempData.indexOf(tempData[i]);
                         if (index > -1) {
@@ -302,7 +302,7 @@ export default class locStorage {
                         }
 
                         //console.log(id + ' ' + tempData[i]);
-                        console.log(tempData);
+                        //console.log(tempData);
                         this.data = [];
                         this.data = tempData;
                         localStorage.setItem("id", JSON.stringify(this.data));
@@ -336,6 +336,6 @@ export default class locStorage {
     }
 
     DebugLS() {
-        console.log(localStorage.getItem('id'));
+        //console.log(localStorage.getItem('id'));
     }
 }

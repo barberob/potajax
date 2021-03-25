@@ -146,7 +146,7 @@ export default class Map{
 
     }
     init() {
-        console.log('Creation Map');
+        //console.log('Creation Map');
 
         //console.log(document.querySelector('.container').scrollWidth);
         //console.log(document.querySelector('.container').scrollWidth);
@@ -168,20 +168,20 @@ export default class Map{
         this.NewPoints(this.Def_pos);
 
         this.macarte.on('moveend', () => {
-            console.log(this.macarte.getZoom());
+            //console.log(this.macarte.getZoom());
             //console.log(this.macarte.getBounds());
             this.NewPoints(this.macarte.getBounds());
         });
 
     }
     NewPoints(posMap) {
-        console.log('Nouveau Marker');
+        //console.log('Nouveau Marker');
         this.marker_remove();
 
         this.Fetch(posMap);
     }
     marker_remove(){
-        console.log('Destruction Marker');
+        //console.log('Destruction Marker');
         //console.log(this.markers);
         if(this.markers){
 
@@ -203,7 +203,7 @@ export default class Map{
         }
     }
     marker_add(){
-        console.log('Creation Marker');
+        //console.log('Creation Marker');
         this.markers = new L1.MarkerClusterGroup();
         this.markers.clearLayers();
         this.macarte.removeLayer(this.markers);
@@ -329,7 +329,7 @@ export default class Map{
 
     }
     Fetch(posMap){
-        console.log('Recherche Marker');
+        //console.log('Recherche Marker');
         let url = this.domain_url+'/API/get_marker';
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         let dataPost = JSON.stringify(this.get_data(this.Def_pos))
@@ -397,7 +397,7 @@ export default class Map{
         //console.log(ResTo);
     }
     get_data(posMap){
-        console.log('Récupération Data Map');
+        //console.log('Récupération Data Map');
         let Url = window.location.href.split('/');
         let VariableGet = Url[3].indexOf('?search=');
         let search = 'default';
@@ -446,110 +446,4 @@ export default class Map{
         }
         return test;
     }
-    /*changeSelect(){
-        document.getElementById('categorie_id')
-            .addEventListener("change", function (event) {
-
-                let url = this.domain_url+'/API/get_sub_category';
-                let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                //console.log(this.value)
-                let test = {
-                    category_id: this.value
-                };
-
-                let ResTo = fetch(url, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "X-CSRF-Token": token
-                    },
-                    method: "post",
-                    credentials: "same-origin",
-                    body: JSON.stringify(test)
-                }).then(response => {
-                    return response.json();
-                }).then(objected => {
-                    //console.log(Object.entries(objected));
-                    for (const [key1, value1] of Object.entries(objected)) {
-                        for (const [key2, value2] of Object.entries(value1)) {
-                            if (value2 != null) {
-                                //console.log(value2);
-                                this.Object.push({
-                                    'detail': {
-                                        'name': value2.nom,
-                                        'desc': value2.descriptif,
-                                        'categorie': value2.category_id,
-                                        'subcategorie': value2.subcategory_id,
-                                    },
-                                    'coord': {
-                                        'Lat': value2.lat,
-                                        'Lng': value2.lng,
-                                    }
-                                });
-                                //console.log(this.Object);
-                            }
-                        }
-                    }
-                    this.marker_add();
-                    //console.log(this.Object);
-                }).catch(error => alert("Erreur : " + error));
-                //console.log(ResTo);
-            });
-        document.getElementById('subcategorie_id')
-            .addEventListener("change", function (event) {
-
-                alert('yolo2');
-            });
-    }*/
-    /*VerificationDejaDansTableau(val,tab,col){
-        //console.log('add '+ val);
-        let data = {type: val, color: col}
-        if(tab.length === 0){
-            this.makerUse.push(data);
-        } else {
-            for(let i = 0; i < tab.length; i++){
-                //console.log(val+' '+tab[i]['type']);
-                if(val !== tab[i]['type']){
-                    this.makerUse.push(data);
-                }
-            }
-        }
-    }*/
-    /*getMaCarte(){
-        console.log('getMaCarte')
-        return this.macarte;
-    }*/
-    /*flyTTo(Loc,zoom){
-        console.log('function flyTo');
-        this.macarte.flyTo(Loc,zoom);
-    }*/
-    /*legende(labels, grades){
-        var legend = L.control({position: 'bottomleft'});
-        legend.onAdd = function(map){
-            var div = L.DomUtil.create('div','legend');
-            div.style.border = '2px solid rgba(0,0,0,0.2)';
-            div.style.backgroundClip = 'padding-box';
-            div.style.background = '#fff';
-            div.style.borderRadius = '5px';
-            div.style.minWidth = '44px';
-            div.style.minHeight = '44px';
-
-            div.style.padding = '10px';
-
-
-            div.style.width = '200px';
-
-            var labels=["restaurant","kebbab"];
-            var grades = [450023,215478];
-
-            div.innerHTML = '<div><b style="text-align: right">Legende</b></div>';
-            for(var i = 0; i < grades.length; i++){
-                div.innerHTML += '<i style="background: #'+grades[i]+';">&nbsp;&nbsp;</i>&nbsp;&nbsp;'+labels[i]+'<br/>';
-            }
-            return div;
-        }
-        legend.addTo(this.macarte);
-    }*/
-
 }
