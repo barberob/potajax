@@ -1,9 +1,14 @@
 
 .opacite{
-	height: 92.5vh;
+	min-height: 92.5vh;
 	background-color: #ffe190;
 	background-image: linear-gradient(316deg, #ffe190 0%, #fa9e8c 74%);
+<<<<<<< HEAD
 	padding-top: 50px;
+=======
+	padding:50px 0;
+
+>>>>>>> 4ca9a6c... fix register - login responsive
 	.card-group{
 		width: 95%;
 		margin: auto;
@@ -36,39 +41,39 @@
 					}
 				}
 			}
-		
-		
 
-		} 
+
+
+		}
 	}
 }
 
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
 	body.login{
 		height: 100vh;
 	}
 	.opacite{
 		padding-top: 100px;
-		
+
 	}
 	.card-group{
 		width: 40%!important;
-		
+
 		.card{
-			
+
 			form{
 
 				.form-group{
 					margin-top: 25px!important;
-					
+
 					.ou{
 						margin: auto!important;
 					}
 				}
 			}
-		
-		
 
-		} 
+
+
+		}
 	}
 }
