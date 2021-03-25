@@ -145,7 +145,7 @@
 
     @moderator
         <h3 class="text-center mt-5">Invalider le commerce</h3>
-        <div class="container row">
+        <div class="container">
             <form method="POST"
                   action="{{ route('reject_shop', ['shop_id' => $infos->id]) }}"
                   class="col-md-6 m-auto"
