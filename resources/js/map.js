@@ -229,13 +229,12 @@ export default class Map{
                 let icone = null;
                 let color = null;
 
-                data += '<p style="font-weight:bold; font-size:18px; color:#EE8E6B;">'+Item.detail['nom']+'</p>';
+                data += '<p style="font-weight:bold; font-size:18px;">'+Item.detail['nom']+'</p>';
                 if(Item.detail['nomVille']){
                     data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' - '+Item.detail['nomVille']+' ('+Item.detail['cp']+')</p>';
                 } else {
                     data += '<p style="font-size:14px;" class="adresse">Adresse : '+Item.detail['adresse']+' ('+Item.detail['cp']+')</p>';
                 }
-
 
                 //console.log(typeof Item.detail['desc']);
                 /*if(typeof Item.detail['desc'] === "string") {
@@ -246,7 +245,7 @@ export default class Map{
                 } else {
                     //data += '<p style="font-size:12px;">' + Item.detail['desc'] + '.</p>';
                 }*/
-                data += '<a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a>';
+                data += '<div class="d-flex justify-content-center"><a class="btn btn-outline-danger btn-sm" href="'+this.domain_url+'/shop/'+Item.detail['id']+'" role="button">Voir la page</a></div>';
                 //console.log(data);
 
                 //marker = L.marker([Item.coord['Lat'], Item.coord['Lng']],/* {icon: IconWhite}*/).bindPopup(data);
