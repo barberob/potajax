@@ -43,6 +43,8 @@ class ShopsController extends Controller
     public function postAddUpdateShop(Request $request, $id = null)
     {
         $cityCode = strlen($request->citycode) > 5 ? null : $request->citycode;
+        if(City::where('id', $cityCode)->count() === 0) $cityCode = null;
+
         $request->session()->put('requestReferrer', URL::previous());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
