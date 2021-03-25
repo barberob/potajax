@@ -21,9 +21,6 @@ class UsersController extends Controller
     {
     	$auth = Auth::user();
         $myshops = Shop::with(['pictures', 'moderation'])->where('user_id', $auth->id)->get();
-        foreach ($myshops as $shop) {
-            dump($shop->moderation->last()->modifRefus);
-        }
         return view('pages.account', ['auth'=> $auth, 'myshops'=> $myshops]);
     }
 
